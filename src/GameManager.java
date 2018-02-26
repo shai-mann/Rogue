@@ -7,7 +7,7 @@ public class GameManager {
     public static void main(String[] args) {
         initFrame();
 
-        Room room = new Room();
+        Room room = new Room(1, 1);
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
