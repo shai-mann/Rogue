@@ -48,6 +48,7 @@ public class Room {
     }
     public void add(JComponent c, int x, int y) {
         //adds component to table at x and y coords given
+        table.getModel().setValueAt(c, x, y);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
