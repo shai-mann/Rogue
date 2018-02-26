@@ -62,11 +62,10 @@ public class Room {
         rowValueList[xLength - 1] = edges;
         return rowValueList;
     }
-    public DefaultTableModel createTableModel() {
-        DefaultTableModel model = new DefaultTableModel();
+    public RoomTableModel createTableModel() {
+        RoomTableModel model = new RoomTableModel();
         for (int x = 0; x < xLength; x++) {
             model.addColumn("col" + x);
-            table.
         }
         String[] rowValueList = getDefaultRow("|", "-");
         model.addRow(getDefaultRow("_", "_"));
