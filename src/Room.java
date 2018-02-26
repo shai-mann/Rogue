@@ -44,7 +44,7 @@ public class Room {
                 null, Helper.FOREGROUND_COLOR
         ));
 
-        table.setBackground(Helper.BACKGROUND_COLOR);
+        customizeTable();
     }
     public void add(JComponent c, int x, int y) {
         //adds component to table at x and y coords given
@@ -54,6 +54,15 @@ public class Room {
 
         DefaultTableModel model = createTableModel();
         table = new JTable(model);
+
+        table.setFocusable(false);
+        table.setRowSelectionAllowed(false);
+        table.setForeground(Helper.BACKGROUND_COLOR);
+        table.setGridColor(Helper.BACKGROUND_COLOR);
+
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(new CustomCellRenderer());
+        }
     }
     public String[] getDefaultRow(String edges, String rests) {
         String[] rowValueList = new String[xLength];
@@ -74,5 +83,10 @@ public class Room {
         }
         model.addRow(getDefaultRow("_", "_"));
         return model;
+    }
+    public void customizeTable() {
+        table.setBackground(Helper.BACKGROUND_COLOR);
+
+        table.setGridColor(Helper.BACKGROUND_COLOR);
     }
 }
