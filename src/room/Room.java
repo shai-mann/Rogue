@@ -1,11 +1,10 @@
-import com.sun.istack.internal.Nullable;
-
+package room;
+import helper.Helper;
+import main.GameManager;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Room {
@@ -60,9 +59,12 @@ public class Room {
         table.setRowSelectionAllowed(false);
         table.setForeground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
+        table.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 12));
 
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(new CustomCellRenderer());
+            table.getColumnModel().getColumn(i).setMinWidth(20);
+            table.getColumnModel().getColumn(i).setMaxWidth(20);
         }
     }
     public String[] getDefaultRow(String edges, String rests) {
@@ -78,16 +80,15 @@ public class Room {
             model.addColumn("col" + x);
         }
         String[] rowValueList = getDefaultRow("|", "-");
-        model.addRow(getDefaultRow("_", "_"));
+        model.addRow(getDefaultRow("--", "--"));
         for (int y = 0; y < yLength - 2; y++) {
             model.addRow(rowValueList);
         }
-        model.addRow(getDefaultRow("_", "_"));
+        model.addRow(getDefaultRow("--", "--"));
         return model;
     }
     public void customizeTable() {
         table.setBackground(Helper.BACKGROUND_COLOR);
-
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }
 }

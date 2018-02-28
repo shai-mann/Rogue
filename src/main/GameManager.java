@@ -1,3 +1,8 @@
+package main;
+
+import helper.Helper;
+import room.Room;
+
 import javax.swing.*;
 
 public class GameManager {

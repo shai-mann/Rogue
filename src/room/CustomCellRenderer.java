@@ -1,5 +1,8 @@
-import javax.swing.*;
+package room;
+import helper.Helper;
 import javax.swing.table.DefaultTableCellRenderer;
+
+import javax.swing.*;
 import java.awt.*;
 
 public class CustomCellRenderer extends DefaultTableCellRenderer {

@@ -1,3 +1,5 @@
+package room;
+
 import javax.swing.table.DefaultTableModel;
 
 public class RoomTableModel extends DefaultTableModel {
