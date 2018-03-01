@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import helper.Helper;
 import room.Room;
 
@@ -8,11 +9,14 @@ import javax.swing.*;
 public class GameManager {
 
     static JFrame frame;
+    static Room room;
+    static Player player;
 
     public static void main(String[] args) {
         initFrame();
 
-        Room room = new Room(10, 10);
+        room = new Room(10, 10);
+        player = new Player();
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
@@ -21,6 +25,9 @@ public class GameManager {
         frame.setVisible(true);
         frame.validate();
         frame.repaint();
+    }
+    public static void add(char s, int x, int y) {
+        room.add(s, x, y);
     }
     public static void initFrame() {
         frame = new JFrame("Rogue");

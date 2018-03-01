@@ -45,14 +45,16 @@ public class Room {
 
         customizeTable();
     }
-    public void add(JComponent c, int x, int y) {
+    public void add(char s, int x, int y) {
         //adds component to table at x and y coords given
-        table.getModel().setValueAt(c, x, y);
+        table.getModel().setValueAt(s, x, y);
+        table.revalidate();
+        table.repaint();
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
 
-        DefaultTableModel model = createTableModel();
+        RoomTableModel model = createTableModel();
         table = new JTable(model);
 
         table.setFocusable(false);
