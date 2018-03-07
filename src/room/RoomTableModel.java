@@ -10,9 +10,4 @@ public class RoomTableModel extends DefaultTableModel {
     public boolean isCellEditable(int row, int column) {
         return false;
     }
-    @Override
-    public void setValueAt(Object o, int x, int y) {
-        super.setValueAt(o, x, y);
-        fireTableCellUpdated(x, y);
-    }
 }
