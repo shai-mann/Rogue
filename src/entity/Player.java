@@ -1,13 +1,13 @@
 package entity;
 
 import main.GameManager;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Player extends Entity implements KeyListener {
+
     public Player() {
-        super('@', 5, 5);
+        super("@", 5, 5);
         GameManager.getFrame().addKeyListener(this);
     }
 

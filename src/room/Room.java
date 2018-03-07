@@ -44,9 +44,9 @@ public class Room {
 
         customizeTable();
     }
-    public void add(char s, int x, int y) {
+    public void add(String s, int y, int x) {
         // adds component to table at x and y coords given
-        table.getModel().setValueAt(s, x, y);
+        table.getModel().setValueAt(s, y, x);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -79,15 +79,19 @@ public class Room {
             model.addColumn("col" + x);
         }
         String[] rowValueList = getDefaultRow("|", "-");
-        model.addRow(getDefaultRow("--", "--"));
+        model.addRow(getDefaultRow("=", "="));
         for (int y = 0; y < yLength - 2; y++) {
             model.addRow(rowValueList);
         }
-        model.addRow(getDefaultRow("--", "--"));
+        model.addRow(getDefaultRow("=", "="));
         return model;
     }
     public void customizeTable() {
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
+    }
+
+    public JTable getTable() {
+        return table;
     }
 }

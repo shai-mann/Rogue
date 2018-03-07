@@ -26,8 +26,8 @@ public class GameManager {
         frame.validate();
         frame.repaint();
     }
-    public static void add(char s, int x, int y) {
-        room.add(s, x, y);
+    public static void add(String s, int y, int x) {
+        room.add(s, y, x);
     }
     public static void initFrame() {
         frame = new JFrame("Rogue");
@@ -39,7 +39,9 @@ public class GameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
+    public static JTable getTable() {
+        return room.getTable();
+    }
     public static JFrame getFrame() {
         return frame;
     }
