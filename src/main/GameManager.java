@@ -39,4 +39,8 @@ public class GameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
 }
