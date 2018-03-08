@@ -3,28 +3,28 @@ package entity;
 import main.GameManager;
 
 public class Entity {
-    int xPos;
-    int yPos;
+    private int xPos;
+    private int yPos;
 
     String graphic;
 
     String overWrittenGraphic = "-";
 
-    static int UP = 0;
-    static int DOWN = 1;
-    static int RIGHT = 2;
-    static int LEFT = 3;
+    protected static int UP = 0;
+    protected static int DOWN = 1;
+    protected static int RIGHT = 2;
+    protected static int LEFT = 3;
 
     public Entity(String g, int x, int y) {
         xPos = x;
         yPos = y;
         graphic = g;
 
-        GameManager.add(graphic, y, x);
+        GameManager.add(graphic, x, y);
     }
     public void move(int direction) {
         if (checkValidMove(direction)) {
-            GameManager.add(overWrittenGraphic, yPos, xPos);
+            GameManager.add(overWrittenGraphic, xPos, yPos);
             if (direction == UP) {
                 yPos -= 1;
             } else if (direction == DOWN) {
@@ -37,41 +37,34 @@ public class Entity {
 
             overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
 
-            GameManager.add(graphic, yPos, xPos);
+            GameManager.add(graphic, xPos, yPos);
         }
     }
     private boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
+        Object value;
         if (direction == UP) {
-            Object value = GameManager.getTable().getValueAt(yPos - 1, xPos);
-            if (value == "--") {
-                return false;
-            }
-            return true;
+            value = GameManager.getTable().getValueAt(yPos - 1, xPos);
         }
-        if (direction == DOWN) {
-            Object value = GameManager.getTable().getValueAt(yPos + 1, xPos);
-            if (value == "--") {
-                return false;
-            }
-            return true;
+        else if (direction == DOWN) {
+            value = GameManager.getTable().getValueAt(yPos + 1, xPos);
         }
-        if (direction == RIGHT) {
-            Object value = GameManager.getTable().getValueAt(yPos, xPos + 1);
-            if (value == "|") {
-                return false;
-            }
-            return true;
+        else if (direction == RIGHT) {
+            value = GameManager.getTable().getValueAt(yPos, xPos + 1);
         }
-        if (direction == LEFT) {
-            Object value = GameManager.getTable().getValueAt(yPos, xPos - 1);
-            if (value == "|") {
-                return false;
-            }
-            return true;
-        }
-        else {
+        else if (direction == LEFT) {
+            value = GameManager.getTable().getValueAt(yPos, xPos - 1);
+        } else {
             return false;
         }
+        return value == "-" || value == "+" || value == "#";
+    }
+
+    public int getXPos() {
+        return xPos;
+    }
+
+    public int getYPos() {
+        return yPos;
     }
 }
