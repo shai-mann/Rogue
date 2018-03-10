@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import entity.monster.Zombie;
 import helper.Helper;
 import room.Room;
 
@@ -17,6 +18,7 @@ public class GameManager {
 
         room = new Room(10, 10);
         player = new Player();
+        new Zombie(2, 2);
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
@@ -26,7 +28,7 @@ public class GameManager {
         frame.validate();
         frame.repaint();
     }
-    public static void add(char s, int x, int y) {
+    public static void add(String s, int x, int y) {
         room.add(s, x, y);
     }
     public static void initFrame() {
@@ -39,8 +41,18 @@ public class GameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-
+    public static JTable getTable() {
+        return room.getTable();
+    }
     public static JFrame getFrame() {
         return frame;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
+
+    public static String getValueAt(int x, int y) {
+        return room.getValueAt(x, y);
     }
 }

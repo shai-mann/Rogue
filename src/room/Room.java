@@ -3,7 +3,6 @@ import helper.Helper;
 import main.GameManager;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Arrays;
 
@@ -13,6 +12,7 @@ public class Room {
     * ROOM CLASS:
     * The room class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
+    * Rooms can only be from 15 length to 5
      */
 
     private JPanel panel;
@@ -41,12 +41,15 @@ public class Room {
                 TitledBorder.DEFAULT_POSITION,
                 null, Helper.FOREGROUND_COLOR
         ));
-
-        customizeTable();
+        table.setBackground(Helper.BACKGROUND_COLOR);
+        table.setGridColor(Helper.BACKGROUND_COLOR);
     }
-    public void add(char s, int x, int y) {
+    public void add(String s, int x, int y) {
         // adds component to table at x and y coords given
-        table.getModel().setValueAt(s, x, y);
+        table.getModel().setValueAt(s, y, x);
+    }
+    public String getValueAt(int x, int y) {
+        return (String) table.getValueAt(y, x);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -79,15 +82,14 @@ public class Room {
             model.addColumn("col" + x);
         }
         String[] rowValueList = getDefaultRow("|", "-");
-        model.addRow(getDefaultRow("--", "--"));
+        model.addRow(getDefaultRow("=", "="));
         for (int y = 0; y < yLength - 2; y++) {
             model.addRow(rowValueList);
         }
-        model.addRow(getDefaultRow("--", "--"));
+        model.addRow(getDefaultRow("=", "="));
         return model;
     }
-    public void customizeTable() {
-        table.setBackground(Helper.BACKGROUND_COLOR);
-        table.setGridColor(Helper.BACKGROUND_COLOR);
+    public JTable getTable() {
+        return table;
     }
 }
