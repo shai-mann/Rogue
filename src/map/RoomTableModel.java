@@ -1,4 +1,4 @@
-package room;
+package map;
 
 import javax.swing.table.DefaultTableModel;
 

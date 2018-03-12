@@ -1,4 +1,4 @@
-package room;
+package map;
 import helper.Helper;
 import main.GameManager;
 import javax.swing.*;
@@ -10,7 +10,7 @@ public class Room {
 
     /*
     * ROOM CLASS:
-    * The room class is made of a grid (represented by a JTable) which things such as the player and monsters
+    * The map class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
     * Rooms can only be from 15 length to 5
      */
@@ -45,7 +45,7 @@ public class Room {
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }
     public void add(String s, int x, int y) {
-        // adds component to table at x and y coords given
+        // adds component to table at x and y coordinates given
         table.getModel().setValueAt(s, y, x);
     }
     public String getValueAt(int x, int y) {

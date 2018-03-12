@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/Map.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/Map.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/map/StatusBar.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/map/StatusBar.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/room/CustomCellRenderer.java" afterPath="$PROJECT_DIR$/src/map/CustomCellRenderer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/room/Room.form" afterPath="$PROJECT_DIR$/src/map/Room.form" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/room/Room.java" afterPath="$PROJECT_DIR$/src/map/Room.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/room/RoomTableModel.java" afterPath="$PROJECT_DIR$/src/map/RoomTableModel.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/room/CustomCellRenderer.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/room/Room.form" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/room/Room.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/room/RoomTableModel.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/room/Room.class" afterPath="$PROJECT_DIR$/out/production/Rogue/room/Room.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/Entity.java" afterPath="$PROJECT_DIR$/src/entity/Entity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/Player.java" afterPath="$PROJECT_DIR$/src/entity/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/monster/Monster.java" afterPath="$PROJECT_DIR$/src/entity/monster/Monster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/GameManager.java" afterPath="$PROJECT_DIR$/src/main/GameManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -66,11 +60,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/entity/Entity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
               <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Room.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/map/Room.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="637">
+              <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -165,7 +169,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-2" />
     <option name="y" value="-13" />
     <option name="width" value="1132" />
@@ -408,15 +412,15 @@
       <workItem from="1519752274432" duration="14637000" />
       <workItem from="1520619187280" duration="1494000" />
       <workItem from="1520859774548" duration="593000" />
-      <workItem from="1520861669328" duration="6513000" />
+      <workItem from="1520861669328" duration="6764000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53787000" />
+    <option name="totallyTimeSpent" value="54038000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -826,18 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/map/Room.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1566#1567#0" expanded="false" />
-            <element signature="e#1620#1621#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -909,6 +901,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="47" column="58" lean-forward="false" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
           <folding />
         </state>
       </provider>

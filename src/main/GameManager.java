@@ -3,7 +3,7 @@ package main;
 import entity.Player;
 import entity.monster.Zombie;
 import helper.Helper;
-import room.Room;
+import map.Room;
 
 import javax.swing.*;
 
