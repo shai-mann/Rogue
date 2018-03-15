@@ -6,6 +6,8 @@ public class Entity {
     private int xPos;
     private int yPos;
 
+    public int health = 20;
+
     String graphic;
 
     String overWrittenGraphic = "-";

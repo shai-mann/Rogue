@@ -1,4 +1,4 @@
-package room;
+package map;
 import helper.Helper;
 import javax.swing.table.DefaultTableCellRenderer;
 

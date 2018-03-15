@@ -2,14 +2,20 @@ package entity;
 
 import entity.monster.Monster;
 import main.GameManager;
+import map.Map;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Player extends Entity implements KeyListener {
 
+    private Map map;
+
     public Player() {
         super("@", 5, 5);
         GameManager.getFrame().addKeyListener(this);
+
+        map = Map.getMap();
     }
 
     public void keyPressed(KeyEvent e) {
@@ -17,22 +23,22 @@ public class Player extends Entity implements KeyListener {
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
                 move(UP);
-                Monster.update();
+                map.update();
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
                 move(DOWN);
-                Monster.update();
+                map.update();
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
                 move(LEFT);
-                Monster.update();
+                map.update();
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
                 move(RIGHT);
-                Monster.update();
+                map.update();
                 break;
             default:
                 break;
@@ -40,4 +46,7 @@ public class Player extends Entity implements KeyListener {
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
+    public int getHealth() {
+        return health;
+    }
 }
