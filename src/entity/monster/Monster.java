@@ -11,6 +11,8 @@ public class Monster extends Entity {
 
     static ArrayList<Monster> monsters = new ArrayList<>();
 
+    public static int DEFAULT_HEALTH = 20;
+
     int speed = 1;
     int moveCounter = 1;
     int range = 10;
@@ -47,7 +49,7 @@ public class Monster extends Entity {
         for (Monster monster : monsters) {
             monster.runUpdate();
         }
-        StatusBar.updateStatusBar();
+        // has to call some method in map that runs the statusBar.updateStatusBar();
     }
     public boolean isInRange() {
         return true;

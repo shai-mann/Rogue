@@ -6,7 +6,7 @@ public class Entity {
     private int xPos;
     private int yPos;
 
-    public static int health = 20;
+    public int health = 20;
 
     String graphic;
 

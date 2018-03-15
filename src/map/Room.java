@@ -6,7 +6,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Room {
+public class Room extends JComponent {
 
     /*
     * ROOM CLASS:
@@ -27,20 +27,13 @@ public class Room {
 
         setDefaults();
 
-        GameManager.replaceContentPane(panel);
+//        GameManager.replaceContentPane(panel);
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         panel.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
         panel.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
-        panel.setBorder(BorderFactory.createTitledBorder(
-                null,
-                "Room of Dimensions (x, y)",
-                TitledBorder.DEFAULT_JUSTIFICATION,
-                TitledBorder.DEFAULT_POSITION,
-                null, Helper.FOREGROUND_COLOR
-        ));
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }
