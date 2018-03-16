@@ -6,6 +6,7 @@ import main.GameManager;
 import map.StatusBar;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Monster extends Entity {
 
@@ -16,6 +17,8 @@ public class Monster extends Entity {
     int speed = 1;
     int moveCounter = 1;
     int range = 10;
+    double hitChance = 0;
+    int hitDamage = 0;
 
     public Monster(String s, int x, int y) {
         super(s, x, y);
@@ -60,6 +63,16 @@ public class Monster extends Entity {
             ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
     }
     public void hit() {
-        System.out.println("ez bangers ur ded");
+        Random random = new Random();
+        if (random.nextDouble() <= hitChance) {
+            GameManager.getPlayer().health -= hitDamage;
+            if (random.nextDouble() <= 0.1) { // critical
+                if (random.nextDouble() <= 0.8) {
+                    GameManager.getPlayer().health -= hitDamage;
+                } else {
+                    // paralyze
+                }
+            }
+        }
     }
 }
