@@ -26,8 +26,6 @@ public class Room extends JComponent {
         yLength = y;
 
         setDefaults();
-
-//        GameManager.replaceContentPane(panel);
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
