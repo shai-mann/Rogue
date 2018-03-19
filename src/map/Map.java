@@ -31,6 +31,6 @@ public class Map {
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        room = new Room(10, 10);
+        room = new Room(30, 30);
     }
 }

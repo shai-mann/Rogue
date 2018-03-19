@@ -28,7 +28,7 @@ public class Monster extends Entity {
         Player player = GameManager.getPlayer();
 
         if (moveCounter == speed) {
-            if (!isNextTo(player) && isInRange()) {
+            if (!isNextTo(player) && isInRange(player)) {
                 if (this.getYPos() > player.getYPos()) {
                     move(UP);
                 } else {
@@ -54,8 +54,8 @@ public class Monster extends Entity {
         }
         // has to call some method in map that runs the statusBar.updateStatusBar();
     }
-    public boolean isInRange() {
-        return true;
+    public boolean isInRange(Player player) {
+        return Math.pow(player.getXPos() - getXPos(), 2) + Math.pow(player.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
     public boolean isNextTo(Player player) {
         return
