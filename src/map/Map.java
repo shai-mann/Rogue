@@ -4,6 +4,7 @@ import entity.Entity;
 import entity.monster.Monster;
 import helper.Helper;
 import main.GameManager;
+import map.level.Level;
 
 import javax.swing.*;
 

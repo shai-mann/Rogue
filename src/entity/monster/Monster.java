@@ -3,7 +3,6 @@ package entity.monster;
 import entity.Entity;
 import entity.Player;
 import main.GameManager;
-import map.StatusBar;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,20 +28,22 @@ public class Monster extends Entity {
         Player player = GameManager.getPlayer();
 
         if (moveCounter == speed) {
-            if (!isNextTo(player) && isInRange(player)) {
-                if (this.getYPos() > player.getYPos()) {
-                    move(UP);
+            if (isInRange(player)) {
+                if (!isNextTo(player)) {
+                    if (this.getYPos() > player.getYPos()) {
+                        move(UP);
+                    } else {
+                        move(DOWN);
+                    }
+                    if (this.getXPos() < player.getXPos()) {
+                        move(RIGHT);
+                    } else {
+                        move(LEFT);
+                    }
+                    moveCounter = 1;
                 } else {
-                    move(DOWN);
+                    hit();
                 }
-                if (this.getXPos() < player.getXPos()) {
-                    move(RIGHT);
-                } else {
-                    move(LEFT);
-                }
-                moveCounter = 1;
-            } else {
-                hit();
             }
         } else {
             moveCounter += 1;

@@ -1,6 +1,7 @@
 package entity;
 
 import entity.monster.Monster;
+import extra.GravePane;
 import main.GameManager;
 import map.Map;
 
@@ -48,5 +49,13 @@ public class Player extends Entity implements KeyListener {
     public void keyTyped(KeyEvent e) {}
     public int getHealth() {
         return health;
+    }
+    public void update() {
+        if (checkDeath()) {
+            new GravePane();
+        }
+    }
+    private boolean checkDeath() {
+        return getHealth() == 0;
     }
 }

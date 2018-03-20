@@ -1,6 +1,8 @@
-package map;
+package map.level;
 import helper.Helper;
 import main.GameManager;
+import map.CustomCellRenderer;
+import map.RoomTableModel;
 
 import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
