@@ -6,11 +6,10 @@ import helper.Helper;
 import main.GameManager;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Map {
     private StatusBar statusBar;
-    private Room room;
+    private Level level;
     private JPanel panel;
 
     private static Map map;
@@ -29,13 +28,13 @@ public class Map {
     public static Map getMap() {
         return map;
     }
-    public Room getRoom(Entity entity) {
-        // This method will return the room which the entity passed is in. *NOT FUNCTIONAL*
-        return room;
+    public Level getRoom(Entity entity) {
+        // This method will return the level which the entity passed is in. *NOT FUNCTIONAL*
+        return level;
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        room = new Room(30, 30);
+        level = new Level(30, 30);
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);

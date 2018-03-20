@@ -8,7 +8,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.Arrays;
 
-public class Room extends JComponent {
+public class Level extends JComponent {
 
     /*
     * ROOM CLASS:
@@ -23,7 +23,7 @@ public class Room extends JComponent {
     private int xLength;
     private int yLength;
 
-    public Room(int x, int y) {
+    public Level(int x, int y) {
         xLength = x;
         yLength = y;
 
