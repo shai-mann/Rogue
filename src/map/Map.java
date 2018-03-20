@@ -2,9 +2,11 @@ package map;
 
 import entity.Entity;
 import entity.monster.Monster;
+import helper.Helper;
 import main.GameManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Map {
     private StatusBar statusBar;
@@ -14,6 +16,7 @@ public class Map {
     private static Map map;
 
     public Map() {
+        setDefaults();
         GameManager.replaceContentPane(panel);
 
         map = this;
@@ -21,6 +24,7 @@ public class Map {
     public void update() {
         Monster.update();
         statusBar.updateStatusBar();
+        GameManager.getPlayer().update();
     }
     public static Map getMap() {
         return map;
@@ -32,5 +36,9 @@ public class Map {
     private void createUIComponents() {
         // TODO: place custom component creation code here
         room = new Room(10, 10);
+    }
+    public void setDefaults() {
+        panel.setBackground(Helper.BACKGROUND_COLOR);
+        panel.setForeground(Helper.BACKGROUND_COLOR);
     }
 }

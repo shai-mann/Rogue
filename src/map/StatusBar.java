@@ -20,6 +20,7 @@ public class StatusBar extends JComponent {
         panel.setBackground(Helper.BACKGROUND_COLOR);
 
         healthField.setText("Health: " + Monster.DEFAULT_HEALTH);
+        healthField.setForeground(Helper.FOREGROUND_COLOR);
     }
     public void updateStatusBar() {
         healthField.setText("Health: " + GameManager.getPlayer().getHealth());

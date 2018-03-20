@@ -1,6 +1,8 @@
 package map;
 import helper.Helper;
 import main.GameManager;
+
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -29,9 +31,9 @@ public class Room extends JComponent {
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
-        panel.setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-        panel.setMaximumSize(Toolkit.getDefaultToolkit().getScreenSize());
-        panel.setMinimumSize(Toolkit.getDefaultToolkit().getScreenSize());
+        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
+        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
+        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }

@@ -14,11 +14,12 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
+    String name = "<Default>";
     int speed = 1;
     int moveCounter = 1;
     int range = 10;
-    double hitChance = 0;
-    int hitDamage = 0;
+    double hitChance = 0.5;
+    int hitDamage = 1;
 
     public Monster(String s, int x, int y) {
         super(s, x, y);
