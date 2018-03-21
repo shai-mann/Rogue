@@ -4,10 +4,9 @@ import main.GameManager;
 import map.CustomCellRenderer;
 import map.RoomTableModel;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Level extends JComponent {
@@ -17,6 +16,7 @@ public class Level extends JComponent {
     * The map class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
     * Rooms can only be from 15 length to 5
+    * Rooms must be odd lengths
      */
 
     private JPanel panel;
@@ -24,6 +24,8 @@ public class Level extends JComponent {
 
     private int xLength;
     private int yLength;
+
+    private int xIterations = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (table.getColumn(0).getWidth() * table.getColumnCount());
 
     public Level(int x, int y) {
         xLength = x;
@@ -64,15 +66,14 @@ public class Level extends JComponent {
             table.getColumnModel().getColumn(i).setMaxWidth(20);
         }
     }
-    public String[] getDefaultRow(String edges, String rests) {
+    private String[] getDefaultRow(String edges, String rests) {
         String[] rowValueList = new String[xLength];
         Arrays.fill(rowValueList, rests);
         rowValueList[0] = edges;
         rowValueList[xLength - 1] = edges;
         return rowValueList;
     }
-    public RoomTableModel createTableModel() {
-        RoomTableModel model = new RoomTableModel();
+    public void createRoomModel(RoomTableModel model) {
         for (int x = 0; x < xLength; x++) {
             model.addColumn("col" + x);
         }
@@ -82,7 +83,19 @@ public class Level extends JComponent {
             model.addRow(rowValueList);
         }
         model.addRow(getDefaultRow("=", "="));
+    }
+    private RoomTableModel createTableModel() {
+        RoomTableModel model = new RoomTableModel();
+        for (int i = 0; i != xIterations; i++) {
+            model.addRow(createTableRow());
+        }
         return model;
+    }
+    private String[] createTableRow() {
+        String[] rowValueList = {};
+        Arrays.fill(rowValueList, "");
+
+        return rowValueList;
     }
     public JTable getTable() {
         return table;
