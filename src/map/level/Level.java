@@ -2,6 +2,7 @@ package map.level;
 import helper.Helper;
 import main.GameManager;
 import map.CustomCellRenderer;
+import map.CustomRoomTable;
 import map.RoomTableModel;
 
 import javax.swing.*;
@@ -20,22 +21,27 @@ public class Level extends JComponent {
      */
 
     private JPanel panel;
-    private JTable table;
-
-//    private int xLength;
-//    private int yLength;
+    private CustomRoomTable table;
+    private Room room;
 
     public Level(int x, int y) {
-//        xLength = x;
-//        yLength = y;
-
         setDefaults();
+        createRooms();
+    }
+    /*
+    * Level size is 69 x 39
+     */
+    public void createRooms() {
+        room = new Room(table.getCustomModel(), 5, 5, new Dimension(11, 11));
+        new Room(table.getCustomModel(), 30, 30, new Dimension(5, 5));
+        new Room(table.getCustomModel(), 60, 10, new Dimension(9, 9));
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
+        panel.setBorder(null);
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }
@@ -50,7 +56,7 @@ public class Level extends JComponent {
         // TODO: place custom component creation code here
 
         RoomTableModel model = createTableModel();
-        table = new JTable(model);
+        table = new CustomRoomTable(model);
 
         table.setFocusable(false);
         table.setRowSelectionAllowed(false);
@@ -64,28 +70,12 @@ public class Level extends JComponent {
             table.getColumnModel().getColumn(i).setMaxWidth(20);
         }
     }
-//    private String[] getDefaultRow(String edges, String rests) {
-//        String[] rowValueList = new String[xLength];
-//        Arrays.fill(rowValueList, rests);
-//        rowValueList[0] = edges;
-//        rowValueList[xLength - 1] = edges;
-//        return rowValueList;
-//    }
-//    public void createRoomModel(RoomTableModel model) {
-//        for (int x = 0; x < xLength; x++) {
-//            model.addColumn("col" + x);
-//        }
-//        String[] rowValueList = getDefaultRow("|", "-");
-//        model.addRow(getDefaultRow("=", "="));
-//        for (int y = 0; y < yLength - 2; y++) {
-//            model.addRow(rowValueList);
-//        }
-//        model.addRow(getDefaultRow("=", "="));
-//    }
     private RoomTableModel createTableModel() {
         RoomTableModel model = new RoomTableModel();
-        for (int i = 0; i != 99; i++) {
+        for (int j = 0; j != 69; j++) {
             model.addColumn("");
+        }
+        for (int i = 0; i != 39; i++) {
             model.addRow(createTableRow());
         }
         return model;
