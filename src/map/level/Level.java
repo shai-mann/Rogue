@@ -22,14 +22,12 @@ public class Level extends JComponent {
     private JPanel panel;
     private JTable table;
 
-    private int xLength;
-    private int yLength;
-
-    private int xIterations = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth() / (table.getColumn(0).getWidth() * table.getColumnCount());
+//    private int xLength;
+//    private int yLength;
 
     public Level(int x, int y) {
-        xLength = x;
-        yLength = y;
+//        xLength = x;
+//        yLength = y;
 
         setDefaults();
     }
@@ -66,33 +64,34 @@ public class Level extends JComponent {
             table.getColumnModel().getColumn(i).setMaxWidth(20);
         }
     }
-    private String[] getDefaultRow(String edges, String rests) {
-        String[] rowValueList = new String[xLength];
-        Arrays.fill(rowValueList, rests);
-        rowValueList[0] = edges;
-        rowValueList[xLength - 1] = edges;
-        return rowValueList;
-    }
-    public void createRoomModel(RoomTableModel model) {
-        for (int x = 0; x < xLength; x++) {
-            model.addColumn("col" + x);
-        }
-        String[] rowValueList = getDefaultRow("|", "-");
-        model.addRow(getDefaultRow("=", "="));
-        for (int y = 0; y < yLength - 2; y++) {
-            model.addRow(rowValueList);
-        }
-        model.addRow(getDefaultRow("=", "="));
-    }
+//    private String[] getDefaultRow(String edges, String rests) {
+//        String[] rowValueList = new String[xLength];
+//        Arrays.fill(rowValueList, rests);
+//        rowValueList[0] = edges;
+//        rowValueList[xLength - 1] = edges;
+//        return rowValueList;
+//    }
+//    public void createRoomModel(RoomTableModel model) {
+//        for (int x = 0; x < xLength; x++) {
+//            model.addColumn("col" + x);
+//        }
+//        String[] rowValueList = getDefaultRow("|", "-");
+//        model.addRow(getDefaultRow("=", "="));
+//        for (int y = 0; y < yLength - 2; y++) {
+//            model.addRow(rowValueList);
+//        }
+//        model.addRow(getDefaultRow("=", "="));
+//    }
     private RoomTableModel createTableModel() {
         RoomTableModel model = new RoomTableModel();
-        for (int i = 0; i != xIterations; i++) {
+        for (int i = 0; i != 99; i++) {
+            model.addColumn("");
             model.addRow(createTableRow());
         }
         return model;
     }
     private String[] createTableRow() {
-        String[] rowValueList = {};
+        String[] rowValueList = new String[99];
         Arrays.fill(rowValueList, "");
 
         return rowValueList;
