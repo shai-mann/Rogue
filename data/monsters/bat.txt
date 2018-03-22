@@ -1,0 +1,8 @@
+name:Bat
+graphic:B
+hitChance:0.1
+critChance:0.01
+hitDamage:1
+speed:1
+movementType:wander
+attackType:hit

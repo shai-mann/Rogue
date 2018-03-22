@@ -1,11 +1,13 @@
 package main;
 
 import entity.Player;
-import entity.monster.Zombie;
+import entity.monster.Monster;
 import helper.Helper;
 import map.Map;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.Random;
 
 public class GameManager {
 
@@ -18,7 +20,16 @@ public class GameManager {
 
         map = new Map();
         player = new Player();
-        new Zombie(2, 2);
+        loadCustomMonsters();
+    }
+    private static void loadCustomMonsters() {
+        File[] files = new File("data/monsters/").listFiles();
+        Random random = new Random();
+        for (File file : files) {
+            if (file.isFile()) {
+                new Monster(file.getPath(), random.nextInt(28) + 1, random.nextInt(28) + 1);
+            }
+        }
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
