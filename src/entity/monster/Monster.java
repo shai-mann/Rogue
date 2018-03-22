@@ -2,6 +2,7 @@ package entity.monster;
 
 import entity.Entity;
 import entity.Player;
+import entity.Status;
 import main.GameManager;
 
 import java.io.*;
@@ -15,7 +16,7 @@ public class Monster extends Entity {
     public static int DEFAULT_HEALTH = 20;
 
     private enum movementTypes { WANDER, TRACK }
-    private enum attackTypes { HIT, SHOOT }
+    private enum attackTypes { HIT, SHOOT, PARALYZE, CONFUSE, INTOXICATE }
 
     public String name = "<Default>";
     private int speed = 1;
@@ -25,6 +26,8 @@ public class Monster extends Entity {
     private int hitDamage = 1;
     private double critChance;
 
+    private Status status;
+
     private movementTypes movementType = movementTypes.TRACK;
     private attackTypes attackType = attackTypes.HIT;
 
@@ -32,6 +35,7 @@ public class Monster extends Entity {
         super("_", x, y);
         monsters.add(this);
         loadDataFile(dataFilePath);
+        status = new Status();
     }
 
     // DATA LOADING
@@ -109,6 +113,12 @@ public class Monster extends Entity {
                 return attackTypes.HIT;
             case "shoot":
                 return attackTypes.SHOOT;
+            case "paralyze":
+                return attackTypes.PARALYZE;
+            case "confuse":
+                return attackTypes.CONFUSE;
+            case "intoxicate":
+                return attackTypes.INTOXICATE;
             default:
                 return attackTypes.HIT; // default attack type
         }
@@ -125,6 +135,7 @@ public class Monster extends Entity {
                 wanderMovement();
                 break;
         }
+        status.update();
     }
     private void trackMovement() {
         Player player = GameManager.getPlayer();
@@ -167,6 +178,15 @@ public class Monster extends Entity {
             case SHOOT:
                 shootAttack();
                 break;
+            case PARALYZE:
+                paralyzeAttack();
+                break;
+            case CONFUSE:
+                confuseAttack();
+                break;
+            case INTOXICATE:
+                intoxicateAttack();
+                break;
         }
     }
     private void hitAttack() {
@@ -184,6 +204,18 @@ public class Monster extends Entity {
     }
     private void shootAttack() {
         // TODO: create shoot attack
+    }
+    private void paralyzeAttack() {
+        Player player = GameManager.getPlayer();
+        if (!player.getStatus().isParalyzed()) {
+            GameManager.getPlayer().getStatus().setParalyzed(3);
+        }
+    }
+    private void confuseAttack() {
+        GameManager.getPlayer().getStatus().setConfused(3);
+    }
+    private void intoxicateAttack() {
+        GameManager.getPlayer().getStatus().setDrunk(3);
     }
 
     // HELPERS
