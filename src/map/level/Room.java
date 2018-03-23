@@ -39,6 +39,13 @@ public class Room {
     public Polygon getBounds() {
         return polygon;
     }
+
+    public Point getCenter() {
+        return center;
+    }
+    public Dimension getSize() {
+        return size;
+    }
     private void addRoom() {
         Point startingPoint = new Point((int) (center.getX() + Math.floor((size.getWidth() / 2))), (int) (center.getY() + Math.floor((size.getHeight() / 2))));
         String[] rowData;
