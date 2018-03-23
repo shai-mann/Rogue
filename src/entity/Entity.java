@@ -12,10 +12,10 @@ public class Entity {
 
     String overWrittenGraphic = "-";
 
-    protected static int UP = 0;
-    protected static int DOWN = 1;
-    protected static int RIGHT = 2;
-    protected static int LEFT = 3;
+    public static int UP = 0;
+    public static int DOWN = 1;
+    public static int RIGHT = 2;
+    public static int LEFT = 3;
 
     public Entity(String g, int x, int y) {
         xPos = x;

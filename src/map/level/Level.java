@@ -16,7 +16,7 @@ public class Level extends JComponent {
     * ROOM CLASS:
     * The map class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
-    * Rooms can only be from 15 length to 5
+    * Rooms can only be from 11 length to 5
     * Rooms must be odd lengths
      */
 
