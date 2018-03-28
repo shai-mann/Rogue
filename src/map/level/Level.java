@@ -24,7 +24,11 @@ public class Level extends JComponent {
     private CustomRoomTable table;
     private Room room;
 
+    public static Level level;
+
     public Level(int x, int y) {
+        level = this;
+
         setDefaults();
         createRooms();
     }
@@ -33,8 +37,9 @@ public class Level extends JComponent {
      */
     public void createRooms() {
         room = new Room(table.getCustomModel(), 5, 5, new Dimension(11, 11));
-        new Room(table.getCustomModel(), 30, 30, new Dimension(5, 5));
-        new Room(table.getCustomModel(), 60, 10, new Dimension(9, 9));
+        Room room1 = new Room(table.getCustomModel(), 30, 30, new Dimension(5, 5));
+        Room room2 = new Room(table.getCustomModel(), 60, 10, new Dimension(9, 9));
+        Passageway passageway = new Passageway(room, room1);
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
@@ -86,7 +91,10 @@ public class Level extends JComponent {
 
         return rowValueList;
     }
-    public JTable getTable() {
+    public CustomRoomTable getTable() {
         return table;
+    }
+    public static Level getLevel() {
+        return level;
     }
 }

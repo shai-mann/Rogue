@@ -29,10 +29,6 @@ public class Map {
     public static Map getMap() {
         return map;
     }
-    public Level getRoom(Entity entity) {
-        // This method will return the level which the entity passed is in. *NOT FUNCTIONAL*
-        return level;
-    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         level = new Level(30, 30);

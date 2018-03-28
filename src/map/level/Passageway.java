@@ -25,23 +25,31 @@ public class Passageway {
     }
     private void createDoorway(Room room) {
         ArrayList<Integer> directions = getDirections(room.getZone());
+        Random random = new Random();
+
+        int maxXPos = (int) room.getCenter().getX() + (int) Math.floor(room.getSize().getWidth() / 2);
+        int maxYPos = (int) room.getCenter().getY() + (int) Math.floor(room.getSize().getHeight() / 2);
+        int minXPos = (int) room.getCenter().getX() - (int) Math.floor(room.getSize().getWidth() / 2);
+        int minYPos = (int) room.getCenter().getY() - (int) Math.floor(room.getSize().getWidth() / 2);
 
         int doorFrom = directions.get(new Random().nextInt(directions.size()));
 
         if (doorFrom == Player.DOWN) {
-            Point door = new Point(new Random().nextInt(
-                    (int) (room.getCenter().getX() + Math.floor(room.getSize().getWidth() / 2)) -
-                            (int) (room.getCenter().getX() - Math.floor(room.getSize().getWidth() / 2) + 1)
-                    ) + (int) (room.getCenter().getX() - Math.floor(room.getSize().getWidth() / 2)),
-                    (int) (room.getCenter().getY() - Math.floor(room.getSize().getHeight() / 2)));
-            // room.getCenter().getY() - Math.floor(room.getHeight() / 2)
+            Point door =
+                    new Point(random.nextInt(maxXPos - minXPos - 2) + minXPos + 1, (int) (room.getCenter().getY() + Math.floor(room.getSize().getHeight() / 2)));
             GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
         } else if (doorFrom == Player.UP) {
-
+            Point door =
+                    new Point(random.nextInt(maxXPos - minXPos - 2) + minXPos + 1, (int) Math.floor(room.getCenter().getY() - Math.floor(room.getSize().getHeight() / 2)));
+            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
         } else if (doorFrom == Player.RIGHT) {
-
+            Point door =
+                    new Point((int) Math.floor(room.getCenter().getX() + Math.floor(room.getSize().getWidth() / 2)), random.nextInt(maxYPos - minYPos - 2) + minYPos + 1);
+            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
         } else if (doorFrom == Player.LEFT) {
-
+            Point door =
+                    new Point((int) Math.floor(room.getCenter().getX() - Math.floor(room.getSize().getWidth() / 2)), random.nextInt(maxYPos - minYPos - 2) + minYPos + 1);
+            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
         }
     }
     private ArrayList<Integer> getDirections(int zone) {

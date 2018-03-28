@@ -4,6 +4,7 @@ import entity.Player;
 import entity.monster.Zombie;
 import helper.Helper;
 import map.Map;
+import map.level.Level;
 
 import javax.swing.*;
 
@@ -29,7 +30,7 @@ public class GameManager {
         frame.repaint();
     }
     public static void add(String s, int x, int y) {
-        map.getRoom(player).add(s, x, y);
+        Level.getLevel().getTable().getCustomModel().setValueAt(s, x, y);
     }
     public static void initFrame() {
         frame = new JFrame("Rogue");
@@ -42,17 +43,13 @@ public class GameManager {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public static JTable getTable() {
-        return map.getRoom(player).getTable();
+        return Level.getLevel().getTable();
     }
     public static JFrame getFrame() {
         return frame;
     }
-
     public static Player getPlayer() {
         return player;
     }
 
-    public static String getValueAt(int x, int y) {
-        return map.getRoom(player).getValueAt(x, y);
-    }
 }
