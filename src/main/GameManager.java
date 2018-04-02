@@ -3,6 +3,7 @@ package main;
 import entity.Player;
 import entity.monster.Zombie;
 import helper.Helper;
+import map.CustomRoomTable;
 import map.Map;
 import map.level.Level;
 
@@ -30,7 +31,7 @@ public class GameManager {
         frame.repaint();
     }
     public static void add(String s, int x, int y) {
-        Level.getLevel().getTable().getCustomModel().setValueAt(s, y, x);
+        GameManager.getTable().getCustomModel().setValueAt(s, y, x);
     }
     public static void initFrame() {
         frame = new JFrame("Rogue");
@@ -42,8 +43,8 @@ public class GameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
-    public static JTable getTable() {
-        return Level.getLevel().getTable();
+    public static CustomRoomTable getTable() {
+        return map.getLevel().getTable();
     }
     public static JFrame getFrame() {
         return frame;

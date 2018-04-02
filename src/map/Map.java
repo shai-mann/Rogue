@@ -30,11 +30,13 @@ public class Map {
         return map;
     }
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         level = new Level(30, 30);
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
+    }
+    public Level getLevel() {
+        return level;
     }
 }

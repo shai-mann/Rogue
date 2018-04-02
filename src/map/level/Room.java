@@ -9,7 +9,7 @@ public class Room {
 
     private static ArrayList<Polygon> zones = new ArrayList<>();
     private static ArrayList<Room> rooms = new ArrayList<>();
-    private ArrayList<Point> doors = new ArrayList<>();
+    public ArrayList<Point> doors = new ArrayList<>();
 
     private Polygon polygon;
 

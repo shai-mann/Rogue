@@ -20,8 +20,6 @@ public class Passageway {
         Point doorFrom = createDoorway(roomFrom);
         Point doorTo = createDoorway(roomTo);
 
-        System.out.println("Door: " + doorTo.getLocation());
-
         createPassageway(doorFrom, doorTo);
     }
     private void createPassageway(Point start, Point end) {
@@ -123,6 +121,7 @@ public class Passageway {
                     new Point((int) Math.floor(room.getCenter().getX() - Math.floor(room.getSize().getWidth() / 2)), random.nextInt(maxYPos - minYPos - 2) + minYPos + 1);
             GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
         }
+        room.doors.add(door);
         return door;
     }
     private ArrayList<Integer> getDirections(int zone) {

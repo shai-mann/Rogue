@@ -22,13 +22,9 @@ public class Level extends JComponent {
 
     private JPanel panel;
     private CustomRoomTable table;
-    private Room room;
 
-    public static Level level;
 
     public Level(int x, int y) {
-        level = this;
-
         setDefaults();
         createRooms();
     }
@@ -36,10 +32,13 @@ public class Level extends JComponent {
     * Level size is 69 x 39
      */
     public void createRooms() {
-        room = new Room(table.getCustomModel(), 5, 5, new Dimension(11, 11));
+        Room room = new Room(table.getCustomModel(), 5, 5, new Dimension(11, 11));
         Room room1 = new Room(table.getCustomModel(), 30, 30, new Dimension(5, 5));
         Room room2 = new Room(table.getCustomModel(), 60, 10, new Dimension(9, 9));
         Passageway passageway = new Passageway(room, room1);
+        Passageway passageway1 = new Passageway(room, room2);
+
+        // Needs to be changed to create a custom level each time
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
@@ -50,16 +49,7 @@ public class Level extends JComponent {
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
     }
-    public void add(String s, int x, int y) {
-        // adds component to table at x and y coordinates given
-        table.getModel().setValueAt(s, y, x);
-    }
-    public String getValueAt(int x, int y) {
-        return (String) table.getValueAt(y, x);
-    }
     private void createUIComponents() {
-        // TODO: place custom component creation code here
-
         RoomTableModel model = createTableModel();
         table = new CustomRoomTable(model);
 
@@ -86,15 +76,12 @@ public class Level extends JComponent {
         return model;
     }
     private String[] createTableRow() {
-        String[] rowValueList = new String[99];
+        String[] rowValueList = new String[table.getColumnCount()];
         Arrays.fill(rowValueList, "");
 
         return rowValueList;
     }
     public CustomRoomTable getTable() {
         return table;
-    }
-    public static Level getLevel() {
-        return level;
     }
 }
