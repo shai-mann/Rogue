@@ -30,7 +30,7 @@ public class GameManager {
         frame.repaint();
     }
     public static void add(String s, int x, int y) {
-        Level.getLevel().getTable().getCustomModel().setValueAt(s, x, y);
+        Level.getLevel().getTable().getCustomModel().setValueAt(s, y, x);
     }
     public static void initFrame() {
         frame = new JFrame("Rogue");
