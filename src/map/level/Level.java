@@ -23,8 +23,11 @@ public class Level extends JComponent {
     private JPanel panel;
     private CustomRoomTable table;
 
+    private static Level level;
 
     public Level(int x, int y) {
+        level = this;
+
         setDefaults();
         createRooms();
     }
@@ -76,12 +79,15 @@ public class Level extends JComponent {
         return model;
     }
     private String[] createTableRow() {
-        String[] rowValueList = new String[table.getColumnCount()];
+        String[] rowValueList = new String[69];
         Arrays.fill(rowValueList, "");
 
         return rowValueList;
     }
     public CustomRoomTable getTable() {
         return table;
+    }
+    public static Level getLevel() {
+        return level;
     }
 }

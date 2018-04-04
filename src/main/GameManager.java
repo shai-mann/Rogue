@@ -44,7 +44,7 @@ public class GameManager {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
     public static CustomRoomTable getTable() {
-        return map.getLevel().getTable();
+        return Level.getLevel().getTable();
     }
     public static JFrame getFrame() {
         return frame;
