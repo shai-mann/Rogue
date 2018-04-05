@@ -212,7 +212,8 @@ public class Monster extends Entity {
         }
     }
     private void confuseAttack() {
-        GameManager.getPlayer().getStatus().setConfused(3);
+        int ticks = new Random().nextInt(11) + 10; // random number between 10 and 20
+        GameManager.getPlayer().getStatus().setConfused(ticks);
     }
     private void intoxicateAttack() {
         GameManager.getPlayer().getStatus().setDrunk(3);
