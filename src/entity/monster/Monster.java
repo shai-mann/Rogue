@@ -77,7 +77,7 @@ public class Monster extends Entity {
                 this.critChance = Double.parseDouble(parsed[1]);
                 break;
             case "hitDamage":
-                this.hitDamage = Integer.parseInt(parsed[1]);
+                this.hitDamage = parseDiceNotation(parsed[1]);
                 break;
             case "speed":
                 this.speed = Integer.parseInt(parsed[1]);
@@ -86,7 +86,7 @@ public class Monster extends Entity {
                 this.range = Integer.parseInt(parsed[1]);
                 break;
             case "health":
-                this.health = Integer.parseInt(parsed[1]);
+                this.health = parseDiceNotation(parsed[1]);
                 break;
             case "movementType":
                 this.movementType = movementTypeFromString(parsed[1]);
@@ -228,6 +228,15 @@ public class Monster extends Entity {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
+    private static int parseDiceNotation(String die) {
+        String[] parts = die.split("d");
+        int amount = Integer.parseInt(parts[0]);
+        int faces = Integer.parseInt(parts[1]);
+        int total = 0;
+        for (int i = 0; i < amount; i++) {
+            total += new Random().nextInt(faces) + 1;
+        }
+        return total;
     }
 
     private void moveRandom() {
