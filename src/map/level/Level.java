@@ -7,7 +7,9 @@ import map.RoomTableModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Random;
 
 public class Level extends JComponent {
@@ -23,11 +25,15 @@ public class Level extends JComponent {
     private JPanel panel;
     private CustomRoomTable table;
     private Random random = new Random();
+    private ArrayList zones;
 
     private static Level level;
 
     public Level() {
         level = this;
+
+        Room.zones = Room.setZones();
+        zones = (ArrayList) Room.zones.clone();
 
         setDefaults();
         createRooms();
@@ -55,10 +61,14 @@ public class Level extends JComponent {
     }
     private Point getRandomPoint() {
         Point point;
+        Polygon zone;
 
         do {
-            point = new Point(random.nextInt(table.getRowCount() - 1), random.nextInt(table.getColumnCount() - 1));
-            // Should be changed to only make the random points inside of the zones
+            // TODO: Should be changed to only make the random points inside of the zones (randomly selected, but never selected twice)
+            zone = (Polygon) zones.get(random.nextInt(zones.size() - 1));
+            point = new Point(random.nextInt(zone.getBounds().width) + (int) zone.getBounds().getMinX(),
+                    random.nextInt(zone.getBounds().height) + (int) zone.getBounds().getMinY());
+
 
             if (checkValidPoint(point)) {
                 return point;
@@ -66,6 +76,7 @@ public class Level extends JComponent {
                 point = null;
             }
         } while (point == null);
+        zones.remove(zone);
         return point;
     }
     private Dimension getRandomRoomSize(Point p) throws Exception {

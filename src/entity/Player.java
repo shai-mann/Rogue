@@ -1,6 +1,5 @@
 package entity;
 
-import entity.monster.Monster;
 import extra.GravePane;
 import main.GameManager;
 import map.Map;
@@ -12,13 +11,14 @@ public class Player extends Entity implements KeyListener {
 
     private Map map;
 
+    // TODO: Make player spawn in location with - as symbol
+
     public Player() {
         super("@", 5, 5);
         GameManager.getFrame().addKeyListener(this);
 
         map = Map.getMap();
     }
-
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:

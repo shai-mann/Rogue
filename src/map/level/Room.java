@@ -19,7 +19,6 @@ public class Room {
 
     public Room(RoomTableModel model, Point p, Dimension size) {
         rooms.add(this);
-        zones = setZones();
         createBounds(p.x, p.y, size);
 
         this.model = model;
@@ -96,7 +95,7 @@ public class Room {
 
         polygon = new Polygon(xPoints, yPoints, 4);
     }
-    private ArrayList<Polygon> setZones() {
+    public static ArrayList<Polygon> setZones() {
         ArrayList<Polygon> zones = new ArrayList<>();
         int[] xPoints = {0, 23, 23, 0};
         int[] yPoints = {0, 0, 23, 23};
