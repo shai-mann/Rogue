@@ -1,7 +1,6 @@
 package main;
 
 import entity.Player;
-import entity.monster.Zombie;
 import helper.Helper;
 import map.CustomRoomTable;
 import map.Map;
@@ -11,16 +10,15 @@ import javax.swing.*;
 
 public class GameManager {
 
-    static JFrame frame;
-    static Map map;
-    static Player player;
+    private static JFrame frame;
+    private static Map map;
+    private static Player player;
 
     public static void main(String[] args) {
         initFrame();
 
         map = new Map();
         player = new Player();
-        new Zombie(2, 2);
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
@@ -34,7 +32,7 @@ public class GameManager {
         GameManager.getTable().getCustomModel().setValueAt(s, y, x);
     }
     public static void initFrame() {
-        frame = new JFrame("Rogue");
+        frame = new JFrame("Rogue - A recreation of the 1980's game");
 
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);

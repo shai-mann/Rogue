@@ -1,0 +1,45 @@
+https://nethackwiki.com/wiki/Rogue_(game)
+
+Note: AC is the amount that the chance to hit is reduced by. So if it is 10, then it is reduced by 0%. Every AC down from there is 5% more reduced per AC down.
+9 would be a 5% reduction of chance to hit.
+Note: Treasure means the chance that the monster is carrying treasure (item or gold) on it when it is killed.
+
+Giant Ant:
+	Makes player weaker on hit
+Bat:
+	Flies randomly
+Centaur:
+	"Just nasty" -Dad
+Dragon:
+	Ranged "6d6" flame attack and normal attack
+Floating Eye:
+	Paralyses player on hit : sleeps until hit
+Violet Fungi:
+	Cannot move : Can grab and hold player (100% chance) when you stand next to it
+Griffin:
+	Damage: 4d3 or 3d5
+Hobgoblin:
+	Kills level 1 rogue in 2 hits : Damage: 1d8 : Health: 1d8 : Experience: 3
+Invisible Stalker:
+	Invisible : moves like bat : Damage: 4d4 : Level: 10 : Health: 8d8 : Experience: 120 : Gold: ???
+Jackal:
+Kobold:
+Leprechaun:
+	Steals some gold and tps away : Damage: 1d1 : Health: 3d8 : Experience: 10 : Treasure: 0%
+Mimic:
+	Mimics an item until hits player : 
+Nymph:
+	Steals one magic item : teleports away after stealing item : Damage: 
+Orc:
+	Tracks gold over player : Damage: 1d8 : Health: 1d8 : Experience: 5 : Treasure: 15%
+Purple Worm:
+Quasit:
+Rust Monster:
+Snake:
+Troll:
+Umberhulk:
+Vampire:
+Xorn:
+Yeti:
+Zombie:
+	Damage: 1d8 : Health: 2d8 : Experience: 6 : Treasure: 0%

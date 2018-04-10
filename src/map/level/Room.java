@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class Room {
 
-    private static ArrayList<Polygon> zones = new ArrayList<>();
+    public static ArrayList<Polygon> zones = new ArrayList<>();
     private static ArrayList<Room> rooms = new ArrayList<>();
     public ArrayList<Point> doors = new ArrayList<>();
 
@@ -17,13 +17,13 @@ public class Room {
     private RoomTableModel model;
     private Dimension size;
 
-    public Room(RoomTableModel model, int x, int y, Dimension size) {
+    public Room(RoomTableModel model, Point p, Dimension size) {
         rooms.add(this);
         zones = setZones();
-        createBounds(x, y, size);
+        createBounds(p.x, p.y, size);
 
         this.model = model;
-        center = new Point(x, y);
+        center = new Point(p.x, p.y);
         this.size = size;
 
         addRoom();
@@ -61,11 +61,23 @@ public class Room {
         }
     }
     public static boolean checkValidSpace(int x, int y, Dimension size) {
-        Rectangle tempBounds = new Rectangle(x, y, (int) size.getWidth(), (int) size.getHeight());
+        int[] xPoints =
+                {(int) (x - Math.floor(size.getWidth() / 2)), (int) (x - Math.ceil(size.getWidth() / 2)), (int) (x + Math.floor(size.getWidth() / 2)), (int) (x + Math.ceil(size.getWidth() / 2))};
+        int[] yPoints =
+                {(int) (y - Math.floor(size.getWidth() / 2)), (int) (y + Math.ceil(size.getWidth() / 2)), (int) (y + Math.floor(size.getWidth() / 2)), (int) (y - Math.ceil(size.getWidth() / 2))};
+
+        Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
         for (Room room : rooms ) {
-            if (room.getBounds().contains(tempBounds)) {
+            if (room.getBounds().intersects(tempBounds.getBounds())) {
                 return false;
             }
+        }
+
+        if (tempBounds.getBounds().getMaxX() > Level.getLevel().getTable().getColumnCount() - 2 ||
+                tempBounds.getBounds().getMinX() < 0 ||
+                tempBounds.getBounds().getMaxY() > Level.getLevel().getTable().getRowCount() - 2 ||
+                tempBounds.getBounds().getMinY() < 0) {
+            return false;
         }
         return true;
     }

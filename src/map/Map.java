@@ -30,7 +30,7 @@ public class Map {
         return map;
     }
     private void createUIComponents() {
-        level = new Level(30, 30);
+        level = new Level();
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);

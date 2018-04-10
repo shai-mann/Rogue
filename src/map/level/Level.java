@@ -7,25 +7,26 @@ import map.RoomTableModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Level extends JComponent {
 
     /*
-    * ROOM CLASS:
+    * LEVEL CLASS:
     * The map class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
     * Rooms can only be from 11 length to 5
-    * Rooms must be odd lengths
+    * Rooms must be odd lengths so as to have a center
      */
 
     private JPanel panel;
     private CustomRoomTable table;
+    private Random random = new Random();
 
     private static Level level;
 
-    public Level(int x, int y) {
+    public Level() {
         level = this;
 
         setDefaults();
@@ -35,13 +36,64 @@ public class Level extends JComponent {
     * Level size is 69 x 39
      */
     public void createRooms() {
-        Room room = new Room(table.getCustomModel(), 5, 5, new Dimension(11, 11));
-        Room room1 = new Room(table.getCustomModel(), 30, 30, new Dimension(5, 5));
-        Room room2 = new Room(table.getCustomModel(), 60, 10, new Dimension(9, 9));
-        Passageway passageway = new Passageway(room, room1);
-        Passageway passageway1 = new Passageway(room, room2);
+        // Add something to make them in different zones each time LoL
+        int roomNumber = random.nextInt(4) + 5;
 
-        // Needs to be changed to create a custom level each time
+        for (int i = 0; i < roomNumber; i++) {
+            Point center;
+            Dimension size;
+            do {
+                center = getRandomPoint();
+                try {
+                    size = getRandomRoomSize(center);
+                } catch (Exception e) {
+                    size = null;
+                }
+            } while(size == null);
+            new Room(table.getCustomModel(), center, size);
+        }
+    }
+    private Point getRandomPoint() {
+        Point point;
+
+        do {
+            point = new Point(random.nextInt(table.getRowCount() - 1), random.nextInt(table.getColumnCount() - 1));
+            // Should be changed to only make the random points inside of the zones
+
+            if (checkValidPoint(point)) {
+                return point;
+            } else {
+                point = null;
+            }
+        } while (point == null);
+        return point;
+    }
+    private Dimension getRandomRoomSize(Point p) throws Exception {
+        Dimension dim;
+        int iterations = 0;
+
+        do {
+            dim = new Dimension(random.nextInt(6) + 5, random.nextInt(6) + 5);
+
+            if (Room.checkValidSpace(p.x, p.y, dim)) {
+                return dim;
+            } else {
+                dim = null;
+            }
+            iterations++;
+
+            if (iterations == 10) {
+                throw new Exception("Entered infinite loop");
+            }
+        } while (dim == null);
+        return dim;
+    }
+    private boolean checkValidPoint(Point p) {
+        try {
+            return GameManager.getTable().getValueAt(p.y, p.x) == "";
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
