@@ -1,5 +1,5 @@
-name:Bat
-graphic:B
+name:Centaur
+graphic:C
 hitChance:0.1
 critChance:0.01
 hitDamage:1d2
