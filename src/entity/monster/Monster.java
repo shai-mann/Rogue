@@ -196,11 +196,15 @@ public class Monster extends Entity {
             if (random.nextDouble() <= critChance) { // critical
                 if (random.nextDouble() <= 0.8) {
                     GameManager.getPlayer().health -= hitDamage;
+                    MessageBar.addMessage("The " + this.name + " crits");
                 } else {
                     // paralyze
                 }
+            } else {
+                MessageBar.addMessage("The " + this.name + " hits");
             }
         }
+        MessageBar.addMessage("The " + this.name + " misses");
     }
     private void shootAttack() {
         // TODO: create shoot attack

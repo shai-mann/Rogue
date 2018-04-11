@@ -2,6 +2,7 @@ package entity;
 
 import entity.monster.Monster;
 import extra.GravePane;
+import extra.MessageBar;
 import main.GameManager;
 import map.Map;
 
@@ -50,6 +51,7 @@ public class Player extends Entity implements KeyListener {
         }
         status.update();
         map.update();
+                    MessageBar.addMessage("You hit the " + monster.getName());
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
