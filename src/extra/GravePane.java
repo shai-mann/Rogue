@@ -4,6 +4,7 @@ import helper.Helper;
 import main.GameManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GravePane extends JComponent {
 
@@ -20,8 +21,19 @@ public class GravePane extends JComponent {
         Helper.setSize(panel, Helper.getScreenSize());
         textArea.setBackground(Helper.BACKGROUND_COLOR);
         textArea.setForeground(Helper.FOREGROUND_COLOR);
-        textArea.setText("Your Ad Here \n< Death Message>");
+        textArea.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 30));
+        addLine("     .-------.");
+        addLine("   .'         '.");
+        addLine("   |  R  I  P  |");
+        addLine("   |           |");
+        addLine("   |   score   |");
+        addLine("   |     3     |");
+        addLine("   |           |");
+        addLine(" ^^^^^^^^^^^^^^^^^");
 
         panel.setBackground(Helper.BACKGROUND_COLOR);
+    }
+    private void addLine(String text) {
+        textArea.setText(textArea.getText() + "\n" + text);
     }
 }

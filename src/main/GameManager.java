@@ -27,7 +27,7 @@ public class GameManager {
         Random random = new Random();
         for (File file : files) {
             if (file.isFile()) {
-                new Monster(file.getPath(), random.nextInt(28) + 1, random.nextInt(28) + 1);
+                    new Monster(file.getPath(), random.nextInt(28) + 1, random.nextInt(28) + 1);
             }
         }
     }

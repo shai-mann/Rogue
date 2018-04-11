@@ -16,9 +16,10 @@ public class Player extends Entity implements KeyListener {
     private Status status;
 
     public Player() {
-        super("@", 5, 5);
+        super("@", 1, 1);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
+        status.setAc(8);
         map = Map.getMap();
     }
 
@@ -49,9 +50,19 @@ public class Player extends Entity implements KeyListener {
             int[] directions = {UP,DOWN,RIGHT,LEFT};
             move(directions[new Random().nextInt(directions.length)]);
         }
-        status.update();
         map.update();
+        Random rand = new Random();
+        for (Monster monster: Monster.getMonsters()) {
+            if (isNextTo(monster)) {
+                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
+                if (rand.nextDouble() <= hitChance) {
+                    Status monsterStatus = monster.getStatus();
+                    monsterStatus.setHealth(monsterStatus.getHealth() - 1); // TODO: base this on sword
                     MessageBar.addMessage("You hit the " + monster.getName());
+                }
+            }
+        }
+        status.update();
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
@@ -62,6 +73,10 @@ public class Player extends Entity implements KeyListener {
         if (checkDeath()) {
             new GravePane();
         }
+    }
+    public boolean checkValidMove(int direction) {
+        String value = graphicAtMove(direction);
+
     }
     private boolean checkDeath() {
         return getHealth() == 0;

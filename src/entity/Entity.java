@@ -1,6 +1,9 @@
 package entity;
 
+import helper.Helper;
 import main.GameManager;
+
+import java.awt.*;
 
 public class Entity {
     private int xPos;
@@ -8,9 +11,9 @@ public class Entity {
 
     public int health = 20;
 
-    String graphic;
+    protected String graphic;
 
-    String overWrittenGraphic = "-";
+    protected String overWrittenGraphic = "-";
 
     protected static int UP = 0;
     protected static int DOWN = 1;
@@ -42,8 +45,12 @@ public class Entity {
             GameManager.add(graphic, xPos, yPos);
         }
     }
-    private boolean checkValidMove(int direction) {
+    public boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
+        String value = (graphicAtMove(direction));
+        return value == "-" || value == "+" || value == "#";
+    }
+    protected String graphicAtMove(int direction) {
         Object value;
         if (direction == UP) {
             value = GameManager.getTable().getValueAt(yPos - 1, xPos);
@@ -57,9 +64,14 @@ public class Entity {
         else if (direction == LEFT) {
             value = GameManager.getTable().getValueAt(yPos, xPos - 1);
         } else {
-            return false;
+            value = "";
         }
-        return value == "-" || value == "+" || value == "#";
+        return (String) value;
+    }
+    protected boolean isNextTo(Entity entity) {
+        return
+                ((entity.getXPos() + 1 == getXPos() || entity.getXPos() - 1 == getXPos()) && entity.getYPos() == getYPos()) ||
+                        ((entity.getYPos() + 1 == getYPos() || entity.getYPos() - 1 == getYPos()) && entity.getXPos() == getXPos());
     }
 
     public int getXPos() {

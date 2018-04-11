@@ -1,4 +1,4 @@
-package map;
+package extra;
 
 import entity.monster.Monster;
 import helper.Helper;

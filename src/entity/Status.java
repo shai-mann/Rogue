@@ -6,6 +6,7 @@ public class Status {
     private int paralyzed = 0;
     private int confused = 0;
     private int drunk = 0;
+    private int ac = 10;
 
     public Status() {
 
@@ -35,6 +36,11 @@ public class Status {
     public boolean isDrunk() {
         return drunk > 0;
     }
+    public int getAc() { return ac; }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
     public void setParalyzed(int turns) {
         this.paralyzed = turns;
     }
@@ -44,5 +50,6 @@ public class Status {
     public void setDrunk(int drunk) {
         this.drunk = drunk;
     }
+    public void setAc(int ac) { this.ac = ac; }
 
 }

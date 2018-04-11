@@ -3,6 +3,7 @@ package entity.monster;
 import entity.Entity;
 import entity.Player;
 import entity.Status;
+import extra.MessageBar;
 import main.GameManager;
 
 import java.io.*;
@@ -15,8 +16,20 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes { WANDER, TRACK }
-    private enum attackTypes { HIT, SHOOT, PARALYZE, CONFUSE, INTOXICATE }
+    private enum movementTypes { WANDER, TRACK, MIMIC, STILL }
+    private enum attackTypes {
+        HIT,
+        SHOOT,
+        PARALYZE,
+        CONFUSE,
+        INTOXICATE,
+        WEAKEN,
+        DRAIN,
+        RUST,
+        RANGE,
+        TRAP,
+        STEAL
+    }
 
     public String name = "<Default>";
     private int speed = 1;
@@ -25,6 +38,8 @@ public class Monster extends Entity {
     private double hitChance = 0.5;
     private int hitDamage = 1;
     private double critChance;
+    private boolean invisible;
+
 
     private Status status;
 
@@ -34,8 +49,8 @@ public class Monster extends Entity {
     public Monster(String dataFilePath, int x, int y) {
         super("_", x, y);
         monsters.add(this);
-        loadDataFile(dataFilePath);
         status = new Status();
+        loadDataFile(dataFilePath);
     }
 
     // DATA LOADING
@@ -61,6 +76,7 @@ public class Monster extends Entity {
         }
     }
     private void applyAttributeFromLine(String line) {
+        // todo: error handling if data is misformatted
         String[] parsed = line.split(":");
         switch (parsed[0]) {
             case "name":
@@ -93,6 +109,12 @@ public class Monster extends Entity {
                 break;
             case "attackType":
                 this.attackType = attackTypeFromString(parsed[1]);
+                break;
+            case "invisible":
+                this.invisible = Boolean.valueOf(parsed[1]);
+                break;
+            case "ac":
+                this.status.setAc(Integer.valueOf(parsed[1]));
                 break;
         }
     }
@@ -127,6 +149,7 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
+        // TODO: Add rust armor, range attack, trap attack, steal gold, steal (magic) item, greedy, pathfind gold, weakness, drain max HP, mimic (immitate object)
         switch (movementType) {
             case TRACK:
                 trackMovement();
@@ -136,6 +159,9 @@ public class Monster extends Entity {
                 break;
         }
         status.update();
+        if (status.getHealth() <= 0) {
+            this.die();
+        }
     }
     private void trackMovement() {
         Player player = GameManager.getPlayer();
@@ -220,7 +246,17 @@ public class Monster extends Entity {
         GameManager.getPlayer().getStatus().setConfused(ticks);
     }
     private void intoxicateAttack() {
+        // TODO: delay between two steps
         GameManager.getPlayer().getStatus().setDrunk(3);
+    }
+
+    // OVERRIDES
+
+    public void move(int direction) {
+        super.move(direction);
+        if (this.invisible) {
+            GameManager.add(overWrittenGraphic, getXPos(), getYPos());
+        }
     }
 
     // HELPERS
@@ -228,10 +264,6 @@ public class Monster extends Entity {
     private boolean isInRange(Player player) {
         return Math.pow(player.getXPos() - getXPos(), 2) + Math.pow(player.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
-    private boolean isNextTo(Player player) {
-        return
-                ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
-                        ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
         int amount = Integer.parseInt(parts[0]);
@@ -248,6 +280,18 @@ public class Monster extends Entity {
         move(directions[new Random().nextInt(directions.length)]);
         moveCounter = 1;
     }
+    private void die() {
+        GameManager.add(overWrittenGraphic, getXPos(), getYPos());
+        MessageBar.addMessage("You kill the " + name);
+        monsters.remove(this);
+    }
+
+    // GETTERS
+
+    public Status getStatus() {
+        return status;
+    }
+    public String getName() { return name; }
 
     // STATIC METHODS
 
@@ -257,6 +301,9 @@ public class Monster extends Entity {
             monster.runUpdate();
         }
         // has to call some method in map that runs the statusBar.updateStatusBar();
+    }
+    public static ArrayList<Monster> getMonsters() {
+        return monsters;
     }
 
 }
