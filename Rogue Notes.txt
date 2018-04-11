@@ -1,0 +1,53 @@
+https://nethackwiki.com/wiki/Rogue_(game)
+
+Note: AC is the amount that the chance to hit is reduced by. So if it is 10, then it is reduced by 0%. Every AC down from there is 3% more reduced per AC down.
+9 would be a 3% reduction of chance to hit.
+Note: Treasure means the chance that the monster is carrying treasure (item or gold) on it when it is killed.
+
+TODO: Add info for: Floating Eye, Jackal, Purple Worm, Quasit, Umberhulk, and Xorn.
+
+Giant Ant:
+	Weakens Player on hit : Damage: 1d6 : Health: 2d8 : Experience: 9 : Treasure: 0% : AC: 3
+Bat:
+	Flies randomly : Damage: 1d2 : Health: 1d8 : Experience: 1 : Treasure: 0% : AC: 3
+Centaur:
+	Damage: 1d2/1d5 for critical : Health: 4d8 : Experience: 17 : Treasure: 15% : AC: 4
+Dragon:
+	Ranged "6d6" flame attack and normal attack : Damage: 1d8/3d10 for flame attack : Health: 10d8 : Experience: 5000 : Treasure: 100% : AC: -1
+Floating Eye:
+	Paralyses player on hit : sleeps until hit
+Violet Fungi:
+	Cannot move : Can grab and hold player (100% chance) when you stand next to it : Damage: 0d0 : Health: 8d8 : Experience: 80 : Treasure: 0% : AC: 3
+Griffin:
+	Damage: 4d3/3d5 on critical : Health: 13d8 : Experience: 2000 : Treasure: 20% : AC: 2
+Hobgoblin:
+	Kills level 1 rogue in 2 hits : Damage: 1d8 : Health: 1d8 : Experience: 3
+Invisible Stalker:
+	Invisible : moves like bat : Damage: 4d4 : Level: 10 : Health: 8d8 : Experience: 120 : Treasure: 10%
+Jackal:
+Kobold:
+    Damage: 1d4 : Health: 1d8 : Experience: 1 : Treasure: 0% : AC: 7
+Leprechaun:
+	Steals some gold and tps away : Damage: 1d1 : Health: 3d8 : Experience: 10 : Treasure: 0%
+Mimic:
+	Mimics an item until hits player : Damage: 4d4 : Health: 7d8 : Experience: 100 : Treasure: 30% : AC: 7
+Nymph:
+	Steals one magic item : tps away after stealing item : Damage: 0d0 : Health: 3d8 : Experience: 37 : Treasure: 100% : AC: 9
+Orc:
+	Tracks gold over player : Damage: 1d8 : Health: 1d8 : Experience: 5 : Treasure: 15%
+Purple Worm:
+Quasit:
+Rust Monster:
+    Attack rusts armor (decreases AC) on hit : Damage: 0d0 : Health: 5d8 : Experience: 20 : Treasure: 0% : AC: 2
+Snake:
+    Damage: 1d3 : Health: 1d8 : Experience: 2 : Treasure: 0% : AC: 5
+Troll:
+    Damage: 1d8/2d6 for critical : Health: 6d8 : Experience: 120 : Treasure: 50% : AC: 4
+Umberhulk:
+Vampire:
+    On hit drains max HP : Damage: 1d10 : Health: 8d8 : Experience: 350 : Treasure: 20% : AC: 1
+Xorn:
+Yeti:
+    Damage: 1d6 : Health: 4d8 : Experience: 50 : Treasure: 30% : AC: 6
+Zombie:
+	Damage: 1d8 : Health: 2d8 : Experience: 6 : Treasure: 0% : AC: 8

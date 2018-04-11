@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Random;
 
 public class Level extends JComponent {
@@ -19,7 +18,7 @@ public class Level extends JComponent {
     * The map class is made of a grid (represented by a JTable) which things such as the player and monsters
     * can be added to
     * Rooms can only be from 11 length to 5
-    * Rooms must be odd lengths so as to have a center
+    * Rooms must be odd lengths so as to have a center (Not requirement of room)
      */
 
     private JPanel panel;
@@ -36,13 +35,16 @@ public class Level extends JComponent {
         zones = (ArrayList) Room.zones.clone();
 
         setDefaults();
+//        Room room = new Room(table.getCustomModel(),new Point(15, 15), new Dimension(10, 10));
+//        Room room1 = new Room(table.getCustomModel(), new Point(30, 30), new Dimension(9, 9));
+//        new Passageway(room, room1);
         createRooms();
+        createPassageways();
     }
     /*
     * Level size is 69 x 39
      */
-    public void createRooms() {
-        // Add something to make them in different zones each time LoL
+    private void createRooms() {
         int roomNumber = random.nextInt(4) + 5;
 
         for (int i = 0; i < roomNumber; i++) {
@@ -59,6 +61,40 @@ public class Level extends JComponent {
             new Room(table.getCustomModel(), center, size);
         }
     }
+    private void createPassageways() {
+        // TODO: Create Passageway generation
+        // 1) Start in one room, and mark that room as starting room
+        // 2) Pick random room as end destination
+        // 3) Backtrack and use original room to go to different room
+        // 4) Update copy of room list to remove starting room from list
+        // 5) First of two ending destinations becomes the starting room
+        // 6) Repeat until all rooms have at least one door (create method to check)
+        ArrayList<Room> rooms = (ArrayList) Room.rooms.clone();
+
+        Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
+        rooms.remove(startingRoom);
+
+        while (!checkForDoorInEachRoom() && !(rooms.size() == 1)) {
+            int iterations = random.nextInt(2) + 1;
+            for (int i = 0; i < iterations; i++) {
+                Room end = rooms.get(random.nextInt(rooms.size() - 1));
+                rooms.remove(end);
+
+                new Passageway(startingRoom, end);
+                startingRoom = end;
+            }
+        }
+    }
+    private boolean checkForDoorInEachRoom() {
+        int roomsCompleted = 0;
+
+        for (Room room : Room.rooms) {
+            if (room.doors.size() > 0) {
+                roomsCompleted++;
+            }
+        }
+        return roomsCompleted == Room.rooms.size();
+    }
     private Point getRandomPoint() {
         Point point;
         Polygon zone;
@@ -66,9 +102,8 @@ public class Level extends JComponent {
         do {
             // TODO: Should be changed to only make the random points inside of the zones (randomly selected, but never selected twice)
             zone = (Polygon) zones.get(random.nextInt(zones.size() - 1));
-            point = new Point(random.nextInt(zone.getBounds().width) + (int) zone.getBounds().getMinX(),
-                    random.nextInt(zone.getBounds().height) + (int) zone.getBounds().getMinY());
-
+            point = new Point(random.nextInt(zone.getBounds().width - 5) + (int) zone.getBounds().getMinX(),
+                    random.nextInt(zone.getBounds().height - 5) + (int) zone.getBounds().getMinY());
 
             if (checkValidPoint(point)) {
                 return point;
