@@ -55,6 +55,8 @@ public class Room {
                 rowData = createDefaultRow("|", "-");
             }
             for (int z = 0; z < rowData.length; z++) {
+                System.out.println(startingPoint.y - i);
+                System.out.println(startingPoint.x - z);
                 model.setValueAt(rowData[z], startingPoint.y - i, startingPoint.x - z);
             }
         }
@@ -98,31 +100,31 @@ public class Room {
     public static ArrayList<Polygon> setZones() {
         ArrayList<Polygon> zones = new ArrayList<>();
         int[] xPoints = {0, 23, 23, 0};
-        int[] yPoints = {0, 0, 23, 23};
+        int[] yPoints = {0, 0, 13, 13};
         zones.add(0, new Polygon(xPoints, yPoints, 4));
         int[] xPoints1 = {24, 46, 46, 24};
-        int[] yPoints1 = {0, 0, 23, 23};
+        int[] yPoints1 = {0, 0, 13, 13};
         zones.add(1, new Polygon(xPoints1, yPoints1, 4));
         int[] xPoints2 = {47, 69, 69, 47};
-        int[] yPoints2 = {0, 0, 23, 23};
+        int[] yPoints2 = {0, 0, 13, 13};
         zones.add(2, new Polygon(xPoints2, yPoints2, 4));
         int[] xPoints3 = {0, 23, 23, 0};
         int[] yPoints3 = {24, 24, 46, 46};
         zones.add(3, new Polygon(xPoints3, yPoints3, 4));
         int[] xPoints4 = {24, 46, 46, 24};
-        int[] yPoints4 = {24, 24, 46, 46};
+        int[] yPoints4 = {14, 14, 26, 26};
         zones.add(4, new Polygon(xPoints4, yPoints4, 4));
         int[] xPoints5 = {47, 69, 69, 47};
-        int[] yPoints5 = {24, 24, 46, 46};
+        int[] yPoints5 = {14, 14, 26, 26};
         zones.add(5, new Polygon(xPoints5, yPoints5, 4));
         int[] xPoints6 = {23, 0, 0, 23};
-        int[] yPoints6 = {47, 47, 69, 69};
+        int[] yPoints6 = {27, 27, 39, 39};
         zones.add(6, new Polygon(xPoints6, yPoints6, 4));
         int[] xPoints7 = {24, 46, 46, 24};
-        int[] yPoints7 = {47, 47, 69, 69};
+        int[] yPoints7 = {27, 27, 39, 39};
         zones.add(7, new Polygon(xPoints7, yPoints7, 4));
         int[] xPoints8 = {47, 69, 69, 47};
-        int[] yPoints8 = {47, 47, 69, 69};
+        int[] yPoints8 = {27, 27, 39, 39};
         zones.add(8, new Polygon(xPoints8, yPoints8, 4));
         return zones;
     }

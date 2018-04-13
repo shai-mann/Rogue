@@ -1,4 +1,5 @@
 package map.level;
+
 import helper.Helper;
 import main.GameManager;
 import map.CustomCellRenderer;
@@ -38,28 +39,44 @@ public class Level extends JComponent {
 //        Room room = new Room(table.getCustomModel(),new Point(15, 15), new Dimension(10, 10));
 //        Room room1 = new Room(table.getCustomModel(), new Point(30, 30), new Dimension(9, 9));
 //        new Passageway(room, room1);
-        createRooms();
-        createPassageways();
+//        createRooms();
+//        createPassageways();
+        Room room = new Room(table.getCustomModel(), new Point(5, 5), new Dimension(10, 10));
+        System.out.println(GameManager.getTable().getValueAt(1,1) + "Dab dab dab dab");
     }
     /*
     * Level size is 69 x 39
      */
     private void createRooms() {
-        int roomNumber = random.nextInt(4) + 5;
+        int roomNumber = random.nextInt(4) + 4;
+        ArrayList<Integer> existingZones = new ArrayList<>();
 
         for (int i = 0; i < roomNumber; i++) {
             Point center;
             Dimension size;
             do {
                 center = getRandomPoint();
-                try {
-                    size = getRandomRoomSize(center);
-                } catch (Exception e) {
+                if (!existingZones.contains(zoneFromPoint(center))) {
+                    try {
+                        size = getRandomRoomSize(center);
+                        existingZones.add(zoneFromPoint(center));
+                    } catch (Exception e) {
+                        size = null;
+                    }
+                } else {
                     size = null;
                 }
             } while(size == null);
             new Room(table.getCustomModel(), center, size);
         }
+    }
+    private Integer zoneFromPoint(Point point) {
+        for (int i = 0; i < Room.zones.size(); i++) {
+            if (Room.zones.get(i).contains(point)) {
+                return Integer.valueOf(i);
+            }
+        }
+        return null;
     }
     private void createPassageways() {
         // TODO: Create Passageway generation
@@ -71,19 +88,18 @@ public class Level extends JComponent {
         // 6) Repeat until all rooms have at least one door (create method to check)
         ArrayList<Room> rooms = (ArrayList) Room.rooms.clone();
 
-        Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
-        rooms.remove(startingRoom);
+//        Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
+//        rooms.remove(startingRoom);
 
-        while (!checkForDoorInEachRoom() && !(rooms.size() == 1)) {
-            int iterations = random.nextInt(2) + 1;
-            for (int i = 0; i < iterations; i++) {
-                Room end = rooms.get(random.nextInt(rooms.size() - 1));
-                rooms.remove(end);
-
-                new Passageway(startingRoom, end);
-                startingRoom = end;
-            }
-        }
+//        while (!checkForDoorInEachRoom() && !(rooms.size() == 1)) {
+//            int iterations = random.nextInt(2) + 1;
+//            for (int i = 0; i < iterations; i++) {
+//                Room end = rooms.get(random.nextInt(rooms.size() - 1));
+//                rooms.remove(end);
+//                new Passageway(startingRoom, end);
+//                startingRoom = end;
+//            }
+//        }
     }
     private boolean checkForDoorInEachRoom() {
         int roomsCompleted = 0;
@@ -97,21 +113,25 @@ public class Level extends JComponent {
     }
     private Point getRandomPoint() {
         Point point;
-        Polygon zone;
+        int index = (random.nextInt(zones.size()) - 1);
+        if (index < 0) {
+            index = 0;
+            System.out.println(index);
+        }
+        Polygon zone = (Polygon) zones.get(index);
 
         do {
             // TODO: Should be changed to only make the random points inside of the zones (randomly selected, but never selected twice)
-            zone = (Polygon) zones.get(random.nextInt(zones.size() - 1));
             point = new Point(random.nextInt(zone.getBounds().width - 5) + (int) zone.getBounds().getMinX(),
                     random.nextInt(zone.getBounds().height - 5) + (int) zone.getBounds().getMinY());
 
             if (checkValidPoint(point)) {
+                zones.remove(zone);
                 return point;
             } else {
                 point = null;
             }
         } while (point == null);
-        zones.remove(zone);
         return point;
     }
     private Dimension getRandomRoomSize(Point p) throws Exception {
@@ -120,7 +140,8 @@ public class Level extends JComponent {
 
         do {
             dim = new Dimension(random.nextInt(6) + 5, random.nextInt(6) + 5);
-
+            dim.width = (int) Math.floor(dim.width / 2) * 2;
+            dim.height = (int) Math.floor(dim.height / 2)  * 2;
             if (Room.checkValidSpace(p.x, p.y, dim)) {
                 return dim;
             } else {
