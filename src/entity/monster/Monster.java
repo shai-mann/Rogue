@@ -78,7 +78,7 @@ public class Monster extends Entity {
     private void applyAttributeFromLine(String line) {
         // todo: error handling if data is misformatted
         String[] parsed = line.split(":");
-        switch (parsed[0]) {
+        switch (parsed[0].toLowerCase()) {
             case "name":
                 name = parsed[1];
                 break;
@@ -86,10 +86,10 @@ public class Monster extends Entity {
                 this.graphic = parsed[1];
                 GameManager.add(graphic, getXPos(), getYPos());
                 break;
-            case "hitChance":
+            case "hitchance":
                 this.hitChance = Double.parseDouble(parsed[1]);
                 break;
-            case "critChance":
+            case "critchance":
                 this.critChance = Double.parseDouble(parsed[1]);
                 break;
             case "hitDamage":
@@ -104,10 +104,10 @@ public class Monster extends Entity {
             case "health":
                 this.health = parseDiceNotation(parsed[1]);
                 break;
-            case "movementType":
+            case "movementtype":
                 this.movementType = movementTypeFromString(parsed[1]);
                 break;
-            case "attackType":
+            case "attacktype":
                 this.attackType = attackTypeFromString(parsed[1]);
                 break;
             case "invisible":
@@ -229,8 +229,9 @@ public class Monster extends Entity {
             } else {
                 MessageBar.addMessage("The " + this.name + " hits");
             }
+        } else {
+            MessageBar.addMessage("The " + this.name + " misses");
         }
-        MessageBar.addMessage("The " + this.name + " misses");
     }
     private void shootAttack() {
         // TODO: create shoot attack
@@ -252,11 +253,12 @@ public class Monster extends Entity {
 
     // OVERRIDES
 
-    public void move(int direction) {
+    public boolean move(int direction) {
         super.move(direction);
         if (this.invisible) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         }
+        return true;
     }
 
     // HELPERS
@@ -296,19 +298,12 @@ public class Monster extends Entity {
     // STATIC METHODS
 
     public static void update() {
-        // run through monster list and update positions
         for (Monster monster : monsters) {
             monster.runUpdate();
         }
-        // has to call some method in map that runs the statusBar.updateStatusBar();
     }
     public static ArrayList<Monster> getMonsters() {
         return monsters;
     }
 
 }
-
-
-
-
-

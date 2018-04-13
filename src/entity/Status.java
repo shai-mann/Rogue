@@ -11,7 +11,6 @@ public class Status {
     public Status() {
 
     }
-
     public void update() {
         if (isParalyzed()) {
             this.paralyzed -= 1;
@@ -23,7 +22,6 @@ public class Status {
             this.drunk -= 1;
         }
     }
-
     public int getHealth() {
         return health;
     }

@@ -27,7 +27,7 @@ public class Entity {
 
         GameManager.add(graphic, x, y);
     }
-    public void move(int direction) {
+    public boolean move(int direction) {
         if (checkValidMove(direction)) {
             GameManager.add(overWrittenGraphic, xPos, yPos);
             if (direction == UP) {
@@ -43,12 +43,14 @@ public class Entity {
             overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
 
             GameManager.add(graphic, xPos, yPos);
+            return true;
         }
+        return false;
     }
     public boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
         String value = (graphicAtMove(direction));
-        return value == "-" || value == "+" || value == "#";
+        return value.equals("-") || value.equals("+") || value.equals("#") || value.equals("*") || value.equals("]");
     }
     protected String graphicAtMove(int direction) {
         Object value;
