@@ -18,7 +18,6 @@ public class Room {
     private Point topLeft;
 
     public Room(RoomTableModel model, Point p, Dimension size) {
-        // TODO: reformat room to have the point be the top left-most point
         rooms.add(this);
         createBounds(p.x, p.y, size);
 
@@ -60,7 +59,7 @@ public class Room {
     }
     public static boolean checkValidSpace(int x, int y, Dimension size) {
         int[] xPoints = {x, x + size.width - 1, x + size.width - 1, x};
-        int[] yPoints = {y, y, y - size.height - 1, y - size.height - 1};
+        int[] yPoints = {y, y, y + size.height - 1, y + size.height - 1};
 
         Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
         for (Room room : rooms ) {
@@ -86,8 +85,8 @@ public class Room {
         return rowValueList;
     }
     private void createBounds(int x, int y, Dimension size) {
-        int[] xPoints = {x, x + size.width, x + size.width, x};
-        int[] yPoints = {y, y, y + size.height, y + size.height};
+        int[] xPoints = {x, x + size.width - 1, x + size.width - 1, x};
+        int[] yPoints = {y, y, y + size.height - 1, y + size.height - 1};
 
         polygon = new Polygon(xPoints, yPoints, 4);
     }

@@ -38,41 +38,30 @@ public class Level extends JComponent {
         setDefaults();
 
         createRooms();
-        createPassageways();
+//        createPassageways();
     }
     /*
     * Level size is 69 x 40
      */
     private void createRooms() {
-        int roomNumber = random.nextInt(4) + 4;
-        ArrayList<Integer> existingZones = new ArrayList<>();
+        int roomNumber = random.nextInt(2) + 4;
 
         for (int i = 0; i < roomNumber; i++) {
             Point point;
             Dimension size;
+            Polygon zone;
             do {
-                point = getRandomPoint();
-                if (!existingZones.contains(zoneFromPoint(point))) {
-                    try {
-                        size = getRandomRoomSize(point);
-                        existingZones.add(zoneFromPoint(point));
-                    } catch (Exception e) {
-                        size = null;
-                    }
-                } else {
+                zone = (Polygon) zones.get(random.nextInt(zones.size() - 1));
+                point = getRandomPoint(zone);
+                try {
+                    size = getRandomRoomSize(point);
+                } catch (Exception e) {
                     size = null;
                 }
             } while(size == null);
             new Room(table.getCustomModel(), point, size);
+            zones.remove(zone);
         }
-    }
-    private Integer zoneFromPoint(Point point) {
-        for (int i = 0; i < Room.zones.size(); i++) {
-            if (Room.zones.get(i).contains(point)) {
-                return i;
-            }
-        }
-        return null;
     }
     private void createPassageways() {
         // TODO: Create Passageway generation
@@ -107,19 +96,13 @@ public class Level extends JComponent {
         }
         return roomsCompleted == Room.rooms.size();
     }
-    private Point getRandomPoint() {
+    private Point getRandomPoint(Polygon zone) {
         Point point;
-        int index = (random.nextInt(zones.size()) - 1);
-        if (index < 0) {
-            index = 0;
-        }
-        Polygon zone = (Polygon) zones.get(index);
         do {
-            point = new Point(random.nextInt(zone.getBounds().width - 5) + (int) zone.getBounds().getMinX(),
-                    random.nextInt(zone.getBounds().height - 5) + (int) zone.getBounds().getMinY());
+            point = new Point(random.nextInt(zone.getBounds().width - 1) + (int) zone.getBounds().getMinX(),
+                    random.nextInt(zone.getBounds().height - 1) + (int) zone.getBounds().getMinY());
 
             if (checkValidPoint(point)) {
-                zones.remove(zone);
                 return point;
             } else {
                 point = null;
