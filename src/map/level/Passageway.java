@@ -1,5 +1,6 @@
 package map.level;
 
+import entity.Entity;
 import entity.Player;
 import main.GameManager;
 
@@ -8,46 +9,95 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Passageway {
-    /*
-    * Passageway class creates the passages between the rooms, and also the doors in the rooms.
-    * It will need to add the door coordinates to the rooms as it creates them.
-     */
-
-    private int previousDirection = -1;
-
-    public Passageway(Room roomFrom, Room roomTo) {
-
-        Point doorFrom = createDoorway(roomFrom);
-        Point doorTo = createDoorway(roomTo);
-
-        createPassageway(doorFrom, doorTo);
+    public Passageway(Room roomTo, Room roomFrom) {
+        createPassageway(roomFrom, roomTo);
     }
-    private void createPassageway(Point start, Point end) {
-        Point markerPoint = start;
-
-        while (!checkForDoorway(markerPoint, end)) {
-            ArrayList<Point> surroundingPoints = getConnectedPoints(markerPoint);
-            Point movementPoint = getClosestPoint(surroundingPoints, end);
-            previousDirection = updatePreviousDirection(markerPoint, movementPoint);
-            markerPoint = drawHallwayMark(movementPoint);
-        }
+    private void drawHallwayMark(Point p) {
+        GameManager.getTable().setValueAt("#", p.y, p.x);
     }
-    private boolean checkForDoorway(Point marker, Point end) {
-        if (marker.getX() + 1 == end.getX() && marker.getY() == end.getY()) {
-            return true;
-        } else if (marker.getX() - 1 == end.getX() && marker.getY() == end.getY()) {
-            return true;
-        } else if (marker.getY() + 1 == end.getY() && marker.getX() == end.getX()) {
-            return true;
-        } else if (marker.getY() - 1 == end.getY() && marker.getX() == end.getX()) {
-            return true;
+    private void createPassageway(Room roomFrom, Room roomTo) {
+        Point centerRoomFrom = new Point(
+                roomFrom.getTopLeft().x + (int) (roomFrom.getSize().getWidth() / 2),
+                roomFrom.getTopLeft().y + (int) (roomFrom.getSize().getHeight() / 2)
+        );
+        Point centerRoomTo = new Point(
+                roomTo.getTopLeft().x + (int) (roomTo.getSize().getWidth() / 2),
+                roomTo.getTopLeft().y + (int) (roomTo.getSize().getHeight() / 2)
+        );
+        Point doorFrom = createDoor(centerRoomFrom, centerRoomTo);
+        Point doorTo = createDoor(centerRoomTo, centerRoomFrom);
+
+        equalize(doorFrom, doorTo);
+    }
+    private void equalize(Point start, Point end) {
+        Point midwayPoint;
+        if (start.getX() > end.getX()) {
+            midwayPoint = new Point(end.x + new Random().nextInt(start.x - end.x), end.y);
         } else {
-            return false;
+            midwayPoint = new Point(end.x - new Random().nextInt(end.x - start.x), end.y);
+        }
+        equalizeX(start, midwayPoint);
+        equalizeY(start, end);
+        equalizeX(midwayPoint, end);
+        drawHallwayMark(end);
+    }
+    private void equalizeX(Point start, Point end) {
+        while (start.getX() != end.getX()) {
+            drawHallwayMark(start);
+            if (start.getX() > end.getX()) {
+                start.x -= 1;
+            } else {
+                start.x += 1;
+            }
         }
     }
-    private Point drawHallwayMark(Point p) {
-        GameManager.add("#", p.x, p.y);
-        return p;
+    private void equalizeY(Point start, Point end) {
+        while (start.getY() != end.getY()) {
+            drawHallwayMark(start);
+            if (start.getY() > end.getY()) {
+                start.y -= 1;
+            } else {
+                start.y += 1;
+            }
+        }
+    }
+    private Point createDoor(Point centerFrom, Point centerTo) {
+        Point markerPoint = centerFrom;
+        while (!isWall(markerPoint)) {
+            markerPoint = getClosestPoint(getConnectedPoints(markerPoint), centerTo);
+        }
+        GameManager.getTable().setValueAt("+", markerPoint.y, markerPoint.x);
+        return getFrontStep(markerPoint);
+    }
+    private boolean isWall(Point marker) {
+        return GameManager.getTable().getValueAt(marker.y, marker.x).equals("=") ||
+                GameManager.getTable().getValueAt(marker.y, marker.x).equals("|");
+    }
+    private Point getFrontStep(Point door) {
+        Point temp;
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    temp = new Point(door.x, door.y - 1);
+                    break;
+                case 1:
+                    temp = new Point(door.x, door.y + 1);
+                    break;
+                case 2:
+                    temp = new Point(door.x + 1, door.y);
+                    break;
+                case 3:
+                    temp = new Point(door.x - 1, door.y);
+                    break;
+                default:
+                    temp = door;
+                    break;
+            }
+            if (GameManager.getTable().getValueAt(temp.y, temp.x).equals("")) {
+                return temp;
+            }
+        }
+        return null;
     }
     private Point getClosestPoint(ArrayList<Point> points, Point end) {
         int shortestDistance = Integer.MAX_VALUE;
@@ -60,28 +110,8 @@ public class Passageway {
         }
         return points.get(indexOfClosestPoint);
     }
-    private int updatePreviousDirection(Point marker, Point end) {
-        if (marker.getY() > end.getY()) {
-            return Player.UP;
-        } else if (marker.getY() < end.getY()) {
-            return Player.DOWN;
-        } else if (marker.getX() > end.getX()) {
-            return Player.RIGHT;
-        } else {
-            return Player.LEFT;
-        }
-    }
-    private ArrayList<Point> removeInvalidPoints(ArrayList<Point> points) {
-        if (previousDirection != -1) {
-            points.remove(previousDirection);
-        }
-        for (int i = 0; i < points.size(); i++) {
-            Point p = points.get(i);
-            if (!GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
-                points.remove(p);
-            }
-        }
-        return points;
+    private double getDistance(Point p, Point p2) {
+        return Math.sqrt(Math.pow(p2.getX() - p.getX(), 2) + Math.pow(p2.getY() - p.getY(), 2));
     }
     private ArrayList<Point> getConnectedPoints(Point p) {
         ArrayList<Point> points = new ArrayList<>();
@@ -90,42 +120,11 @@ public class Passageway {
         points.add(new Point(p.x + 1, p.y));
         points.add(new Point(p.x - 1, p.y));
 
-        return removeInvalidPoints(points);
+        return points;
     }
-    private Point createDoorway(Room room) {
-        ArrayList<Integer> directions = getDirections(room.getZone());
-        Random random = new Random();
-        Point door = new Point();
-
-        int maxXPos = (int) room.getCenter().getX() + (int) Math.floor(room.getSize().getWidth() / 2);
-        int maxYPos = (int) room.getCenter().getY() + (int) Math.floor(room.getSize().getHeight() / 2);
-        int minXPos = (int) room.getCenter().getX() - (int) Math.floor(room.getSize().getWidth() / 2);
-        int minYPos = (int) room.getCenter().getY() - (int) Math.floor(room.getSize().getWidth() / 2);
-
-        int doorFrom = directions.get(new Random().nextInt(directions.size()));
-
-        if (doorFrom == Player.DOWN) {
-            door =
-                    new Point(random.nextInt(maxXPos - minXPos - 2) + minXPos + 1, (int) (room.getCenter().getY() + Math.floor(room.getSize().getHeight() / 2)));
-            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
-        } else if (doorFrom == Player.UP) {
-            door =
-                    new Point(random.nextInt(maxXPos - minXPos - 2) + minXPos + 1, (int) Math.floor(room.getCenter().getY() - Math.floor(room.getSize().getHeight() / 2)));
-            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
-        } else if (doorFrom == Player.RIGHT) {
-            door =
-                    new Point((int) Math.floor(room.getCenter().getX() + Math.floor(room.getSize().getWidth() / 2)), random.nextInt(maxYPos - minYPos - 2) + minYPos + 1);
-            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
-        } else if (doorFrom == Player.LEFT) {
-            door =
-                    new Point((int) Math.floor(room.getCenter().getX() - Math.floor(room.getSize().getWidth() / 2)), random.nextInt(maxYPos - minYPos - 2) + minYPos + 1);
-            GameManager.getTable().getModel().setValueAt("+", door.y, door.x);
-        }
-        room.doors.add(door);
-        return door;
-    }
-    private ArrayList<Integer> getDirections(int zone) {
+    private ArrayList<Integer> getDirections(Room room) {
         ArrayList<Integer> directions = new ArrayList<>();
+        int zone = room.getZone();
         if (zone == 0) {
             // Doors can be down or right
             directions.add(Player.DOWN);
@@ -140,30 +139,15 @@ public class Passageway {
             directions.add(Player.DOWN);
             directions.add(Player.LEFT);
         } else if (zone == 3) {
-            // Doors can be up down or right
-            directions.add(Player.DOWN);
-            directions.add(Player.RIGHT);
-        } else if (zone == 4) {
-            // Doors can be any direction
-            directions.add(Player.DOWN);
-            directions.add(Player.UP);
-            directions.add(Player.RIGHT);
-            directions.add(Player.LEFT);
-        } else if (zone == 5) {
-            // Doors can be up down or left
-            directions.add(Player.DOWN);
-            directions.add(Player.UP);
-            directions.add(Player.LEFT);
-        } else if (zone == 6) {
             // Doors can be up or right
             directions.add(Player.UP);
             directions.add(Player.RIGHT);
-        } else if (zone == 7) {
+        } else if (zone == 4) {
             // Doors can be up right or left
             directions.add(Player.UP);
             directions.add(Player.RIGHT);
             directions.add(Player.LEFT);
-        } else if (zone == 8) {
+        } else if (zone == 5) {
             // Doors can be up or left
             directions.add(Player.UP);
             directions.add(Player.LEFT);
@@ -171,8 +155,5 @@ public class Passageway {
             throw new ArrayIndexOutOfBoundsException("Zone passed is not a valid zone.");
         }
         return directions;
-    }
-    private double getDistance(Point p, Point p2) {
-        return Math.sqrt(Math.pow(p2.getX() - p.getX(), 2) + Math.pow(p2.getY() - p.getY(), 2));
     }
 }

@@ -38,7 +38,7 @@ public class Level extends JComponent {
         setDefaults();
 
         createRooms();
-//        createPassageways();
+        createPassageways();
     }
     /*
     * Level size is 69 x 40
@@ -76,7 +76,7 @@ public class Level extends JComponent {
         Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
         rooms.remove(startingRoom);
 
-        while (!checkForDoorInEachRoom() && !(rooms.size() == 1)) {
+        while (!checkForDoorInEachRoom() && !(rooms.size() <= 1)) {
             int iterations = random.nextInt(2) + 1;
             for (int i = 0; i < iterations; i++) {
                 Room end = rooms.get(random.nextInt(rooms.size() - 1));
