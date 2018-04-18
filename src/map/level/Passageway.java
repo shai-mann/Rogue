@@ -1,6 +1,5 @@
 package map.level;
 
-import entity.Entity;
 import entity.Player;
 import main.GameManager;
 
@@ -24,8 +23,8 @@ public class Passageway {
                 roomTo.getTopLeft().x + (int) (roomTo.getSize().getWidth() / 2),
                 roomTo.getTopLeft().y + (int) (roomTo.getSize().getHeight() / 2)
         );
-        Point doorFrom = createDoor(centerRoomFrom, centerRoomTo);
-        Point doorTo = createDoor(centerRoomTo, centerRoomFrom);
+        Point doorFrom = createDoor(roomFrom, centerRoomFrom, centerRoomTo);
+        Point doorTo = createDoor(roomTo, centerRoomTo, centerRoomFrom);
 
         equalize(doorFrom, doorTo);
     }
@@ -61,13 +60,15 @@ public class Passageway {
             }
         }
     }
-    private Point createDoor(Point centerFrom, Point centerTo) {
+    private Point createDoor(Room room, Point centerFrom, Point centerTo) {
         Point markerPoint = centerFrom;
         while (!isWall(markerPoint)) {
             markerPoint = getClosestPoint(getConnectedPoints(markerPoint), centerTo);
         }
         GameManager.getTable().setValueAt("+", markerPoint.y, markerPoint.x);
+        room.doors.add(markerPoint);
         return getFrontStep(markerPoint);
+        // TODO: Make so doors cant be next to or inside of each other
     }
     private boolean isWall(Point marker) {
         return GameManager.getTable().getValueAt(marker.y, marker.x).equals("=") ||
@@ -110,7 +111,7 @@ public class Passageway {
         }
         return points.get(indexOfClosestPoint);
     }
-    private double getDistance(Point p, Point p2) {
+    public static double getDistance(Point p, Point p2) {
         return Math.sqrt(Math.pow(p2.getX() - p.getX(), 2) + Math.pow(p2.getY() - p.getY(), 2));
     }
     private ArrayList<Point> getConnectedPoints(Point p) {

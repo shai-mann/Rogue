@@ -1,6 +1,6 @@
 package map.level;
 
-import map.RoomTableModel;
+import main.GameManager;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,19 +9,18 @@ public class Room {
 
     public static ArrayList<Polygon> zones = new ArrayList<>();
     public static ArrayList<Room> rooms = new ArrayList<>();
-    public ArrayList<Point> doors = new ArrayList<>(); // TODO: Remove this ArrayList (it was just for testing)
+    public ArrayList<Point> doors = new ArrayList<>();
+    // TODO: Fix that rooms can generate inside of each other
 
     private Polygon polygon;
 
-    private RoomTableModel model;
     private Dimension size;
     private Point topLeft;
 
-    public Room(RoomTableModel model, Point p, Dimension size) {
+    public Room(Point p, Dimension size) {
         rooms.add(this);
         createBounds(p.x, p.y, size);
 
-        this.model = model;
         this.size = size;
         topLeft = p;
 
@@ -53,7 +52,7 @@ public class Room {
                 rowData = createDefaultRow("|", "-");
             }
             for (int z = 0; z < rowData.length; z++) {
-                model.setValueAt(rowData[z], topLeft.y + i, topLeft.x + z);
+                GameManager.getTable().getCustomModel().setValueAt(rowData[z], topLeft.y + i, topLeft.x + z);
             }
         }
     }
@@ -63,7 +62,12 @@ public class Room {
 
         Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
         for (Room room : rooms ) {
-            if (room.getBounds().intersects(tempBounds.getBounds())) {
+            int[] xPoints1 = {room.topLeft.x + 5, room.topLeft.x + room.getSize().width + 5,
+                    room.topLeft.x + room.getSize().width + 5, room.topLeft.x + 5};
+            int[] yPoints1 = {room.topLeft.y + 5, room.topLeft.y + 5,
+                    room.topLeft.y + room.getSize().height + 5, room.topLeft.y + room.getSize().height + 5};
+            Polygon temp = new Polygon(xPoints1, yPoints1, 4);
+            if (temp.intersects(tempBounds.getBounds())) {
                 return false;
             }
         }

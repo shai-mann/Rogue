@@ -38,7 +38,7 @@ public class Level extends JComponent {
         setDefaults();
 
         createRooms();
-        createPassageways();
+//        createPassageways();
     }
     /*
     * Level size is 69 x 40
@@ -59,11 +59,14 @@ public class Level extends JComponent {
                     size = null;
                 }
             } while(size == null);
-            new Room(table.getCustomModel(), point, size);
+            new Room(point, size);
+            if (i > 0) {
+                new Passageway(Room.rooms.get(i - 1), Room.rooms.get(i));
+            }
             zones.remove(zone);
         }
     }
-    private void createPassageways() {
+    private Room createPassageways() {
         // TODO: Create Passageway generation
         // 1) Start in one room, and mark that room as starting room
         // 2) Pick random room as end destination
@@ -75,16 +78,25 @@ public class Level extends JComponent {
 
         Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
         rooms.remove(startingRoom);
+        new Passageway(startingRoom, getClosestRoom(startingRoom, rooms));
+        Room markerRoom = getClosestRoom(startingRoom, rooms);
 
-        while (!checkForDoorInEachRoom() && !(rooms.size() <= 1)) {
-            int iterations = random.nextInt(2) + 1;
-            for (int i = 0; i < iterations; i++) {
-                Room end = rooms.get(random.nextInt(rooms.size() - 1));
-                rooms.remove(end);
-                new Passageway(startingRoom, end);
-                startingRoom = end;
+        while (!checkForDoorInEachRoom()) {
+            new Passageway(markerRoom, getClosestRoom(markerRoom, rooms));
+            rooms.remove(markerRoom);
+            markerRoom = getClosestRoom(markerRoom, rooms);
+        }
+        return startingRoom;
+    }
+    private Room getClosestRoom(Room room, ArrayList<Room> rooms) {
+        Room closestRoom = rooms.get(0);
+        for (int i = 1; i < rooms.size(); i++) {
+            if (Passageway.getDistance(room.getTopLeft(), rooms.get(i).getTopLeft()) <
+                    Passageway.getDistance(room.getTopLeft(), closestRoom.getTopLeft())) {
+                closestRoom = rooms.get(i);
             }
         }
+        return closestRoom;
     }
     private boolean checkForDoorInEachRoom() {
         int roomsCompleted = 0;
