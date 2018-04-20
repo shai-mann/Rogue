@@ -5,7 +5,10 @@
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <inheritsPopupMenu value="false"/>
+      <maximumSize width="2147483647" height="100"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="8bdf8" class="javax.swing.JLabel" binding="label">

@@ -38,6 +38,7 @@ public class GameManager {
         new Gold(Helper.random.nextInt(28) + 1, Helper.random.nextInt(28) + 1);
 //        new Armor(Helper.random.nextInt(28) + 1, Helper.random.nextInt(28) + 1);
         new Armor(2, 2);
+        new Armor(2, 1);
     }
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);

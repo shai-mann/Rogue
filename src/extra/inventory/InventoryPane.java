@@ -26,8 +26,7 @@ public class InventoryPane {
     private void addInventory() {
         ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
-            panel.add(new InventoryItem(i, playerInventory.get(i)).getPanel());
-            // TODO: Fix bug where inventory doesn't display when there are items in it
+            scrollingPanel.add(new InventoryItem(i + 1, playerInventory.get(i)).getPanel());
             panel.revalidate();
         }
     }
@@ -35,9 +34,9 @@ public class InventoryPane {
         scrollingPanel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON2) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
                     for (InventoryItem item : InventoryItem.getInventoryItems()) {
-                        if (item.contains(e.getLocationOnScreen())) {
+                        if (item.getPanel().contains(e.getPoint())) {
                             item.setButtonsVisible(true);
                         } else {
                             item.setButtonsVisible(false);
@@ -47,19 +46,15 @@ public class InventoryPane {
             }
             @Override
             public void mousePressed(MouseEvent e) {
-
             }
             @Override
             public void mouseReleased(MouseEvent e) {
-
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
             @Override
             public void mouseExited(MouseEvent e) {
-
             }
         });
     }
@@ -67,6 +62,7 @@ public class InventoryPane {
         Helper.setSize(panel, GameManager.getFrame().getSize());
         panel.setBackground(Helper.BACKGROUND_COLOR);
         scrollingPanel.setBackground(Helper.BACKGROUND_COLOR);
+        scrollingPanel.setLayout(new BoxLayout(scrollingPanel, BoxLayout.Y_AXIS));
         scrollablePane.getViewport().setBackground(Helper.BACKGROUND_COLOR);
         panel.setBorder(new TitledBorder(
                 panel.getBorder(),
