@@ -1,5 +1,8 @@
 package map.level;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
+import com.sun.tracing.dtrace.ArgsAttributes;
 import helper.Helper;
 import main.GameManager;
 import map.CustomCellRenderer;
@@ -16,79 +19,99 @@ public class Level extends JComponent {
 
     /*
     * LEVEL CLASS:
-    * The Level class is made of a grid (represented by a JTable) which things such as the player and monsters
-    * can be added to
-    * Rooms can only be from 11 length to 5
-    * Rooms must be odd lengths so as to have a center (Not requirement of room)
+    * The Level class creates a new JTable the "level", and then generates rooms on it
+    * Generates 5-8 rooms per level
+    * Generates Passageways connecting all rooms to all other rooms
+    * Generates Treasure and monsters in each of the rooms
+    * Generates the Player in the starting room with the staircase up one level in the same room
+    * Generates staircase going down to next level (except on last level)
      */
 
     private JPanel panel;
     private CustomRoomTable table;
     private Random random = new Random();
-    private ArrayList zones;
 
     private static Level level;
 
     public Level() {
-        level = this;
-
-        Room.zones = Room.setZones();
-        zones = (ArrayList) Room.zones.clone();
-
         setDefaults();
 
         createRooms();
-//        createPassageways();
+
+        Room startingRoom = createPassageways();
     }
     /*
     * Level size is 69 x 40
      */
     private void createRooms() {
-        int roomNumber = random.nextInt(2) + 4;
-
+        int roomNumber = random.nextInt(4) + 5;
         for (int i = 0; i < roomNumber; i++) {
+            Dimension size = getRandomRoomSize();
             Point point;
-            Dimension size;
-            Polygon zone;
             do {
-                zone = (Polygon) zones.get(random.nextInt(zones.size() - 1));
-                point = getRandomPoint(zone);
-                try {
-                    size = getRandomRoomSize(point);
-                } catch (Exception e) {
-                    size = null;
+                point = getRandomPoint();
+                if (!checkValidPoint(point) || !Room.checkValidSpace(point.x, point.y, size)) {
+                    point = null;
+                } else {
+                    new Room(point, size);
                 }
-            } while(size == null);
-            new Room(point, size);
-            if (i > 0) {
-                new Passageway(Room.rooms.get(i - 1), Room.rooms.get(i));
-            }
-            zones.remove(zone);
+            } while (point == null);
         }
     }
+
+    // ROOM GENERATION HELPER METHODS
+
+    private Dimension getRandomRoomSize() {
+        return new Dimension(random.nextInt(7) + 5,
+                random.nextInt(6) + 6);
+    }
+    private Point getRandomPoint() {
+        return new Point(random.nextInt(GameManager.getTable().getColumnCount() - 1),
+                random.nextInt(GameManager.getTable().getRowCount() - 1));
+    }
+    private boolean checkValidPoint(Point p) {
+        try {
+            return GameManager.getTable().getColumnCount() - p.x > 5 &&
+                    GameManager.getTable().getRowCount() - p.y > 5 &&
+                    p.x > 5 && p.y > 5;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
     private Room createPassageways() {
-        // TODO: Create Passageway generation
-        // 1) Start in one room, and mark that room as starting room
-        // 2) Pick random room as end destination
-        // 3) Backtrack and use original room to go to different room
-        // 4) Update copy of room list to remove starting room from list
-        // 5) First of two ending destinations becomes the starting room
-        // 6) Repeat until all rooms have at least one door (create method to check)
-        ArrayList<Room> rooms = (ArrayList) Room.rooms.clone();
+        /*
+        * 1) Get closest unconnected room to top left
+        * 2) Get closest connected room to that room
+        * 3) Connect those rooms
+        * 4) Repeat until there are no unconnected rooms
+         */
+        ArrayList<Room> unconnectedRooms = (ArrayList<Room>) Room.rooms.clone();
+        ArrayList<Room> connectedRooms = new ArrayList<>();
+        Room room;
+        Room closestRoom;
 
-        Room startingRoom = rooms.get(random.nextInt(Room.rooms.size() - 1));
-        rooms.remove(startingRoom);
-        new Passageway(startingRoom, getClosestRoom(startingRoom, rooms));
-        Room markerRoom = getClosestRoom(startingRoom, rooms);
-
-        while (!checkForDoorInEachRoom()) {
-            new Passageway(markerRoom, getClosestRoom(markerRoom, rooms));
-            rooms.remove(markerRoom);
-            markerRoom = getClosestRoom(markerRoom, rooms);
+        for (int i = 0; i < unconnectedRooms.size();) {
+            room = getClosestRoom(new Point(0,0), unconnectedRooms);
+            if (connectedRooms.size() != 0) {
+                closestRoom = getClosestRoom(room, connectedRooms);
+            } else {
+                closestRoom = getClosestRoom(room, unconnectedRooms);
+            }
+            new Passageway(room, closestRoom);
+            connectedRooms.add(room);
+            unconnectedRooms.remove(room);
+            connectedRooms.add(closestRoom);
+            unconnectedRooms.remove(closestRoom);
         }
-        return startingRoom;
+        return getClosestRoom(new Point(34, 20), connectedRooms);
     }
-    private Room getClosestRoom(Room room, ArrayList<Room> rooms) {
+
+    // PASSAGEWAY GENERATION HELPER METHODS
+
+    private Room getClosestRoom(Room room, ArrayList<Room> rs) {
+        ArrayList<Room> rooms = (ArrayList<Room>) rs.clone();
+        rooms.remove(room);
         Room closestRoom = rooms.get(0);
         for (int i = 1; i < rooms.size(); i++) {
             if (Passageway.getDistance(room.getTopLeft(), rooms.get(i).getTopLeft()) <
@@ -98,58 +121,20 @@ public class Level extends JComponent {
         }
         return closestRoom;
     }
-    private boolean checkForDoorInEachRoom() {
-        int roomsCompleted = 0;
-
-        for (Room room : Room.rooms) {
-            if (room.doors.size() > 0) {
-                roomsCompleted++;
+    private Room getClosestRoom(Point p, ArrayList<Room> rs) {
+        ArrayList<Room> rooms = (ArrayList<Room>) rs.clone();
+        Room closestRoom = rooms.get(0);
+        for (int i = 0; i < rooms.size(); i++) {
+            if (Passageway.getDistance(p, rooms.get(i).getTopLeft()) <
+                    Passageway.getDistance(p, closestRoom.getTopLeft())) {
+                closestRoom = rooms.get(i);
             }
         }
-        return roomsCompleted == Room.rooms.size();
+        return closestRoom;
     }
-    private Point getRandomPoint(Polygon zone) {
-        Point point;
-        do {
-            point = new Point(random.nextInt(zone.getBounds().width - 1) + (int) zone.getBounds().getMinX(),
-                    random.nextInt(zone.getBounds().height - 1) + (int) zone.getBounds().getMinY());
 
-            if (checkValidPoint(point)) {
-                return point;
-            } else {
-                point = null;
-            }
-        } while (point == null);
-        return point;
-    }
-    private Dimension getRandomRoomSize(Point p) throws Exception {
-        Dimension dim;
-        int iterations = 0;
+    // TABLE GENERATION METHODS
 
-        do {
-            dim = new Dimension(random.nextInt(6) + 6, random.nextInt(6) + 6);
-            dim.width = (int) (Math.floor(dim.width / 2) * 2) - 1;
-            dim.height = (int) (Math.floor(dim.height / 2)  * 2) - 1;
-            if (Room.checkValidSpace(p.x, p.y, dim)) {
-                return dim;
-            } else {
-                dim = null;
-            }
-            iterations++;
-
-            if (iterations == 10) {
-                throw new Exception("Entered infinite loop");
-            }
-        } while (dim == null);
-        return dim;
-    }
-    private boolean checkValidPoint(Point p) {
-        try {
-            return GameManager.getTable().getValueAt(p.y, p.x) == "";
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-    }
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
@@ -158,6 +143,8 @@ public class Level extends JComponent {
         panel.setBorder(null);
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
+
+        level = this;
     }
     private void createUIComponents() {
         RoomTableModel model = createTableModel();
@@ -191,6 +178,9 @@ public class Level extends JComponent {
 
         return rowValueList;
     }
+
+    // GETTER METHODS
+
     public CustomRoomTable getTable() {
         return table;
     }

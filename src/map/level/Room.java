@@ -7,35 +7,20 @@ import java.util.Arrays;
 
 public class Room {
 
-    public static ArrayList<Polygon> zones = new ArrayList<>();
     public static ArrayList<Room> rooms = new ArrayList<>();
-    public ArrayList<Point> doors = new ArrayList<>();
-    // TODO: Fix that rooms can generate inside of each other
-
-    private Polygon polygon;
+    public ArrayList<Door> doors = new ArrayList<>();
+    public ArrayList<Passageway> passageways = new ArrayList<>();
 
     private Dimension size;
     private Point topLeft;
 
     public Room(Point p, Dimension size) {
         rooms.add(this);
-        createBounds(p.x, p.y, size);
 
         this.size = size;
         topLeft = p;
 
         addRoom();
-    }
-    public int getZone() {
-        for (int i = 0; i < zones.size(); i++) {
-            if (zones.get(i).intersects(getBounds().getBounds())) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    public Polygon getBounds() {
-        return polygon;
     }
     public Point getTopLeft() {
         return topLeft;
@@ -57,17 +42,17 @@ public class Room {
         }
     }
     public static boolean checkValidSpace(int x, int y, Dimension size) {
-        int[] xPoints = {x, x + size.width - 1, x + size.width - 1, x};
-        int[] yPoints = {y, y, y + size.height - 1, y + size.height - 1};
+        int[] xPoints = {x - 2, x + size.width + 2, x + size.width + 2, x - 2};
+        int[] yPoints = {y - 2, y - 2, y + size.height + 2, y + size.height + 2};
 
         Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
         for (Room room : rooms ) {
-            int[] xPoints1 = {room.topLeft.x + 5, room.topLeft.x + room.getSize().width + 5,
-                    room.topLeft.x + room.getSize().width + 5, room.topLeft.x + 5};
-            int[] yPoints1 = {room.topLeft.y + 5, room.topLeft.y + 5,
-                    room.topLeft.y + room.getSize().height + 5, room.topLeft.y + room.getSize().height + 5};
+            int[] xPoints1 = {room.topLeft.x, room.topLeft.x + room.getSize().width,
+                    room.topLeft.x + room.getSize().width, room.topLeft.x};
+            int[] yPoints1 = {room.topLeft.y, room.topLeft.y,
+                    room.topLeft.y + room.getSize().height, room.topLeft.y + room.getSize().height};
             Polygon temp = new Polygon(xPoints1, yPoints1, 4);
-            if (temp.intersects(tempBounds.getBounds())) {
+            if (temp.intersects(tempBounds.getBounds()) || tempBounds.intersects(temp.getBounds())) {
                 return false;
             }
         }
@@ -87,33 +72,5 @@ public class Room {
         rowValueList[size.width - 1] = edges;
 
         return rowValueList;
-    }
-    private void createBounds(int x, int y, Dimension size) {
-        int[] xPoints = {x, x + size.width - 1, x + size.width - 1, x};
-        int[] yPoints = {y, y, y + size.height - 1, y + size.height - 1};
-
-        polygon = new Polygon(xPoints, yPoints, 4);
-    }
-    public static ArrayList<Polygon> setZones() {
-        ArrayList<Polygon> zones = new ArrayList<>();
-        int[] xPoints = {0, 23, 23, 0};
-        int[] yPoints = {0, 0, 20, 20};
-        zones.add(0, new Polygon(xPoints, yPoints, 4));
-        int[] xPoints1 = {24, 46, 46, 24};
-        int[] yPoints1 = {0, 0, 40, 40};
-        zones.add(1, new Polygon(xPoints1, yPoints1, 4));
-        int[] xPoints2 = {25, 46, 46, 25};
-        int[] yPoints2 = {0, 0, 20, 20};
-        zones.add(2, new Polygon(xPoints2, yPoints2, 4));
-        int[] xPoints3 = {25, 46, 46, 25};
-        int[] yPoints3 = {20, 20, 40, 40};
-        zones.add(3, new Polygon(xPoints3, yPoints3, 4));
-        int[] xPoints4 = {47, 69, 69, 47};
-        int[] yPoints4 = {0, 0, 20, 20};
-        zones.add(4, new Polygon(xPoints4, yPoints4, 4));
-        int[] xPoints5 = {47, 69, 69, 47};
-        int[] yPoints5 = {20, 20, 40, 40};
-        zones.add(5, new Polygon(xPoints5, yPoints5, 4));
-        return zones;
     }
 }

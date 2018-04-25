@@ -14,6 +14,11 @@ public class GameManager {
     private static Map map;
     private static Player player;
 
+    // TODO: Current bugs are:
+    // Sometimes the passageways generate strangely, failing to get to the room they are trying to get to
+    // Secret doors don't hide the doorway
+    // Doorways can still be next to each other or inside of each other
+
     public static void main(String[] args) {
         initFrame();
 
