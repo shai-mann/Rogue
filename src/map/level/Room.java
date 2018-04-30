@@ -4,6 +4,7 @@ import main.GameManager;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Room {
 
@@ -22,12 +23,9 @@ public class Room {
 
         addRoom();
     }
-    public Point getTopLeft() {
-        return topLeft;
-    }
-    public Dimension getSize() {
-        return size;
-    }
+
+    // ROOM GENERATION METHODS
+
     private void addRoom() {
         String[] rowData;
         for (int i = 0; i < size.getHeight(); i++) {
@@ -42,8 +40,8 @@ public class Room {
         }
     }
     public static boolean checkValidSpace(int x, int y, Dimension size) {
-        int[] xPoints = {x - 2, x + size.width + 2, x + size.width + 2, x - 2};
-        int[] yPoints = {y - 2, y - 2, y + size.height + 2, y + size.height + 2};
+        int[] xPoints = {x - 3, x + size.width + 3, x + size.width + 3, x - 3};
+        int[] yPoints = {y - 3, y - 3, y + size.height + 3, y + size.height + 3};
 
         Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
         for (Room room : rooms ) {
@@ -72,5 +70,30 @@ public class Room {
         rowValueList[size.width - 1] = edges;
 
         return rowValueList;
+    }
+
+    // GETTER METHODS
+
+    public Point getTopLeft() {
+        return topLeft;
+    }
+    public Dimension getSize() {
+        return size;
+    }
+    public Polygon getBounds() {
+        int[] xPoints1 = {topLeft.x, topLeft.x + getSize().width,
+                topLeft.x + getSize().width, topLeft.x};
+        int[] yPoints1 = {topLeft.y, topLeft.y,
+                topLeft.y + getSize().height, topLeft.y + getSize().height};
+        return new Polygon(xPoints1, yPoints1, 4);
+    }
+    public Point getRandomPointInBounds() {
+        // should return a random point inside of tbe room (not in the wall tho) NOT FUNCTIONAL
+        int minX = (int) getBounds().getBounds().getMinX() + 1;
+        int maxX = (int) getBounds().getBounds().getMaxX() - 2;
+        int minY = (int) getBounds().getBounds().getMinY() + 1;
+        int maxY = (int) getBounds().getBounds().getMaxY() - 2;
+        return new Point(new Random().nextInt((maxX - minX) + minX),
+                new Random().nextInt(maxY - minY) + minY);
     }
 }

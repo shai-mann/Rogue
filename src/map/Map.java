@@ -1,6 +1,5 @@
 package map;
 
-import entity.Entity;
 import entity.monster.Monster;
 import helper.Helper;
 import main.GameManager;
@@ -26,6 +25,9 @@ public class Map {
         statusBar.updateStatusBar();
         GameManager.getPlayer().update();
     }
+
+    // GETTER/ HELPER METHODS
+
     public static Map getMap() {
         return map;
     }
@@ -35,8 +37,5 @@ public class Map {
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
-    }
-    public Level getLevel() {
-        return level;
     }
 }

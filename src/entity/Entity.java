@@ -2,6 +2,8 @@ package entity;
 
 import main.GameManager;
 
+import java.awt.*;
+
 public class Entity {
     private int xPos;
     private int yPos;
@@ -10,7 +12,7 @@ public class Entity {
 
     String graphic;
 
-    String overWrittenGraphic = "-";
+    private String overWrittenGraphic = "";
 
     public static int UP = 0;
     public static int DOWN = 1;
@@ -21,6 +23,7 @@ public class Entity {
         xPos = x;
         yPos = y;
         graphic = g;
+        overWrittenGraphic = (String) GameManager.getTable().getValueAt(xPos, yPos);
 
         GameManager.add(graphic, x, y);
     }
@@ -65,8 +68,16 @@ public class Entity {
     public int getXPos() {
         return xPos;
     }
-
     public int getYPos() {
         return yPos;
+    }
+    public void setLocation(Point p) {
+        GameManager.getTable().setValueAt(overWrittenGraphic, xPos, yPos);
+
+        xPos = p.x;
+        yPos = p.y;
+        overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
+
+        GameManager.getTable().setValueAt("@", p.y, p.x);
     }
 }

@@ -18,13 +18,17 @@ public class GameManager {
     // Sometimes the passageways generate strangely, failing to get to the room they are trying to get to
     // Secret doors don't hide the doorway
     // Doorways can still be next to each other or inside of each other
+    // Player has chance to spawn outside of the map or in the wall of a room and generates in two places
 
     public static void main(String[] args) {
         initFrame();
 
         map = new Map();
-        player = new Player();
+        player = new Player(Level.getLevel().getStartingRoom());
     }
+
+    // HELPER METHODS
+
     public static void replaceContentPane(JPanel panel) {
         frame.setContentPane(panel);
         frame.pack();
@@ -46,6 +50,9 @@ public class GameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
+
+    // GETTER METHODS
+
     public static CustomRoomTable getTable() {
         return Level.getLevel().getTable();
     }

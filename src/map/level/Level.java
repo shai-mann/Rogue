@@ -3,6 +3,7 @@ package map.level;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import com.sun.tracing.dtrace.ArgsAttributes;
+import entity.Player;
 import helper.Helper;
 import main.GameManager;
 import map.CustomCellRenderer;
@@ -25,24 +26,30 @@ public class Level extends JComponent {
     * Generates Treasure and monsters in each of the rooms
     * Generates the Player in the starting room with the staircase up one level in the same room
     * Generates staircase going down to next level (except on last level)
+    * Level size is 69 * 40
      */
 
     private JPanel panel;
     private CustomRoomTable table;
     private Random random = new Random();
+    private Room startingRoom;
+    private int levelNumber = 0;
 
     private static Level level;
 
     public Level() {
         setDefaults();
+        newLevel();
+    }
+    public void newLevel() {
+        createLevel();
+    }
+    private void createLevel() {
+        levelNumber++;
 
         createRooms();
-
-        Room startingRoom = createPassageways();
+        startingRoom = createPassageways();
     }
-    /*
-    * Level size is 69 x 40
-     */
     private void createRooms() {
         int roomNumber = random.nextInt(4) + 5;
         for (int i = 0; i < roomNumber; i++) {
@@ -186,5 +193,11 @@ public class Level extends JComponent {
     }
     public static Level getLevel() {
         return level;
+    }
+    public Room getStartingRoom() {
+        return startingRoom;
+    }
+    public int getLevelNumber() {
+        return levelNumber;
     }
 }

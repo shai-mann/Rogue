@@ -3,18 +3,22 @@ package entity;
 import extra.GravePane;
 import main.GameManager;
 import map.Map;
+import map.level.Room;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class Player extends Entity implements KeyListener {
 
     private Map map;
 
-    // TODO: Make player spawn in location with - as symbol
+    // TODO: Convert to Helper.random on merge
 
-    public Player() {
-        super("@", 5, 5);
+    public Player(Room room) {
+        super("@", 0, 0);
+        setLocation(room);
         GameManager.getFrame().addKeyListener(this);
 
         map = Map.getMap();
@@ -47,6 +51,10 @@ public class Player extends Entity implements KeyListener {
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
+    private void setLocation(Room room) {
+        // TODO: Change this to be Helper.random
+        super.setLocation(room.getRandomPointInBounds());
+    }
     public int getHealth() {
         return health;
     }

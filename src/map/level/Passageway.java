@@ -1,6 +1,5 @@
 package map.level;
 
-import helper.Helper;
 import main.GameManager;
 
 import java.awt.*;
@@ -9,22 +8,17 @@ import java.util.Random;
 
 public class Passageway {
 
-    private Room roomFrom;
-    private Room roomTo;
+    // CONSTRUCTORS
 
     public Passageway(Room roomTo, Room roomFrom) {
         createPassageway(roomFrom, roomTo);
-        this.roomFrom = roomFrom;
-        this.roomTo = roomTo;
     }
     public Passageway(Room room) {
         // this passageway will just wander off randomly for a ways. It will be based on where the
     }
-    private void drawHallwayMark(Point p) {
-        if (GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
-            GameManager.getTable().setValueAt("#", p.y, p.x);
-        }
-    }
+
+    // PASSAGEWAY GENERATION METHODS
+
     private void createPassageway(Room roomFrom, Room roomTo) {
         Point centerRoomFrom = new Point(
                 roomFrom.getTopLeft().x + (int) (roomFrom.getSize().getWidth() / 2),
@@ -39,13 +33,23 @@ public class Passageway {
 
         equalize(doorFrom, doorTo);
     }
+    private void drawHallwayMark(Point p) {
+        if (GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
+            GameManager.getTable().setValueAt("#", p.y, p.x);
+        } else if (GameManager.getTable().getValueAt(p.y, p.x).equals("=") || GameManager.getTable().getValueAt(p.y, p.x).equals("|")) {
+            GameManager.getTable().setValueAt("+", p.y, p.x);
+        }
+    }
+
+    // EQUALIZE METHODS
+
     private void equalize(Point start, Point end) {
         Point midwayPoint;
         if (start.getX() - end.getX() > start.getY() - end.getY()) {
             if (start.getX() > end.getX()) {
-                midwayPoint = new Point(end.x + new Random().nextInt(start.x - end.x) + 1, end.y);
+                midwayPoint = new Point(end.x + new Random().nextInt(start.x - end.x), end.y);
             } else if (start.getX() < end.getX()){
-                midwayPoint = new Point(end.x - new Random().nextInt(end.x - start.x) - 1, end.y);
+                midwayPoint = new Point(end.x - new Random().nextInt(end.x - start.x), end.y);
             } else {
                 midwayPoint = new Point(end.x, end.y);
             }
@@ -55,9 +59,9 @@ public class Passageway {
             drawHallwayMark(end);
         } else {
             if (start.getY() > end.getY()) {
-                midwayPoint = new Point(end.x, end.y + new Random().nextInt(start.y - end.y) + 1);
+                midwayPoint = new Point(end.x, end.y + new Random().nextInt(start.y - end.y));
             } else if (start.getY() < end.getY()){
-                midwayPoint = new Point(end.x, end.y + new Random().nextInt(end.y - start.y) - 1);
+                midwayPoint = new Point(end.x, end.y + new Random().nextInt(end.y - start.y));
             } else {
                 midwayPoint = new Point(end.x, end.y);
             }
@@ -87,6 +91,9 @@ public class Passageway {
             }
         }
     }
+
+    // DOORWAY HELPER METHODS
+
     private Point createDoor(Room room, Point centerFrom, Point centerTo) {
         Point markerPoint = centerFrom;
         while (!isWall(markerPoint)) {
@@ -102,6 +109,9 @@ public class Passageway {
                 GameManager.getTable().getValueAt(marker.y, marker.x).equals("|") ||
                 GameManager.getTable().getValueAt(marker.y, marker.x).equals("+");
     }
+
+    // OTHER HELPER METHODS
+
     private Point getFrontStep(Point door) {
         Point temp;
         for (int i = 0; i < 4; i++) {
@@ -151,12 +161,9 @@ public class Passageway {
 
         return points;
     }
-    public Room getOtherRoom(Room firstRoom) {
-        return roomFrom == firstRoom ? roomFrom : roomTo;
-    }
     private boolean getIsSecret() {
         int randomInt = new Random().nextInt(100) + 1;
         // TODO: Change this to be using Helper.random
-        return randomInt >= 90;
+        return randomInt >= 100 - (5* Level.getLevel().getLevelNumber());
     }
 }
