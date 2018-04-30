@@ -3,6 +3,7 @@ package entity.monster;
 import entity.Entity;
 import entity.Player;
 import entity.Status;
+import extra.MessageBar;
 import main.GameManager;
 
 import java.io.*;
@@ -232,6 +233,7 @@ public class Monster extends Entity {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
+    }
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
         int amount = Integer.parseInt(parts[0]);

@@ -27,8 +27,8 @@ public class GameManager {
         initFrame();
 
         map = new Map();
-        player = new Player();
-        loadCustomMonsters();
+        player = new Player(Level.getLevel().getStartingRoom());
+//        loadCustomMonsters();
     }
     private static void loadCustomMonsters() {
         File[] files = new File("data/monsters/").listFiles();

@@ -10,7 +10,7 @@ public class Entity {
 
     public int health = 20;
 
-    String graphic;
+    public String graphic;
 
     private String overWrittenGraphic = "";
 
