@@ -144,10 +144,16 @@ public class Level extends JComponent {
 
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
+<<<<<<< HEAD
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setBorder(null);
+=======
+        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
+        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
+        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
+>>>>>>> items
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
 

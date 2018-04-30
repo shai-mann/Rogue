@@ -25,8 +25,8 @@ public class Map {
     public void update() {
         MessageBar.nextTurn(); // must go first
         Monster.update();
-        statusBar.updateStatusBar();
         GameManager.getPlayer().update();
+        statusBar.updateStatusBar(); // must go after player update
     }
 
     // GETTER/ HELPER METHODS

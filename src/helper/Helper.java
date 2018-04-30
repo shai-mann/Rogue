@@ -2,6 +2,7 @@ package helper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Helper {
 
@@ -9,6 +10,8 @@ public class Helper {
     public static Color FOREGROUND_COLOR = Color.WHITE;
 
     public static String THEME_FONT = Font.MONOSPACED;
+
+    public static Random random = new Random();
 
     public static Dimension getScreenSize() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -18,5 +21,8 @@ public class Helper {
         component.setPreferredSize(size);
         component.setMaximumSize(size);
         component.setMinimumSize(size);
+    }
+    public static Color changeOpacity(Color color, int opacity) {
+        return new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
     }
 }

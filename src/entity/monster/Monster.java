@@ -16,8 +16,20 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes { WANDER, TRACK }
-    private enum attackTypes { HIT, SHOOT, PARALYZE, CONFUSE, INTOXICATE }
+    private enum movementTypes { WANDER, TRACK, MIMIC, STILL }
+    private enum attackTypes {
+        HIT,
+        SHOOT,
+        PARALYZE,
+        CONFUSE,
+        INTOXICATE,
+        WEAKEN,
+        DRAIN,
+        RUST,
+        RANGE,
+        TRAP,
+        STEAL
+    }
 
     public String name = "<Default>";
     private int speed = 1;
@@ -26,6 +38,8 @@ public class Monster extends Entity {
     private double hitChance = 0.5;
     private int hitDamage = 1;
     private double critChance;
+    private boolean invisible;
+
 
     private Status status;
 
@@ -35,8 +49,8 @@ public class Monster extends Entity {
     public Monster(String dataFilePath, int x, int y) {
         super("_", x, y);
         monsters.add(this);
-        loadDataFile(dataFilePath);
         status = new Status();
+        loadDataFile(dataFilePath);
     }
 
     // DATA LOADING
@@ -62,8 +76,9 @@ public class Monster extends Entity {
         }
     }
     private void applyAttributeFromLine(String line) {
+        // todo: error handling if data is misformatted
         String[] parsed = line.split(":");
-        switch (parsed[0]) {
+        switch (parsed[0].toLowerCase()) {
             case "name":
                 name = parsed[1];
                 break;
@@ -71,10 +86,10 @@ public class Monster extends Entity {
                 this.graphic = parsed[1];
                 GameManager.add(graphic, getXPos(), getYPos());
                 break;
-            case "hitChance":
+            case "hitchance":
                 this.hitChance = Double.parseDouble(parsed[1]);
                 break;
-            case "critChance":
+            case "critchance":
                 this.critChance = Double.parseDouble(parsed[1]);
                 break;
             case "hitDamage":
@@ -89,11 +104,17 @@ public class Monster extends Entity {
             case "health":
                 this.health = parseDiceNotation(parsed[1]);
                 break;
-            case "movementType":
+            case "movementtype":
                 this.movementType = movementTypeFromString(parsed[1]);
                 break;
-            case "attackType":
+            case "attacktype":
                 this.attackType = attackTypeFromString(parsed[1]);
+                break;
+            case "invisible":
+                this.invisible = Boolean.valueOf(parsed[1]);
+                break;
+            case "ac":
+                this.status.setAc(Integer.valueOf(parsed[1]));
                 break;
         }
     }
@@ -128,6 +149,7 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
+        // TODO: Add rust armor, range attack, trap attack, steal gold, steal (magic) item, greedy, pathfind gold, weakness, drain max HP, mimic (immitate object)
         switch (movementType) {
             case TRACK:
                 trackMovement();
@@ -137,6 +159,9 @@ public class Monster extends Entity {
                 break;
         }
         status.update();
+        if (status.getHealth() <= 0) {
+            this.die();
+        }
     }
     private void trackMovement() {
         Player player = GameManager.getPlayer();
@@ -204,8 +229,9 @@ public class Monster extends Entity {
             } else {
                 MessageBar.addMessage("The " + this.name + " hits");
             }
+        } else {
+            MessageBar.addMessage("The " + this.name + " misses");
         }
-        MessageBar.addMessage("The " + this.name + " misses");
     }
     private void shootAttack() {
         // TODO: create shoot attack
@@ -221,7 +247,18 @@ public class Monster extends Entity {
         GameManager.getPlayer().getStatus().setConfused(ticks);
     }
     private void intoxicateAttack() {
+        // TODO: delay between two steps
         GameManager.getPlayer().getStatus().setDrunk(3);
+    }
+
+    // OVERRIDES
+
+    public boolean move(int direction) {
+        super.move(direction);
+        if (this.invisible) {
+            GameManager.add(overWrittenGraphic, getXPos(), getYPos());
+        }
+        return true;
     }
 
     // HELPERS
@@ -229,11 +266,14 @@ public class Monster extends Entity {
     private boolean isInRange(Player player) {
         return Math.pow(player.getXPos() - getXPos(), 2) + Math.pow(player.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
+<<<<<<< HEAD
     private boolean isNextTo(Player player) {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
     }
+=======
+>>>>>>> items
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
         int amount = Integer.parseInt(parts[0]);
@@ -250,20 +290,28 @@ public class Monster extends Entity {
         move(directions[new Random().nextInt(directions.length)]);
         moveCounter = 1;
     }
+    private void die() {
+        GameManager.add(overWrittenGraphic, getXPos(), getYPos());
+        MessageBar.addMessage("You kill the " + name);
+        monsters.remove(this);
+    }
+
+    // GETTERS
+
+    public Status getStatus() {
+        return status;
+    }
+    public String getName() { return name; }
 
     // STATIC METHODS
 
     public static void update() {
-        // run through monster list and update positions
         for (Monster monster : monsters) {
             monster.runUpdate();
         }
-        // has to call some method in map that runs the statusBar.updateStatusBar();
+    }
+    public static ArrayList<Monster> getMonsters() {
+        return monsters;
     }
 
 }
-
-
-
-
-

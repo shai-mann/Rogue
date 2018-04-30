@@ -10,17 +10,17 @@
     <children>
       <nested-form id="27e5e" form-file="map/level/Level.form" binding="level" custom-create="true">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </nested-form>
-      <nested-form id="c63f8" form-file="extra/StatusBar.form" binding="statusBar">
-        <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
       <nested-form id="6c835" form-file="extra/MessageBar.form" binding="messageBar">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </nested-form>
+      <nested-form id="c63f8" form-file="extra/StatusBar.form" binding="statusBar">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
     </children>

@@ -11,7 +11,6 @@ public class MessageBar extends JComponent {
     private JTextArea message;
     private JTextArea oldMessage;
     private JTextArea olderMessage;
-    private static int index = 0;
 
     private static MessageBar messageBar;
 
@@ -24,8 +23,8 @@ public class MessageBar extends JComponent {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
         setTextareaDefaults(message, Helper.FOREGROUND_COLOR);
-        setTextareaDefaults(oldMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 95));
-        setTextareaDefaults(olderMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 90));
+        setTextareaDefaults(oldMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 99));
+        setTextareaDefaults(olderMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 80));
     }
     private void setTextareaDefaults(JTextArea textArea, Color foreground) {
         textArea.setBackground(Helper.BACKGROUND_COLOR);

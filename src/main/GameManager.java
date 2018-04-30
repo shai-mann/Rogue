@@ -1,6 +1,9 @@
 package main;
 
 import entity.Player;
+import entity.item.Armor;
+import entity.item.Gold;
+import entity.item.Item;
 import entity.monster.Monster;
 import helper.Helper;
 import map.CustomRoomTable;
@@ -9,7 +12,6 @@ import map.level.Level;
 
 import javax.swing.*;
 import java.io.File;
-import java.util.Random;
 
 public class GameManager {
 
@@ -27,18 +29,33 @@ public class GameManager {
         initFrame();
 
         map = new Map();
+<<<<<<< HEAD
         player = new Player(Level.getLevel().getStartingRoom());
 //        loadCustomMonsters();
+=======
+        player = new Player();
+
+        loadCustomMonsters();
+
+        Item.randomizeHiddenNames();
+>>>>>>> items
     }
     private static void loadCustomMonsters() {
+        // TODO: Move this method to Level Class once generation is finished
         File[] files = new File("data/monsters/").listFiles();
-        Random random = new Random();
         for (File file : files) {
             if (file.isFile()) {
-                new Monster(file.getPath(), random.nextInt(28) + 1, random.nextInt(28) + 1);
+                    new Monster(file.getPath(), Helper.random.nextInt(28) + 1, Helper.random.nextInt(28) + 1);
             }
         }
+<<<<<<< HEAD
         player = new Player(Level.getLevel().getStartingRoom());
+=======
+        new Gold(Helper.random.nextInt(28) + 1, Helper.random.nextInt(28) + 1);
+//        new Armor(Helper.random.nextInt(28) + 1, Helper.random.nextInt(28) + 1);
+        new Armor(2, 2);
+        new Armor(2, 1);
+>>>>>>> items
     }
 
     // HELPER METHODS

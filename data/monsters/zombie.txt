@@ -2,7 +2,8 @@ name:Zombie
 graphic:Z
 hitChance:0.5
 critChance:0.1
-hitDamage:1
-speed:1
+hitDamage:1d8
+speed:6
 movementType:track
 attackType:hit
+health:2d8
