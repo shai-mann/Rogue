@@ -1,11 +1,12 @@
 package entity;
 
-import entity.monster.Monster;
 import extra.GravePane;
 import extra.MessageBar;
 import main.GameManager;
 import map.Map;
+import map.level.Room;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -15,13 +16,15 @@ public class Player extends Entity implements KeyListener {
     private Map map;
     private Status status;
 
-    public Player() {
-        super("@", 5, 5);
+    // TODO: Convert to Helper.random on merge
+
+    public Player(Room room) {
+        super("@", 0, 0);
+        setLocation(room);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
         map = Map.getMap();
     }
-
     public void keyPressed(KeyEvent e) {
         if (!status.isParalyzed() && !status.isConfused()) {
             switch (e.getKeyCode()) {
@@ -55,6 +58,10 @@ public class Player extends Entity implements KeyListener {
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
+    private void setLocation(Room room) {
+        // TODO: Change this to be Helper.random
+        super.setLocation(room.getRandomPointInBounds());
+    }
     public int getHealth() {
         return health;
     }

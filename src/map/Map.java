@@ -1,6 +1,5 @@
 package map;
 
-import entity.Entity;
 import entity.monster.Monster;
 import extra.MessageBar;
 import extra.StatusBar;
@@ -29,6 +28,9 @@ public class Map {
         statusBar.updateStatusBar();
         GameManager.getPlayer().update();
     }
+
+    // GETTER/ HELPER METHODS
+
     public static Map getMap() {
         return map;
     }
@@ -38,8 +40,7 @@ public class Map {
         return level;
     }
     private void createUIComponents() {
-        // TODO: place custom component creation code here
-        level = new Level(30, 30);
+        level = new Level();
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
