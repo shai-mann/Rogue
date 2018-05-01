@@ -1,10 +1,10 @@
 package map.level;
 
+import helper.Helper;
 import main.GameManager;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Passageway {
 
@@ -36,8 +36,6 @@ public class Passageway {
     private void drawHallwayMark(Point p) {
         if (GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
             GameManager.getTable().setValueAt("#", p.y, p.x);
-        } else if (GameManager.getTable().getValueAt(p.y, p.x).equals("=") || GameManager.getTable().getValueAt(p.y, p.x).equals("|")) {
-            GameManager.getTable().setValueAt("+", p.y, p.x);
         }
     }
 
@@ -47,9 +45,9 @@ public class Passageway {
         Point midwayPoint;
         if (start.getX() - end.getX() > start.getY() - end.getY()) {
             if (start.getX() > end.getX()) {
-                midwayPoint = new Point(end.x + new Random().nextInt(start.x - end.x), end.y);
+                midwayPoint = new Point(end.x + Helper.random.nextInt(start.x - end.x), end.y);
             } else if (start.getX() < end.getX()){
-                midwayPoint = new Point(end.x - new Random().nextInt(end.x - start.x), end.y);
+                midwayPoint = new Point(end.x - Helper.random.nextInt(end.x - start.x), end.y);
             } else {
                 midwayPoint = new Point(end.x, end.y);
             }
@@ -59,9 +57,9 @@ public class Passageway {
             drawHallwayMark(end);
         } else {
             if (start.getY() > end.getY()) {
-                midwayPoint = new Point(end.x, end.y + new Random().nextInt(start.y - end.y));
+                midwayPoint = new Point(end.x, end.y + Helper.random.nextInt(start.y - end.y));
             } else if (start.getY() < end.getY()){
-                midwayPoint = new Point(end.x, end.y + new Random().nextInt(end.y - start.y));
+                midwayPoint = new Point(end.x, end.y - Helper.random.nextInt(end.y - start.y));
             } else {
                 midwayPoint = new Point(end.x, end.y);
             }
@@ -162,8 +160,8 @@ public class Passageway {
         return points;
     }
     private boolean getIsSecret() {
-        int randomInt = new Random().nextInt(100) + 1;
-        // TODO: Change this to be using Helper.random
+        int randomInt = Helper.random.nextInt(100) + 1;
+        // TODO: Make this only have a maximum of 50% chance to be secret
         return randomInt >= 100 - (5* Level.getLevel().getLevelNumber());
     }
 }

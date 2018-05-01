@@ -1,13 +1,13 @@
 package entity;
 
-<<<<<<< HEAD
-=======
+import map.level.Room;
+
+import java.awt.*;
 import entity.item.Armor;
 import entity.item.Gold;
 import entity.item.Item;
 import entity.item.Ring;
 import entity.monster.Monster;
->>>>>>> items
 import extra.GravePane;
 import extra.inventory.InventoryPane;
 import extra.MessageBar;
@@ -16,10 +16,7 @@ import main.GameManager;
 import map.Map;
 import map.level.Room;
 
-<<<<<<< HEAD
-=======
 import javax.swing.*;
->>>>>>> items
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -33,13 +30,7 @@ public class Player extends Entity implements KeyListener {
     private boolean showInventory = false;
     private Container savedContentPane;
 
-<<<<<<< HEAD
     // TODO: Convert to Helper.random on merge
-
-    public Player(Room room) {
-        super("@", 0, 0);
-        setLocation(room);
-=======
     private Armor wornItem;
     private Item heldItem;
     private Ring leftRing;
@@ -49,9 +40,9 @@ public class Player extends Entity implements KeyListener {
 
     private ArrayList<Item> inventory = new ArrayList<>();
 
-    public Player() { // TODO: make Player spawn in non-arbitrary location
-        super("@", 1, 1);
->>>>>>> items
+    public Player(Room room) { // TODO: make Player spawn in non-arbitrary location
+        super("@", 0, 0);
+        setLocation(room);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
         status.setAc(8);
@@ -95,7 +86,7 @@ public class Player extends Entity implements KeyListener {
         }
         if (status.isConfused() || status.isDrunk()) {
             int[] directions = {UP,DOWN,RIGHT,LEFT};
-            move(directions[new Random().nextInt(directions.length)]);
+            move(directions[Helper.random.nextInt(directions.length)]);
         }
         if (moved) {
             map.update();

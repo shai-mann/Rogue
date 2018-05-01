@@ -5,6 +5,7 @@ import helper.Helper;
 import main.GameManager;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class StatusBar extends JComponent {
     private JLabel healthField;
@@ -19,6 +20,9 @@ public class StatusBar extends JComponent {
     public void setDefaults() {
         panel.setForeground(Helper.BACKGROUND_COLOR);
         panel.setBackground(Helper.BACKGROUND_COLOR);
+        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.05)));
+        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.05)));
+        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.05)));
 
         healthField.setText("Health: " + Monster.DEFAULT_HEALTH);
         healthField.setForeground(Helper.FOREGROUND_COLOR);

@@ -34,13 +34,9 @@ public class Map {
     public static Map getMap() {
         return map;
     }
-    public Level getRoom(Entity entity) {
-        // This method will return the level which
-        // the entity passed is in. *NOT FUNCTIONAL*
-        return level;
-    }
     private void createUIComponents() {
         level = new Level();
+        statusBar = new StatusBar();
     }
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);

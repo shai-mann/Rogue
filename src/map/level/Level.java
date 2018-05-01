@@ -31,7 +31,6 @@ public class Level extends JComponent {
 
     private JPanel panel;
     private CustomRoomTable table;
-    private Random random = new Random();
     private Room startingRoom;
     private int levelNumber = 0;
 
@@ -50,8 +49,11 @@ public class Level extends JComponent {
         createRooms();
         startingRoom = createPassageways();
     }
+
+    // PHYSICAL LEVEL GENERATION METHODS
+
     private void createRooms() {
-        int roomNumber = random.nextInt(4) + 5;
+        int roomNumber = Helper.random.nextInt(4) + 5;
         for (int i = 0; i < roomNumber; i++) {
             Dimension size = getRandomRoomSize();
             Point point;
@@ -65,27 +67,6 @@ public class Level extends JComponent {
             } while (point == null);
         }
     }
-
-    // ROOM GENERATION HELPER METHODS
-
-    private Dimension getRandomRoomSize() {
-        return new Dimension(random.nextInt(7) + 5,
-                random.nextInt(6) + 6);
-    }
-    private Point getRandomPoint() {
-        return new Point(random.nextInt(GameManager.getTable().getColumnCount() - 1),
-                random.nextInt(GameManager.getTable().getRowCount() - 1));
-    }
-    private boolean checkValidPoint(Point p) {
-        try {
-            return GameManager.getTable().getColumnCount() - p.x > 5 &&
-                    GameManager.getTable().getRowCount() - p.y > 5 &&
-                    p.x > 5 && p.y > 5;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-    }
-
     private Room createPassageways() {
         /*
         * 1) Get closest unconnected room to top left
@@ -112,6 +93,35 @@ public class Level extends JComponent {
             unconnectedRooms.remove(closestRoom);
         }
         return getClosestRoom(new Point(34, 20), connectedRooms);
+    }
+
+    // ENTITY SPAWNING METHODS
+
+    private void spawnMonsters() {
+
+    }
+    private void spawnItems() {
+
+    }
+
+    // ROOM GENERATION HELPER METHODS
+
+    private Dimension getRandomRoomSize() {
+        return new Dimension(Helper.random.nextInt(7) + 5,
+                Helper.random.nextInt(6) + 6);
+    }
+    private Point getRandomPoint() {
+        return new Point(Helper.random.nextInt(GameManager.getTable().getColumnCount() - 1),
+                Helper.random.nextInt(GameManager.getTable().getRowCount() - 1));
+    }
+    private boolean checkValidPoint(Point p) {
+        try {
+            return GameManager.getTable().getColumnCount() - p.x > 5 &&
+                    GameManager.getTable().getRowCount() - p.y > 5 &&
+                    p.x > 5 && p.y > 5;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     // PASSAGEWAY GENERATION HELPER METHODS
@@ -144,16 +154,10 @@ public class Level extends JComponent {
 
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
-<<<<<<< HEAD
-        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
-        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
-        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.9)));
         panel.setBorder(null);
-=======
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
->>>>>>> items
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
 

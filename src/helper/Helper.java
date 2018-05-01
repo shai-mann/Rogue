@@ -2,6 +2,7 @@ package helper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Helper {
@@ -24,5 +25,8 @@ public class Helper {
     }
     public static Color changeOpacity(Color color, int opacity) {
         return new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
+    }
+    public static Object getRandom(ArrayList objects) {
+        return objects.get(random.nextInt(objects.size()));
     }
 }

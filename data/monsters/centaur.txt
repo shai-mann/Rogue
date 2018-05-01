@@ -7,3 +7,4 @@ speed:1
 movementType:wander
 attackType:hit
 health:1d8
+level:1-7, 18

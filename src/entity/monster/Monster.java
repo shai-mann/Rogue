@@ -4,8 +4,12 @@ import entity.Entity;
 import entity.Player;
 import entity.Status;
 import extra.MessageBar;
+import helper.Helper;
 import main.GameManager;
+import map.level.Level;
+import map.level.Room;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,6 +17,8 @@ import java.util.Random;
 public class Monster extends Entity {
 
     static ArrayList<Monster> monsters = new ArrayList<>();
+    static File[] files;
+    static ArrayList<File> availableFiles = new ArrayList<>();
 
     public static int DEFAULT_HEALTH = 20;
 
@@ -47,7 +53,7 @@ public class Monster extends Entity {
     private attackTypes attackType = attackTypes.HIT;
 
     public Monster(String dataFilePath, int x, int y) {
-        super("_", x, y);
+        super("-", x, y);
         monsters.add(this);
         status = new Status();
         loadDataFile(dataFilePath);
@@ -216,11 +222,10 @@ public class Monster extends Entity {
         }
     }
     private void hitAttack() {
-        Random random = new Random();
-        if (random.nextDouble() <= hitChance) {
+        if (Helper.random.nextDouble() <= hitChance) {
             GameManager.getPlayer().health -= hitDamage;
-            if (random.nextDouble() <= critChance) { // critical
-                if (random.nextDouble() <= 0.8) {
+            if (Helper.random.nextDouble() <= critChance) { // critical
+                if (Helper.random.nextDouble() <= 0.8) {
                     GameManager.getPlayer().health -= hitDamage;
                     MessageBar.addMessage("The " + this.name + " crits");
                 } else {
@@ -266,14 +271,11 @@ public class Monster extends Entity {
     private boolean isInRange(Player player) {
         return Math.pow(player.getXPos() - getXPos(), 2) + Math.pow(player.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
-<<<<<<< HEAD
     private boolean isNextTo(Player player) {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
     }
-=======
->>>>>>> items
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
         int amount = Integer.parseInt(parts[0]);
@@ -305,6 +307,58 @@ public class Monster extends Entity {
 
     // STATIC METHODS
 
+    private static void createMonster(Room room) {
+        Point location = room.getRandomPointInBounds();
+        new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
+    }
+    public static void spawnMonsters() {
+        createMonster(Level.getLevel().getStartingRoom());
+        // TODO: fix to use Poisson's method for spawning monsters
+    }
+    private static void updateAvailableMonsters() {
+        for (File file : files) {
+            if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
+                availableFiles.add(file);
+            }
+        }
+    }
+    private static ArrayList<Integer> getLevel(File file) {
+        String line;
+        ArrayList<Integer> validLevels = new ArrayList<>();
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.contains("level")) {
+                    line = line.split(":")[1];
+                    String[] numbers = line.split(",");
+                    for (String string : numbers) {
+                        if (string.contains("-")) {
+                            for (int i = Integer.parseInt(string.split("-")[0].trim());
+                                 i <= Integer.parseInt(string.split("-")[1].trim()); i++) {
+                                validLevels.add(i);
+                            }
+                        } else {
+                            validLevels.add(Integer.parseInt(string.trim()));
+                        }
+                    }
+                }
+            }
+            bufferedReader.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Error: file not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error reading file");
+        }
+        return validLevels;
+    }
+    public static void loadCustomMonsters() {
+        files = new File("data/monsters/").listFiles();
+        updateAvailableMonsters();
+    }
     public static void update() {
         for (Monster monster : monsters) {
             monster.runUpdate();
@@ -313,5 +367,4 @@ public class Monster extends Entity {
     public static ArrayList<Monster> getMonsters() {
         return monsters;
     }
-
 }

@@ -13,7 +13,7 @@ public class Entity {
 
     public String graphic;
 
-    private String overWrittenGraphic = "";
+    public String overWrittenGraphic = "-";
 
     public static int UP = 0;
     public static int DOWN = 1;
@@ -24,7 +24,7 @@ public class Entity {
         xPos = x;
         yPos = y;
         graphic = g;
-        overWrittenGraphic = (String) GameManager.getTable().getValueAt(xPos, yPos);
+        overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
 
         GameManager.add(graphic, x, y);
     }
@@ -42,7 +42,6 @@ public class Entity {
             }
 
             overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
-
             GameManager.add(graphic, xPos, yPos);
             return true;
         }
