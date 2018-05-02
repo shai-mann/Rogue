@@ -92,7 +92,14 @@ public class Room {
         int maxX = (int) getBounds().getBounds().getMaxX() - 2;
         int minY = (int) getBounds().getBounds().getMinY() + 1;
         int maxY = (int) getBounds().getBounds().getMaxY() - 2;
-        return new Point(Helper.random.nextInt(maxX - minX) + minX,
-                Helper.random.nextInt(maxY - minY) + minY);
+        Point p = null;
+        while (p == null) {
+            p = new Point(Helper.random.nextInt(maxX - minX) + minX,
+                    Helper.random.nextInt(maxY - minY) + minY);
+            if (!GameManager.getTable().getValueAt(p.y, p.x).equals("-")) {
+                p = null;
+            }
+        }
+        return p;
     }
 }

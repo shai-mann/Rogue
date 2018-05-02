@@ -5,6 +5,8 @@ import helper.Helper;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Ring extends Item {
 
@@ -35,15 +37,13 @@ public class Ring extends Item {
         randomizeRingType();
     }
     public static void randomizeObfuscatedNames() {
-        ArrayList<String> strings = new ArrayList<>(Arrays.asList(colors));
-        for (int i = 0; i < obfuscatedNames.size(); i++) {
-            String color = strings.get(Helper.random.nextInt(strings.size() - 1));
-            obfuscatedNames.set(i, color);
-            strings.remove(color);
+        for (int i = 0; i < colors.length; i++) {
+            String color = colors[(Helper.random.nextInt(colors.length - 1))];
+            obfuscatedNames.add(color);
         }
     }
     private void randomizeRingType() {
-        int ringType = Helper.random.nextInt(11);
+        int ringType = Helper.random.nextInt(12);
         // TODO: Add powers to different ring types
 
         switch (ringType) {
@@ -90,5 +90,6 @@ public class Ring extends Item {
                 hiddenName = "Ring of Maintain Armor";
                 break;
         }
+        name = obfuscatedNames.get(ringType);
     }
 }

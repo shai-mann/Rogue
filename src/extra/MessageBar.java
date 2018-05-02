@@ -23,9 +23,9 @@ public class MessageBar extends JComponent {
     public void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
-        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.15)));
-        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.15)));
-        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.15)));
+        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.2)));
+        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.2)));
+        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.2)));
         setTextareaDefaults(message, Helper.FOREGROUND_COLOR);
         setTextareaDefaults(oldMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 99));
         setTextareaDefaults(olderMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 80));

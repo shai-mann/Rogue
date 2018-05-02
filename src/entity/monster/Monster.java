@@ -3,6 +3,8 @@ package entity.monster;
 import entity.Entity;
 import entity.Player;
 import entity.Status;
+import entity.item.Gold;
+import entity.item.Item;
 import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -22,7 +24,7 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes { WANDER, TRACK, MIMIC, STILL }
+    private enum movementTypes { WANDER, TRACK, MIMIC, STILL, GOLD_TRACK, SLEEP }
     private enum attackTypes {
         HIT,
         SHOOT,
@@ -43,9 +45,12 @@ public class Monster extends Entity {
     private int range = 10;
     private double hitChance = 0.5;
     private int hitDamage = 1;
-    private double critChance;
-    private boolean invisible;
-
+    private double critChance = 0.05;
+    private double critDamage = hitDamage * 2;
+    private boolean invisible = false;
+    private int experience = 2;
+    private double treasureDropChance = 0.3;
+    // TODO: implement treasure dropping and experience gaining
 
     private Status status;
 
@@ -98,9 +103,11 @@ public class Monster extends Entity {
             case "critchance":
                 this.critChance = Double.parseDouble(parsed[1]);
                 break;
-            case "hitDamage":
+            case "hitdamage":
                 this.hitDamage = parseDiceNotation(parsed[1]);
                 break;
+            case "critdamage":
+                this.critDamage = Double.parseDouble(parsed[1]);
             case "speed":
                 this.speed = Integer.parseInt(parsed[1]);
                 break;
@@ -122,15 +129,31 @@ public class Monster extends Entity {
             case "ac":
                 this.status.setAc(Integer.valueOf(parsed[1]));
                 break;
+            case "experience":
+                this.experience = Integer.parseInt(parsed[1]);
+            case "treasure":
+                this.treasureDropChance = Integer.parseInt(parsed[1]) / 100;
+                break;
         }
     }
 
+    // DATA PARSING HELPER METHODS
+
     private movementTypes movementTypeFromString(String string) {
-        switch (string) {
+        switch (string.toLowerCase().trim()) {
             case "wander":
                 return movementTypes.WANDER;
             case "track":
                 return movementTypes.TRACK;
+            case "sleep":
+                return movementTypes.SLEEP;
+            case "mimic":
+                return movementTypes.MIMIC;
+            case "goldtracking":
+            case "gold tracking":
+                return movementTypes.GOLD_TRACK;
+            case "still":
+                return movementTypes.STILL;
             default:
                 return movementTypes.TRACK; // default movement type
         }
@@ -155,13 +178,19 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
-        // TODO: Add rust armor, range attack, trap attack, steal gold, steal (magic) item, greedy, pathfind gold, weakness, drain max HP, mimic (immitate object)
+        // TODO: Add rust armor, range attack, trap attack, steal gold, steal (magic) item, pathfind gold, weakness, drain max HP, mimic (immitate object)
         switch (movementType) {
             case TRACK:
                 trackMovement();
                 break;
             case WANDER:
                 wanderMovement();
+                break;
+            case STILL:
+                stillMovement();
+                break;
+            case GOLD_TRACK:
+                goldTrackMovement();
                 break;
         }
         status.update();
@@ -202,6 +231,37 @@ public class Monster extends Entity {
         }
         moveRandom();
     }
+    private void stillMovement() {
+        if (isNextTo(GameManager.getPlayer())) {
+            attack();
+        }
+    }
+    private void goldTrackMovement() {
+        Gold gold = (Gold) Item.getClosestItem(this, Item.getAllItemsOfType(Item.itemTypes.GOLD));
+        if (moveCounter == speed) {
+            if (isInRange(gold)) {
+                if (!isNextTo(gold)) {
+                    if (this.getYPos() > gold.getYPos()) {
+                        move(UP);
+                    } else {
+                        move(DOWN);
+                    }
+                    if (this.getXPos() < gold.getXPos()) {
+                        move(RIGHT);
+                    } else {
+                        move(LEFT);
+                    }
+                    moveCounter = 1;
+                }
+            } else if (isInRange(GameManager.getPlayer())){
+                trackMovement();
+            } else {
+                moveRandom();
+            }
+        } else {
+            moveCounter += 1;
+        }
+    }
     private void attack() {
         switch (attackType) {
             case HIT:
@@ -223,15 +283,16 @@ public class Monster extends Entity {
     }
     private void hitAttack() {
         if (Helper.random.nextDouble() <= hitChance) {
-            GameManager.getPlayer().health -= hitDamage;
             if (Helper.random.nextDouble() <= critChance) { // critical
                 if (Helper.random.nextDouble() <= 0.8) {
-                    GameManager.getPlayer().health -= hitDamage;
+                    GameManager.getPlayer().health -= critDamage;
                     MessageBar.addMessage("The " + this.name + " crits");
                 } else {
-                    // paralyze
+                    GameManager.getPlayer().health -= hitDamage;
+                    GameManager.getPlayer().getStatus().setParalyzed(3);
                 }
             } else {
+                GameManager.getPlayer().health -= hitDamage;
                 MessageBar.addMessage("The " + this.name + " hits");
             }
         } else {
@@ -268,8 +329,8 @@ public class Monster extends Entity {
 
     // HELPERS
 
-    private boolean isInRange(Player player) {
-        return Math.pow(player.getXPos() - getXPos(), 2) + Math.pow(player.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
+    private boolean isInRange(Entity entity) {
+        return Math.pow(entity.getXPos() - getXPos(), 2) + Math.pow(entity.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
     private boolean isNextTo(Player player) {
         return
@@ -305,7 +366,7 @@ public class Monster extends Entity {
     }
     public String getName() { return name; }
 
-    // STATIC METHODS
+    // MONSTER SPAWNING METHODS
 
     private static void createMonster(Room room) {
         Point location = room.getRandomPointInBounds();
@@ -313,12 +374,22 @@ public class Monster extends Entity {
     }
     public static void spawnMonsters() {
         createMonster(Level.getLevel().getStartingRoom());
+        createMonster((Room) Helper.getRandom(Room.rooms));
         // TODO: fix to use Poisson's method for spawning monsters
     }
+
+    // STATIC METHODS
+
     private static void updateAvailableMonsters() {
         for (File file : files) {
-            if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
-                availableFiles.add(file);
+            try {
+                if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
+                    availableFiles.add(file);
+                }
+            } catch (NullPointerException e) {
+                if (getLevel(file).contains(1)) {
+                    availableFiles.add(file);
+                }
             }
         }
     }
@@ -360,7 +431,8 @@ public class Monster extends Entity {
         updateAvailableMonsters();
     }
     public static void update() {
-        for (Monster monster : monsters) {
+        for (int i = 0; i < monsters.size(); i++) {
+            Monster monster = monsters.get(i);
             monster.runUpdate();
         }
     }

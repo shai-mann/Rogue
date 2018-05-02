@@ -23,6 +23,7 @@ public class GameManager {
 
     public static void main(String[] args) {
         initFrame();
+        runStaticSetupMethods();
 
         map = new Map();
         player = new Player(Level.getLevel().getStartingRoom());
@@ -46,10 +47,9 @@ public class GameManager {
 
     // SETUP METHODS
 
-    private static void runStaticSetupMethods() {
+    public static void runStaticSetupMethods() {
         Monster.loadCustomMonsters();
         Item.randomizeHiddenNames();
-        Monster.spawnMonsters();
     }
     private static void initFrame() {
         frame = new JFrame("Rogue - A recreation of the 1980's game");

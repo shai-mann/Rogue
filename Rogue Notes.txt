@@ -4,50 +4,55 @@ Note: AC is the amount that the chance to hit is reduced by. So if it is 10, the
 9 would be a 3% reduction of chance to hit.
 Note: Treasure means the chance that the monster is carrying treasure (item or gold) on it when it is killed.
 
-TODO: Add info for: Floating Eye, Jackal, Purple Worm, Quasit, Umberhulk, and Xorn.
+TODO: Add info for: Purple Worm, Umberhulk, and Wraith.
 
 Giant Ant:
-	Weakens Player on hit : Damage: 1d6 : Health: 2d8 : Experience: 9 : Treasure: 0% : AC: 3
+	Weakens Player on hit : Damage: 1d6 : Health: 2d8 : Experience: 5 : Treasure: 5% : AC: 7 : Level: 3-7
 Bat:
-	Flies randomly : Damage: 1d2 : Health: 1d8 : Experience: 1 : Treasure: 0% : AC: 3
+	Flies randomly : Damage: 1d2 : Health: 1d8 : Experience: 2 : Treasure: 0% : AC: 7 : Level: 1-4
 Centaur:
-	Damage: 1d2/1d5 for critical : Health: 4d8 : Experience: 17 : Treasure: 15% : AC: 4
+	Damage: 3d8/4d8 for critical : Health: 4d8 : Experience: 29 : Treasure: 15% : AC: 7 : Level: 7-13
 Dragon:
-	Ranged "6d6" flame attack and normal attack : Damage: 1d8/3d10 for flame attack : Health: 10d8 : Experience: 5000 : Treasure: 100% : AC: -1
+	Ranged "6d6" flame attack and normal attack : Damage: 1d8/3d10 for critical : Health: 10d8 : Experience: 5000 : Treasure: 100% : AC: -1 : Level: 24-26
 Floating Eye:
-	Paralyses player on hit : sleeps until hit
+	Paralyses player on hit : sleeps until hit : Damage: 0d0 : Health : 1d10 : Experience: 5 : Treasure: 10% : AC: 8 : Level: 2-10
 Violet Fungi:
-	Cannot move : Can grab and hold player (100% chance) when you stand next to it : Damage: 0d0 : Health: 8d8 : Experience: 80 : Treasure: 0% : AC: 3
+	Cannot move : Can grab and hold player (100% chance) when you stand next to it : Damage: 0d0 : Health: 8d8 : Experience: 80 : Treasure: 0% : AC: 3 : Level: 10-16
 Griffin:
-	Damage: 4d3/3d5 on critical : Health: 13d8 : Experience: 2000 : Treasure: 20% : AC: 2
+	Damage: 4d3/4d5 on critical : Health: 13d8 : Experience: 2000 : Treasure: 20% : AC: 2
 Hobgoblin:
-	Kills level 1 rogue in 2 hits : Damage: 1d8 : Health: 1d8 : Experience: 3
+	Damage: 1d8 : Health: 1d8 : Experience: 3 : Treasure: 50% : AC: 6 : Level: 1-7
 Invisible Stalker:
-	Invisible : moves like bat : Damage: 4d4 : Level: 10 : Health: 8d8 : Experience: 120 : Treasure: 10%
+	Invisible : moves like bat : Damage: 4d4 : Health: 5d8 : Experience: 120 : Treasure: 10% : AC: 5 : Level: 14-18
 Jackal:
+    Damage: 1d5 : Health: 1d9 : Experience: 2 : Treasure: 30% : AC: 7 : Level: 1-6
 Kobold:
-    Damage: 1d4 : Health: 1d8 : Experience: 1 : Treasure: 0% : AC: 7
+    Damage: 1d4 : Health: 1d8 : Experience: 2 : Treasure: 30% : AC: 7 : Level: 1-5
 Leprechaun:
-	Steals some gold and tps away : Damage: 1d1 : Health: 3d8 : Experience: 10 : Treasure: 0%
+	Steals some gold and tps away : Damage: 0d0 : Health: 3d8 : Experience: 15 : Treasure: 100% : AC: 9 : Level: 6-12
 Mimic:
 	Mimics an item until hits player : Damage: 4d4 : Health: 7d8 : Experience: 100 : Treasure: 30% : AC: 7
 Nymph:
-	Steals one magic item : tps away after stealing item : Damage: 0d0 : Health: 3d8 : Experience: 37 : Treasure: 100% : AC: 9
+	Steals one magic item : tps away after stealing item : Damage: 0d0 : Health: 3d8 : Experience: 56 : Treasure: 100% : AC: 9 : Level: 11-14
 Orc:
-	Tracks gold over player : Damage: 1d8 : Health: 1d8 : Experience: 5 : Treasure: 15%
+	Tracks gold over player : Damage: 2d8 : Health: 2d9 : Experience: 5 : Treasure: 15% : AC: 6 : Level: 4-8
 Purple Worm:
 Quasit:
+    Damage: 2d12 : Health: 3d9 : Experience: 54 : Treasure: 30% : AC: 6 : Level: 9-13
 Rust Monster:
-    Attack rusts armor (decreases AC) on hit : Damage: 0d0 : Health: 5d8 : Experience: 20 : Treasure: 0% : AC: 2
+    Attack rusts armor (decreases AC) on hit : Damage: 0d0 : Health: 5d8 : Experience: 42 : Treasure: 20% : AC: 6 : Level: 8-17
 Snake:
-    Damage: 1d3 : Health: 1d8 : Experience: 2 : Treasure: 0% : AC: 5
+    Damage: 1d3 : Health: 1d8 : Experience: 2 : Treasure: 15% : AC: 8 : Level: 1-3
 Troll:
-    Damage: 1d8/2d6 for critical : Health: 6d8 : Experience: 120 : Treasure: 50% : AC: 4
+    Damage: 4d10/6d10 for critical : Health: 6d8 : Experience: 120 : Treasure: 50% : AC: 4 : Level: 13-16
 Umberhulk:
 Vampire:
     On hit drains max HP : Damage: 1d10 : Health: 8d8 : Experience: 350 : Treasure: 20% : AC: 1
+Wraith:
+
 Xorn:
+    Damage: 9d8 : Health: 10d8 : Experience: 203 : Treasure: 45% : AC: 6 : Level: 17-21
 Yeti:
-    Damage: 1d6 : Health: 4d8 : Experience: 50 : Treasure: 30% : AC: 6
+    Damage: 7d8 : Health: 5d8 : Experience: 80 : Treasure: 30% : AC: 3 : Level: 12-16
 Zombie:
-	Damage: 1d8 : Health: 2d8 : Experience: 6 : Treasure: 0% : AC: 8
+	Damage: 2d6 : Health: 3d8 : Experience: 9 : Treasure: 40% : AC: 6 : Level: 5-10

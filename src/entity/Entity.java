@@ -1,5 +1,6 @@
 package entity;
 
+import entity.monster.Monster;
 import helper.Helper;
 import main.GameManager;
 
@@ -47,12 +48,21 @@ public class Entity {
         }
         return false;
     }
-    public boolean checkValidMove(int direction) {
+
+    // MOVEMENT HELPER METHODS
+
+    private boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
         String value = (graphicAtMove(direction));
-        return value.equals("-") || value.equals("+") || value.equals("#") || value.equals("*") || value.equals("]");
+        for (int i = 0; i < Monster.getMonsters().size(); i++) {
+            Monster monster = Monster.getMonsters().get(i);
+            if (fakeMove(direction).getY() == monster.getYPos() && fakeMove(direction).getX() == monster.getXPos()) {
+                return false;
+            }
+        }
+        return value.equals("-") || value.equals("+") || value.equals("#") || value.equals("*") || value.equals("]") || value.equals("&");
     }
-    protected String graphicAtMove(int direction) {
+    private String graphicAtMove(int direction) {
         Object value;
         if (direction == UP) {
             value = GameManager.getTable().getValueAt(yPos - 1, xPos);
@@ -70,12 +80,35 @@ public class Entity {
         }
         return (String) value;
     }
+    private Point fakeMove(int direction) {
+        Point point;
+        if (direction == UP) {
+            point = new Point(yPos - 1, xPos);
+        }
+        else if (direction == DOWN) {
+            point = new Point(yPos + 1, xPos);
+        }
+        else if (direction == RIGHT) {
+            point = new Point(yPos, xPos + 1);
+        }
+        else if (direction == LEFT) {
+            point = new Point(yPos, xPos - 1);
+        } else {
+            point = new Point();
+        }
+        return point;
+    }
     protected boolean isNextTo(Entity entity) {
         return
                 ((entity.getXPos() + 1 == getXPos() || entity.getXPos() - 1 == getXPos()) && entity.getYPos() == getYPos()) ||
                         ((entity.getYPos() + 1 == getYPos() || entity.getYPos() - 1 == getYPos()) && entity.getXPos() == getXPos());
     }
 
+    // GETTER/SETTER METHODS
+
+    public double getDistanceTo(Entity entity) {
+        return Math.hypot(getXPos() - entity.getXPos(), getYPos() - entity.getYPos());
+    }
     public int getXPos() {
         return xPos;
     }

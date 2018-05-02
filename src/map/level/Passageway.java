@@ -34,7 +34,7 @@ public class Passageway {
         equalize(doorFrom, doorTo);
     }
     private void drawHallwayMark(Point p) {
-        if (GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
+        if (GameManager.getTable().getValueAt(p.y, p.x).equals("") || GameManager.getTable().getValueAt(p.y, p.x).equals("#")) {
             GameManager.getTable().setValueAt("#", p.y, p.x);
         }
     }
@@ -42,31 +42,45 @@ public class Passageway {
     // EQUALIZE METHODS
 
     private void equalize(Point start, Point end) {
-        Point midwayPoint;
+        Point markerPoint = getMarkerPoint(start, end);
         if (start.getX() - end.getX() > start.getY() - end.getY()) {
-            if (start.getX() > end.getX()) {
-                midwayPoint = new Point(end.x + Helper.random.nextInt(start.x - end.x), end.y);
-            } else if (start.getX() < end.getX()){
-                midwayPoint = new Point(end.x - Helper.random.nextInt(end.x - start.x), end.y);
-            } else {
-                midwayPoint = new Point(end.x, end.y);
-            }
-            equalizeX(start, midwayPoint);
+            equalizeX(start, markerPoint);
             equalizeY(start, end);
-            equalizeX(midwayPoint, end);
+            equalizeX(markerPoint, end);
             drawHallwayMark(end);
         } else {
-            if (start.getY() > end.getY()) {
-                midwayPoint = new Point(end.x, end.y + Helper.random.nextInt(start.y - end.y));
-            } else if (start.getY() < end.getY()){
-                midwayPoint = new Point(end.x, end.y - Helper.random.nextInt(end.y - start.y));
-            } else {
-                midwayPoint = new Point(end.x, end.y);
-            }
-            equalizeY(start, midwayPoint);
+            equalizeY(start, markerPoint);
             equalizeX(start, end);
-            equalizeY(midwayPoint, end);
+            equalizeY(markerPoint, end);
             drawHallwayMark(end);
+        }
+    }
+
+    // EQUALIZE HELPER METHODS
+
+    private Point getMarkerPoint(Point start, Point end) {
+        Point markerPoint;
+        if (start.getX() - end.getX() > start.getY() - end.getY()) {
+            if (start.getX() > end.getX()) {
+                markerPoint = new Point(end.x + Helper.random.nextInt(start.x - end.x), end.y);
+            } else if (start.getX() < end.getX()){
+                markerPoint = new Point(end.x - Helper.random.nextInt(end.x - start.x), end.y);
+            } else {
+                markerPoint = new Point(end.x, end.y);
+            }
+        } else {
+            if (start.getY() > end.getY()) {
+                markerPoint = new Point(end.x, end.y + Helper.random.nextInt(start.y - end.y));
+            } else if (start.getY() < end.getY()){
+                markerPoint = new Point(end.x, end.y - Helper.random.nextInt(end.y - start.y));
+            } else {
+                markerPoint = new Point(end.x, end.y);
+            }
+        }
+        if (GameManager.getTable().getValueAt(markerPoint.y, markerPoint.x).equals("")) {
+            return markerPoint;
+        } else {
+            return getMarkerPoint(start, end);
         }
     }
     private void equalizeX(Point start, Point end) {

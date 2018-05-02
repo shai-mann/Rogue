@@ -90,8 +90,9 @@ public class Player extends Entity implements KeyListener {
         }
         if (moved) {
             map.update();
-        } else {
-            for (Monster monster: Monster.getMonsters()) {
+        } else if (e.getKeyCode() != KeyEvent.VK_I){
+            for (int i = 0; i < Monster.getMonsters().size(); i++) {
+                Monster monster = Monster.getMonsters().get(i);
                 if (isNextTo(monster)) {
                     double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
                     if (Helper.random.nextDouble() <= hitChance) {
@@ -132,14 +133,14 @@ public class Player extends Entity implements KeyListener {
 
             MessageBar.addMessage("You picked up " + foundGold.getAmount() + " gold");
             Item.items.remove(foundGold);
-        } else if (overWrittenGraphic.equals("]")) {
-            Item foundArmor = Item.getItemAt(getXPos(), getYPos());
+        } else if (overWrittenGraphic.equals("]") || overWrittenGraphic.equals("&")) {
+            Item foundItem = Item.getItemAt(getXPos(), getYPos());
 
-            overWrittenGraphic = foundArmor.overWrittenGraphic;
+            overWrittenGraphic = foundItem.overWrittenGraphic;
 
-            inventory.add(foundArmor);
-            MessageBar.addMessage("You picked up " + foundArmor.getName());
-            Item.items.remove(foundArmor);
+            inventory.add(foundItem);
+            MessageBar.addMessage("You picked up " + foundItem.getName());
+            Item.items.remove(foundItem);
         }
     }
     private boolean checkDeath() {

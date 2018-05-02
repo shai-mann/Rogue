@@ -36,7 +36,7 @@ public class InventoryPane {
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     for (InventoryItem item : InventoryItem.getInventoryItems()) {
-                        if (item.getPanel().contains(e.getPoint())) {
+                        if (item.getPanel().getBounds().contains(e.getPoint())) {
                             item.setButtonsVisible(true);
                         } else {
                             item.setButtonsVisible(false);

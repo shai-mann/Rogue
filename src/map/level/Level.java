@@ -1,9 +1,7 @@
 package map.level;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-import com.sun.tracing.dtrace.ArgsAttributes;
-import entity.Player;
+import entity.item.Item;
+import entity.monster.Monster;
 import helper.Helper;
 import main.GameManager;
 import map.CustomCellRenderer;
@@ -14,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 
 public class Level extends JComponent {
 
@@ -41,18 +38,19 @@ public class Level extends JComponent {
         newLevel();
     }
     public void newLevel() {
-        createLevel();
+        generateLevel();
+        spawnEntities();
     }
-    private void createLevel() {
+    private void generateLevel() {
         levelNumber++;
 
-        createRooms();
-        startingRoom = createPassageways();
+        generateRooms();
+        startingRoom = generatePassageways();
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
 
-    private void createRooms() {
+    private void generateRooms() {
         int roomNumber = Helper.random.nextInt(4) + 5;
         for (int i = 0; i < roomNumber; i++) {
             Dimension size = getRandomRoomSize();
@@ -67,7 +65,7 @@ public class Level extends JComponent {
             } while (point == null);
         }
     }
-    private Room createPassageways() {
+    private Room generatePassageways() {
         /*
         * 1) Get closest unconnected room to top left
         * 2) Get closest connected room to that room
@@ -97,11 +95,9 @@ public class Level extends JComponent {
 
     // ENTITY SPAWNING METHODS
 
-    private void spawnMonsters() {
-
-    }
-    private void spawnItems() {
-
+    public void spawnEntities() {
+        Monster.spawnMonsters();
+        Item.spawnItems();
     }
 
     // ROOM GENERATION HELPER METHODS
@@ -160,6 +156,7 @@ public class Level extends JComponent {
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         table.setBackground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
+        table.setRowHeight((int) (table.getRowHeight() * 0.9));
 
         level = this;
     }

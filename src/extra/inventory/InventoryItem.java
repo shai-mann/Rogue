@@ -49,6 +49,10 @@ public class InventoryItem extends JComponent {
         throwButton.setBackground(Helper.BACKGROUND_COLOR);
         dropButton.setBackground(Helper.BACKGROUND_COLOR);
 
+        useButton.setForeground(Helper.FOREGROUND_COLOR);
+        throwButton.setForeground(Helper.FOREGROUND_COLOR);
+        dropButton.setForeground(Helper.FOREGROUND_COLOR);
+
         label.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 20));
         label.setForeground(Color.WHITE);
 
