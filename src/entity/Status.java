@@ -7,6 +7,9 @@ public class Status {
     private int confused = 0;
     private int drunk = 0;
     private int ac = 10;
+    private int weakened = 0;
+    private int sleeping = 0;
+
 
     public Status() {
 
@@ -20,6 +23,9 @@ public class Status {
         }
         if (isDrunk()) {
             this.drunk -= 1;
+        }
+        if (isSleeping()) {
+            this.sleeping -= 1;
         }
     }
     public int getHealth() {
@@ -35,6 +41,12 @@ public class Status {
         return drunk > 0;
     }
     public int getAc() { return ac; }
+    public boolean isWeakened() {
+        return weakened > 0;
+    }
+    public boolean isSleeping() {
+        return sleeping > 0;
+    }
 
     public void setHealth(int health) {
         this.health = health;
@@ -49,5 +61,11 @@ public class Status {
         this.drunk = drunk;
     }
     public void setAc(int ac) { this.ac = ac; }
+    public void setWeakened(int weakened) {
+        this.weakened = weakened;
+    }
+    public void setSleeping(int sleeping) {
+        this.sleeping += sleeping;
+    }
 
 }

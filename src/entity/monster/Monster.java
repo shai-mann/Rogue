@@ -5,6 +5,8 @@ import entity.Player;
 import entity.Status;
 import entity.item.Gold;
 import entity.item.Item;
+import entity.item.Ring;
+import entity.item.Wand;
 import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -14,6 +16,7 @@ import map.level.Room;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Monster extends Entity {
@@ -27,16 +30,16 @@ public class Monster extends Entity {
     private enum movementTypes { WANDER, TRACK, MIMIC, STILL, GOLD_TRACK, SLEEP }
     private enum attackTypes {
         HIT,
-        SHOOT,
         PARALYZE,
         CONFUSE,
         INTOXICATE,
         WEAKEN,
-        DRAIN,
+        HP_DRAIN,
+        XP_DRAIN,
         RUST,
-        RANGE,
         TRAP,
-        STEAL
+        STEAL_GOLD,
+        STEAL_ITEM
     }
 
     public String name = "<Default>";
@@ -49,8 +52,10 @@ public class Monster extends Entity {
     private double critDamage = hitDamage * 2;
     private boolean invisible = false;
     private int experience = 2;
-    private double treasureDropChance = 0.3;
-    // TODO: implement treasure dropping and experience gaining
+    private double treasureChance = 0.3;
+    private boolean startSleeping = true;
+
+    private Item stolenItem = null;
 
     private Status status;
 
@@ -87,7 +92,6 @@ public class Monster extends Entity {
         }
     }
     private void applyAttributeFromLine(String line) {
-        // todo: error handling if data is misformatted
         String[] parsed = line.split(":");
         switch (parsed[0].toLowerCase()) {
             case "name":
@@ -132,7 +136,7 @@ public class Monster extends Entity {
             case "experience":
                 this.experience = Integer.parseInt(parsed[1]);
             case "treasure":
-                this.treasureDropChance = Integer.parseInt(parsed[1]) / 100;
+                this.treasureChance = Integer.parseInt(parsed[1]) / 100;
                 break;
         }
     }
@@ -146,8 +150,10 @@ public class Monster extends Entity {
             case "track":
                 return movementTypes.TRACK;
             case "sleep":
+                startSleeping = true;
                 return movementTypes.SLEEP;
             case "mimic":
+                startSleeping = true;
                 return movementTypes.MIMIC;
             case "goldtracking":
             case "gold tracking":
@@ -162,8 +168,6 @@ public class Monster extends Entity {
         switch (string) {
             case "attack":
                 return attackTypes.HIT;
-            case "shoot":
-                return attackTypes.SHOOT;
             case "paralyze":
                 return attackTypes.PARALYZE;
             case "confuse":
@@ -178,7 +182,8 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
-        // TODO: Add rust armor, range attack, trap attack, steal gold, steal (magic) item, pathfind gold, weakness, drain max HP, mimic (immitate object)
+        // TODO: Add rust armor, trap attack,
+        // TODO: steal gold, steal (magic) item, weakness, drain max HP, drain XP (levels loss if go below thresh-hold), mimic (imitate object)
         switch (movementType) {
             case TRACK:
                 trackMovement();
@@ -192,12 +197,21 @@ public class Monster extends Entity {
             case GOLD_TRACK:
                 goldTrackMovement();
                 break;
+            case SLEEP:
+                sleepMovement();
+                break;
+            case MIMIC:
+                mimicMovement();
+                break;
         }
         status.update();
         if (status.getHealth() <= 0) {
             this.die();
         }
     }
+
+    // MONSTER MOVEMENT
+
     private void trackMovement() {
         Player player = GameManager.getPlayer();
 
@@ -262,13 +276,29 @@ public class Monster extends Entity {
             moveCounter += 1;
         }
     }
+    private void sleepMovement() {
+        if (startSleeping) {
+            getStatus().setSleeping(1);
+        } else {
+            trackMovement();
+        }
+    }
+    private void mimicMovement() {
+        if (startSleeping) {
+            this.getStatus().setSleeping(1);
+            this.overWrittenGraphic = graphic;
+
+            String[] chars = {"\\", "&", "*", "^", "]"};
+            graphic = (String) Helper.getRandom((ArrayList<String>) Arrays.asList(chars));
+        }
+    }
+
+    // MONSTER ATTACK
+
     private void attack() {
         switch (attackType) {
             case HIT:
                 hitAttack();
-                break;
-            case SHOOT:
-                shootAttack();
                 break;
             case PARALYZE:
                 paralyzeAttack();
@@ -278,6 +308,15 @@ public class Monster extends Entity {
                 break;
             case INTOXICATE:
                 intoxicateAttack();
+                break;
+            case WEAKEN:
+                weakenAttack();
+                break;
+            case STEAL_GOLD:
+                stealGoldAttack();
+                break;
+            case STEAL_ITEM:
+                stealItemAttack();
                 break;
         }
     }
@@ -299,22 +338,39 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + this.name + " misses");
         }
     }
-    private void shootAttack() {
-        // TODO: create shoot attack
-    }
     private void paralyzeAttack() {
         Player player = GameManager.getPlayer();
         if (!player.getStatus().isParalyzed()) {
             GameManager.getPlayer().getStatus().setParalyzed(3);
         }
+        MessageBar.addMessage("You are paralyzed");
     }
     private void confuseAttack() {
-        int ticks = new Random().nextInt(11) + 10; // random number between 10 and 20
-        GameManager.getPlayer().getStatus().setConfused(ticks);
+        GameManager.getPlayer().getStatus().setConfused(Helper.random.nextInt(11) + 10);
+        MessageBar.addMessage("You feel confused");
     }
     private void intoxicateAttack() {
         // TODO: delay between two steps
         GameManager.getPlayer().getStatus().setDrunk(3);
+        MessageBar.addMessage("You feel strange");
+    }
+    private void weakenAttack() {
+        GameManager.getPlayer().getStatus().setWeakened(Helper.random.nextInt(10) + 2);
+        MessageBar.addMessage("You feel weaker");
+    }
+    private void stealGoldAttack() {
+        GameManager.getPlayer().stealGold(Helper.random.nextInt(50) + GameManager.getPlayer().getGold() / 4);
+        MessageBar.addMessage("Your pockets feel lighter");
+    }
+    private void stealItemAttack() {
+        ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
+        Item.itemTypes[] itemTypes = {Item.itemTypes.RING, Item.itemTypes.WAND, Item.itemTypes.STAFF};
+
+        items = Item.getAllItemsOfTypes((ArrayList<Item.itemTypes>) Arrays.asList(itemTypes), items);
+
+        stolenItem = (Item) Helper.getRandom(items);
+        GameManager.getPlayer().getInventory().remove(stolenItem);
+        MessageBar.addMessage("Your backpack feels lighter");
     }
 
     // OVERRIDES
@@ -355,6 +411,16 @@ public class Monster extends Entity {
     }
     private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
+        GameManager.getPlayer().addExperience(experience);
+
+        if (Helper.random.nextInt(99) + 1 < treasureChance) {
+            if (stolenItem == null) {
+                Item.spawnItem(getXPos(), getYPos(), null, null);
+            } else {
+                Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
+            }
+        }
+
         MessageBar.addMessage("You kill the " + name);
         monsters.remove(this);
     }
@@ -373,9 +439,13 @@ public class Monster extends Entity {
         new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
     }
     public static void spawnMonsters() {
+        // TODO: Update to use Poisson's thingy
         createMonster(Level.getLevel().getStartingRoom());
-        createMonster((Room) Helper.getRandom(Room.rooms));
-        // TODO: fix to use Poisson's method for spawning monsters
+        for (Room room : Room.rooms) {
+            if (!room.equals(Level.getLevel().getStartingRoom())) {
+                createMonster(room);
+            }
+        }
     }
 
     // STATIC METHODS

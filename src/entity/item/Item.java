@@ -2,8 +2,10 @@ package entity.item;
 
 import com.sun.istack.internal.Nullable;
 import entity.Entity;
+import helper.Helper;
 import map.level.Level;
 import map.level.Room;
+import sun.plugin.services.WNetscape4BrowserService;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -80,6 +82,18 @@ public class Item extends Entity {
         }
         return itemsList;
     }
+    public static ArrayList<Item> getAllItemsOfTypes(ArrayList<itemTypes> types, @Nullable ArrayList<Item> items) {
+        ArrayList<Item> itemsList;
+        if (items == null) {
+            itemsList = new ArrayList<>();
+        } else {
+            itemsList = items;
+        }
+        for (itemTypes type : types) {
+            itemsList.addAll(getAllItemsOfType(type));
+        }
+        return itemsList;
+    }
     public static Item getItemAt(int x, int y) {
         for (Item item : items) {
             if (item.getXPos() == x && item.getYPos() == y) {
@@ -94,6 +108,20 @@ public class Item extends Entity {
 
     // STATIC METHODS
 
+    public static void randomizeHiddenNames() {
+        Ring.randomizeObfuscatedNames();
+    }
+
+    // ITEM SPAWNING METHODS
+
+    public static void spawnItems() {
+        // TODO: Update to use Poisson's thingy
+        for (Room room : Room.rooms) {
+            if (!room.equals(Level.getLevel().getStartingRoom())) {
+                spawnItem(room, getRandomItemType());
+            }
+        }
+    }
     private static void spawnItem(Room room, itemTypes itemType) {
         Point location = room.getRandomPointInBounds();
 
@@ -118,13 +146,40 @@ public class Item extends Entity {
                 break;
         }
     }
-    public static void spawnItems() {
-        // TODO: make spawning code for items in rooms
-        spawnItem(Level.getLevel().getStartingRoom(), itemTypes.GOLD);
-        spawnItem(Level.getLevel().getStartingRoom(), itemTypes.ARMOR);
-        spawnItem(Level.getLevel().getStartingRoom(), itemTypes.RING);
+    private static void spawnItemCopy(Item item) {
+        if (item instanceof Armor) {
+            new Armor((Armor) item);
+        } else if (item instanceof Ring) {
+            new Ring((Ring) item);
+        } // TODO: Add other item types spawning copy
     }
-    public static void randomizeHiddenNames() {
-        Ring.randomizeObfuscatedNames();
+    public static void spawnItem(int x, int y, @Nullable itemTypes type, @Nullable Item item) {
+        if (item != null) {
+            spawnItemCopy(item);
+        } else {
+            if (type == null) {
+                spawnItem(new Point(x, y), getRandomItemType());
+            } else {
+                spawnItem(new Point(x, y), type);
+            }
+        }
+    }
+    private static void spawnItem(Point p, itemTypes type) {
+        switch (type) {
+            case WAND:
+                new Wand(p.x, p.y);
+                break;
+            case RING:
+                new Ring(p.x, p.y);
+                break;
+            case GOLD:
+                new Gold(p.x, p.y);
+                break;
+            case ARMOR:
+                new Armor(p.x, p.y);
+        }
+    }
+    private static itemTypes getRandomItemType() {
+        return itemTypes.values()[Helper.random.nextInt(itemTypes.values().length)];
     }
 }

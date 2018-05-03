@@ -13,6 +13,13 @@ public class Armor extends Item {
         randomizeArmorType();
         randomizeCursed();
     }
+    public Armor(Armor item) {
+        super("]", item.getXPos(), item.getYPos());
+
+        this.name = item.getName();
+        this.cursed = item.getCursed();
+        this.AC = item.getAC();
+    }
     private void randomizeArmorType() {
         int type = Helper.random.nextInt(7) + 1; // TODO: Make this based on level or percentages
 
@@ -56,5 +63,8 @@ public class Armor extends Item {
     }
     public boolean getCursed() {
         return cursed;
+    }
+    public int getAC() {
+        return AC;
     }
 }

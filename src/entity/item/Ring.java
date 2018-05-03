@@ -14,24 +14,44 @@ public class Ring extends Item {
 
     private static ArrayList<String> obfuscatedNames = new ArrayList<>(13);
     private static String[] colors = {
-            "Blue Ring",
-            "Red Ring",
-            "Majenta Ring",
-            "Green Ring",
-            "Turquoise Ring",
-            "Yellow Ring",
-            "Pink Ring",
-            "Brown Ring",
-            "Black Ring",
-            "Orange Ring",
-            "Maroon Ring",
-            "Purple Ring",
-            "Gray Ring"
+        "Blue Ring",
+        "Red Ring",
+        "Majenta Ring",
+        "Green Ring",
+        "Turquoise Ring",
+        "Yellow Ring",
+        "Pink Ring",
+        "Brown Ring",
+        "Black Ring",
+        "Orange Ring",
+        "Maroon Ring",
+        "Purple Ring",
+        "Gray Ring"
     };
+    private enum powers {
+        PROTECTION,
+        STRENGTH,
+        SUSTAIN_STRENGTH,
+        SEARCHING,
+        SEE_INVISIBLE,
+        ADORNMENT,
+        AGGRAVATE_MONSTER,
+        DEXTERITY,
+        INCREASE_DAMAGE,
+        REGENERATION,
+        SLOW_DIGESTION,
+        TELEPORTATION,
+        STEALTH,
+        MAINTAIN_ARMOR
+    }
 
     public Ring(int x, int y) {
         super("&", x, y);
         randomizeRingData();
+    }
+    public Ring(Ring item) {
+        super("&", item.getXPos(), item.getYPos());
+        this.name = item.getName();
     }
     private void randomizeRingData() {
         randomizeRingType();

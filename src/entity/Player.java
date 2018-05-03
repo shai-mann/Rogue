@@ -30,17 +30,17 @@ public class Player extends Entity implements KeyListener {
     private boolean showInventory = false;
     private Container savedContentPane;
 
-    // TODO: Convert to Helper.random on merge
     private Armor wornItem;
     private Item heldItem;
     private Ring leftRing;
     private Ring rightRing;
 
     private int gold = 0;
+    private int experience = 0;
 
     private ArrayList<Item> inventory = new ArrayList<>();
 
-    public Player(Room room) { // TODO: make Player spawn in non-arbitrary location
+    public Player(Room room) {
         super("@", 0, 0);
         setLocation(room);
         GameManager.getFrame().addKeyListener(this);
@@ -48,6 +48,9 @@ public class Player extends Entity implements KeyListener {
         status.setAc(8);
         map = Map.getMap();
     }
+
+    // KEY LISTENER OVERRIDES
+
     public void keyPressed(KeyEvent e) {
         if (checkDeath()) {
             return;
@@ -75,49 +78,59 @@ public class Player extends Entity implements KeyListener {
                     break;
             }
             if (e.getKeyCode() == KeyEvent.VK_I) {
-                showInventory = !showInventory;
-                if (showInventory) {
-                    savedContentPane = GameManager.getFrame().getContentPane();
-                    new InventoryPane();
-                } else {
-                    GameManager.replaceContentPane((JPanel) savedContentPane);
-                }
+                openOrCloseInventory();
             }
         }
         if (status.isConfused() || status.isDrunk()) {
-            int[] directions = {UP,DOWN,RIGHT,LEFT};
-            move(directions[Helper.random.nextInt(directions.length)]);
+            moved = moveRandom();
         }
         if (moved) {
             map.update();
         } else if (e.getKeyCode() != KeyEvent.VK_I){
-            for (int i = 0; i < Monster.getMonsters().size(); i++) {
-                Monster monster = Monster.getMonsters().get(i);
-                if (isNextTo(monster)) {
-                    double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
-                    if (Helper.random.nextDouble() <= hitChance) {
-                        Status monsterStatus = monster.getStatus();
-                        monsterStatus.setHealth(monsterStatus.getHealth() - 1); // TODO: base this on sword
-                        map.update();
-                        MessageBar.addMessage("You hit the " + monster.getName());
-                    }
-                }
-            }
+            hitMonster();
         }
         status.update();
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
-    private void setLocation(Room room) {
-        // TODO: Change this to be Helper.random
-        super.setLocation(room.getRandomPointInBounds());
+
+    // KEY LISTENER HELPER METHODS
+
+    private void openOrCloseInventory() {
+        showInventory = !showInventory;
+        if (showInventory) {
+            savedContentPane = GameManager.getFrame().getContentPane();
+            new InventoryPane();
+        } else {
+            GameManager.replaceContentPane((JPanel) savedContentPane);
+        }
     }
-    public int getHealth() {
-        return health;
+    private void hitMonster() {
+        for (int i = 0; i < Monster.getMonsters().size(); i++) {
+            Monster monster = Monster.getMonsters().get(i);
+            if (isNextTo(monster)) {
+                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
+                if (Helper.random.nextDouble() <= hitChance) {
+                    Status monsterStatus = monster.getStatus();
+                    monsterStatus.setHealth(monsterStatus.getHealth() - getDamage());
+                    map.update();
+                    if (monster.health > 0) {
+                        MessageBar.addMessage("You hit the " + monster.getName());
+                    }
+                    if (monster.getStatus().isSleeping()) {
+                        monster.getStatus().setSleeping(0);
+                    }
+                }
+            }
+        }
     }
-    public int getGold() {
-        return gold;
+    private boolean moveRandom() {
+        int[] directions = {UP,DOWN,RIGHT,LEFT};
+        return move(directions[Helper.random.nextInt(directions.length)]);
     }
+
+    // UPDATE METHODS
+
     public void update() {
         if (checkDeath()) {
             new GravePane();
@@ -146,10 +159,41 @@ public class Player extends Entity implements KeyListener {
     private boolean checkDeath() {
         return getHealth() <= 0;
     }
+
+    // GETTERS
+
+    public int getHealth() {
+        return health;
+    }
+    public int getGold() {
+        return gold;
+    }
     public Status getStatus() {
         return status;
     }
     public ArrayList<Item> getInventory() {
         return inventory;
+    }
+    public int getExperienceDigitsNumber() {
+        return String.valueOf(experience).length();
+    }
+    public int getExperience() {
+        return experience;
+    }
+    public int getDamage() {
+        // TODO: when swords are added, make it based on damage of heldItem
+        return getStatus().isWeakened() ? 1 : 2;
+    }
+
+    // SETTERS
+
+    public void addExperience(int experience) {
+        this.experience += experience;
+    }
+    public void stealGold(int amount) {
+        this.gold -= gold;
+    }
+    private void setLocation(Room room) {
+        super.setLocation(room.getRandomPointInBounds());
     }
 }

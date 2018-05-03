@@ -54,12 +54,13 @@ public class Entity {
     private boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
         String value = (graphicAtMove(direction));
-        for (int i = 0; i < Monster.getMonsters().size(); i++) {
-            Monster monster = Monster.getMonsters().get(i);
-            if (fakeMove(direction).getY() == monster.getYPos() && fakeMove(direction).getX() == monster.getXPos()) {
-                return false;
-            }
-        }
+//        for (int i = 0; i < Monster.getMonsters().size(); i++) {
+//            Monster monster = Monster.getMonsters().get(i);
+//            if (fakeMove(direction).getY() == monster.getYPos() && fakeMove(direction).getX() == monster.getXPos()) {
+//                return false;
+//            }
+//        }
+        // TODO: implement so if monster is invisible, then it will not be allowed to walk there
         return value.equals("-") || value.equals("+") || value.equals("#") || value.equals("*") || value.equals("]") || value.equals("&");
     }
     private String graphicAtMove(int direction) {
