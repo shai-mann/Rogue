@@ -18,7 +18,6 @@ public class GravePane extends JComponent {
     }
     private void setDefaults() {
         textArea.setEditable(false);
-        Helper.setSize(panel, Helper.getScreenSize());
         textArea.setBackground(Helper.BACKGROUND_COLOR);
         textArea.setForeground(Helper.FOREGROUND_COLOR);
         textArea.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 30));
@@ -27,7 +26,7 @@ public class GravePane extends JComponent {
         addLine("   |  R  I  P  |");
         addLine("   |           |");
         addLine("   |   score   |");
-        addLine("   |     3     |");
+        addLine(scoreLine());
         addLine("   |           |");
         addLine(" ^^^^^^^^^^^^^^^^^");
 
@@ -35,5 +34,17 @@ public class GravePane extends JComponent {
     }
     private void addLine(String text) {
         textArea.setText(textArea.getText() + "\n" + text);
+    }
+    private String scoreLine() {
+        String string = "   |";
+        for (int i = 0; i < (6 - GameManager.getPlayer().getExperienceDigitsNumber() / 2) - 1; i++) {
+            string = string.concat(" ");
+        }
+        string = string.concat(String.valueOf(GameManager.getPlayer().getExperience()));
+        for (int i = 0; i < (6 - GameManager.getPlayer().getExperienceDigitsNumber() / 2) - 1; i++) {
+            string = string.concat(" ");
+        }
+        string = string.concat("|");
+        return string;
     }
 }
