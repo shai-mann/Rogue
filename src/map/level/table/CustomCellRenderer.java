@@ -1,4 +1,4 @@
-package map;
+package map.level.table;
 import helper.Helper;
 import javax.swing.table.DefaultTableCellRenderer;
 

@@ -50,7 +50,7 @@ public class Room {
             int[] yPoints1 = {room.topLeft.y, room.topLeft.y,
                     room.topLeft.y + room.getSize().height, room.topLeft.y + room.getSize().height};
             Polygon temp = new Polygon(xPoints1, yPoints1, 4);
-            if (temp.intersects(tempBounds.getBounds()) || tempBounds.intersects(temp.getBounds())) {
+            if (temp.intersects(tempBounds.getBounds())) {
                 return false;
             }
         }

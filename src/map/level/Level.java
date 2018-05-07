@@ -1,12 +1,14 @@
 package map.level;
 
+import entity.Staircase;
 import entity.item.Item;
-import entity.monster.Monster;
+import entity.livingentity.Monster;
+import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
-import map.CustomCellRenderer;
-import map.CustomRoomTable;
-import map.RoomTableModel;
+import map.level.table.CustomCellRenderer;
+import map.level.table.CustomRoomTable;
+import map.level.table.RoomTableModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,31 +23,41 @@ public class Level extends JComponent {
     * Generates 5-8 rooms per level
     * Generates Passageways connecting all rooms to all other rooms
     * Generates Treasure and monsters in each of the rooms
-    * Generates the Player in the starting room with the staircase up one level in the same room
-    * Generates staircase going down to next level (except on last level)
+    * Generates the Player in the starting table with the descendingStaircase up one level in the same table
+    * Generates descendingStaircase going down to next level (except on last level)
     * Level size is 69 * 40
      */
 
     private JPanel panel;
     private CustomRoomTable table;
     private Room startingRoom;
+    private Staircase descendingStaircase;
+    private Staircase ascendingStaircase;
     private int levelNumber = 0;
 
     private static Level level;
 
     public Level() {
         setDefaults();
-        newLevel();
+        newLevel(Player.DOWN);
     }
-    public void newLevel() {
-        generateLevel();
-        spawnEntities();
+    public void newLevel(int direction) {
+        generateLevel(direction);
+        spawnEntities(direction);
     }
-    private void generateLevel() {
-        levelNumber++;
-
+    private void generateLevel(int direction) {
+        if (levelNumber != 0 && direction == Player.DOWN) {
+            resetTable();
+        }
+        if (direction == Player.DOWN) {
+            levelNumber++;
+        } else {
+            levelNumber--;
+        }
         generateRooms();
         startingRoom = generatePassageways();
+        panel.revalidate();
+        panel.repaint();
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
@@ -67,8 +79,8 @@ public class Level extends JComponent {
     }
     private Room generatePassageways() {
         /*
-        * 1) Get closest unconnected room to top left
-        * 2) Get closest connected room to that room
+        * 1) Get closest unconnected table to top left
+        * 2) Get closest connected table to that table
         * 3) Connect those rooms
         * 4) Repeat until there are no unconnected rooms
          */
@@ -95,9 +107,16 @@ public class Level extends JComponent {
 
     // ENTITY SPAWNING METHODS
 
-    public void spawnEntities() {
+    public void spawnEntities(int direction) {
+        Monster.updateAvailableMonsters();
         Monster.spawnMonsters();
         Item.spawnItems();
+        if (levelNumber != 26 && direction == Player.DOWN) {
+            descendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);
+        }
+        if (levelNumber != 1 && direction == Player.UP) {
+            ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
+        }
     }
 
     // ROOM GENERATION HELPER METHODS
@@ -112,9 +131,9 @@ public class Level extends JComponent {
     }
     private boolean checkValidPoint(Point p) {
         try {
-            return GameManager.getTable().getColumnCount() - p.x > 5 &&
-                    GameManager.getTable().getRowCount() - p.y > 5 &&
-                    p.x > 5 && p.y > 5;
+            return GameManager.getTable().getColumnCount() - p.x > 3 &&
+                    GameManager.getTable().getRowCount() - p.y > 3 &&
+                    p.x > 3 && p.y > 3;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         }
@@ -161,8 +180,7 @@ public class Level extends JComponent {
         level = this;
     }
     private void createUIComponents() {
-        RoomTableModel model = createTableModel();
-        table = new CustomRoomTable(model);
+        table = new CustomRoomTable(createTableModel());
 
         table.setFocusable(false);
         table.setRowSelectionAllowed(false);
@@ -192,6 +210,18 @@ public class Level extends JComponent {
 
         return rowValueList;
     }
+    private void resetTable() {
+        Monster.getMonsters().clear();
+        Item.items.clear();
+        Room.rooms.clear();
+        descendingStaircase = null;
+        ascendingStaircase = null;
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                table.setValueAt("", i, j);
+            }
+        }
+    }
 
     // GETTER METHODS
 
@@ -206,5 +236,12 @@ public class Level extends JComponent {
     }
     public int getLevelNumber() {
         return levelNumber;
+    }
+    public Staircase getStaircase() {
+        if (descendingStaircase == null) {
+            return ascendingStaircase;
+        } else {
+            return descendingStaircase;
+        }
     }
 }

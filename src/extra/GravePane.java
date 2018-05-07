@@ -15,6 +15,7 @@ public class GravePane extends JComponent {
         GameManager.replaceContentPane(panel);
 
         setDefaults();
+        GameManager.getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     private void setDefaults() {
         textArea.setEditable(false);

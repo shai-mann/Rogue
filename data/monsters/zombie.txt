@@ -7,4 +7,7 @@ speed:2
 movementType:track
 attackType:hit
 health:2d8
-level:1-5
+range:5
+experience:100
+treasure:40
+level:2-5

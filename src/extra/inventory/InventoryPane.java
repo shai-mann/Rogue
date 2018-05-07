@@ -73,4 +73,9 @@ public class InventoryPane {
                 Helper.FOREGROUND_COLOR)
         );
     }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    }
 }

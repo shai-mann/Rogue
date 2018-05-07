@@ -1,7 +1,6 @@
 package map;
 
-import com.sun.prism.paint.Color;
-import entity.monster.Monster;
+import entity.livingentity.Monster;
 import extra.MessageBar;
 import extra.StatusBar;
 import helper.Helper;
@@ -9,7 +8,6 @@ import main.GameManager;
 import map.level.Level;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 public class Map {
     private StatusBar statusBar;

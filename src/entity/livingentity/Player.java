@@ -1,5 +1,8 @@
-package entity;
+package entity.livingentity;
 
+import entity.Entity;
+import entity.Status;
+import map.level.Level;
 import map.level.Room;
 
 import java.awt.*;
@@ -7,21 +10,17 @@ import entity.item.Armor;
 import entity.item.Gold;
 import entity.item.Item;
 import entity.item.Ring;
-import entity.monster.Monster;
 import extra.GravePane;
 import extra.inventory.InventoryPane;
 import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.Map;
-import map.level.Room;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Player extends Entity implements KeyListener {
 
@@ -55,30 +54,46 @@ public class Player extends Entity implements KeyListener {
         if (checkDeath()) {
             return;
         }
+        if (e.getKeyCode() == KeyEvent.VK_I) {
+            openOrCloseInventory();
+        }
         boolean moved = false;
-        if (!status.isParalyzed() && !status.isConfused()) {
+        if (!status.isParalyzed() && !status.isConfused() && !showInventory) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_W:
                 case KeyEvent.VK_UP:
                     moved = move(UP);
+                    if (!moved) {
+                        hitMonster(UP);
+                    }
                     break;
                 case KeyEvent.VK_S:
                 case KeyEvent.VK_DOWN:
                     moved = move(DOWN);
+                    if (!moved) {
+                        hitMonster(DOWN);
+                    }
                     break;
                 case KeyEvent.VK_A:
                 case KeyEvent.VK_LEFT:
                     moved = move(LEFT);
+                    if (!moved) {
+                        hitMonster(LEFT);
+                    }
                     break;
                 case KeyEvent.VK_D:
                 case KeyEvent.VK_RIGHT:
                     moved = move(RIGHT);
+                    if (!moved) {
+                        hitMonster(RIGHT);
+                    }
                     break;
+                case KeyEvent.VK_ENTER:
+                    if (overWrittenGraphic.equals("%")) {
+                        changeLevel(Level.getLevel().getStaircase().getDirection());
+                    }
                 default:
                     break;
-            }
-            if (e.getKeyCode() == KeyEvent.VK_I) {
-                openOrCloseInventory();
             }
         }
         if (status.isConfused() || status.isDrunk()) {
@@ -86,8 +101,6 @@ public class Player extends Entity implements KeyListener {
         }
         if (moved) {
             map.update();
-        } else if (e.getKeyCode() != KeyEvent.VK_I){
-            hitMonster();
         }
         status.update();
     }
@@ -105,10 +118,10 @@ public class Player extends Entity implements KeyListener {
             GameManager.replaceContentPane((JPanel) savedContentPane);
         }
     }
-    private void hitMonster() {
+    private void hitMonster(int direction) {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {
             Monster monster = Monster.getMonsters().get(i);
-            if (isNextTo(monster)) {
+            if (fakeMove(direction).getX() == monster.getXPos() && fakeMove(direction).getY() == monster.getYPos()) {
                 double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
                 if (Helper.random.nextDouble() <= hitChance) {
                     Status monsterStatus = monster.getStatus();
@@ -127,6 +140,10 @@ public class Player extends Entity implements KeyListener {
     private boolean moveRandom() {
         int[] directions = {UP,DOWN,RIGHT,LEFT};
         return move(directions[Helper.random.nextInt(directions.length)]);
+    }
+    private void changeLevel(int direction) {
+        Level.getLevel().newLevel(direction);
+        setLocation(Level.getLevel().getStartingRoom());
     }
 
     // UPDATE METHODS

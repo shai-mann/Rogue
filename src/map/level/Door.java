@@ -13,7 +13,7 @@ public class Door extends Point {
         super(p);
         this.secret = secret;
         this.overWrittenGraphic = overWrittenGraphic;
-        if (getSecret()) {
+        if (isSecret()) {
             GameManager.getTable().setValueAt(overWrittenGraphic, p.y, p.x);
         }
         // TODO: Figure out why secret doors aren't working
@@ -21,7 +21,7 @@ public class Door extends Point {
 
     // GETTER METHODS
 
-    public boolean getSecret() {
+    public boolean isSecret() {
         return secret;
     }
     public String getOverWrittenGraphic() {

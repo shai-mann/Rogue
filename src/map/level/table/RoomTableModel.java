@@ -1,4 +1,4 @@
-package map;
+package map.level.table;
 
 import javax.swing.table.DefaultTableModel;
 

@@ -1,12 +1,9 @@
-package entity.monster;
+package entity.livingentity;
 
 import entity.Entity;
-import entity.Player;
 import entity.Status;
 import entity.item.Gold;
 import entity.item.Item;
-import entity.item.Ring;
-import entity.item.Wand;
 import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -21,9 +18,9 @@ import java.util.Random;
 
 public class Monster extends Entity {
 
-    static ArrayList<Monster> monsters = new ArrayList<>();
-    static File[] files;
-    static ArrayList<File> availableFiles = new ArrayList<>();
+    private static ArrayList<Monster> monsters = new ArrayList<>();
+    private static File[] files;
+    private static ArrayList<File> availableFiles = new ArrayList<>();
 
     public static int DEFAULT_HEALTH = 20;
 
@@ -111,7 +108,8 @@ public class Monster extends Entity {
                 this.hitDamage = parseDiceNotation(parsed[1]);
                 break;
             case "critdamage":
-                this.critDamage = Double.parseDouble(parsed[1]);
+                this.critDamage = parseDiceNotation(parsed[1]);
+                break;
             case "speed":
                 this.speed = Integer.parseInt(parsed[1]);
                 break;
@@ -135,6 +133,7 @@ public class Monster extends Entity {
                 break;
             case "experience":
                 this.experience = Integer.parseInt(parsed[1]);
+                break;
             case "treasure":
                 this.treasureChance = Integer.parseInt(parsed[1]) / 100;
                 break;
@@ -409,7 +408,7 @@ public class Monster extends Entity {
         move(directions[new Random().nextInt(directions.length)]);
         moveCounter = 1;
     }
-    private void die() {
+    public void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         GameManager.getPlayer().addExperience(experience);
 
@@ -450,7 +449,8 @@ public class Monster extends Entity {
 
     // STATIC METHODS
 
-    private static void updateAvailableMonsters() {
+    public static void updateAvailableMonsters() {
+        availableFiles.clear();
         for (File file : files) {
             try {
                 if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
@@ -498,7 +498,6 @@ public class Monster extends Entity {
     }
     public static void loadCustomMonsters() {
         files = new File("data/monsters/").listFiles();
-        updateAvailableMonsters();
     }
     public static void update() {
         for (int i = 0; i < monsters.size(); i++) {

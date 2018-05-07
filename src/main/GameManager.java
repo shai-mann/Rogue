@@ -1,10 +1,10 @@
 package main;
 
-import entity.Player;
+import entity.livingentity.Player;
 import entity.item.Item;
-import entity.monster.Monster;
+import entity.livingentity.Monster;
 import helper.Helper;
-import map.CustomRoomTable;
+import map.level.table.CustomRoomTable;
 import map.Map;
 import map.level.Level;
 
@@ -19,7 +19,7 @@ public class GameManager {
     // TODO: Current bugs are:
     // Secret doors don't hide the doorway
     // Doorways can still be next to each other or inside of each other
-    // Passageways sometimes still don't work
+    // Passageways still bug out (check screenshots)
 
     public static void main(String[] args) {
         initFrame();

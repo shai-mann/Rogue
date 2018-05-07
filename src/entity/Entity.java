@@ -1,7 +1,6 @@
 package entity;
 
-import entity.monster.Monster;
-import helper.Helper;
+import entity.livingentity.Monster;
 import main.GameManager;
 
 import java.awt.*;
@@ -54,14 +53,14 @@ public class Entity {
     private boolean checkValidMove(int direction) {
         //checks that the entity is making a valid move
         String value = (graphicAtMove(direction));
-//        for (int i = 0; i < Monster.getMonsters().size(); i++) {
-//            Monster monster = Monster.getMonsters().get(i);
-//            if (fakeMove(direction).getY() == monster.getYPos() && fakeMove(direction).getX() == monster.getXPos()) {
-//                return false;
-//            }
-//        }
-        // TODO: implement so if monster is invisible, then it will not be allowed to walk there
-        return value.equals("-") || value.equals("+") || value.equals("#") || value.equals("*") || value.equals("]") || value.equals("&");
+        for (int i = 0; i < Monster.getMonsters().size(); i++) {
+            Monster monster = Monster.getMonsters().get(i);
+            if (fakeMove(direction).getY() == monster.getYPos() && fakeMove(direction).getX() == monster.getXPos()) {
+                return false;
+            }
+        }
+        return value.equals("-") || value.equals("+") || value.equals("#") ||
+                value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%");
     }
     private String graphicAtMove(int direction) {
         Object value;
@@ -81,19 +80,19 @@ public class Entity {
         }
         return (String) value;
     }
-    private Point fakeMove(int direction) {
+    protected Point fakeMove(int direction) {
         Point point;
         if (direction == UP) {
-            point = new Point(yPos - 1, xPos);
+            point = new Point(xPos, yPos - 1);
         }
         else if (direction == DOWN) {
-            point = new Point(yPos + 1, xPos);
+            point = new Point(xPos, yPos + 1);
         }
         else if (direction == RIGHT) {
-            point = new Point(yPos, xPos + 1);
+            point = new Point(xPos + 1, yPos);
         }
         else if (direction == LEFT) {
-            point = new Point(yPos, xPos - 1);
+            point = new Point(xPos - 1, yPos);
         } else {
             point = new Point();
         }
@@ -117,7 +116,7 @@ public class Entity {
         return yPos;
     }
     public void setLocation(Point p) {
-        GameManager.getTable().setValueAt(overWrittenGraphic, xPos, yPos);
+        GameManager.getTable().setValueAt(overWrittenGraphic, yPos, xPos);
 
         xPos = p.x;
         yPos = p.y;

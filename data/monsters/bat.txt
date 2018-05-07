@@ -1,12 +1,13 @@
 name:Bat
 graphic:B
+hitChance:0.1
 critChance:0.01
 hitDamage:1d2
 speed:1
 movementType:wander
 attackType:hit
-health:2d8
+health:2d1
 AC:7
 experience:2
 treasure:0
-level:1-3,20-22
+level:1,4-10

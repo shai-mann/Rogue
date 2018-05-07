@@ -1,6 +1,6 @@
 package extra;
 
-import entity.monster.Monster;
+import entity.livingentity.Monster;
 import helper.Helper;
 import main.GameManager;
 
