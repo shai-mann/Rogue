@@ -16,7 +16,6 @@ public class BeginPane extends JComponent {
     private JButton newGameButton;
     private JButton loadGameButton;
     private JButton settingsButton;
-    private JPanel innerPanel;
     private JPanel imagePanel;
 
     public BeginPane() {
@@ -25,7 +24,7 @@ public class BeginPane extends JComponent {
         GameManager.replaceContentPane(panel);
     }
     private void setDefaults() {
-        innerPanel.setBackground(Helper.BACKGROUND_COLOR);
+        imagePanel.setBackground(Helper.BACKGROUND_COLOR);
         Helper.setSize(panel, Helper.getScreenSize());
 
         newGameButton.setBackground(Helper.BACKGROUND_COLOR);
@@ -58,6 +57,6 @@ public class BeginPane extends JComponent {
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        imagePanel = new JPanel();
+        imagePanel = new ImagePanel();
     }
 }
