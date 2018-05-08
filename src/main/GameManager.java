@@ -3,9 +3,9 @@ package main;
 import entity.livingentity.Player;
 import entity.item.Item;
 import entity.livingentity.Monster;
+import extra.BeginPane;
 import helper.Helper;
 import map.level.table.CustomRoomTable;
-import map.Map;
 import map.level.Level;
 
 import javax.swing.*;
@@ -13,22 +13,16 @@ import javax.swing.*;
 public class GameManager {
 
     private static JFrame frame;
-    private static Map map;
     private static Player player;
 
     // TODO: Current bugs are:
-    // Secret doors don't hide the doorway
     // Doorways can still be next to each other or inside of each other
-    // Passageways still bug out (check screenshots)
 
     public static void main(String[] args) {
         initFrame();
         runStaticSetupMethods();
 
-        map = new Map();
-        player = new Player(Level.getLevel().getStartingRoom());
-
-        runStaticSetupMethods();
+        new BeginPane();
     }
 
     // HELPER METHODS
@@ -62,7 +56,7 @@ public class GameManager {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    // GETTER METHODS
+    // GETTER AND SETTER METHODS
 
     public static CustomRoomTable getTable() {
         return Level.getLevel().getTable();
@@ -72,6 +66,9 @@ public class GameManager {
     }
     public static Player getPlayer() {
         return player;
+    }
+    public static void createPlayer() {
+        player = new Player(Level.getLevel().getStartingRoom());
     }
 
 }
