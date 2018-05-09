@@ -1,7 +1,9 @@
 package entity.livingentity;
 
 import entity.Entity;
+import entity.KeyBinds;
 import entity.Status;
+import map.level.Door;
 import map.level.Level;
 import map.level.Room;
 
@@ -37,11 +39,16 @@ public class Player extends Entity implements KeyListener {
     private int gold = 0;
     private int experience = 0;
 
+    private int maxHealth = Monster.DEFAULT_HEALTH;
+    private int level = 1;
+    private int[] levelingThresholds = {10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
+
     private ArrayList<Item> inventory = new ArrayList<>();
 
     public Player(Room room) {
         super("@", 0, 0);
         setLocation(room);
+        GameManager.getTable().setValueAt("", 0, 0);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
         status.setAc(8);
@@ -54,52 +61,44 @@ public class Player extends Entity implements KeyListener {
         if (checkDeath()) {
             return;
         }
-        if (e.getKeyCode() == KeyEvent.VK_I) {
-            openOrCloseInventory();
-        }
         boolean moved = false;
+        if (e.getKeyCode() == KeyBinds.INVENTORY) {
+            toggleInventory();
+        }
         if (!status.isParalyzed() && !status.isConfused() && !showInventory) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_W:
-                case KeyEvent.VK_UP:
-                    moved = move(UP);
-                    if (!moved) {
-                        hitMonster(UP);
-                    }
-                    break;
-                case KeyEvent.VK_S:
-                case KeyEvent.VK_DOWN:
-                    moved = move(DOWN);
-                    if (!moved) {
-                        hitMonster(DOWN);
-                    }
-                    break;
-                case KeyEvent.VK_A:
-                case KeyEvent.VK_LEFT:
-                    moved = move(LEFT);
-                    if (!moved) {
-                        hitMonster(LEFT);
-                    }
-                    break;
-                case KeyEvent.VK_D:
-                case KeyEvent.VK_RIGHT:
-                    moved = move(RIGHT);
-                    if (!moved) {
-                        hitMonster(RIGHT);
-                    }
-                    break;
-                case KeyEvent.VK_ENTER:
-                    if (overWrittenGraphic.equals("%")) {
-                        changeLevel(Level.getLevel().getStaircase().getDirection());
-                    }
-                default:
-                    break;
+            if(e.getKeyCode() == KeyBinds.MOVE_DOWN || e.getKeyCode() == KeyBinds.MOVE_DOWN_ALT) {
+                moved = move(DOWN);
+                if (!moved) {
+                    hitMonster(DOWN);
+                }
+            } else if (e.getKeyCode() == KeyBinds.MOVE_UP || e.getKeyCode() == KeyBinds.MOVE_UP_ALT) {
+                moved = move(UP);
+                if (!moved) {
+                    hitMonster(UP);
+                }
+            } else if (e.getKeyCode() == KeyBinds.MOVE_RIGHT || e.getKeyCode() == KeyBinds.MOVE_RIGHT_ALT) {
+                moved = move(RIGHT);
+                if (!moved) {
+                    hitMonster(RIGHT);
+                }
+            } else if (e.getKeyCode() == KeyBinds.MOVE_LEFT || e.getKeyCode() == KeyBinds.MOVE_LEFT_ALT) {
+                moved = move(LEFT);
+                if (!moved) {
+                    hitMonster(LEFT);
+                }
+            } else if (e.getKeyCode() == KeyBinds.USE_STAIRCASE) {
+                if (overWrittenGraphic.equals("%")) {
+                    changeLevel(Level.getLevel().getStaircase().getDirection());
+                }
+            } else if (e.getKeyCode() == KeyBinds.SEARCH) {
+                moved = true;
+                search();
             }
         }
         if (status.isConfused() || status.isDrunk()) {
             moved = moveRandom();
         }
-        if (moved) {
+        if (moved || getStatus().isParalyzed()) {
             map.update();
         }
         status.update();
@@ -109,7 +108,21 @@ public class Player extends Entity implements KeyListener {
 
     // KEY LISTENER HELPER METHODS
 
-    private void openOrCloseInventory() {
+    private void search() {
+        for (Door door : Door.getDoors()) {
+            if (door.isSecret() && isNextTo(door)) {
+                if (Helper.random.nextInt(99) + 1 >= 75) {
+                    door.reveal();
+                }
+            }
+        }
+    }
+    private boolean isNextTo(Point p) {
+        return
+                ((p.getX() + 1 == getXPos() || p.getX() - 1 == getXPos()) && p.getY() == getYPos()) ||
+                        ((p.getY() + 1 == getYPos() || p.getY() - 1 == getYPos()) && p.getX() == getXPos());
+    }
+    private void toggleInventory() {
         showInventory = !showInventory;
         if (showInventory) {
             savedContentPane = GameManager.getFrame().getContentPane();
@@ -131,7 +144,10 @@ public class Player extends Entity implements KeyListener {
                         MessageBar.addMessage("You hit the " + monster.getName());
                     }
                     if (monster.getStatus().isSleeping()) {
-                        monster.getStatus().setSleeping(0);
+                        monster.getStatus().setSleeping(false);
+                        if (monster.getHiddenChar() != null) {
+                            GameManager.getTable().setValueAt(monster.getHiddenChar(), monster.getYPos(), monster.getXPos());
+                        }
                     }
                 }
             }
@@ -151,12 +167,17 @@ public class Player extends Entity implements KeyListener {
     public void update() {
         if (checkDeath()) {
             new GravePane();
+        } else if (checkLevelUp()) {
+            levelUp();
         }
         checkToPickUpItem();
     }
     private void checkToPickUpItem() {
         if (overWrittenGraphic.equals("*")) {
             Gold foundGold = (Gold) Item.getItemAt(getXPos(), getYPos());
+            if (foundGold == null) {
+                return;
+            }
 
             overWrittenGraphic = foundGold.overWrittenGraphic;
             gold += foundGold.getAmount();
@@ -165,6 +186,9 @@ public class Player extends Entity implements KeyListener {
             Item.items.remove(foundGold);
         } else if (overWrittenGraphic.equals("]") || overWrittenGraphic.equals("&")) {
             Item foundItem = Item.getItemAt(getXPos(), getYPos());
+            if (foundItem == null) {
+                return;
+            }
 
             overWrittenGraphic = foundItem.overWrittenGraphic;
 
@@ -172,6 +196,16 @@ public class Player extends Entity implements KeyListener {
             MessageBar.addMessage("You picked up " + foundItem.getName());
             Item.items.remove(foundItem);
         }
+    }
+    private boolean checkLevelUp() {
+        return experience >= levelingThresholds[level];
+    }
+    private void levelUp() {
+        level++;
+        maxHealth *= 1.1;
+        // increase maxDamage
+
+        MessageBar.addMessage("Welcome to level " + level);
     }
     private boolean checkDeath() {
         return getHealth() <= 0;
@@ -197,9 +231,15 @@ public class Player extends Entity implements KeyListener {
     public int getExperience() {
         return experience;
     }
-    public int getDamage() {
+    private int getDamage() {
         // TODO: when swords are added, make it based on damage of heldItem
         return getStatus().isWeakened() ? 1 : 2;
+    }
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+    public int getLevelThreshold() {
+        return levelingThresholds[level];
     }
 
     // SETTERS
@@ -208,7 +248,13 @@ public class Player extends Entity implements KeyListener {
         this.experience += experience;
     }
     public void stealGold(int amount) {
-        this.gold -= gold;
+        this.gold -= amount;
+    }
+    public void drainMaxHealth(int amount) {
+        this.maxHealth -= amount;
+        if (health < maxHealth) {
+            health = maxHealth;
+        }
     }
     private void setLocation(Room room) {
         super.setLocation(room.getRandomPointInBounds());

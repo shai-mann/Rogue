@@ -1,6 +1,7 @@
 package extra;
 
 import entity.livingentity.Monster;
+import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
 
@@ -25,17 +26,19 @@ public class StatusBar extends JComponent {
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.05)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.05)));
 
-        healthField.setText("Health: " + Monster.DEFAULT_HEALTH);
+        healthField.setText("Health: " + Monster.DEFAULT_HEALTH + "(" + Monster.DEFAULT_HEALTH + ")");
         healthField.setForeground(Helper.FOREGROUND_COLOR);
         goldField.setText("Gold: 0");
         goldField.setForeground(Helper.FOREGROUND_COLOR);
-        experienceLabel.setText("Experience: 0");
+        experienceLabel.setText("Experience: 0(10)");
         experienceLabel.setForeground(Helper.FOREGROUND_COLOR);
     }
     public void updateStatusBar() {
-        healthField.setText("Health: " + GameManager.getPlayer().getHealth());
+        healthField.setText("Health: " + GameManager.getPlayer().getHealth() +
+                "(" + GameManager.getPlayer().getMaxHealth() + ")");
         goldField.setText("Gold: " + GameManager.getPlayer().getGold());
-        experienceLabel.setText("Experience: " + GameManager.getPlayer().getExperience());
+        experienceLabel.setText("Experience: " + GameManager.getPlayer().getExperience() +
+                "(" + GameManager.getPlayer().getLevelThreshold() + ")");
         panel.revalidate();
         panel.repaint();
     }

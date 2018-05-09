@@ -3,10 +3,8 @@ package extra;
 import helper.Helper;
 import main.GameManager;
 import map.Map;
-import sun.awt.image.ToolkitImage;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -51,6 +49,12 @@ public class BeginPane extends JComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: add code to load games
+            }
+        });
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

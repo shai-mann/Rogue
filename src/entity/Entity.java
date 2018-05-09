@@ -115,9 +115,7 @@ public class Entity {
     public int getYPos() {
         return yPos;
     }
-    public void setLocation(Point p) {
-        GameManager.getTable().setValueAt(overWrittenGraphic, yPos, xPos);
-
+    protected void setLocation(Point p) {
         xPos = p.x;
         yPos = p.y;
         overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);

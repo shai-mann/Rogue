@@ -20,7 +20,7 @@ public class MessageBar extends JComponent {
         messageBar = this;
         setDefaults();
     }
-    public void setDefaults() {
+    private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.2)));

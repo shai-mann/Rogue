@@ -1,5 +1,6 @@
 package entity.livingentity;
 
+import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.Status;
 import entity.item.Gold;
@@ -39,7 +40,7 @@ public class Monster extends Entity {
         STEAL_ITEM
     }
 
-    public String name = "<Default>";
+    private String name = "<Default>";
     private int speed = 1;
     private int moveCounter = 1;
     private int range = 10;
@@ -50,13 +51,14 @@ public class Monster extends Entity {
     private boolean invisible = false;
     private int experience = 2;
     private double treasureChance = 0.3;
-    private boolean startSleeping = true;
+    private String hiddenChar;
 
     private Item stolenItem = null;
 
     private Status status;
 
     private movementTypes movementType = movementTypes.TRACK;
+    private movementTypes secondaryMovementType = movementTypes.WANDER;
     private attackTypes attackType = attackTypes.HIT;
 
     public Monster(String dataFilePath, int x, int y) {
@@ -122,6 +124,9 @@ public class Monster extends Entity {
             case "movementtype":
                 this.movementType = movementTypeFromString(parsed[1]);
                 break;
+            case "secondarymovementtype":
+                this.secondaryMovementType = movementTypeFromString(parsed[1]);
+                break;
             case "attacktype":
                 this.attackType = attackTypeFromString(parsed[1]);
                 break;
@@ -149,10 +154,14 @@ public class Monster extends Entity {
             case "track":
                 return movementTypes.TRACK;
             case "sleep":
-                startSleeping = true;
+                getStatus().setSleeping(true);
                 return movementTypes.SLEEP;
             case "mimic":
-                startSleeping = true;
+                getStatus().setSleeping(true);
+                hiddenChar = graphic;
+                String[] chars = {"\\", "&", "*", "]", "%"};
+                graphic = (String) Helper.getRandom(new ArrayList(Arrays.asList(chars)));
+                GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
                 return movementTypes.MIMIC;
             case "goldtracking":
             case "gold tracking":
@@ -181,8 +190,40 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
-        // TODO: Add rust armor, trap attack,
-        // TODO: steal gold, steal (magic) item, weakness, drain max HP, drain XP (levels loss if go below thresh-hold), mimic (imitate object)
+        // TODO: steal (magic) item, drain max HP, drain XP (levels loss if go below thresh-hold)
+        move(null);
+        status.update();
+        if (status.getHealth() <= 0) {
+            this.die();
+        }
+    }
+
+    // MONSTER MOVEMENT
+
+    private void move(@Nullable movementTypes type) {
+        if (type != null) {
+            switch (type) {
+                case TRACK:
+                    trackMovement();
+                    break;
+                case WANDER:
+                    wanderMovement();
+                    break;
+                case STILL:
+                    stillMovement();
+                    break;
+                case GOLD_TRACK:
+                    goldTrackMovement();
+                    break;
+                case SLEEP:
+                    sleepMovement();
+                    break;
+                case MIMIC:
+                    mimicMovement();
+                    break;
+            }
+            return;
+        }
         switch (movementType) {
             case TRACK:
                 trackMovement();
@@ -203,14 +244,7 @@ public class Monster extends Entity {
                 mimicMovement();
                 break;
         }
-        status.update();
-        if (status.getHealth() <= 0) {
-            this.die();
-        }
     }
-
-    // MONSTER MOVEMENT
-
     private void trackMovement() {
         Player player = GameManager.getPlayer();
 
@@ -276,30 +310,29 @@ public class Monster extends Entity {
         }
     }
     private void sleepMovement() {
-        if (startSleeping) {
-            getStatus().setSleeping(1);
-        } else {
-            trackMovement();
+        if (!getStatus().isSleeping()) {
+            move(secondaryMovementType);
         }
     }
     private void mimicMovement() {
-        if (startSleeping) {
-            this.getStatus().setSleeping(1);
-            this.overWrittenGraphic = graphic;
-
-            String[] chars = {"\\", "&", "*", "^", "]"};
-            graphic = (String) Helper.getRandom((ArrayList<String>) Arrays.asList(chars));
+        if (!getStatus().isSleeping()) {
+            move(secondaryMovementType);
+            GameManager.getTable().setValueAt(hiddenChar, getYPos(), getXPos());
+        } else {
+            GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
         }
     }
 
     // MONSTER ATTACK
-
+    //TODO: make all attacks have similar chances to hit as the hitAttack();
+    // TODO: reformat damage to be randomized with hitdamaage as the maximum damage to deal and critdamage as max critical hit damage
     private void attack() {
         switch (attackType) {
             case HIT:
                 hitAttack();
                 break;
             case PARALYZE:
+            case TRAP:
                 paralyzeAttack();
                 break;
             case CONFUSE:
@@ -316,6 +349,15 @@ public class Monster extends Entity {
                 break;
             case STEAL_ITEM:
                 stealItemAttack();
+                break;
+            case RUST:
+                rustAttack();
+                break;
+            case XP_DRAIN:
+                xpDrainAttack();
+                break;
+            case HP_DRAIN:
+                healthDrainAttack();
                 break;
         }
     }
@@ -342,7 +384,7 @@ public class Monster extends Entity {
         if (!player.getStatus().isParalyzed()) {
             GameManager.getPlayer().getStatus().setParalyzed(3);
         }
-        MessageBar.addMessage("You are paralyzed");
+        MessageBar.addMessage("You can't move");
     }
     private void confuseAttack() {
         GameManager.getPlayer().getStatus().setConfused(Helper.random.nextInt(11) + 10);
@@ -370,6 +412,17 @@ public class Monster extends Entity {
         stolenItem = (Item) Helper.getRandom(items);
         GameManager.getPlayer().getInventory().remove(stolenItem);
         MessageBar.addMessage("Your backpack feels lighter");
+    }
+    private void rustAttack() {
+        GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() - 1);
+
+        MessageBar.addMessage("Your armor feels worse");
+    }
+    private void xpDrainAttack() {
+        GameManager.getPlayer().addExperience((int) -(GameManager.getPlayer().getExperience() * 0.9));
+    }
+    private void healthDrainAttack() {
+        GameManager.getPlayer().drainMaxHealth((int) (GameManager.getPlayer().getMaxHealth() * 0.9));
     }
 
     // OVERRIDES
@@ -408,7 +461,7 @@ public class Monster extends Entity {
         move(directions[new Random().nextInt(directions.length)]);
         moveCounter = 1;
     }
-    public void die() {
+    private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         GameManager.getPlayer().addExperience(experience);
 
@@ -429,7 +482,12 @@ public class Monster extends Entity {
     public Status getStatus() {
         return status;
     }
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
+    public String getHiddenChar() {
+        return hiddenChar;
+    }
 
     // MONSTER SPAWNING METHODS
 

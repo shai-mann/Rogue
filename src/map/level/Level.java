@@ -44,6 +44,8 @@ public class Level extends JComponent {
     public void newLevel(int direction) {
         generateLevel(direction);
         spawnEntities(direction);
+        panel.revalidate();
+        panel.repaint();
     }
     private void generateLevel(int direction) {
         if (levelNumber != 0 && direction == Player.DOWN) {
@@ -56,8 +58,6 @@ public class Level extends JComponent {
         }
         generateRooms();
         startingRoom = generatePassageways();
-        panel.revalidate();
-        panel.repaint();
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
@@ -107,7 +107,7 @@ public class Level extends JComponent {
 
     // ENTITY SPAWNING METHODS
 
-    public void spawnEntities(int direction) {
+    private void spawnEntities(int direction) {
         Monster.updateAvailableMonsters();
         Monster.spawnMonsters();
         Item.spawnItems();
@@ -214,6 +214,7 @@ public class Level extends JComponent {
         Monster.getMonsters().clear();
         Item.items.clear();
         Room.rooms.clear();
+        Door.getDoors().clear();
         descendingStaircase = null;
         ascendingStaircase = null;
         for (int i = 0; i < table.getRowCount(); i++) {
