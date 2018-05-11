@@ -1,11 +1,11 @@
-package entity.item;
+package entity.lifelessentity.item;
 
 import com.sun.istack.internal.Nullable;
 import entity.Entity;
+import entity.lifelessentity.item.combat.Armor;
+import extra.MessageBar;
 import helper.Helper;
-import map.level.Level;
 import map.level.Room;
-import sun.plugin.services.WNetscape4BrowserService;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,33 +14,25 @@ public class Item extends Entity {
 
     public static ArrayList<Item> items = new ArrayList<>();
     public String name;
-    public enum itemTypes { ARMOR, GOLD, FOOD, RING, STAFF, WAND }
+    public String hiddenName;
+    public enum itemTypes { ARMOR, GOLD, FOOD, RING, POTION, WAND, SCROLL }
 
     public Item(String g, int x, int y) {
         super(g, x, y);
         items.add(this);
     }
 
+    public void use() {
+
+    }
+    public void identify() {
+        name = hiddenName;
+        MessageBar.addMessage("You identified a " + name);
+    }
+
     // GETTER METHODS
 
-    public static Item getClosestItem(Entity entity, @Nullable ArrayList<Item> i) {
-        Item closestItem = null;
-        if (i != null) {
-            for (Item item : i) {
-                if (closestItem == null || item.getDistanceTo(entity) < closestItem.getDistanceTo(entity)) {
-                    closestItem = item;
-                }
-            }
-        } else {
-            for (Item item : items) {
-                if (closestItem == null || item.getDistanceTo(entity) < closestItem.getDistanceTo(entity)) {
-                    closestItem = item;
-                }
-            }
-        }
-        return closestItem;
-    }
-    public static ArrayList<Item> getAllItemsOfType(itemTypes type) {
+    private static ArrayList<Item> getAllItemsOfType(itemTypes type) {
         ArrayList<Item> itemsList = (ArrayList<Item>) items.clone();
         switch (type) {
             case ARMOR:
@@ -48,14 +40,18 @@ public class Item extends Entity {
                     Item item = itemsList.get(i);
                     if(!(item instanceof Armor)) {
                         itemsList.remove(item);
+                    } else {
+                        i++;
                     }
                 }
                 break;
             case GOLD:
                 for (int i = 0; i < itemsList.size();) {
                     Item item = itemsList.get(i);
-                    if(!(item instanceof Gold)) {
+                    if(!(item instanceof entity.lifelessentity.item.Gold)) {
                         itemsList.remove(item);
+                    } else {
+                        i++;
                     }
                 }
                 break;
@@ -66,16 +62,18 @@ public class Item extends Entity {
                     Item item = itemsList.get(i);
                     if(!(item instanceof Ring)) {
                         itemsList.remove(item);
+                    } else {
+                        i++;
                     }
                 }
-                break;
-            case STAFF:
                 break;
             case WAND:
                 for (int i = 0; i < itemsList.size();) {
                     Item item = itemsList.get(i);
                     if(!(item instanceof Wand)) {
                         itemsList.remove(item);
+                    } else {
+                        i++;
                     }
                 }
                 break;
@@ -105,11 +103,16 @@ public class Item extends Entity {
     public String getName() {
         return name;
     }
+    public String getHiddenName() {
+        return hiddenName;
+    }
 
     // STATIC METHODS
 
     public static void randomizeHiddenNames() {
         Ring.randomizeObfuscatedNames();
+        Wand.randomizeObfuscatedNames();
+        Potion.randomizeObfuscatedNames();
     }
 
     // ITEM SPAWNING METHODS
@@ -117,7 +120,7 @@ public class Item extends Entity {
     public static void spawnItems() {
         // TODO: Update to use Poisson's thingy
         for (Room room : Room.rooms) {
-            if (!room.equals(Level.getLevel().getStartingRoom())) {
+            if (Helper.random.nextInt(99) + 1 >= 45) {
                 spawnItem(room, getRandomItemType());
             }
         }
@@ -133,16 +136,19 @@ public class Item extends Entity {
                 new Gold(location.x, location.y);
                 break;
             case FOOD:
-                // new Food
+                new Food(location.x, location.y);
                 break;
             case RING:
                 new Ring(location.x, location.y);
                 break;
-            case STAFF:
-                // new Staff
-                break;
             case WAND:
-                // new Wand
+                new Wand(location.x, location.y);
+                break;
+            case POTION:
+                new Potion(location.x, location.y);
+                break;
+            case SCROLL:
+                new Scroll(location.x, location.y);
                 break;
         }
     }
@@ -151,7 +157,15 @@ public class Item extends Entity {
             new Armor((Armor) item);
         } else if (item instanceof Ring) {
             new Ring((Ring) item);
-        } // TODO: Add other item types spawning copy
+        } else if (item instanceof Food) {
+            new Food((Food) item);
+        } else if (item instanceof Potion) {
+            new Potion((Potion) item);
+        } else if (item instanceof Scroll) {
+            new Scroll((Scroll) item);
+        } else if (item instanceof Wand) {
+            new Wand((Wand) item);
+        }
     }
     public static void spawnItem(int x, int y, @Nullable itemTypes type, @Nullable Item item) {
         if (item != null) {
@@ -177,9 +191,20 @@ public class Item extends Entity {
                 break;
             case ARMOR:
                 new Armor(p.x, p.y);
+                break;
+            case FOOD:
+                new Food(p.x, p.y);
+                break;
+            case POTION:
+                new Potion(p.x, p.y);
+                break;
+            case SCROLL:
+                new Scroll(p.x, p.y);
+                break;
         }
     }
     private static itemTypes getRandomItemType() {
+        // TODO: make this weighted per item
         return itemTypes.values()[Helper.random.nextInt(itemTypes.values().length)];
     }
 }

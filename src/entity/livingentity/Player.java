@@ -3,15 +3,15 @@ package entity.livingentity;
 import entity.Entity;
 import entity.KeyBinds;
 import entity.Status;
+import entity.lifelessentity.Trap;
+import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.combat.Armor;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
 
 import java.awt.*;
-import entity.item.Armor;
-import entity.item.Gold;
-import entity.item.Item;
-import entity.item.Ring;
+
 import extra.GravePane;
 import extra.inventory.InventoryPane;
 import extra.MessageBar;
@@ -38,10 +38,17 @@ public class Player extends Entity implements KeyListener {
 
     private int gold = 0;
     private int experience = 0;
+    private int stepsTakenSinceMeal = 0;
+    private int hungerLevel = SATISFIED;
+
+    private static final int SATISFIED = 0;
+    private static final int HUNGRY = 1;
+    private static final int STARVING = 2;
+    private static final int WEAK = 3;
 
     private int maxHealth = Monster.DEFAULT_HEALTH;
     private int level = 1;
-    private int[] levelingThresholds = {10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
+    private int[] levelingThresholds = {0, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
 
     private ArrayList<Item> inventory = new ArrayList<>();
 
@@ -116,20 +123,31 @@ public class Player extends Entity implements KeyListener {
                 }
             }
         }
+        for (Trap trap : Trap.getTraps()) {
+            if (trap.isHidden() && isNextTo(new Point(trap.getXPos(), trap.getYPos()))) {
+                trap.reveal();
+            }
+        }
     }
     private boolean isNextTo(Point p) {
         return
                 ((p.getX() + 1 == getXPos() || p.getX() - 1 == getXPos()) && p.getY() == getYPos()) ||
                         ((p.getY() + 1 == getYPos() || p.getY() - 1 == getYPos()) && p.getX() == getXPos());
     }
-    private void toggleInventory() {
+    public InventoryPane toggleInventory() {
         showInventory = !showInventory;
         if (showInventory) {
             savedContentPane = GameManager.getFrame().getContentPane();
-            new InventoryPane();
+            return new InventoryPane();
         } else {
             GameManager.replaceContentPane((JPanel) savedContentPane);
+            return null;
         }
+    }
+    public InventoryPane toggleInventory(String message) {
+        InventoryPane inv = toggleInventory();
+        inv.setBorderTitle(message);
+        return inv;
     }
     private void hitMonster(int direction) {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {
@@ -165,12 +183,34 @@ public class Player extends Entity implements KeyListener {
     // UPDATE METHODS
 
     public void update() {
+        stepsTakenSinceMeal++;
+        hungerLevel = updateHungerStatus();
         if (checkDeath()) {
             new GravePane();
         } else if (checkLevelUp()) {
             levelUp();
         }
         checkToPickUpItem();
+    }
+    private int updateHungerStatus() {
+        if (stepsTakenSinceMeal > 100) {
+            if (stepsTakenSinceMeal > 300) {
+                if (stepsTakenSinceMeal > 550) {
+                    if (stepsTakenSinceMeal > 600) {
+                        health = 0;
+                        return 4;
+                    } else {
+                        return WEAK;
+                    }
+                } else {
+                    return STARVING;
+                }
+            } else {
+                return HUNGRY;
+            }
+        } else {
+            return SATISFIED;
+        }
     }
     private void checkToPickUpItem() {
         if (overWrittenGraphic.equals("*")) {
@@ -184,7 +224,9 @@ public class Player extends Entity implements KeyListener {
 
             MessageBar.addMessage("You picked up " + foundGold.getAmount() + " gold");
             Item.items.remove(foundGold);
-        } else if (overWrittenGraphic.equals("]") || overWrittenGraphic.equals("&")) {
+        } else if (overWrittenGraphic.equals("]") || overWrittenGraphic.equals("&") ||
+                overWrittenGraphic.equals(":") || overWrittenGraphic.equals("?") ||
+                overWrittenGraphic.equals("/") || overWrittenGraphic.equals("!")) {
             Item foundItem = Item.getItemAt(getXPos(), getYPos());
             if (foundItem == null) {
                 return;
@@ -193,7 +235,13 @@ public class Player extends Entity implements KeyListener {
             overWrittenGraphic = foundItem.overWrittenGraphic;
 
             inventory.add(foundItem);
-            MessageBar.addMessage("You picked up " + foundItem.getName());
+            if (foundItem instanceof Food) {
+                MessageBar.addMessage("You found some " + foundItem.getName().toLowerCase());
+            } else if (foundItem instanceof Armor) {
+                MessageBar.addMessage("You found " + foundItem.getName());
+            } else {
+                MessageBar.addMessage("You found a " + foundItem.getName());
+            }
             Item.items.remove(foundItem);
         }
     }
@@ -241,6 +289,26 @@ public class Player extends Entity implements KeyListener {
     public int getLevelThreshold() {
         return levelingThresholds[level];
     }
+    public String getHungerLevel() {
+        switch (hungerLevel) {
+            case 0:
+                return "";
+            case 1:
+                return "hungry";
+            case 2:
+                return "starving";
+            case 3:
+                return "weak";
+            default:
+                return "";
+        }
+    }
+    public Item getHeldItem() {
+        return heldItem;
+    }
+    public Item getWornItem() {
+        return wornItem;
+    }
 
     // SETTERS
 
@@ -256,7 +324,11 @@ public class Player extends Entity implements KeyListener {
             health = maxHealth;
         }
     }
-    private void setLocation(Room room) {
+    public void setLocation(Room room) {
         super.setLocation(room.getRandomPointInBounds());
+    }
+    public void eat() {
+        stepsTakenSinceMeal = 0;
+        hungerLevel = updateHungerStatus();
     }
 }

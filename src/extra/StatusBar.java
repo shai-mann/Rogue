@@ -13,6 +13,7 @@ public class StatusBar extends JComponent {
     private JPanel panel;
     private JLabel goldField;
     private JLabel experienceLabel;
+    private JLabel hungerLabel;
 
     // This class is what takes the player's stats and displays them at the bottom of the screen
     public StatusBar() {
@@ -32,6 +33,7 @@ public class StatusBar extends JComponent {
         goldField.setForeground(Helper.FOREGROUND_COLOR);
         experienceLabel.setText("Experience: 0(10)");
         experienceLabel.setForeground(Helper.FOREGROUND_COLOR);
+        hungerLabel.setForeground(Helper.FOREGROUND_COLOR);
     }
     public void updateStatusBar() {
         healthField.setText("Health: " + GameManager.getPlayer().getHealth() +
@@ -39,6 +41,7 @@ public class StatusBar extends JComponent {
         goldField.setText("Gold: " + GameManager.getPlayer().getGold());
         experienceLabel.setText("Experience: " + GameManager.getPlayer().getExperience() +
                 "(" + GameManager.getPlayer().getLevelThreshold() + ")");
+        hungerLabel.setText(GameManager.getPlayer().getHungerLevel());
         panel.revalidate();
         panel.repaint();
     }

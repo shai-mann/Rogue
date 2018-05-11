@@ -1,12 +1,15 @@
 package extra.inventory;
 
-import entity.item.Item;
+import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.combat.Armor;
 import helper.Helper;
+import main.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class InventoryItem extends JComponent {
@@ -32,7 +35,7 @@ public class InventoryItem extends JComponent {
     }
     public void setButtonsVisible(boolean visible) {
         useButton.setVisible(visible);
-        throwButton.setVisible(visible);
+        //throwButton.setVisible(visible); make this only happen if it is a javelin or shurikens
         dropButton.setVisible(visible);
     }
     public static ArrayList<InventoryItem> getInventoryItems() {
@@ -59,5 +62,30 @@ public class InventoryItem extends JComponent {
         useButton.setVisible(false);
         throwButton.setVisible(false);
         dropButton.setVisible(false);
+
+        setNames();
+
+        addActionListeners();
+    }
+    private void addActionListeners() {
+        useButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameManager.getPlayer().toggleInventory();
+                item.use();
+                GameManager.getFrame().requestFocus();
+            }
+        });
+    }
+    private void setNames() {
+        if (item instanceof Armor || item instanceof Ring) {
+            useButton.setText("Wear");
+        } else if (item instanceof Potion) {
+            useButton.setText("Drink");
+        } else if (item instanceof Food) {
+            useButton.setText("Eat");
+        } else if (item instanceof Scroll) {
+            useButton.setText("Read");
+        }
     }
 }

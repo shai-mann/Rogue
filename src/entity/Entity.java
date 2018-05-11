@@ -60,7 +60,8 @@ public class Entity {
             }
         }
         return value.equals("-") || value.equals("+") || value.equals("#") ||
-                value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%");
+                value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%") ||
+                value.equals("?") || value.equals("/") || value.equals("^") || value.equals(":") || value.equals("!");
     }
     private String graphicAtMove(int direction) {
         Object value;
@@ -97,11 +98,6 @@ public class Entity {
             point = new Point();
         }
         return point;
-    }
-    protected boolean isNextTo(Entity entity) {
-        return
-                ((entity.getXPos() + 1 == getXPos() || entity.getXPos() - 1 == getXPos()) && entity.getYPos() == getYPos()) ||
-                        ((entity.getYPos() + 1 == getYPos() || entity.getYPos() - 1 == getYPos()) && entity.getXPos() == getXPos());
     }
 
     // GETTER/SETTER METHODS

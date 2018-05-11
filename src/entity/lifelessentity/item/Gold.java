@@ -1,4 +1,4 @@
-package entity.item;
+package entity.lifelessentity.item;
 
 import helper.Helper;
 

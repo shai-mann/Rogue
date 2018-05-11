@@ -1,12 +1,14 @@
 package extra.inventory;
 
-import entity.item.Item;
+import entity.lifelessentity.item.Item;
 import helper.Helper;
 import main.GameManager;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -22,6 +24,14 @@ public class InventoryPane {
         addMouseListener();
 
         GameManager.replaceContentPane(panel);
+    }
+    public void setBorderTitle(String borderTitle) {
+        panel.setBorder(new TitledBorder(borderTitle));
+        panel.revalidate();
+        panel.repaint();
+    }
+    public void addMouseListener(MouseAdapter l) {
+        panel.addMouseListener(l);
     }
     private void addInventory() {
         ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
@@ -75,7 +85,6 @@ public class InventoryPane {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     }
 }

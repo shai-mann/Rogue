@@ -1,5 +1,6 @@
-package entity;
+package entity.lifelessentity;
 
+import entity.Entity;
 import entity.livingentity.Player;
 
 import java.awt.*;

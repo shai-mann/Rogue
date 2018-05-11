@@ -1,7 +1,8 @@
 package map.level;
 
-import entity.Staircase;
-import entity.item.Item;
+import entity.Entity;
+import entity.lifelessentity.Staircase;
+import entity.lifelessentity.item.*;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
 import helper.Helper;
@@ -46,6 +47,7 @@ public class Level extends JComponent {
         spawnEntities(direction);
         panel.revalidate();
         panel.repaint();
+        GameManager.getFrame().requestFocus();
     }
     private void generateLevel(int direction) {
         if (levelNumber != 0 && direction == Player.DOWN) {
@@ -117,6 +119,7 @@ public class Level extends JComponent {
         if (levelNumber != 1 && direction == Player.UP) {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
+        new Scroll(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
     }
 
     // ROOM GENERATION HELPER METHODS
@@ -234,6 +237,14 @@ public class Level extends JComponent {
     }
     public Room getStartingRoom() {
         return startingRoom;
+    }
+    public Room getRoom(Entity entity) {
+        for (Room room : Room.rooms) {
+            if (room.getBounds().contains(new Point(entity.getXPos(), entity.getYPos()))) {
+                return room;
+            }
+        }
+        return null;
     }
     public int getLevelNumber() {
         return levelNumber;

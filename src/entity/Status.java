@@ -9,7 +9,8 @@ public class Status {
     private int ac = 10;
     private int weakened = 0;
     private boolean sleeping = false;
-
+    private int sleepTurns = 0;
+    private Effect effects = new Effect();
 
     public Status() {
 
@@ -26,6 +27,9 @@ public class Status {
         }
         if (isWeakened()) {
             this.weakened -= 1;
+        }
+        if (sleepTurns > 0) {
+            sleepTurns--;
         }
     }
     public int getHealth() {
@@ -47,7 +51,10 @@ public class Status {
         return weakened > 0;
     }
     public boolean isSleeping() {
-        return sleeping;
+        return sleeping || sleepTurns > 0;
+    }
+    public Effect getEffects() {
+        return effects;
     }
 
     public void setHealth(int health) {
@@ -74,6 +81,9 @@ public class Status {
     }
     public void setSleeping(boolean sleeping) {
         this.sleeping = sleeping;
+    }
+    public void setSleeping(int turns) {
+        sleepTurns = turns;
     }
 
 }

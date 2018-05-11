@@ -1,7 +1,7 @@
 package main;
 
 import entity.livingentity.Player;
-import entity.item.Item;
+import entity.lifelessentity.item.Item;
 import entity.livingentity.Monster;
 import extra.BeginPane;
 import helper.Helper;

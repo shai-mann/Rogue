@@ -29,4 +29,12 @@ public class Helper {
     public static Object getRandom(ArrayList objects) {
         return objects.get(random.nextInt(objects.size()));
     }
+    public static String createRandomString(int length) {
+        String chars = "abcdefghijklmnopqrstuvwxyz";
+        String string = "";
+        for (int i = 0; i < length; i++) {
+            string = string.concat(String.valueOf(chars.charAt(random.nextInt(chars.length() - 1))));
+        }
+        return string;
+    }
 }

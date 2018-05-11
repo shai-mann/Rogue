@@ -3,8 +3,7 @@ package entity.livingentity;
 import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.Status;
-import entity.item.Gold;
-import entity.item.Item;
+import entity.lifelessentity.item.Item;
 import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -25,7 +24,7 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes { WANDER, TRACK, MIMIC, STILL, GOLD_TRACK, SLEEP }
+    private enum movementTypes { WANDER, TRACK, MIMIC, STILL, SLEEP }
     private enum attackTypes {
         HIT,
         PARALYZE,
@@ -59,6 +58,7 @@ public class Monster extends Entity {
 
     private movementTypes movementType = movementTypes.TRACK;
     private movementTypes secondaryMovementType = movementTypes.WANDER;
+    // Only wander and track can be secondary movement types.
     private attackTypes attackType = attackTypes.HIT;
 
     public Monster(String dataFilePath, int x, int y) {
@@ -159,13 +159,10 @@ public class Monster extends Entity {
             case "mimic":
                 getStatus().setSleeping(true);
                 hiddenChar = graphic;
-                String[] chars = {"\\", "&", "*", "]", "%"};
+                String[] chars = {"\\", "&", "*", "]", "%", "?", "!"};
                 graphic = (String) Helper.getRandom(new ArrayList(Arrays.asList(chars)));
                 GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
                 return movementTypes.MIMIC;
-            case "goldtracking":
-            case "gold tracking":
-                return movementTypes.GOLD_TRACK;
             case "still":
                 return movementTypes.STILL;
             default:
@@ -212,9 +209,6 @@ public class Monster extends Entity {
                 case STILL:
                     stillMovement();
                     break;
-                case GOLD_TRACK:
-                    goldTrackMovement();
-                    break;
                 case SLEEP:
                     sleepMovement();
                     break;
@@ -233,9 +227,6 @@ public class Monster extends Entity {
                 break;
             case STILL:
                 stillMovement();
-                break;
-            case GOLD_TRACK:
-                goldTrackMovement();
                 break;
             case SLEEP:
                 sleepMovement();
@@ -281,32 +272,6 @@ public class Monster extends Entity {
     private void stillMovement() {
         if (isNextTo(GameManager.getPlayer())) {
             attack();
-        }
-    }
-    private void goldTrackMovement() {
-        Gold gold = (Gold) Item.getClosestItem(this, Item.getAllItemsOfType(Item.itemTypes.GOLD));
-        if (moveCounter == speed) {
-            if (isInRange(gold)) {
-                if (!isNextTo(gold)) {
-                    if (this.getYPos() > gold.getYPos()) {
-                        move(UP);
-                    } else {
-                        move(DOWN);
-                    }
-                    if (this.getXPos() < gold.getXPos()) {
-                        move(RIGHT);
-                    } else {
-                        move(LEFT);
-                    }
-                    moveCounter = 1;
-                }
-            } else if (isInRange(GameManager.getPlayer())){
-                trackMovement();
-            } else {
-                moveRandom();
-            }
-        } else {
-            moveCounter += 1;
         }
     }
     private void sleepMovement() {
@@ -405,7 +370,7 @@ public class Monster extends Entity {
     }
     private void stealItemAttack() {
         ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
-        Item.itemTypes[] itemTypes = {Item.itemTypes.RING, Item.itemTypes.WAND, Item.itemTypes.STAFF};
+        Item.itemTypes[] itemTypes = {Item.itemTypes.RING, Item.itemTypes.WAND, Item.itemTypes.POTION, Item.itemTypes.SCROLL};
 
         items = Item.getAllItemsOfTypes((ArrayList<Item.itemTypes>) Arrays.asList(itemTypes), items);
 
@@ -491,7 +456,7 @@ public class Monster extends Entity {
 
     // MONSTER SPAWNING METHODS
 
-    private static void createMonster(Room room) {
+    public static void createMonster(Room room) {
         Point location = room.getRandomPointInBounds();
         new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
     }
