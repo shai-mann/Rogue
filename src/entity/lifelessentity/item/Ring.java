@@ -5,7 +5,7 @@ import helper.Helper;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Ring extends entity.lifelessentity.item.Item {
+public class Ring extends Item {
 
     private powers power;
 

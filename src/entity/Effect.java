@@ -25,4 +25,14 @@ public class Effect {
             }
         }
     }
+    public boolean hasEffect(int effect) {
+        switch (effect) {
+            case PROTECT_ARMOR:
+                return true;
+            case CONFUSE_ON_HIT:
+                return true;
+            default:
+                return false;
+        }
+    }
 }

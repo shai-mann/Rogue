@@ -2,6 +2,7 @@ package extra.inventory;
 
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import extra.MessageBar;
 import helper.Helper;
 import main.GameManager;
 
@@ -27,6 +28,7 @@ public class InventoryItem extends JComponent {
         setDefaults();
         inventoryItems.add(this);
         this.item = item;
+        setNames();
 
         label.setText(number + ") " + item.getName());
     }
@@ -63,8 +65,6 @@ public class InventoryItem extends JComponent {
         throwButton.setVisible(false);
         dropButton.setVisible(false);
 
-        setNames();
-
         addActionListeners();
     }
     private void addActionListeners() {
@@ -72,6 +72,7 @@ public class InventoryItem extends JComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GameManager.getPlayer().toggleInventory();
+                MessageBar.nextTurn();
                 item.use();
                 GameManager.getFrame().requestFocus();
             }

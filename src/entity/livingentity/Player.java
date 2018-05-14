@@ -6,6 +6,7 @@ import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import extra.inventory.InventoryItem;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
@@ -22,6 +23,9 @@ import map.Map;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Player extends Entity implements KeyListener {
@@ -69,6 +73,7 @@ public class Player extends Entity implements KeyListener {
             return;
         }
         boolean moved = false;
+        Object o = null;
         if (e.getKeyCode() == KeyBinds.INVENTORY) {
             toggleInventory();
         }
@@ -99,7 +104,7 @@ public class Player extends Entity implements KeyListener {
                 }
             } else if (e.getKeyCode() == KeyBinds.SEARCH) {
                 moved = true;
-                search();
+                o = search();
             }
         }
         if (status.isConfused() || status.isDrunk()) {
@@ -107,6 +112,13 @@ public class Player extends Entity implements KeyListener {
         }
         if (moved || getStatus().isParalyzed()) {
             map.update();
+            if (o != null) {
+                if (o instanceof Door) {
+                    ((Door) o).reveal();
+                } else if (o instanceof Trap) {
+                    ((Trap) o).reveal();
+                }
+            }
         }
         status.update();
     }
@@ -115,39 +127,52 @@ public class Player extends Entity implements KeyListener {
 
     // KEY LISTENER HELPER METHODS
 
-    private void search() {
+    private Object search() {
         for (Door door : Door.getDoors()) {
             if (door.isSecret() && isNextTo(door)) {
                 if (Helper.random.nextInt(99) + 1 >= 75) {
-                    door.reveal();
+                    return door;
                 }
             }
         }
         for (Trap trap : Trap.getTraps()) {
             if (trap.isHidden() && isNextTo(new Point(trap.getXPos(), trap.getYPos()))) {
-                trap.reveal();
+                return trap;
             }
         }
+        return null;
     }
     private boolean isNextTo(Point p) {
         return
                 ((p.getX() + 1 == getXPos() || p.getX() - 1 == getXPos()) && p.getY() == getYPos()) ||
                         ((p.getY() + 1 == getYPos() || p.getY() - 1 == getYPos()) && p.getX() == getXPos());
     }
-    public InventoryPane toggleInventory() {
+    public void toggleInventory() {
         showInventory = !showInventory;
         if (showInventory) {
             savedContentPane = GameManager.getFrame().getContentPane();
-            return new InventoryPane();
+            new InventoryPane();
         } else {
             GameManager.replaceContentPane((JPanel) savedContentPane);
-            return null;
         }
     }
-    public InventoryPane toggleInventory(String message) {
-        InventoryPane inv = toggleInventory();
-        inv.setBorderTitle(message);
-        return inv;
+    public void toggleInventory(String message) {
+        showInventory = !showInventory;
+        savedContentPane = GameManager.getFrame().getContentPane();
+        new InventoryPane(message, new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    for (int i = 0; i < InventoryItem.getInventoryItems().size(); i++) {
+                        InventoryItem item = InventoryItem.getInventoryItems().get(i);
+                        if (item.getPanel().getBounds().contains(e.getPoint())) {
+                            GameManager.getPlayer().toggleInventory();
+                            item.getItem().identify();
+                        }
+                    }
+                }
+            }
+        });
     }
     private void hitMonster(int direction) {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {

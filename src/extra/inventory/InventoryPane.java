@@ -25,13 +25,18 @@ public class InventoryPane {
 
         GameManager.replaceContentPane(panel);
     }
+    public InventoryPane(String message, MouseAdapter l) {
+        setDefaults();
+        addInventory();
+        setBorderTitle(message);
+        scrollingPanel.addMouseListener(l);
+
+        GameManager.replaceContentPane(panel);
+    }
     public void setBorderTitle(String borderTitle) {
         panel.setBorder(new TitledBorder(borderTitle));
         panel.revalidate();
         panel.repaint();
-    }
-    public void addMouseListener(MouseAdapter l) {
-        panel.addMouseListener(l);
     }
     private void addInventory() {
         ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
@@ -41,7 +46,7 @@ public class InventoryPane {
         }
     }
     private void addMouseListener() {
-        scrollingPanel.addMouseListener(new MouseListener() {
+        scrollingPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
@@ -53,18 +58,6 @@ public class InventoryPane {
                         }
                     }
                 }
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
             }
         });
     }

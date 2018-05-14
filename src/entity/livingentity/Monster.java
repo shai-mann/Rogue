@@ -1,6 +1,7 @@
 package entity.livingentity;
 
 import com.sun.istack.internal.Nullable;
+import entity.Effect;
 import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
@@ -179,6 +180,24 @@ public class Monster extends Entity {
                 return attackTypes.CONFUSE;
             case "intoxicate":
                 return attackTypes.INTOXICATE;
+            case "weaken":
+                return attackTypes.WEAKEN;
+            case "hpdrain":
+            case "hp_drain":
+                return attackTypes.HP_DRAIN;
+            case "xpdrain":
+            case "xp_drain":
+                return attackTypes.XP_DRAIN;
+            case "rust":
+                return attackTypes.RUST;
+            case "trap":
+                return attackTypes.TRAP;
+            case "stealgold":
+            case "steal_gold":
+                return attackTypes.STEAL_GOLD;
+            case "stealitem":
+            case "steal_item":
+                return attackTypes.STEAL_ITEM;
             default:
                 return attackTypes.HIT; // default attack type
         }
@@ -379,9 +398,15 @@ public class Monster extends Entity {
         MessageBar.addMessage("Your backpack feels lighter");
     }
     private void rustAttack() {
-        GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() - 1);
+        if (!GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
+            GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() - 1);
 
-        MessageBar.addMessage("Your armor feels worse");
+            MessageBar.addMessage("Your armor feels worse");
+        } else if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)){
+            MessageBar.addMessage("The " + getName() + "'s attack was deflected");
+        } else {
+            MessageBar.addMessage("The " + getName() + " missed");
+        }
     }
     private void xpDrainAttack() {
         GameManager.getPlayer().addExperience((int) -(GameManager.getPlayer().getExperience() * 0.9));
