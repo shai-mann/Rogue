@@ -80,9 +80,16 @@ public class Potion extends Item {
     // STATIC METHODS
 
     public static void randomizeObfuscatedNames() {
-        for (int i = 0; i < hiddenNames.length; i++) {
-            String color = hiddenNames[(Helper.random.nextInt(hiddenNames.length - 1))];
-            obfuscatedNames.add(color);
+        ArrayList<String> temp = new ArrayList<>(Arrays.asList(hiddenNames));
+        for (int i = 0; i < temp.size();) {
+            String name;
+            if (temp.size() == 1) {
+                name = temp.get(Helper.random.nextInt(temp.size()));
+            } else {
+                name = temp.get(Helper.random.nextInt(temp.size() - 1));
+            }
+            temp.remove(name);
+            obfuscatedNames.add(name);
         }
     }
 }
