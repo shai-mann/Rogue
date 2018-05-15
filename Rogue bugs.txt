@@ -1,0 +1,8 @@
+wanderMovement should have a chance to move away even when isNextTo(Player)
+base armor needs to be 10
+Wand names
+I found a null LoL
+When "found a" make it be a or an based on first letter of getName()
+First input is bugged and updates map but not player
+Scrolls don't always have the same name for the same type
+Get hungry too fast
