@@ -1,7 +1,10 @@
 package entity.lifelessentity.item.combat;
 
 import entity.lifelessentity.item.Item;
+import entity.livingentity.Player;
 import helper.Helper;
+import main.GameManager;
+import util.MessageBar;
 
 public class Armor extends Item {
 
@@ -20,6 +23,20 @@ public class Armor extends Item {
         this.name = item.getName();
         this.cursed = item.isCursed();
         this.ac = item.getAc();
+    }
+
+    // OVERRIDES
+
+    @Override
+    public void use() {
+        Player player = GameManager.getPlayer();
+        if (!(player.getWornItem() != null && player.getWornItem().isCursed())) {
+            player.setWornItem(this);
+            player.getInventory().remove(this);
+            MessageBar.addMessage("You equip the " + getName());
+        } else {
+            MessageBar.addMessage("You cannot take off the armor you are wearing");
+        }
     }
 
     // GETTERS/SETTERS
@@ -63,7 +80,7 @@ public class Armor extends Item {
         }
     }
     private void randomizeCursed() {
-        cursed = Helper.random.nextBoolean();
+        cursed = Helper.random.nextInt(99) + 1 >= 90;
     }
     public boolean isCursed() {
         return cursed;

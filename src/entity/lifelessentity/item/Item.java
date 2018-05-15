@@ -3,7 +3,7 @@ package entity.lifelessentity.item;
 import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.lifelessentity.item.combat.Armor;
-import extra.MessageBar;
+import util.MessageBar;
 import helper.Helper;
 import map.level.Room;
 

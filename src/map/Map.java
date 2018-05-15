@@ -1,20 +1,16 @@
 package map;
 
 import entity.livingentity.Monster;
-import entity.livingentity.Player;
-import extra.MessageBar;
-import extra.SavePane;
-import extra.StatusBar;
+import util.MessageBar;
+import util.SavePane;
+import util.StatusBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
-import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.ArrayList;
 
 public class Map {
     private StatusBar statusBar;

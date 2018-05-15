@@ -3,6 +3,7 @@ package map.level;
 import entity.Entity;
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.combat.Armor;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
 import helper.Helper;
@@ -119,7 +120,8 @@ public class Level extends JComponent {
         if (levelNumber != 1 && direction == Player.UP) {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
-        new Scroll(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y); // TODO: remove when done testing
+        new Wand(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+        // TODO: remove when done testing LoL
     }
 
     // ROOM GENERATION HELPER METHODS

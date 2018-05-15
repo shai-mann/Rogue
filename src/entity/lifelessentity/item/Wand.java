@@ -1,6 +1,6 @@
 package entity.lifelessentity.item;
 
-import extra.MessageBar;
+import util.MessageBar;
 import helper.Helper;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class Wand extends Item {
     private powers power;
 
     private static ArrayList<String> obfuscatedNames = new ArrayList<>(13);
-    private static String[] hiddenNames = {
+    private static String[] names = {
             "Hawthorn Wand",
             "Elm Wand",
             "Redwood Wand",
@@ -27,7 +27,7 @@ public class Wand extends Item {
             "Walnut Wand",
             "Emberwood Staff"
     };
-    private String[] names = {
+    private static String[] hiddenNames = {
             "Wand of Invisibility",
             "Wand of Lightning",
             "Wand of Fire",
@@ -72,8 +72,8 @@ public class Wand extends Item {
     // RANDOMIZE WAND DATA
 
     private void randomizeWandData() {
-        hiddenName = (String) Helper.getRandom(new ArrayList(Arrays.asList(names)));
-        name = Helper.createRandomString(Helper.random.nextInt(5) + 10);
+        hiddenName = (String) Helper.getRandom(obfuscatedNames);
+        name = names[obfuscatedNames.indexOf(hiddenName)];
         power = powers.valueOf(hiddenName.split("Wand of")[1].trim().replace(" ", "_").toUpperCase());
     }
     @Override
@@ -84,15 +84,22 @@ public class Wand extends Item {
             MessageBar.addMessage("Your " + name + " breaks");
         }
     }
-    public powers getPower() {
+    private powers getPower() {
         return power;
     }
 
     // STATIC METHODS
 
     public static void randomizeObfuscatedNames() {
-        for (int i = 0; i < hiddenNames.length; i++) {
-            String name = hiddenNames[(Helper.random.nextInt(hiddenNames.length - 1))];
+        ArrayList<String> temp = new ArrayList<>(Arrays.asList(hiddenNames));
+        for (int i = 0; i < temp.size();) {
+            String name;
+            if (temp.size() == 1) {
+                name = temp.get(Helper.random.nextInt(temp.size()));
+            } else {
+                name = temp.get(Helper.random.nextInt(temp.size() - 1));
+            }
+            temp.remove(name);
             obfuscatedNames.add(name);
         }
     }

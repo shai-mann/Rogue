@@ -1,9 +1,9 @@
-package extra;
+package util;
 
 import entity.livingentity.Monster;
-import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
+import map.level.Level;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,10 +14,11 @@ public class StatusBar extends JComponent {
     private JLabel goldField;
     private JLabel experienceLabel;
     private JLabel hungerLabel;
+    private JLabel acLabel;
+    private JLabel floorLabel;
 
     // This class is what takes the player's stats and displays them at the bottom of the screen
     public StatusBar() {
-
         setDefaults();
     }
     public void setDefaults() {
@@ -34,6 +35,10 @@ public class StatusBar extends JComponent {
         experienceLabel.setText("Experience: 0(10)");
         experienceLabel.setForeground(Helper.FOREGROUND_COLOR);
         hungerLabel.setForeground(Helper.FOREGROUND_COLOR);
+        acLabel.setText("Arm: 10");
+        acLabel.setForeground(Helper.FOREGROUND_COLOR);
+        floorLabel.setText("Level: 1");
+        floorLabel.setForeground(Helper.FOREGROUND_COLOR);
     }
     public void updateStatusBar() {
         healthField.setText("Health: " + GameManager.getPlayer().getHealth() +
@@ -42,6 +47,8 @@ public class StatusBar extends JComponent {
         experienceLabel.setText("Experience: " + GameManager.getPlayer().getExperience() +
                 "(" + GameManager.getPlayer().getLevelThreshold() + ")");
         hungerLabel.setText(GameManager.getPlayer().getHungerLevel());
+        acLabel.setText("Arm: " + String.valueOf(GameManager.getPlayer().getStatus().getAc()));
+        floorLabel.setText("Level: " + Level.getLevel().getLevelNumber());
         panel.revalidate();
         panel.repaint();
     }

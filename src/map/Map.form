@@ -13,12 +13,12 @@
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
-      <nested-form id="6c835" form-file="extra/MessageBar.form" binding="messageBar">
+      <nested-form id="6c835" form-file="util/MessageBar.form" binding="messageBar">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
       </nested-form>
-      <nested-form id="e33ee" form-file="extra/StatusBar.form" binding="statusBar" custom-create="true">
+      <nested-form id="e33ee" form-file="util/StatusBar.form" binding="statusBar" custom-create="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

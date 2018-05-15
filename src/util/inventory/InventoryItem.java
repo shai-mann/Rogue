@@ -1,8 +1,8 @@
-package extra.inventory;
+package util.inventory;
 
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
-import extra.MessageBar;
+import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
 

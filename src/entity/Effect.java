@@ -7,32 +7,20 @@ public class Effect {
     public final static int PROTECT_ARMOR = 0;
     public static final int CONFUSE_ON_HIT = 1;
 
-    private ArrayList<Integer> types = new ArrayList<>();
+    private ArrayList<Integer> effects = new ArrayList<>();
 
     public Effect() {
 
     }
     public void addEffect(int type) {
-        types.add(type);
+        effects.add(type);
     }
-    public void update() {
-        for (int i: types) {
-            switch (i) {
-                case PROTECT_ARMOR:
-                    break;
-                case CONFUSE_ON_HIT:
-                    break;
-            }
+    public void removeEffect(int type) {
+        if (effects.contains(type)) {
+            effects.remove(type);
         }
     }
     public boolean hasEffect(int effect) {
-        switch (effect) {
-            case PROTECT_ARMOR:
-                return true;
-            case CONFUSE_ON_HIT:
-                return true;
-            default:
-                return false;
-        }
+        return effects.contains(effect);
     }
 }

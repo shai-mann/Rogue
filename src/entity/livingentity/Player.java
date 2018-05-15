@@ -1,21 +1,22 @@
 package entity.livingentity;
 
+import entity.Effect;
 import entity.Entity;
 import entity.KeyBinds;
 import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
-import extra.inventory.InventoryItem;
+import util.inventory.InventoryItem;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
 
 import java.awt.*;
 
-import extra.GravePane;
-import extra.inventory.InventoryPane;
-import extra.MessageBar;
+import util.GravePane;
+import util.inventory.InventoryPane;
+import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.Map;
@@ -25,7 +26,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Player extends Entity implements KeyListener {
@@ -203,6 +203,7 @@ public class Player extends Entity implements KeyListener {
     private void changeLevel(int direction) {
         Level.getLevel().newLevel(direction);
         setLocation(Level.getLevel().getStartingRoom());
+        Map.getMap().getStatusBar().updateStatusBar();
     }
 
     // UPDATE METHODS
@@ -215,7 +216,9 @@ public class Player extends Entity implements KeyListener {
         } else if (checkLevelUp()) {
             levelUp();
         }
-        checkToPickUpItem();
+        if (!checkTrap()) {
+            checkToPickUpItem();
+        }
     }
     private int updateHungerStatus() {
         if (stepsTakenSinceMeal > 100) {
@@ -236,6 +239,15 @@ public class Player extends Entity implements KeyListener {
         } else {
             return SATISFIED;
         }
+    }
+    private boolean checkTrap() {
+        for (Trap trap : Trap.getTraps()) {
+            if (isNextTo(new Point(trap.getXPos(), trap.getYPos()))) {
+                trap.trigger();
+                return true;
+            }
+        }
+        return false;
     }
     private void checkToPickUpItem() {
         if (overWrittenGraphic.equals("*")) {
@@ -331,7 +343,7 @@ public class Player extends Entity implements KeyListener {
     public Item getHeldItem() {
         return heldItem;
     }
-    public Item getWornItem() {
+    public Armor getWornItem() {
         return wornItem;
     }
 
@@ -355,5 +367,15 @@ public class Player extends Entity implements KeyListener {
     public void eat() {
         stepsTakenSinceMeal = 0;
         hungerLevel = updateHungerStatus();
+        Map.getMap().getStatusBar().updateStatusBar();
+    }
+    public void setWornItem(Armor wornItem) {
+        if (this.wornItem != null) {
+            getInventory().add(this.wornItem);
+        }
+        this.wornItem = wornItem;
+        getStatus().setAc(wornItem.getAc());
+        getStatus().getEffects().removeEffect(Effect.PROTECT_ARMOR);
+        Map.getMap().getStatusBar().updateStatusBar();
     }
 }

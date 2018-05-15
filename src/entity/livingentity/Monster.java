@@ -5,7 +5,7 @@ import entity.Effect;
 import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
-import extra.MessageBar;
+import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
@@ -44,7 +44,6 @@ public class Monster extends Entity {
     private int speed = 1;
     private int moveCounter = 1;
     private int range = 10;
-    private double hitChance = 0.5;
     private int hitDamage = 1;
     private double critChance = 0.05;
     private double critDamage = hitDamage * 2;
@@ -100,9 +99,6 @@ public class Monster extends Entity {
             case "graphic":
                 this.graphic = parsed[1];
                 GameManager.add(graphic, getXPos(), getYPos());
-                break;
-            case "hitchance":
-                this.hitChance = Double.parseDouble(parsed[1]);
                 break;
             case "critchance":
                 this.critChance = Double.parseDouble(parsed[1]);
@@ -285,8 +281,9 @@ public class Monster extends Entity {
     private void wanderMovement() {
         if (isNextTo(GameManager.getPlayer())) {
             attack();
+        } else {
+            moveRandom();
         }
-        moveRandom();
     }
     private void stillMovement() {
         if (isNextTo(GameManager.getPlayer())) {
@@ -308,59 +305,58 @@ public class Monster extends Entity {
     }
 
     // MONSTER ATTACK
-    //TODO: make all attacks have similar chances to hit as the hitAttack();
-    // TODO: reformat damage to be randomized with hitdamaage as the maximum damage to deal and critdamage as max critical hit damage
+
     private void attack() {
-        switch (attackType) {
-            case HIT:
-                hitAttack();
-                break;
-            case PARALYZE:
-            case TRAP:
-                paralyzeAttack();
-                break;
-            case CONFUSE:
-                confuseAttack();
-                break;
-            case INTOXICATE:
-                intoxicateAttack();
-                break;
-            case WEAKEN:
-                weakenAttack();
-                break;
-            case STEAL_GOLD:
-                stealGoldAttack();
-                break;
-            case STEAL_ITEM:
-                stealItemAttack();
-                break;
-            case RUST:
-                rustAttack();
-                break;
-            case XP_DRAIN:
-                xpDrainAttack();
-                break;
-            case HP_DRAIN:
-                healthDrainAttack();
-                break;
+        if (Helper.random.nextDouble() <= GameManager.getPlayer().getStatus().getAc() / 100) {
+            switch (attackType) {
+                case HIT:
+                    hitAttack();
+                    break;
+                case PARALYZE:
+                case TRAP:
+                    paralyzeAttack();
+                    break;
+                case CONFUSE:
+                    confuseAttack();
+                    break;
+                case INTOXICATE:
+                    intoxicateAttack();
+                    break;
+                case WEAKEN:
+                    weakenAttack();
+                    break;
+                case STEAL_GOLD:
+                    stealGoldAttack();
+                    break;
+                case STEAL_ITEM:
+                    stealItemAttack();
+                    break;
+                case RUST:
+                    rustAttack();
+                    break;
+                case XP_DRAIN:
+                    xpDrainAttack();
+                    break;
+                case HP_DRAIN:
+                    healthDrainAttack();
+                    break;
+            }
+        } else {
+            MessageBar.addMessage("The " + getName() + " misses");
         }
     }
     private void hitAttack() {
-        if (Helper.random.nextDouble() <= hitChance) {
-            if (Helper.random.nextDouble() <= critChance) { // critical
-                if (Helper.random.nextDouble() <= 0.8) {
-                    GameManager.getPlayer().health -= critDamage;
-                    MessageBar.addMessage("The " + this.name + " crits");
-                } else {
-                    GameManager.getPlayer().health -= hitDamage;
-                    GameManager.getPlayer().getStatus().setParalyzed(3);
-                }
+        if (Helper.random.nextDouble() <= critChance) { // critical
+            if (Helper.random.nextDouble() <= 0.8) {
+                GameManager.getPlayer().health -= Helper.random.nextInt((int) critDamage) + 1;
+                MessageBar.addMessage("The " + getName() + " crits");
             } else {
-                GameManager.getPlayer().health -= hitDamage;
-                MessageBar.addMessage("The " + this.name + " hits");
+                GameManager.getPlayer().health -= Helper.random.nextInt(hitDamage) + 1;
+                GameManager.getPlayer().getStatus().setParalyzed(3);
             }
         } else {
-            MessageBar.addMessage("The " + this.name + " misses");
+            GameManager.getPlayer().health -= Helper.random.nextInt(hitDamage) + 1;
+            MessageBar.addMessage("The " + getName() + " hits");
         }
     }
     private void paralyzeAttack() {
@@ -398,14 +394,13 @@ public class Monster extends Entity {
         MessageBar.addMessage("Your backpack feels lighter");
     }
     private void rustAttack() {
-        if (!GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
-            GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() - 1);
+        if (GameManager.getPlayer().getWornItem() != null &&
+                !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
+            GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() + 1);
 
             MessageBar.addMessage("Your armor feels worse");
-        } else if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)){
-            MessageBar.addMessage("The " + getName() + "'s attack was deflected");
-        } else {
-            MessageBar.addMessage("The " + getName() + " missed");
+        } else if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
+            MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
         }
     }
     private void xpDrainAttack() {

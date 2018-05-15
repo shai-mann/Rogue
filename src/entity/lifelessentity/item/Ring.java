@@ -69,12 +69,19 @@ public class Ring extends Item {
     private void randomizeRingType() {
         name = (String) Helper.getRandom(obfuscatedNames);
         hiddenName = hiddenNames[obfuscatedNames.indexOf(name)];
-        power = powers.valueOf(hiddenName.split("Ring of ")[1].replace(" ", "_").toUpperCase());
+        power = powers.valueOf(hiddenName.split("Ring of")[1].trim().replace(" ", "_").toUpperCase());
     }
     public static void randomizeObfuscatedNames() {
-        for (int i = 0; i < names.length; i++) {
-            String color = names[(Helper.random.nextInt(names.length - 1))];
-            obfuscatedNames.add(color);
+        ArrayList<String> temp = new ArrayList<>(Arrays.asList(hiddenNames));
+        for (int i = 0; i < temp.size();) {
+            String name;
+            if (temp.size() == 1) {
+                name = temp.get(Helper.random.nextInt(temp.size()));
+            } else {
+                name = temp.get(Helper.random.nextInt(temp.size() - 1));
+            }
+            temp.remove(name);
+            obfuscatedNames.add(name);
         }
     }
 }

@@ -1,4 +1,4 @@
-package extra;
+package util;
 
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Monster;

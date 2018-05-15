@@ -1,4 +1,4 @@
-package extra;
+package util;
 
 import helper.Helper;
 import main.GameManager;

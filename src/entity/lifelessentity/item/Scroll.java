@@ -5,16 +5,12 @@ import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Sword;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
-import extra.MessageBar;
-import extra.inventory.InventoryItem;
-import extra.inventory.InventoryPane;
+import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -77,8 +73,8 @@ public class Scroll extends Item {
                 }
                 break;
             case REMOVE_CURSE:
-                if (player.getWornItem() != null && ((Armor) player.getWornItem()).isCursed()) {
-                    ((Armor) player.getWornItem()).setCursed(false);
+                if (player.getWornItem() != null && player.getWornItem().isCursed()) {
+                    player.getWornItem().setCursed(false);
                     MessageBar.addMessage("You feel as if somebody is watching over you");
                 } else {
                     MessageBar.addMessage("You feel a strange sense of loss");
@@ -86,7 +82,7 @@ public class Scroll extends Item {
                 break;
             case ENCHANT_ARMOR:
                 if (player.getWornItem() != null) {
-                    ((Armor) player.getWornItem()).setAc(((Armor) player.getWornItem()).getAc() - 1);
+                    player.getWornItem().setAc(player.getWornItem().getAc() - 1);
                     MessageBar.addMessage("Your armor glows silver for a moment");
                 } else {
                     MessageBar.addMessage("You feel a strange sense of loss");
@@ -100,8 +96,12 @@ public class Scroll extends Item {
                 player.setLocation((Room) Helper.getRandom(Room.rooms));
                 break;
             case PROTECT_ARMOR:
-                player.getStatus().getEffects().addEffect(Effect.PROTECT_ARMOR);
-                MessageBar.addMessage("Your armor is covered by a shimmering gold shield");
+                if (player.getWornItem() != null) {
+                    player.getStatus().getEffects().addEffect(Effect.PROTECT_ARMOR);
+                    MessageBar.addMessage("Your armor is covered by a shimmering gold shield");
+                } else {
+                    MessageBar.addMessage("You feel a strange sense of loss");
+                }
                 break;
             case CREATE_MONSTER:
                 if (Helper.random.nextInt(99) + 1 <= 90) {
