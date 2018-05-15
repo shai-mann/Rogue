@@ -3,7 +3,7 @@ graphic:Z
 hitChance:0.5
 critChance:0.1
 hitDamage:1d8
-speed:2
+speed:-2
 movementType:track
 attackType:hit
 health:2d8

@@ -118,4 +118,7 @@ public class Entity {
 
         GameManager.getTable().setValueAt("@", p.y, p.x);
     }
+    public Point getLocation() {
+        return new Point(getXPos(), getYPos());
+    }
 }

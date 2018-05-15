@@ -5,6 +5,7 @@ import entity.Effect;
 import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
+import map.level.Passageway;
 import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -213,6 +214,20 @@ public class Monster extends Entity {
     // MONSTER MOVEMENT
 
     private void move(@Nullable movementTypes type) {
+        if (speed > 0) {
+            for (int i = 0; i < speed; i++) {
+                moveHelper(type);
+            }
+        } else {
+            if (moveCounter == -speed) {
+                moveHelper(type);
+                moveCounter = 1;
+            } else {
+                moveCounter += 1;
+            }
+        }
+    }
+    private void moveHelper(@Nullable movementTypes type) {
         if (type != null) {
             switch (type) {
                 case TRACK:
@@ -254,29 +269,26 @@ public class Monster extends Entity {
     private void trackMovement() {
         Player player = GameManager.getPlayer();
 
-        if (moveCounter == speed) {
-            if (isInRange(player)) {
-                if (!isNextTo(player)) {
-                    if (this.getYPos() > player.getYPos()) {
-                        move(UP);
-                    } else {
-                        move(DOWN);
-                    }
-                    if (this.getXPos() < player.getXPos()) {
-                        move(RIGHT);
-                    } else {
-                        move(LEFT);
-                    }
-                    moveCounter = 1;
+        if (isInRange(player)) {
+            if (!isNextTo(player)) {
+                if (this.getYPos() > player.getYPos()) {
+                    move(UP);
                 } else {
-                    attack();
+                    move(DOWN);
+                }
+                if (this.getXPos() < player.getXPos()) {
+                    move(RIGHT);
+                } else {
+                    move(LEFT);
                 }
             } else {
-                moveRandom();
+                attack();
             }
         } else {
-            moveCounter += 1;
+            moveRandom();
         }
+
+
     }
     private void wanderMovement() {
         if (isNextTo(GameManager.getPlayer())) {
@@ -462,6 +474,16 @@ public class Monster extends Entity {
         monsters.remove(this);
     }
 
+    public void setInvisible(boolean invisible) {
+        this.invisible = invisible;
+    }
+    public void setType(File file) {
+        loadDataFile(file.getPath());
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     // GETTERS
 
     public Status getStatus() {
@@ -547,6 +569,15 @@ public class Monster extends Entity {
             Monster monster = monsters.get(i);
             monster.runUpdate();
         }
+    }
+    public static Monster getClosestMonster(Entity e) {
+        Monster closest = getMonsters().get(0);
+        for (Monster m : getMonsters()) {
+            if (Passageway.getDistance(m.getLocation(), e.getLocation()) < Passageway.getDistance(closest.getLocation(), e.getLocation())) {
+                closest = m;
+            }
+        }
+        return closest;
     }
     public static ArrayList<Monster> getMonsters() {
         return monsters;
