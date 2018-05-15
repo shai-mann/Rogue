@@ -44,6 +44,7 @@ public class Player extends Entity implements KeyListener {
     private int experience = 0;
     private int stepsTakenSinceMeal = 0;
     private int hungerLevel = SATISFIED;
+    private int regenStepsCounter = 0;
 
     private static final int SATISFIED = 0;
     private static final int HUNGRY = 1;
@@ -118,6 +119,14 @@ public class Player extends Entity implements KeyListener {
                 } else if (o instanceof Trap) {
                     ((Trap) o).reveal();
                 }
+            }
+        }
+        if (moved) {
+            regenStepsCounter++;
+            if (regenStepsCounter >= 20 - level) {
+                health++;
+                regenStepsCounter = 0;
+                Map.getMap().getStatusBar().updateStatusBar();
             }
         }
         status.update();
@@ -377,5 +386,20 @@ public class Player extends Entity implements KeyListener {
         getStatus().setAc(wornItem.getAc());
         getStatus().getEffects().removeEffect(Effect.PROTECT_ARMOR);
         Map.getMap().getStatusBar().updateStatusBar();
+    }
+    public void setHeldItem(Item heldItem) {
+        if (this.heldItem != null) {
+            getInventory().add(getHeldItem());
+        }
+        this.heldItem = heldItem;
+    }
+    public void wearRing(Ring ring) {
+        if (leftRing == null) {
+            leftRing = ring;
+        } else if (rightRing == null) {
+            rightRing = ring;
+        } else {
+            // TODO: figure out what to do if both hands already have rings (how to replace an already worn ring)
+        }
     }
 }
