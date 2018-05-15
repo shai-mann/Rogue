@@ -1,6 +1,7 @@
 package entity;
 
 import entity.livingentity.Monster;
+import helper.Helper;
 import main.GameManager;
 
 import java.awt.*;
@@ -15,10 +16,10 @@ public class Entity {
 
     public String overWrittenGraphic = "-";
 
-    public static int UP = 0;
-    public static int DOWN = 1;
-    public static int RIGHT = 2;
-    public static int LEFT = 3;
+    public static final int UP = 0;
+    public static final int DOWN = 1;
+    public static final int RIGHT = 2;
+    public static final int LEFT = 3;
 
     public Entity(String g, int x, int y) {
         xPos = x;
@@ -105,13 +106,28 @@ public class Entity {
     public double getDistanceTo(Entity entity) {
         return Math.hypot(getXPos() - entity.getXPos(), getYPos() - entity.getYPos());
     }
+    public Point getPointNextTo() {
+        int direction = Helper.random.nextInt(4) + 1;
+        switch (direction) {
+            case UP:
+                return new Point(getXPos(), getYPos() - 1);
+            case DOWN:
+                return new Point(getXPos(), getYPos() + 1);
+            case RIGHT:
+                return new Point(getXPos() + 1, getYPos());
+            case LEFT:
+                return new Point(getXPos() - 1, getYPos());
+            default:
+                return new Point();
+        }
+    }
     public int getXPos() {
         return xPos;
     }
     public int getYPos() {
         return yPos;
     }
-    protected void setLocation(Point p) {
+    public void setLocation(Point p) {
         xPos = p.x;
         yPos = p.y;
         overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);

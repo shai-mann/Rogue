@@ -214,7 +214,7 @@ public class Monster extends Entity {
     // MONSTER MOVEMENT
 
     private void move(@Nullable movementTypes type) {
-        if (speed > 0) {
+        if (speed > 0 && !getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
             for (int i = 0; i < speed; i++) {
                 moveHelper(type);
             }
@@ -320,38 +320,42 @@ public class Monster extends Entity {
 
     private void attack() {
         if (Helper.random.nextDouble() <= GameManager.getPlayer().getStatus().getAc() / 100) {
-            switch (attackType) {
-                case HIT:
-                    hitAttack();
-                    break;
-                case PARALYZE:
-                case TRAP:
-                    paralyzeAttack();
-                    break;
-                case CONFUSE:
-                    confuseAttack();
-                    break;
-                case INTOXICATE:
-                    intoxicateAttack();
-                    break;
-                case WEAKEN:
-                    weakenAttack();
-                    break;
-                case STEAL_GOLD:
-                    stealGoldAttack();
-                    break;
-                case STEAL_ITEM:
-                    stealItemAttack();
-                    break;
-                case RUST:
-                    rustAttack();
-                    break;
-                case XP_DRAIN:
-                    xpDrainAttack();
-                    break;
-                case HP_DRAIN:
-                    healthDrainAttack();
-                    break;
+            if (!getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
+                switch (attackType) {
+                    case HIT:
+                        hitAttack();
+                        break;
+                    case PARALYZE:
+                    case TRAP:
+                        paralyzeAttack();
+                        break;
+                    case CONFUSE:
+                        confuseAttack();
+                        break;
+                    case INTOXICATE:
+                        intoxicateAttack();
+                        break;
+                    case WEAKEN:
+                        weakenAttack();
+                        break;
+                    case STEAL_GOLD:
+                        stealGoldAttack();
+                        break;
+                    case STEAL_ITEM:
+                        stealItemAttack();
+                        break;
+                    case RUST:
+                        rustAttack();
+                        break;
+                    case XP_DRAIN:
+                        xpDrainAttack();
+                        break;
+                    case HP_DRAIN:
+                        healthDrainAttack();
+                        break;
+                }
+            } else {
+                hitAttack();
             }
         } else {
             MessageBar.addMessage("The " + getName() + " misses");
@@ -494,6 +498,9 @@ public class Monster extends Entity {
     }
     public String getHiddenChar() {
         return hiddenChar;
+    }
+    public int getSpeed() {
+        return speed;
     }
 
     // MONSTER SPAWNING METHODS

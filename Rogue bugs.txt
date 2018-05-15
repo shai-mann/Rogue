@@ -6,3 +6,4 @@ When "found a" make it be a or an based on first letter of getName()
 First input is bugged and updates map but not player
 Scrolls don't always have the same name for the same type
 Get hungry too fast
+Rings don't hide their names

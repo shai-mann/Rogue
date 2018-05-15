@@ -121,7 +121,7 @@ public class Player extends Entity implements KeyListener {
                 }
             }
         }
-        if (moved) {
+        if (moved && health < maxHealth) {
             regenStepsCounter++;
             if (regenStepsCounter >= 20 - level) {
                 health++;
