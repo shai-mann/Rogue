@@ -63,7 +63,6 @@ public class Player extends Entity implements KeyListener {
         GameManager.getTable().setValueAt("", 0, 0);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
-        status.setAc(8);
         map = Map.getMap();
     }
 

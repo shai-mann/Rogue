@@ -1,8 +1,16 @@
 package entity.lifelessentity.item;
 
+import entity.Effect;
+import entity.livingentity.Monster;
+import main.GameManager;
+import map.Map;
+import map.level.Room;
 import util.MessageBar;
 import helper.Helper;
 
+import java.awt.*;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,13 +21,13 @@ public class Wand extends Item {
 
     private static ArrayList<String> obfuscatedNames = new ArrayList<>(13);
     private static String[] names = {
-            "Hawthorn Wand",
+            "Hawthorn Staff",
             "Elm Wand",
             "Redwood Wand",
             "Green Staff",
             "Elder Rod",
-            "Red Staff",
             "Maple Wand",
+            "Juniper Staff",
             "Yew Wand",
             "Yew Staff",
             "Black Staff",
@@ -61,6 +69,7 @@ public class Wand extends Item {
     public Wand(int x, int y) {
         super("/", x, y);
         randomizeWandData();
+        power = powers.INVISIBILITY;
     }
     public Wand(Wand wand) {
         super("/", wand.getXPos(), wand.getYPos());
@@ -78,11 +87,61 @@ public class Wand extends Item {
     }
     @Override
     public void use() {
+        Monster m = Monster.getClosestMonster(GameManager.getPlayer());
+        switch (power) {
+            case INVISIBILITY:
+                m.setInvisible(true);
+                break;
+            case LIGHTNING:
+                // TODO: implement Lightning, fire, and cold wand powers
+                break;
+            case FIRE:
+                break;
+            case COLD:
+                break;
+            case POLYMORPH:
+                m.setType((File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/monsters").listFiles()))));
+                break;
+            case MAGIC_MISSILES:
+                break;
+            case HASTE_MONSTER:
+                if (m.getSpeed() > 0) {
+                    m.setSpeed(m.getSpeed() + 1);
+                } else {
+                    m.setSpeed(1);
+                }
+                break;
+            case SLOW_MONSTER:
+                if (m.getSpeed() < 0) {
+                    m.setSpeed(m.getSpeed() - 1);
+                } else {
+                    m.setSpeed(-1);
+                }
+            case DRAIN_LIFE:
+                int damage = GameManager.getPlayer().getHealth() / 2;
+                GameManager.getPlayer().getStatus().setHealth(damage);
+                Map.getMap().getStatusBar().updateStatusBar();
+                // TODO: once visible vs. not visible monsters implemented, make all visible ones lose damage amount health
+                break;
+            case NOTHING:
+                // Yup, this is legitimately a wand type.
+                break;
+            case TELEPORT_AWAY:
+                m.setLocation(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds());
+                break;
+            case TELEPORT_TO:
+                m.setLocation(GameManager.getPlayer().getPointNextTo());
+                break;
+            case CANCELLATION:
+                m.getStatus().getEffects().addEffect(Effect.SUPPRESS_POWER);
+                break;
+        }
         uses--;
         if (uses <= 0) {
             Item.items.remove(this);
             MessageBar.addMessage("Your " + name + " breaks");
         }
+        MessageBar.addMessage(power.toString());
     }
     private powers getPower() {
         return power;

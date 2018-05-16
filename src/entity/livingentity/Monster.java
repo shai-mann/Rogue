@@ -319,7 +319,7 @@ public class Monster extends Entity {
     // MONSTER ATTACK
 
     private void attack() {
-        if (Helper.random.nextDouble() <= GameManager.getPlayer().getStatus().getAc() / 100) {
+        if (Helper.random.nextDouble() <= (double) GameManager.getPlayer().getStatus().getAc() / 10) {
             if (!getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
                 switch (attackType) {
                     case HIT:
