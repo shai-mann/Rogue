@@ -1,0 +1,11 @@
+name:Giant Ant
+graphic:A
+hitDamage:1d6
+speed:1
+movementType:track
+attackType:weaken
+health:2d8
+AC:7
+experience:5
+treasure:5
+level:3-7

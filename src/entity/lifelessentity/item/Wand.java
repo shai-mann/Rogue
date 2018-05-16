@@ -8,9 +8,7 @@ import map.level.Room;
 import util.MessageBar;
 import helper.Helper;
 
-import java.awt.*;
 import java.io.File;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -69,7 +67,6 @@ public class Wand extends Item {
     public Wand(int x, int y) {
         super("/", x, y);
         randomizeWandData();
-        power = powers.INVISIBILITY;
     }
     public Wand(Wand wand) {
         super("/", wand.getXPos(), wand.getYPos());
@@ -91,6 +88,7 @@ public class Wand extends Item {
         switch (power) {
             case INVISIBILITY:
                 m.setInvisible(true);
+                GameManager.getTable().setValueAt(m.overWrittenGraphic, m.getYPos(), m.getXPos());
                 break;
             case LIGHTNING:
                 // TODO: implement Lightning, fire, and cold wand powers

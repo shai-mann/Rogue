@@ -7,3 +7,5 @@ First input is bugged and updates map but not player
 Scrolls don't always have the same name for the same type
 Get hungry too fast
 Rings don't hide their names
+Need to update stealing attacks so that the item one keeps the item and drops it as treasure, and stealgold drops gold one as treasure.
+Both stealGold and stealItem attackTypes need to have the monster run away from player (or tp away) after it steals from player

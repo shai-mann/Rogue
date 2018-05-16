@@ -9,4 +9,4 @@ health:4d8
 AC:7
 experience:29
 treasure:15
-level:4-10
+level:7-13

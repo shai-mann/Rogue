@@ -1,0 +1,12 @@
+name:Mimic
+graphic:M
+hitDamage:4d4
+speed:1
+movementType:mimic
+secondaryMovementType:still
+attackType:hit
+health:7d8
+AC:7
+experience:100
+treasure:30
+level:19-26

@@ -1,0 +1,12 @@
+name:Troll
+graphic:T
+hitDamage:4d10
+critDamage:6d10
+speed:1
+movementType:track
+attackType:hit
+health:6d8
+AC:4
+experience:120
+treasure:50
+level:13-16

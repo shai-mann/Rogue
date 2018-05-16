@@ -1,0 +1,12 @@
+name:Griffin
+graphic:G
+critChance:0.05
+hitDamage:4d3
+speed:2
+movementType:track
+attackType:hit
+health:13d8
+AC:2
+experience:2000
+treasure:20%
+level:20-25

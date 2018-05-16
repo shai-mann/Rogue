@@ -1,0 +1,11 @@
+name:Leprechaun
+graphic:L
+hitDamage:0d0
+speed:1
+movementType:track
+attackType:stealgold
+health:3d8
+AC:9
+experience:15
+treasure:100
+level:6-12
