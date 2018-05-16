@@ -1,5 +1,6 @@
 package map;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import entity.livingentity.Monster;
 import util.MessageBar;
 import util.SavePane;
@@ -50,7 +51,22 @@ public class Map {
         GameManager.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                new SavePane((JPanel) GameManager.getFrame().getContentPane());
+                Boolean userInput = null;
+                Thread saveThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new SavePane((JPanel) GameManager.getFrame().getContentPane(), userInput);
+                    }
+                });
+                saveThread.start();
+                while (userInput == null) {
+                    System.out.println("Waiting");
+                }
+                if (userInput.booleanValue()) {
+
+                } else {
+
+                }
             }
         });
     }

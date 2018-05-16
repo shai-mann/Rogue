@@ -22,12 +22,23 @@ public class SavePane {
     private JTextField nameField;
 
     private JPanel savedPanel;
+    private Boolean response;
 
-    public SavePane(JPanel savedPanel) {
+    public SavePane(JPanel savedPanel, Boolean userResponse) {
         setDefaults();
 
+        this.response = userResponse;
         this.savedPanel = savedPanel;
-        GameManager.replaceContentPane(panel);
+
+        JFrame f = new JFrame("Save Your Game?");
+        f.setContentPane(panel);
+        f.setVisible(true);
+        f.setLocationRelativeTo(null);
+        f.pack();
+        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        f.revalidate();
+        f.repaint();
     }
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
@@ -71,7 +82,7 @@ public class SavePane {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameManager.replaceContentPane(savedPanel);
+                response = false;
             }
         });
         nameField.addFocusListener(new FocusListener() {
@@ -92,6 +103,7 @@ public class SavePane {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
+                response = true;
                 try {
                     ObjectOutputStream output = new ObjectOutputStream(
                             new BufferedOutputStream(
