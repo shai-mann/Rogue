@@ -120,7 +120,7 @@ public class Level extends JComponent {
         if (levelNumber != 1 && direction == Player.UP) {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
-        new Ring(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+        new Armor(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
         // TODO: remove when done testing LoL
     }
 
