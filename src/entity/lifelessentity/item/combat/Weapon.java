@@ -1,0 +1,133 @@
+package entity.lifelessentity.item.combat;
+
+import entity.lifelessentity.item.Item;
+import helper.Helper;
+import main.GameManager;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Weapon extends Item {
+
+    private int damage = 1;
+    private boolean throwable = false;
+    private boolean isBow = false;
+    private boolean cursed = false;
+    private int throwDamage;
+    private int amount = 1;
+
+    public Weapon(String dataFilePath, int x, int y) {
+        super(")", x, y);
+        if (!(dataFilePath == null)) {
+            loadDataFile(dataFilePath);
+        } else {
+            File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/weapons").listFiles())));
+            loadDataFile(file.getPath());
+        }
+        if (damage <= 1) {
+            damage = 2;
+        }
+    }
+    public Weapon(Weapon weapon) {
+        super(")", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
+        name = weapon.getName();
+        damage = weapon.getMaxDamage();
+        throwable = weapon.isThrowable();
+        isBow = weapon.isBow();
+        cursed = weapon.isCursed();
+    }
+
+    // DATA LOADING
+
+    private void loadDataFile(String path) {
+        String line;
+        try {
+            FileReader fileReader = new FileReader(path);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                applyAttributeFromLine(line);
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            // TODO: Better error handling
+            System.out.println("Error: file not found");
+        } catch (IOException e) {
+            System.out.println("Error reading file");
+        }
+    }
+    private void applyAttributeFromLine(String line) {
+        String[] parsed = line.split(":");
+        switch (parsed[0].toLowerCase()) {
+            case "damage":
+                this.damage = parseDiceNotation(parsed[1]);
+                break;
+            case "throwable":
+                this.throwable = Boolean.valueOf(parsed[1]);
+                break;
+            case "isbow":
+                this.isBow = Boolean.valueOf(parsed[1]);
+                break;
+            case "name":
+                this.name = parsed[1];
+                break;
+            case "curseChance":
+                this.cursed = Helper.random.nextInt(99) + 1 <= Integer.valueOf(parsed[1]);
+                break;
+            case "throwdamage":
+                this.throwDamage = parseDiceNotation(parsed[1]);
+                break;
+            case "amount":
+                this.amount = parseDiceNotation(parsed[1]);
+                if (amount > 1) {
+                    name = name.concat("s");
+                }
+                break;
+        }
+    }
+
+    private static int parseDiceNotation(String die) {
+        String[] parts = die.split("d");
+        return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
+    }
+
+    // OVERRIDES
+
+    @Override
+    public void use() {
+        GameManager.getPlayer().setHeldItem(this);
+    }
+    @Override
+    public String getName() {
+        return isHeld() ? super.getName().concat(" (held)") : super.getName();
+    }
+
+    // GETTERS/SETTERS
+
+    private int getMaxDamage() {
+        return damage;
+    }
+    public void enchant() {
+        damage++;
+    }
+    public boolean isCursed() {
+        return cursed;
+    }
+    public int getDamage() {
+        return Helper.random.nextInt(damage - 1) + 1;
+    }
+    public int getThrowDamage() {
+        return Helper.random.nextInt(throwDamage) + 1;
+    }
+    public boolean isBow() {
+        return isBow;
+    }
+    public boolean isThrowable() {
+        return throwable;
+    }
+    public boolean isHeld() {
+        return this.equals(GameManager.getPlayer().getHeldItem());
+    }
+}

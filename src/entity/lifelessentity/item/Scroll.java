@@ -1,8 +1,7 @@
 package entity.lifelessentity.item;
 
 import entity.Effect;
-import entity.lifelessentity.item.combat.Armor;
-import entity.lifelessentity.item.combat.Sword;
+import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
 import util.MessageBar;
@@ -46,10 +45,11 @@ public class Scroll extends Item {
         randomizeScrollType();
     }
     public Scroll(Scroll scroll) {
-        super("?", scroll.getXPos(), scroll.getYPos());
-
+        super("?", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         this.name = scroll.getName();
         this.power = scroll.power;
+        this.hiddenName = scroll.getHiddenName();
     }
 
     @Override
@@ -65,8 +65,8 @@ public class Scroll extends Item {
                 player.toggleInventory("Select an item to identify");
                 break;
             case ENCHANT_WEAPON:
-                if (player.getHeldItem() instanceof Sword) {
-                    ((Sword) player.getHeldItem()).enchant();
+                if (player.getHeldItem() instanceof Weapon) {
+                    ((Weapon) player.getHeldItem()).enchant();
                     MessageBar.addMessage("Your sword glows for a moment");
                 } else {
                     MessageBar.addMessage("You feel a strange sense of loss");
@@ -123,6 +123,5 @@ public class Scroll extends Item {
         hiddenName = (String) Helper.getRandom(new ArrayList(Arrays.asList(names)));
         name = "Scroll of ".concat(Helper.createRandomString(Helper.random.nextInt(5) + 10));
         power = powers.valueOf(hiddenName.split("Scroll of")[1].trim().replace(" ", "_").toUpperCase());
-        power = powers.PROTECT_ARMOR; //JUST FOR TESTING TODO: UNDO AFTER DONE TESTING
     }
 }

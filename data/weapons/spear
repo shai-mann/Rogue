@@ -1,0 +1,5 @@
+name:Spear
+damage:2d3
+throwable:true
+throwDamage:1d6
+cursed:1

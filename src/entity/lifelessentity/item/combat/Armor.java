@@ -18,8 +18,8 @@ public class Armor extends Item {
         randomizeCursed();
     }
     public Armor(Armor item) {
-        super("]", item.getXPos(), item.getYPos());
-
+        super("]", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         this.name = item.getName();
         this.cursed = item.isCursed();
         this.ac = item.getAc();
@@ -30,17 +30,32 @@ public class Armor extends Item {
     @Override
     public void use() {
         Player player = GameManager.getPlayer();
+        if (isBeingWorn()) {
+            player.setWornItem(null);
+            MessageBar.addMessage("You remove the " + getName());
+            return;
+        }
         if (!(player.getWornItem() != null && player.getWornItem().isCursed())) {
             player.setWornItem(this);
-            player.getInventory().remove(this);
             MessageBar.addMessage("You equip the " + getName());
         } else {
             MessageBar.addMessage("You cannot take off the armor you are wearing");
         }
     }
+    @Override
+    public String getName() {
+        if (isBeingWorn()) {
+            return name.concat(" (worn)");
+        } else {
+            return super.getName();
+        }
+    }
 
     // GETTERS/SETTERS
 
+    public boolean isBeingWorn() {
+        return this.equals(GameManager.getPlayer().getWornItem());
+    }
     private void randomizeArmorType() {
         int type = Helper.random.nextInt(7) + 1; // TODO: Make this based on level or percentages
 

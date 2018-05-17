@@ -2,6 +2,8 @@ package util.inventory;
 
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import entity.lifelessentity.item.combat.Arrow;
+import entity.lifelessentity.item.combat.Weapon;
 import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -37,8 +39,10 @@ public class InventoryItem extends JComponent {
     }
     public void setButtonsVisible(boolean visible) {
         useButton.setVisible(visible);
-        //throwButton.setVisible(visible); make this only happen if it is a javelin or shurikens
         dropButton.setVisible(visible);
+        if (item instanceof Weapon && ((Weapon) item).isThrowable()) {
+            throwButton.setVisible(true);
+        }
     }
     public static ArrayList<InventoryItem> getInventoryItems() {
         return inventoryItems;
@@ -77,16 +81,58 @@ public class InventoryItem extends JComponent {
                 GameManager.getFrame().requestFocus();
             }
         });
+        dropButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!(item instanceof Armor && ((Armor) item).isBeingWorn()) &&
+                        !(item.equals(GameManager.getPlayer().getHeldItem()))) {
+                    GameManager.getPlayer().getInventory().remove(item);
+                    if (item instanceof Armor) {
+                        new Armor((Armor) item);
+                    } else if (item instanceof Ring) {
+                        new Ring((Ring) item);
+                    } else if (item instanceof Scroll) {
+                        new Scroll((Scroll) item);
+                    } else if (item instanceof Potion) {
+                        new Potion((Potion) item);
+                    } else if (item instanceof Food) {
+                        new Food((Food) item);
+                    } else if (item instanceof Wand) {
+                        new Wand((Wand) item);
+                    } else if (item instanceof Arrow) {
+                        new Arrow((Arrow) item);
+                    } else if (item instanceof Weapon) {
+                        new Weapon((Weapon) item);
+                    }
+                    GameManager.getPlayer().setOverwrittenGraphic(item.graphic);
+                    GameManager.getFrame().requestFocus();
+                    MessageBar.addMessage("You drop the " + getName());
+                } else {
+                    MessageBar.addMessage("You can't drop things you are wearing or holding.");
+                }
+                GameManager.getPlayer().toggleInventory();
+            }
+        });
     }
     private void setNames() {
         if (item instanceof Armor || item instanceof Ring) {
-            useButton.setText("Wear");
+            if (item instanceof Armor && ((Armor) item).isBeingWorn()) {
+                useButton.setText("Remove");
+            } else {
+                useButton.setText("Wear");
+            }
         } else if (item instanceof Potion) {
             useButton.setText("Drink");
         } else if (item instanceof Food) {
             useButton.setText("Eat");
         } else if (item instanceof Scroll) {
             useButton.setText("Read");
+        } else if (item instanceof Weapon) {
+            if (((Weapon) item).isHeld()) {
+                useButton.setText("Hold");
+            } else {
+                useButton.setText("Put away");
+            }
         }
     }
 }

@@ -157,7 +157,7 @@ public class Monster extends Entity {
             case "mimic":
                 getStatus().setSleeping(true);
                 hiddenChar = graphic;
-                String[] chars = {"\\", "&", "*", "]", "%", "?", "!"};
+                String[] chars = {"\\", "&", "*", "]", "%", "?", "!", "(", ","};
                 graphic = (String) Helper.getRandom(new ArrayList(Arrays.asList(chars)));
                 GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
                 return movementTypes.MIMIC;
@@ -454,13 +454,7 @@ public class Monster extends Entity {
     }
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
-        int amount = Integer.parseInt(parts[0]);
-        int faces = Integer.parseInt(parts[1]);
-        int total = 0;
-        for (int i = 0; i < amount; i++) {
-            total += new Random().nextInt(faces) + 1;
-        }
-        return total;
+        return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
     }
 
     private void moveRandom() {

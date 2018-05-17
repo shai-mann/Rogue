@@ -69,7 +69,8 @@ public class Wand extends Item {
         randomizeWandData();
     }
     public Wand(Wand wand) {
-        super("/", wand.getXPos(), wand.getYPos());
+        super("/", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         name = wand.getName();
         hiddenName = wand.getHiddenName();
         power = wand.getPower();

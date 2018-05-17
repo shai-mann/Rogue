@@ -3,6 +3,8 @@ package entity.lifelessentity.item;
 import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.lifelessentity.item.combat.Armor;
+import entity.lifelessentity.item.combat.Arrow;
+import entity.lifelessentity.item.combat.Weapon;
 import util.MessageBar;
 import helper.Helper;
 import map.level.Room;
@@ -15,7 +17,7 @@ public class Item extends Entity {
     public static ArrayList<Item> items = new ArrayList<>();
     public String name;
     public String hiddenName;
-    public enum itemTypes { ARMOR, GOLD, FOOD, RING, POTION, WAND, SCROLL }
+    public enum itemTypes { ARMOR, GOLD, FOOD, RING, POTION, WAND, SCROLL, WEAPON, ARROW }
 
     public Item(String g, int x, int y) {
         super(g, x, y);
@@ -149,6 +151,12 @@ public class Item extends Entity {
                 break;
             case SCROLL:
                 new Scroll(location.x, location.y);
+                break;
+            case ARROW:
+                new Arrow(location.x, location.y);
+                break;
+            case WEAPON:
+                new Weapon(null, location.x, location.y);
                 break;
         }
     }

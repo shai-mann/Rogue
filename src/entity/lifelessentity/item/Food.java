@@ -26,8 +26,8 @@ public class Food extends Item {
         amount = Helper.random.nextInt(15) + 5;
     }
     public Food(Food food) {
-        super(":", food.getXPos(), food.getYPos());
-
+        super(":", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         this.name = food.getName();
         this.amount = food.amount;
     }

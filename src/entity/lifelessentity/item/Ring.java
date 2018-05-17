@@ -63,8 +63,11 @@ public class Ring extends Item {
         randomizeRingType();
     }
     public Ring(Ring item) {
-        super("&", item.getXPos(), item.getYPos());
+        super("&", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         this.name = item.getName();
+        this.power = item.power;
+        this.effect = item.effect;
     }
 
     // RING DATA RANDOMIZING

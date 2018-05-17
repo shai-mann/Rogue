@@ -62,7 +62,8 @@ public class Entity {
         }
         return value.equals("-") || value.equals("+") || value.equals("#") ||
                 value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%") ||
-                value.equals("?") || value.equals("/") || value.equals("^") || value.equals(":") || value.equals("!");
+                value.equals("?") || value.equals("/") || value.equals("^") || value.equals(":") ||
+                value.equals("!") || value.equals(")") || value.equals(",");
     }
     private String graphicAtMove(int direction) {
         Object value;

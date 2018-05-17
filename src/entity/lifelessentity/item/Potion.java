@@ -1,6 +1,7 @@
 package entity.lifelessentity.item;
 
 import helper.Helper;
+import main.GameManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +59,8 @@ public class Potion extends Item {
         randomizePotionData();
     }
     public Potion(Potion potion) {
-        super("!", potion.getXPos(), potion.getYPos());
+        super("!", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        overWrittenGraphic = "-";
         name = potion.getName();
         hiddenName = potion.getHiddenName();
         power = potion.getPower();

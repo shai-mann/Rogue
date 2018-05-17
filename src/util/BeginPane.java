@@ -60,7 +60,6 @@ public class BeginPane extends JComponent {
     }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
         imagePanel = new ImagePanel();
     }
 }

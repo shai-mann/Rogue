@@ -7,7 +7,7 @@ import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
-import entity.lifelessentity.item.combat.Sword;
+import entity.lifelessentity.item.combat.Weapon;
 import util.inventory.InventoryItem;
 import map.level.Door;
 import map.level.Level;
@@ -124,7 +124,7 @@ public class Player extends Entity implements KeyListener {
         }
         if (moved && health < maxHealth) {
             regenStepsCounter++;
-            if (regenStepsCounter >= 20 - level) {
+            if (regenStepsCounter >= 21 - level) {
                 health++;
                 regenStepsCounter = 0;
                 Map.getMap().getStatusBar().updateStatusBar();
@@ -196,7 +196,7 @@ public class Player extends Entity implements KeyListener {
                     Status monsterStatus = monster.getStatus();
                     monsterStatus.setHealth(monsterStatus.getHealth() - getDamage());
                     map.update();
-                    if (monster.health > 0) {
+                    if (monster.getStatus().getHealth() > 0) {
                         MessageBar.addMessage("You hit the " + monster.getName());
                     }
                     if (monster.getStatus().isSleeping()) {
@@ -237,7 +237,6 @@ public class Player extends Entity implements KeyListener {
         }
     }
     private int updateHungerStatus() {
-        MessageBar.addMessage(stepsTakenSinceMeal + " : " + hungerLevel);
         if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 400 : 200)) {
             if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 800 : 400)) {
                 if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 1600 : 800)) {
@@ -280,7 +279,8 @@ public class Player extends Entity implements KeyListener {
             Item.items.remove(foundGold);
         } else if (overWrittenGraphic.equals("]") || overWrittenGraphic.equals("&") ||
                 overWrittenGraphic.equals(":") || overWrittenGraphic.equals("?") ||
-                overWrittenGraphic.equals("/") || overWrittenGraphic.equals("!")) {
+                overWrittenGraphic.equals("/") || overWrittenGraphic.equals("!") ||
+                overWrittenGraphic.equals(")") || overWrittenGraphic.equals(",")) {
             Item foundItem = Item.getItemAt(getXPos(), getYPos());
             if (foundItem == null) {
                 return;
@@ -336,7 +336,7 @@ public class Player extends Entity implements KeyListener {
     private int getDamage() {
         int damage = 2;
         if (getHeldItem() != null) {
-            damage = ((Sword) getHeldItem()).getDamage();
+            damage = ((Weapon) getHeldItem()).getDamage();
         }
         damage = getStatus().isWeakened() ?  damage - 1 : damage;
         damage = getStatus().getEffects().hasEffect(Effect.STRENGTH) ? damage + 2 : damage;
@@ -392,18 +392,16 @@ public class Player extends Entity implements KeyListener {
         Map.getMap().getStatusBar().updateStatusBar();
     }
     public void setWornItem(Armor wornItem) {
-        if (this.wornItem != null) {
-            getInventory().add(this.wornItem);
-        }
         this.wornItem = wornItem;
-        getStatus().setAc(wornItem.getAc());
+        if (wornItem != null) {
+            getStatus().setAc(wornItem.getAc());
+        } else {
+            getStatus().setAc(9);
+        }
         getStatus().getEffects().removeEffect(Effect.PROTECT_ARMOR);
         Map.getMap().getStatusBar().updateStatusBar();
     }
     public void setHeldItem(Item heldItem) {
-        if (this.heldItem != null) {
-            getInventory().add(getHeldItem());
-        }
         this.heldItem = heldItem;
     }
     public void wearRing(Ring ring) {
@@ -414,5 +412,9 @@ public class Player extends Entity implements KeyListener {
         } else {
             // TODO: figure out what to do if both hands already have rings (how to replace an already worn ring)
         }
+    }
+    public void setOverwrittenGraphic(String overwrittenGraphic) {
+        this.overWrittenGraphic = overwrittenGraphic;
+        GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
     }
 }

@@ -1,0 +1,5 @@
+name:Shuriken
+damage:1d2
+throwable:true
+throwDamage:2d4
+amount:3d4
