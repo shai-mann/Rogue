@@ -291,7 +291,7 @@ public class Monster extends Entity {
 
     }
     private void wanderMovement() {
-        if (isNextTo(GameManager.getPlayer())) {
+        if (isNextTo(GameManager.getPlayer()) && !(Helper.random.nextInt(99) + 1 <= 90)) {
             attack();
         } else {
             moveRandom();
@@ -303,7 +303,7 @@ public class Monster extends Entity {
         }
     }
     private void sleepMovement() {
-        if (!getStatus().isSleeping()) {
+        if (!getStatus().isSleeping() || GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.AGGRAVATE_MONSTER)) {
             move(secondaryMovementType);
         }
     }
@@ -392,8 +392,12 @@ public class Monster extends Entity {
         MessageBar.addMessage("You feel strange");
     }
     private void weakenAttack() {
-        GameManager.getPlayer().getStatus().setWeakened(Helper.random.nextInt(10) + 2);
-        MessageBar.addMessage("You feel weaker");
+        if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SUSTAIN_STRENGTH)) {
+            MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
+        } else {
+            GameManager.getPlayer().getStatus().setWeakened(Helper.random.nextInt(10) + 2);
+            MessageBar.addMessage("You feel weaker");
+        }
     }
     private void stealGoldAttack() {
         GameManager.getPlayer().stealGold(Helper.random.nextInt(50) + GameManager.getPlayer().getGold() / 4);
@@ -421,16 +425,18 @@ public class Monster extends Entity {
     }
     private void xpDrainAttack() {
         GameManager.getPlayer().addExperience((int) -(GameManager.getPlayer().getExperience() * 0.9));
+        MessageBar.addMessage("The " + name + " preys on your mind. Your experience drains away");
     }
     private void healthDrainAttack() {
         GameManager.getPlayer().drainMaxHealth((int) (GameManager.getPlayer().getMaxHealth() * 0.9));
+        MessageBar.addMessage("");
     }
 
     // OVERRIDES
 
     public boolean move(int direction) {
         super.move(direction);
-        if (this.invisible) {
+        if (this.invisible && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         }
         return true;

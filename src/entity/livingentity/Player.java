@@ -7,6 +7,7 @@ import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import entity.lifelessentity.item.combat.Sword;
 import util.inventory.InventoryItem;
 import map.level.Door;
 import map.level.Level;
@@ -63,6 +64,7 @@ public class Player extends Entity implements KeyListener {
         GameManager.getTable().setValueAt("", 0, 0);
         GameManager.getFrame().addKeyListener(this);
         status = new Status();
+        getStatus().setAc(9);
         map = Map.getMap();
     }
 
@@ -138,7 +140,10 @@ public class Player extends Entity implements KeyListener {
     private Object search() {
         for (Door door : Door.getDoors()) {
             if (door.isSecret() && isNextTo(door)) {
-                if (Helper.random.nextInt(99) + 1 >= 75) {
+                int chance = Helper.random.nextInt(99) + 1;
+                if (getStatus().getEffects().hasEffect(Effect.SEARCHING) && chance <= 90) {
+                    return door;
+                } else if (chance <= 75){
                     return door;
                 }
             }
@@ -227,12 +232,16 @@ public class Player extends Entity implements KeyListener {
         if (!checkTrap()) {
             checkToPickUpItem();
         }
+        if (getStatus().getEffects().hasEffect(Effect.REGENERATION) && health < maxHealth) {
+            health++;
+        }
     }
     private int updateHungerStatus() {
-        if (stepsTakenSinceMeal > 100) {
-            if (stepsTakenSinceMeal > 300) {
-                if (stepsTakenSinceMeal > 550) {
-                    if (stepsTakenSinceMeal > 600) {
+        MessageBar.addMessage(stepsTakenSinceMeal + " : " + hungerLevel);
+        if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 400 : 200)) {
+            if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 800 : 400)) {
+                if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 1600 : 800)) {
+                    if (stepsTakenSinceMeal > (getStatus().getEffects().hasEffect(Effect.SLOW_DIGESTION) ? 3200 : 1600)) {
                         health = 0;
                         return 4;
                     } else {
@@ -325,8 +334,13 @@ public class Player extends Entity implements KeyListener {
         return experience;
     }
     private int getDamage() {
-        // TODO: when swords are added, make it based on damage of heldItem
-        return getStatus().isWeakened() ? 1 : 2;
+        int damage = 2;
+        if (getHeldItem() != null) {
+            damage = ((Sword) getHeldItem()).getDamage();
+        }
+        damage = getStatus().isWeakened() ?  damage - 1 : damage;
+        damage = getStatus().getEffects().hasEffect(Effect.STRENGTH) ? damage + 2 : damage;
+        return damage;
     }
     public int getMaxHealth() {
         return maxHealth;

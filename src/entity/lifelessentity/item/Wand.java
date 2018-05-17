@@ -139,7 +139,6 @@ public class Wand extends Item {
             Item.items.remove(this);
             MessageBar.addMessage("Your " + name + " breaks");
         }
-        MessageBar.addMessage(power.toString());
     }
     private powers getPower() {
         return power;

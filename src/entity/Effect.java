@@ -10,6 +10,15 @@ public class Effect {
     public static final int CONFUSE_ON_HIT = 1;
     // SUPPRESS_POWER is only for Monster, and makes the attackTypes and movementTypes of the monsters normal while the effect is on
     public static final int SUPPRESS_POWER = 2;
+    // The following effects are only from Rings
+    public static final int PROTECTION = 3;
+    public static final int SEARCHING = 4;
+    public static final int SEE_INVISIBLE = 5;
+    public static final int SUSTAIN_STRENGTH = 6;
+    public static final int STRENGTH = 7;
+    public static final int REGENERATION = 8;
+    public static final int AGGRAVATE_MONSTER = 9;
+    public static final int SLOW_DIGESTION = 10;
 
     private ArrayList<Integer> effects = new ArrayList<>();
 

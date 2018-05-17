@@ -45,7 +45,11 @@ public class Status {
         return drunk > 0;
     }
     public int getAc() {
-        return ac;
+        if (getEffects().hasEffect(Effect.PROTECTION)) {
+            return ac + 1;
+        } else {
+            return ac;
+        }
     }
     public boolean isWeakened() {
         return weakened > 0;
