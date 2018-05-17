@@ -15,9 +15,6 @@ public class GameManager {
     private static JFrame frame;
     private static Player player;
 
-    // TODO: Current bugs are:
-    // Doorways can still be next to each other or inside of each other
-
     public static void main(String[] args) {
         initFrame();
         runStaticSetupMethods();
