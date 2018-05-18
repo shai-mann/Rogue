@@ -41,7 +41,7 @@ public class InventoryItem extends JComponent {
         useButton.setVisible(visible);
         dropButton.setVisible(visible);
         if (item instanceof Weapon && ((Weapon) item).isThrowable()) {
-            throwButton.setVisible(true);
+            throwButton.setVisible(visible);
         }
     }
     public static ArrayList<InventoryItem> getInventoryItems() {
@@ -121,6 +121,9 @@ public class InventoryItem extends JComponent {
             } else {
                 useButton.setText("Wear");
             }
+            if (item instanceof Ring && GameManager.getPlayer().getRings().contains(item)) {
+                useButton.setText("Remove");
+            }
         } else if (item instanceof Potion) {
             useButton.setText("Drink");
         } else if (item instanceof Food) {
@@ -128,7 +131,7 @@ public class InventoryItem extends JComponent {
         } else if (item instanceof Scroll) {
             useButton.setText("Read");
         } else if (item instanceof Weapon) {
-            if (((Weapon) item).isHeld()) {
+            if (!((Weapon) item).isHeld()) {
                 useButton.setText("Hold");
             } else {
                 useButton.setText("Put away");

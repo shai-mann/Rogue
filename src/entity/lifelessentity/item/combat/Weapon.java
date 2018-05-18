@@ -3,6 +3,7 @@ package entity.lifelessentity.item.combat;
 import entity.lifelessentity.item.Item;
 import helper.Helper;
 import main.GameManager;
+import util.MessageBar;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -97,6 +98,10 @@ public class Weapon extends Item {
 
     @Override
     public void use() {
+        if (GameManager.getPlayer().getHeldItem().equals(this)) {
+            GameManager.getPlayer().setHeldItem(null);
+            MessageBar.addMessage("You put away the " + getName());
+        }
         GameManager.getPlayer().setHeldItem(this);
     }
     @Override

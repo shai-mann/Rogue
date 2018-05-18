@@ -4,6 +4,7 @@ import entity.Entity;
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
 import helper.Helper;
@@ -120,7 +121,7 @@ public class Level extends JComponent {
         if (levelNumber != 1 && direction == Player.UP) {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
-        new Armor(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+        new Weapon(null, getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
         // TODO: remove when done testing LoL
     }
 

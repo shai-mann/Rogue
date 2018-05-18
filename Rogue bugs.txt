@@ -12,3 +12,38 @@
 - Doors can generate next to each other
 - Monsters can spawn in the same place as an item, causing the item to look like it is there for one turn, and then be overwritten on the first
 map update by the monster
+
+
+Features To Implement:
+- level mapping
+- animations
+    - Explosion animations (wands of fire, ice, and lightning)
+    - Cone animations (dragon fire breathing)
+- three ring powers
+- several wand powers (see animations)
+- one scroll type
+- change armor to be about damage reduction
+- give monsters custom hit chances
+- ring wearing
+- shooting arrows
+- all potion powers
+- different food potencies
+- monster and item spawnChances
+- starting items in first room on first level (only when going down) and no monsters in that room (same circumstances)
+
+ALPHA TESTER SUGGESTIONS:
+- resting 
+- kobold attack too high
+- throw button bugged
+- two many secret doorways
+- make snake less health
+- staff of teleport to makes duplicate player
+- 
+- 
+- 
+- 
+
+
+DAD'S NOTES (USELESS, IGNORE)
+- Starting pack should include: food, bow, arrows (random numer) short sword (+1, +1),  ring mail (+1)
+- you should start with this stuff, or at least that stuff in the first room

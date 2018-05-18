@@ -75,6 +75,10 @@ public class Ring extends Item {
     @Override
     public void use() {
         Player p = GameManager.getPlayer();
+        if (p.getRings().contains(this)) {
+            remove();
+            return;
+        }
         p.wearRing(this);
         switch (power) {
             case PROTECTION:
@@ -113,8 +117,13 @@ public class Ring extends Item {
                 p.getStatus().getEffects().addEffect(Effect.SLOW_DIGESTION);
                 effect = Effect.SLOW_DIGESTION;
                 break;
-            // TODO: add in ring of Dexterity, Adornment, and Teleportation
+            case ADORNMENT:
+                // Adornment does nothing but be worth ten gold, so it is effectively useless
+                break;
+            // TODO: add in ring of Dexterity and Teleportation
         }
+        MessageBar.addMessage("You put on the " + getName());
+        MessageBar.addMessage(power.toString());
     }
     public void remove() {
         GameManager.getPlayer().getInventory().add(this);

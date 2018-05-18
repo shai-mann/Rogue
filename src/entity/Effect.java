@@ -29,8 +29,8 @@ public class Effect {
         effects.add(type);
     }
     public void removeEffect(int type) {
-        if (effects.contains(type)) {
-            effects.remove(type);
+        if (effects != null && effects.contains(type)) {
+            effects.remove(Integer.valueOf(type));
         }
     }
     public boolean hasEffect(int effect) {

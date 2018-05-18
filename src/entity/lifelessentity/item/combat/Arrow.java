@@ -14,7 +14,7 @@ public class Arrow extends Item {
         name = String.valueOf(amount) + "arrows";
     }
     public Arrow(Arrow arrow) {
-        super(",", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
+        super(")", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
         overWrittenGraphic = "-";
         amount = arrow.getAmount();
     }

@@ -368,6 +368,16 @@ public class Player extends Entity implements KeyListener {
     public Armor getWornItem() {
         return wornItem;
     }
+    public ArrayList<Ring> getRings() {
+        ArrayList<Ring> rings = new ArrayList<>();
+        if (leftRing != null) {
+            rings.add(leftRing);
+        }
+        if (rightRing != null) {
+            rings.add(rightRing);
+        }
+        return rings;
+    }
 
     // SETTERS
 

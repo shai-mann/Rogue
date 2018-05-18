@@ -3,7 +3,7 @@ package entity;
 public class Status {
 
     private int health = 20;
-    private int paralyzed = 0;
+    private int paralyzed = -1;
     private int confused = 0;
     private int drunk = 0;
     private int ac = 10;
