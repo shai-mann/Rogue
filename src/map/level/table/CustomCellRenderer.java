@@ -22,6 +22,10 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
             return Color.YELLOW;
         } else if (value.matches("[a-zA-Z]")) { // monsters
             return Color.RED;
+        } else if (value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%") ||
+                value.equals("?") || value.equals("/") || value.equals("^") || value.equals(":") ||
+                value.equals("!") || value.equals(")")) {
+            return Color.GREEN;
         } else {
             return Helper.FOREGROUND_COLOR;
         }
