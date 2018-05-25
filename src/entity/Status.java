@@ -1,8 +1,9 @@
 package entity;
 
+import main.GameManager;
+
 public class Status {
 
-    private int health = 20;
     private int paralyzed = -1;
     private int confused = 0;
     private int drunk = 0;
@@ -10,10 +11,14 @@ public class Status {
     private int weakened = 0;
     private boolean sleeping = false;
     private int sleepTurns = 0;
+    private int poisoned = 0;
+    private int strengthened = 0;
     private Effect effects = new Effect();
 
-    public Status() {
+    private Entity target;
 
+    public Status(Entity e) {
+        target = e;
     }
     public void update() {
         if (isParalyzed()) {
@@ -31,9 +36,12 @@ public class Status {
         if (sleepTurns > 0) {
             sleepTurns--;
         }
+        if (isPoisoned()) {
+            poisoned--;
+        }
     }
     public int getHealth() {
-        return health;
+        return target.health;
     }
     public boolean isParalyzed() {
         return paralyzed > -1;
@@ -57,12 +65,18 @@ public class Status {
     public boolean isSleeping() {
         return sleeping || sleepTurns <= 0;
     }
+    public boolean isPoisoned() {
+        return poisoned > 0;
+    }
+    public boolean isStrengthened() {
+        return strengthened > 0;
+    }
     public Effect getEffects() {
         return effects;
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        target.health = health;
     }
     public void setParalyzed(int turns) {
         this.paralyzed = turns;
@@ -88,6 +102,12 @@ public class Status {
     }
     public void setSleeping(int turns) {
         sleepTurns = turns;
+    }
+    public void setPoisoned(int turns) {
+        this.poisoned = turns;
+    }
+    public void setStrengthened(int turns) {
+        this.strengthened = turns;
     }
 
 }

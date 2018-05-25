@@ -65,7 +65,7 @@ public class Monster extends Entity {
     public Monster(String dataFilePath, int x, int y) {
         super("-", x, y);
         monsters.add(this);
-        status = new Status();
+        status = new Status(this);
         loadDataFile(dataFilePath);
     }
 

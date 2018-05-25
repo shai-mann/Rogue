@@ -9,7 +9,7 @@ public class Arrow extends Item {
     private int amount = 1;
 
     public Arrow(int x, int y) {
-        super(",", x, y);
+        super(")", x, y);
         amount = Helper.random.nextInt(20) + 5;
         name = String.valueOf(amount) + "arrows";
     }

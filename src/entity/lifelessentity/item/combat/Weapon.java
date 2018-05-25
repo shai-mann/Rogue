@@ -98,7 +98,7 @@ public class Weapon extends Item {
 
     @Override
     public void use() {
-        if (GameManager.getPlayer().getHeldItem().equals(this)) {
+        if (GameManager.getPlayer().getHeldItem() != null && GameManager.getPlayer().getHeldItem().equals(this)) {
             GameManager.getPlayer().setHeldItem(null);
             MessageBar.addMessage("You put away the " + getName());
         }

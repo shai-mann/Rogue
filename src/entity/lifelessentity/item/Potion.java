@@ -1,7 +1,10 @@
 package entity.lifelessentity.item;
 
+import entity.Effect;
+import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
+import util.MessageBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,7 +76,50 @@ public class Potion extends Item {
     }
     @Override
     public void use() {
-
+        Player p = GameManager.getPlayer();
+        switch (power) {
+            case CONFUSION:
+                p.getStatus().setConfused(Helper.random.nextInt(2) + 19);
+                break;
+            case HALLUCINATION:
+                // implement hallucination
+                MessageBar.addMessage("You feel strange, as if you are seeing things");
+                break;
+            case POISON:
+                p.getStatus().setPoisoned(Helper.random.nextInt(80) + 20);
+                MessageBar.addMessage("Poison flows through your bloodstream");
+                break;
+            case GAIN_STRENGTH:
+                p.getStatus().setStrengthened(Helper.random.nextInt(20));
+                MessageBar.addMessage("You feel stronger");
+                break;
+            case SEE_INVISIBLE:
+                p.getStatus().getEffects().addEffect(Effect.SEE_INVISIBLE);
+                MessageBar.addMessage("Your eyesight becomes better");
+                break;
+            case HEALING:
+                p.getStatus().setHealth(p.getHealth() + p.getLevel());
+                break;
+            case MONSTER_DETECTION:
+                // TODO: implement monster_detection, magic_detection, hallucination, and blindness potions
+                break;
+            case MAGIC_DETECTION:
+                break;
+            case RAISE_LEVEL:
+                p.addExperience(p.getLevelThreshold() + 1);
+                break;
+            case EXTRA_HEALING:
+                p.getStatus().setHealth(p.getHealth() + (8 * p.getLevel()));
+                MessageBar.addMessage("You feel much better");
+                break;
+            case RESTORE_STRENGTH:
+                p.getStatus().setWeakened(0);
+                break;
+            case BLINDNESS:
+                break;
+        }
+        p.getInventory().remove(this);
+        MessageBar.addMessage(power.toString());
     }
     public powers getPower() {
         return power;

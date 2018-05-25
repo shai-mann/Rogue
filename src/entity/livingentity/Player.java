@@ -63,7 +63,7 @@ public class Player extends Entity implements KeyListener {
         setLocation(room);
         GameManager.getTable().setValueAt("", 0, 0);
         GameManager.getFrame().addKeyListener(this);
-        status = new Status();
+        status = new Status(this);
         getStatus().setAc(9);
         map = Map.getMap();
     }
@@ -128,6 +128,9 @@ public class Player extends Entity implements KeyListener {
                 health++;
                 regenStepsCounter = 0;
                 Map.getMap().getStatusBar().updateStatusBar();
+            }
+            if (getStatus().isPoisoned() && health > 3) {
+                health--;
             }
         }
         status.update();
@@ -340,6 +343,12 @@ public class Player extends Entity implements KeyListener {
         }
         damage = getStatus().isWeakened() ?  damage - 1 : damage;
         damage = getStatus().getEffects().hasEffect(Effect.STRENGTH) ? damage + 2 : damage;
+        if (getStatus().isPoisoned()) {
+            damage -= Helper.random.nextInt(1) + 1;
+        }
+        if (getStatus().isStrengthened()) {
+            damage += 1;
+        }
         return damage;
     }
     public int getMaxHealth() {
@@ -377,6 +386,9 @@ public class Player extends Entity implements KeyListener {
             rings.add(rightRing);
         }
         return rings;
+    }
+    public int getLevel() {
+        return level;
     }
 
     // SETTERS
