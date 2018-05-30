@@ -3,7 +3,6 @@ package map.level;
 import entity.Entity;
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.item.*;
-import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
@@ -26,17 +25,20 @@ public class Level extends JComponent {
     * Generates 5-8 rooms per level
     * Generates Passageways connecting all rooms to all other rooms
     * Generates Treasure and monsters in each of the rooms
-    * Generates the Player in the starting table with the descendingStaircase up one level in the same table
+    * Generates the Player in the starting hiddenTable with the descendingStaircase up one level in the same hiddenTable
     * Generates descendingStaircase going down to next level (except on last level)
     * Level size is 69 * 40
      */
 
     private JPanel panel;
     private CustomRoomTable table;
+    private CustomRoomTable hiddenTable;
     private Room startingRoom;
     private Staircase descendingStaircase;
     private Staircase ascendingStaircase;
     private int levelNumber = 0;
+
+    private ArrayList<Point> shownPoints = new ArrayList<>();
 
     private static Level level;
 
@@ -50,6 +52,7 @@ public class Level extends JComponent {
         panel.revalidate();
         panel.repaint();
         GameManager.getFrame().requestFocus();
+        shownPoints.clear();
     }
     private void generateLevel(int direction) {
         if (levelNumber != 0 && direction == Player.DOWN) {
@@ -62,6 +65,23 @@ public class Level extends JComponent {
         }
         generateRooms();
         startingRoom = generatePassageways();
+    }
+
+    public void update() {
+        Point location = GameManager.getPlayer().getLocation();
+
+        shownPoints.add(location);
+        shownPoints.add(new Point(location.x, location.y + 1));
+        shownPoints.add(new Point(location.x, location.y - 1));
+        shownPoints.add(new Point(location.x + 1, location.y));
+        shownPoints.add(new Point(location.x - 1, location.y));
+
+        for (Point p : shownPoints) {
+            table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
+        }
+    }
+    public void finalSetup() {
+        shownPoints.add(GameManager.getPlayer().getLocation());
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
@@ -83,8 +103,8 @@ public class Level extends JComponent {
     }
     private Room generatePassageways() {
         /*
-        * 1) Get closest unconnected table to top left
-        * 2) Get closest connected table to that table
+        * 1) Get closest unconnected hiddenTable to top left
+        * 2) Get closest connected hiddenTable to that hiddenTable
         * 3) Connect those rooms
         * 4) Repeat until there are no unconnected rooms
          */
@@ -180,13 +200,14 @@ public class Level extends JComponent {
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        table.setBackground(Helper.BACKGROUND_COLOR);
-        table.setGridColor(Helper.BACKGROUND_COLOR);
-        table.setRowHeight((int) (table.getRowHeight() * 0.9));
+        hiddenTable.setBackground(Helper.BACKGROUND_COLOR);
+        hiddenTable.setGridColor(Helper.BACKGROUND_COLOR);
+        hiddenTable.setRowHeight((int) (hiddenTable.getRowHeight() * 0.9));
 
         level = this;
     }
     private void createUIComponents() {
+        hiddenTable = new CustomRoomTable(createTableModel());
         table = new CustomRoomTable(createTableModel());
 
         table.setFocusable(false);
@@ -224,17 +245,17 @@ public class Level extends JComponent {
         Door.getDoors().clear();
         descendingStaircase = null;
         ascendingStaircase = null;
-        for (int i = 0; i < table.getRowCount(); i++) {
-            for (int j = 0; j < table.getColumnCount(); j++) {
-                table.setValueAt("", i, j);
+        for (int i = 0; i < hiddenTable.getRowCount(); i++) {
+            for (int j = 0; j < hiddenTable.getColumnCount(); j++) {
+                hiddenTable.setValueAt("", i, j);
             }
         }
     }
 
     // GETTER METHODS
 
-    public CustomRoomTable getTable() {
-        return table;
+    public CustomRoomTable getHiddenTable() {
+        return hiddenTable;
     }
     public static Level getLevel() {
         return level;

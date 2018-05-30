@@ -32,6 +32,7 @@ public class Map {
         Monster.update();
         GameManager.getPlayer().update();
         statusBar.updateStatusBar(); // must go after player update
+        level.update();
     }
 
     // GETTER/HELPER METHODS
@@ -62,7 +63,7 @@ public class Map {
                 while (userInput == null) {
                     System.out.println("Waiting");
                 }
-                if (userInput.booleanValue()) {
+                if (userInput) {
 
                 } else {
 

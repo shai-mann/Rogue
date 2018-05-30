@@ -54,9 +54,9 @@ public class Room {
                 return false;
             }
         }
-        if (tempBounds.getBounds().getMaxX() > Level.getLevel().getTable().getColumnCount() - 2 ||
+        if (tempBounds.getBounds().getMaxX() > Level.getLevel().getHiddenTable().getColumnCount() - 2 ||
                 tempBounds.getBounds().getMinX() < 0 ||
-                tempBounds.getBounds().getMaxY() > Level.getLevel().getTable().getRowCount() - 2 ||
+                tempBounds.getBounds().getMaxY() > Level.getLevel().getHiddenTable().getRowCount() - 2 ||
                 tempBounds.getBounds().getMinY() < 0) {
             return false;
         }

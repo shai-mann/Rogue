@@ -56,7 +56,7 @@ public class GameManager {
     // GETTER AND SETTER METHODS
 
     public static CustomRoomTable getTable() {
-        return Level.getLevel().getTable();
+        return Level.getLevel().getHiddenTable();
     }
     public static JFrame getFrame() {
         return frame;

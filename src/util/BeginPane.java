@@ -3,6 +3,7 @@ package util;
 import helper.Helper;
 import main.GameManager;
 import map.Map;
+import map.level.Level;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -42,6 +43,7 @@ public class BeginPane extends JComponent {
             public void actionPerformed(ActionEvent e) {
                 new Map();
                 GameManager.createPlayer();
+                Level.getLevel().finalSetup();
                 GameManager.getFrame().requestFocus();
             }
         });
