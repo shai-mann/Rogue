@@ -52,21 +52,13 @@ public class Map {
         GameManager.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Boolean userInput = null;
-                Thread saveThread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        new SavePane((JPanel) GameManager.getFrame().getContentPane(), userInput);
+                new SavePane();
+                synchronized (this) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
                     }
-                });
-                saveThread.start();
-                while (userInput == null) {
-                    System.out.println("Waiting");
-                }
-                if (userInput) {
-
-                } else {
-
                 }
             }
         });

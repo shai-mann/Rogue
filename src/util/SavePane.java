@@ -21,16 +21,12 @@ public class SavePane {
     private JLabel title;
     private JTextField nameField;
 
-    private JPanel savedPanel;
-    private Boolean response;
+    private JFrame f;
 
-    public SavePane(JPanel savedPanel, Boolean userResponse) {
+    public SavePane() {
         setDefaults();
 
-        this.response = userResponse;
-        this.savedPanel = savedPanel;
-
-        JFrame f = new JFrame("Save Your Game?");
+        f = new JFrame("Save Your Game?");
         f.setContentPane(panel);
         f.setVisible(true);
         f.setLocationRelativeTo(null);
@@ -82,7 +78,8 @@ public class SavePane {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                response = false;
+                f.dispose();
+                GameManager.getFrame().requestFocus();
             }
         });
         nameField.addFocusListener(new FocusListener() {
@@ -103,7 +100,6 @@ public class SavePane {
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
-                response = true;
                 try {
                     ObjectOutputStream output = new ObjectOutputStream(
                             new BufferedOutputStream(

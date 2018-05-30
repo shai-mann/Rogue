@@ -45,6 +45,7 @@ public class Level extends JComponent {
     public Level() {
         setDefaults();
         newLevel(Player.DOWN);
+        table.setValueAt("&", 30, 65);
     }
     public void newLevel(int direction) {
         generateLevel(direction);
@@ -215,6 +216,7 @@ public class Level extends JComponent {
         table.setForeground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
         table.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 12));
+        table.setRowHeight(12);
 
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(new CustomCellRenderer());
