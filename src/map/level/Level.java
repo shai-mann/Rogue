@@ -121,8 +121,9 @@ public class Level extends JComponent {
         if (levelNumber != 1 && direction == Player.UP) {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
-        new Weapon(null, getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
-        // TODO: remove when done testing LoL
+        if (levelNumber == 1 && direction == Player.DOWN) {
+            new Weapon(null, getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+        }
     }
 
     // ROOM GENERATION HELPER METHODS

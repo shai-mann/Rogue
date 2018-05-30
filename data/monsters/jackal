@@ -1,6 +1,6 @@
 name:Jackal
 graphic:J
-hitDamage:1d5
+hitDamage:1d4
 speed:1
 movementType:track
 attackType:hit

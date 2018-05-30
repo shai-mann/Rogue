@@ -149,4 +149,12 @@ public class Ring extends Item {
             obfuscatedNames.add(name);
         }
     }
+
+    @Override
+    public String getName() {
+        if (GameManager.getPlayer().getRings().contains(this)) {
+            return super.getName().concat(" (held)");
+        }
+        return super.getName();
+    }
 }

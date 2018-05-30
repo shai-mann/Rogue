@@ -1,6 +1,6 @@
 name:Snake
 graphic:S
-hitDamage:1d3
+hitDamage:1d2
 speed:1
 movementType:track
 attackType:hit

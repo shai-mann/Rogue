@@ -103,6 +103,7 @@ public class Weapon extends Item {
             MessageBar.addMessage("You put away the " + getName());
         }
         GameManager.getPlayer().setHeldItem(this);
+        MessageBar.addMessage("You hold the " + getName());
     }
     @Override
     public String getName() {

@@ -1,6 +1,6 @@
 name:Kobold
 graphic:K
-hitDamage:1d4
+hitDamage:1d3
 speed:1
 movementType:track
 attackType:hit

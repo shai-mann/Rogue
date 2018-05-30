@@ -510,8 +510,6 @@ public class Monster extends Entity {
         new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
     }
     public static void spawnMonsters() {
-        // TODO: Update to use Poisson's thingy
-        createMonster(Level.getLevel().getStartingRoom());
         for (Room room : Room.rooms) {
             if (!room.equals(Level.getLevel().getStartingRoom())) {
                 createMonster(room);
