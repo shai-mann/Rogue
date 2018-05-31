@@ -563,7 +563,7 @@ public class Monster extends Entity {
         return validLevels;
     }
     public static void loadCustomMonsters() {
-        files = new File("./data/monsters/").listFiles();
+        files = new File(Monster.class.getClassLoader().getResource("monsters").getPath()).listFiles();
     }
     public static void update() {
         for (int i = 0; i < monsters.size(); i++) {
