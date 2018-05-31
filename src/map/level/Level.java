@@ -143,9 +143,10 @@ public class Level extends JComponent {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
         if (levelNumber == 1 && direction == Player.DOWN) {
-            new Weapon(null, getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+            // At the beginning of the game this gives you a mace
+            new Weapon("./data/weapons/mace",
+                    getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
         }
-        new Trap(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
     }
 
     // ROOM GENERATION HELPER METHODS

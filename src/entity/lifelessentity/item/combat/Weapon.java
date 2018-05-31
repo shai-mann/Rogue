@@ -23,7 +23,7 @@ public class Weapon extends Item {
         if (!(dataFilePath == null)) {
             loadDataFile(dataFilePath);
         } else {
-            File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/weapons").listFiles())));
+            File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(new File("./data/weapons").listFiles())));
             loadDataFile(file.getPath());
         }
         if (damage <= 1) {
