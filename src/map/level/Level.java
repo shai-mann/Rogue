@@ -40,6 +40,7 @@ public class Level extends JComponent {
     private int levelNumber = 0;
 
     private ArrayList<Point> shownPoints = new ArrayList<>();
+    private ArrayList<Point> blindnessPoints = new ArrayList<>();
 
     private static Level level;
 
@@ -71,18 +72,48 @@ public class Level extends JComponent {
     public void update() {
         Point location = GameManager.getPlayer().getLocation();
 
-        shownPoints.add(location);
-        shownPoints.add(new Point(location.x, location.y + 1));
-        shownPoints.add(new Point(location.x, location.y - 1));
-        shownPoints.add(new Point(location.x + 1, location.y));
-        shownPoints.add(new Point(location.x - 1, location.y));
+        if (GameManager.getPlayer().getStatus().isBlinded()) {
+            blind();
+        }
+        addShownPoint(location);
+        addShownPoint(new Point(location.x, location.y + 1));
+        addShownPoint(new Point(location.x, location.y - 1));
+        addShownPoint(new Point(location.x + 1, location.y));
+        addShownPoint(new Point(location.x - 1, location.y));
 
         for (Point p : shownPoints) {
             table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
         }
     }
+
+    // UPDATE HELPER METHODS
+
+    public void addShownPoint(Point p) {
+        for (Point point : shownPoints) {
+            if (p.getY() == point.getY() && p.getX() == point.getX()) {
+                return;
+            }
+        }
+        shownPoints.add(p);
+    }
     public void finalSetup() {
-        shownPoints.add(GameManager.getPlayer().getLocation());
+        Point p = GameManager.getPlayer().getLocation();
+        addShownPoint(p);
+        table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
+    }
+    public void blind() {
+        blindnessPoints.addAll(shownPoints);
+        shownPoints.clear();
+
+        for (int i = 0; i < hiddenTable.getRowCount(); i++) {
+            for (int j = 0; j < hiddenTable.getColumnCount(); j++) {
+                table.setValueAt("", i, j);
+            }
+        }
+    }
+    public void unblind() {
+        shownPoints.addAll(blindnessPoints);
+        blindnessPoints.clear();
     }
 
     // PHYSICAL LEVEL GENERATION METHODS

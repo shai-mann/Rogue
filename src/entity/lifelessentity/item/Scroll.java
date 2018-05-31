@@ -10,6 +10,7 @@ import main.GameManager;
 import map.level.Level;
 import map.level.Room;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -89,7 +90,11 @@ public class Scroll extends Item {
                 }
                 break;
             case MAGIC_MAPPING:
-                // TODO: add mapping in when ready
+                for (int i = 0; i < GameManager.getTable().getRowCount(); i++) {
+                    for (int j = 0; j < GameManager.getTable().getColumnCount(); j++) {
+                        Level.getLevel().addShownPoint(new Point(j, i));
+                    }
+                }
                 break;
             case TELEPORTATION:
                 GameManager.getTable().setValueAt(player.overWrittenGraphic, player.getYPos(), player.getXPos());
@@ -114,7 +119,6 @@ public class Scroll extends Item {
                 }
                 break;
         }
-        System.out.println(power.toString());
     }
 
     // SCROLL DATA RANDOMIZING

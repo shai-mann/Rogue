@@ -123,7 +123,6 @@ public class Ring extends Item {
             // TODO: add in ring of Dexterity and Teleportation
         }
         MessageBar.addMessage("You put on the " + getName());
-        MessageBar.addMessage(power.toString());
     }
     public void remove() {
         GameManager.getPlayer().getInventory().add(this);

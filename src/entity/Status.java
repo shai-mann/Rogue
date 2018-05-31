@@ -1,5 +1,7 @@
 package entity;
 
+import map.level.Level;
+
 public class Status {
 
     private int paralyzed = -1;
@@ -11,6 +13,7 @@ public class Status {
     private int sleepTurns = 0;
     private int poisoned = 0;
     private int strengthened = 0;
+    private int blinded = 0;
     private Effect effects = new Effect();
 
     private Entity target;
@@ -36,6 +39,11 @@ public class Status {
         }
         if (isPoisoned()) {
             poisoned--;
+        }
+        if (isBlinded()) {
+            blinded--;
+        } else {
+            Level.getLevel().unblind();
         }
     }
     public int getHealth() {
@@ -68,6 +76,9 @@ public class Status {
     }
     public boolean isStrengthened() {
         return strengthened > 0;
+    }
+    public boolean isBlinded() {
+        return blinded > 0;
     }
     public Effect getEffects() {
         return effects;
@@ -109,6 +120,9 @@ public class Status {
     }
     public void setStrengthened(int turns) {
         this.strengthened = turns;
+    }
+    public void setBlinded(int turns) {
+        this.blinded = turns;
     }
 
 }

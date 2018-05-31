@@ -1,9 +1,12 @@
 package entity.lifelessentity.item;
 
 import entity.Effect;
+import entity.livingentity.Monster;
 import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
+import map.level.Level;
+import map.level.table.CustomRoomTable;
 import util.MessageBar;
 
 import java.util.ArrayList;
@@ -20,7 +23,6 @@ public class Potion extends Item {
             "Majenta Potion",
             "Green Potion",
             "Turquoise Potion",
-            "Yellow Potion",
             "Pink Potion",
             "Brown Potion",
             "Black Potion",
@@ -30,7 +32,6 @@ public class Potion extends Item {
     };
     private static String[] hiddenNames = {
             "Potion of Confusion",
-            "Potion of Hallucination",
             "Potion of Poison",
             "Potion of Gain Strength",
             "Potion of See Invisible",
@@ -44,7 +45,6 @@ public class Potion extends Item {
     };
     private enum powers {
         CONFUSION,
-        HALLUCINATION,
         POISON,
         GAIN_STRENGTH,
         SEE_INVISIBLE,
@@ -81,10 +81,6 @@ public class Potion extends Item {
             case CONFUSION:
                 p.getStatus().setConfused(Helper.random.nextInt(2) + 19);
                 break;
-            case HALLUCINATION:
-                // implement hallucination
-                MessageBar.addMessage("You feel strange, as if you are seeing things");
-                break;
             case POISON:
                 p.getStatus().setPoisoned(Helper.random.nextInt(80) + 20);
                 MessageBar.addMessage("Poison flows through your bloodstream");
@@ -100,10 +96,20 @@ public class Potion extends Item {
             case HEALING:
                 p.getStatus().setHealth(p.getHealth() + p.getLevel());
                 break;
-            case MONSTER_DETECTION:
-                // TODO: implement monster_detection, magic_detection, hallucination, and blindness potions
-                break;
             case MAGIC_DETECTION:
+                for (Item item : Item.items) {
+                    if (item instanceof Wand ||
+                            item instanceof Ring ||
+                            item instanceof Potion ||
+                            item instanceof Scroll) {
+                        GameManager.getTable().setValueAt(item.graphic, item.getYPos(), item.getXPos());
+                    }
+                }
+                break;
+            case MONSTER_DETECTION:
+                for (Monster m : Monster.getMonsters()) {
+                    GameManager.getTable().setValueAt(m.graphic, m.getYPos(), m.getXPos());
+                }
                 break;
             case RAISE_LEVEL:
                 p.addExperience(p.getLevelThreshold() + 1);
@@ -116,10 +122,12 @@ public class Potion extends Item {
                 p.getStatus().setWeakened(0);
                 break;
             case BLINDNESS:
+                GameManager.getPlayer().getStatus().setBlinded(Helper.random.nextInt(1) + 10);
+                Level.getLevel().blind();
+                MessageBar.addMessage("You feel your eyesight magically deteriorate");
                 break;
         }
         p.getInventory().remove(this);
-        MessageBar.addMessage(power.toString());
     }
     public powers getPower() {
         return power;
