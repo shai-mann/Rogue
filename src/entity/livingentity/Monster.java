@@ -41,7 +41,6 @@ public class Monster extends Entity {
         STEAL_ITEM
     }
 
-    private String name = "<Default>";
     private int speed = 1;
     private int moveCounter = 1;
     private int range = 10;
@@ -493,9 +492,6 @@ public class Monster extends Entity {
     public Status getStatus() {
         return status;
     }
-    public String getName() {
-        return name;
-    }
     public String getHiddenChar() {
         return hiddenChar;
     }
@@ -567,7 +563,7 @@ public class Monster extends Entity {
         return validLevels;
     }
     public static void loadCustomMonsters() {
-        files = new File("data/monsters/").listFiles();
+        files = new File("./data/monsters/").listFiles();
     }
     public static void update() {
         for (int i = 0; i < monsters.size(); i++) {

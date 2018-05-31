@@ -2,6 +2,7 @@ package map.level;
 
 import entity.Entity;
 import entity.lifelessentity.Staircase;
+import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.Monster;
@@ -45,7 +46,6 @@ public class Level extends JComponent {
     public Level() {
         setDefaults();
         newLevel(Player.DOWN);
-        table.setValueAt("&", 30, 65);
     }
     public void newLevel(int direction) {
         generateLevel(direction);
@@ -145,6 +145,7 @@ public class Level extends JComponent {
         if (levelNumber == 1 && direction == Player.DOWN) {
             new Weapon(null, getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
         }
+        new Trap(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
     }
 
     // ROOM GENERATION HELPER METHODS
@@ -250,6 +251,7 @@ public class Level extends JComponent {
         for (int i = 0; i < hiddenTable.getRowCount(); i++) {
             for (int j = 0; j < hiddenTable.getColumnCount(); j++) {
                 hiddenTable.setValueAt("", i, j);
+                table.setValueAt("", i, j);
             }
         }
     }

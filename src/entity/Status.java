@@ -1,7 +1,5 @@
 package entity;
 
-import main.GameManager;
-
 public class Status {
 
     private int paralyzed = -1;
@@ -77,6 +75,9 @@ public class Status {
 
     public void setHealth(int health) {
         target.health = health;
+    }
+    public void lowerHealth(int amount) {
+        target.health -= amount;
     }
     public void setParalyzed(int turns) {
         this.paralyzed = turns;

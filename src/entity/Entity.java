@@ -13,7 +13,7 @@ public class Entity {
     public int health = 20;
 
     public String graphic;
-
+    protected String name = "<Default>";
     public String overWrittenGraphic = "-";
 
     public static final int UP = 0;
@@ -104,9 +104,6 @@ public class Entity {
 
     // GETTER/SETTER METHODS
 
-    public double getDistanceTo(Entity entity) {
-        return Math.hypot(getXPos() - entity.getXPos(), getYPos() - entity.getYPos());
-    }
     public Point getPointNextTo() {
         int direction = Helper.random.nextInt(4) + 1;
         switch (direction) {
@@ -137,5 +134,8 @@ public class Entity {
     }
     public Point getLocation() {
         return new Point(getXPos(), getYPos());
+    }
+    public String getName() {
+        return name;
     }
 }

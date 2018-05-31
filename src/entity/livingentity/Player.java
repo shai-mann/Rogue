@@ -7,6 +7,7 @@ import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
+import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
 import util.inventory.InventoryItem;
 import map.level.Door;
@@ -261,7 +262,7 @@ public class Player extends Entity implements KeyListener {
     }
     private boolean checkTrap() {
         for (Trap trap : Trap.getTraps()) {
-            if (isNextTo(new Point(trap.getXPos(), trap.getYPos()))) {
+            if (getXPos() == trap.getXPos() && getYPos() == trap.getYPos()) {
                 trap.trigger();
                 return true;
             }
@@ -294,7 +295,7 @@ public class Player extends Entity implements KeyListener {
             inventory.add(foundItem);
             if (foundItem instanceof Food) {
                 MessageBar.addMessage("You found some " + foundItem.getName().toLowerCase());
-            } else if (foundItem instanceof Armor) {
+            } else if (foundItem instanceof Armor || foundItem instanceof Arrow) {
                 MessageBar.addMessage("You found " + foundItem.getName());
             } else {
                 MessageBar.addMessage("You found a " + foundItem.getName());

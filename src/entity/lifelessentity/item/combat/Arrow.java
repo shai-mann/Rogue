@@ -11,7 +11,7 @@ public class Arrow extends Item {
     public Arrow(int x, int y) {
         super(")", x, y);
         amount = Helper.random.nextInt(20) + 5;
-        name = String.valueOf(amount) + "arrows";
+        name = String.valueOf(amount) + " arrows";
     }
     public Arrow(Arrow arrow) {
         super(")", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());
