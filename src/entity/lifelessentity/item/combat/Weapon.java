@@ -53,7 +53,6 @@ public class Weapon extends Item {
             }
             bufferedReader.close();
         } catch (FileNotFoundException e) {
-            // TODO: Better error handling
             System.out.println("Error: file not found");
         } catch (IOException e) {
             System.out.println("Error reading file");

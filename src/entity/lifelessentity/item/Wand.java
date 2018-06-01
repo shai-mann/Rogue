@@ -86,6 +86,9 @@ public class Wand extends Item {
     @Override
     public void use() {
         Monster m = Monster.getClosestMonster(GameManager.getPlayer());
+        if (m == null) {
+            return;
+        }
         switch (power) {
             case INVISIBILITY:
                 m.setInvisible(true);

@@ -12,8 +12,10 @@ import main.GameManager;
 import map.level.Level;
 import map.level.Room;
 
+import javax.print.URIException;
 import java.awt.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -563,7 +565,11 @@ public class Monster extends Entity {
         return validLevels;
     }
     public static void loadCustomMonsters() {
-        files = new File(Monster.class.getClassLoader().getResource("monsters").getPath()).listFiles();
+        try {
+            files = new File(Monster.class.getClassLoader().getResource("monsters").toURI().getPath()).listFiles();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
     public static void update() {
         for (int i = 0; i < monsters.size(); i++) {
@@ -572,7 +578,12 @@ public class Monster extends Entity {
         }
     }
     public static Monster getClosestMonster(Entity e) {
-        Monster closest = getMonsters().get(0);
+        Monster closest;
+        if (monsters.size() != 0) {
+            closest = getMonsters().get(0);
+        } else {
+            return null;
+        }
         for (Monster m : getMonsters()) {
             if (Passageway.getDistance(m.getLocation(), e.getLocation()) < Passageway.getDistance(closest.getLocation(), e.getLocation())) {
                 closest = m;
