@@ -35,6 +35,13 @@ public class SavePane {
         f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         f.revalidate();
         f.repaint();
+
+        f.setContentPane(panel);
+        f.pack();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
+        f.validate();
+        f.repaint();
     }
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);

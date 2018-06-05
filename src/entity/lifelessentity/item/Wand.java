@@ -7,7 +7,9 @@ import map.Map;
 import map.level.Room;
 import util.MessageBar;
 import helper.Helper;
+import util.animation.Animation;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,16 +97,20 @@ public class Wand extends Item {
                 GameManager.getTable().setValueAt(m.overWrittenGraphic, m.getYPos(), m.getXPos());
                 break;
             case LIGHTNING:
-                // TODO: implement Lightning, fire, and cold wand powers
+                Map.getMap().getAnimationManager().addAnimation(new Animation(GameManager.getPlayer().getLocation(), Color.YELLOW));
                 break;
             case FIRE:
+                Map.getMap().getAnimationManager().addAnimation(new Animation(GameManager.getPlayer().getLocation(), Color.RED));
                 break;
             case COLD:
+                Map.getMap().getAnimationManager().addAnimation(new Animation(GameManager.getPlayer().getLocation(),
+                        new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
                 m.setType((File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/monsters").listFiles()))));
                 break;
             case MAGIC_MISSILES:
+                m.getStatus().setHealth(m.health - Helper.random.nextInt(3) + 1);
                 break;
             case HASTE_MONSTER:
                 if (m.getSpeed() > 0) {
@@ -138,6 +144,7 @@ public class Wand extends Item {
                 m.getStatus().getEffects().addEffect(Effect.SUPPRESS_POWER);
                 break;
         }
+        MessageBar.addMessage("You used the " + getName());
         uses--;
         if (uses <= 0) {
             Item.items.remove(this);

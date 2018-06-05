@@ -8,6 +8,7 @@ import util.StatusBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
+import util.animation.AnimationManager;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -18,6 +19,7 @@ public class Map {
     private Level level;
     private JPanel panel;
     private MessageBar messageBar;
+    private AnimationManager animationManager;
 
     private static Map map;
 
@@ -32,6 +34,7 @@ public class Map {
         Monster.update();
         GameManager.getPlayer().update();
         statusBar.updateStatusBar(); // must go after player update
+        animationManager.update();
         level.update();
     }
 
@@ -48,7 +51,7 @@ public class Map {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
 
-        GameManager.getFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        GameManager.getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         GameManager.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -62,11 +65,15 @@ public class Map {
                 }
             }
         });
+        animationManager = new AnimationManager();
     }
     public MessageBar getMessageBar() {
         return messageBar;
     }
     public StatusBar getStatusBar() {
         return statusBar;
+    }
+    public AnimationManager getAnimationManager() {
+        return animationManager;
     }
 }

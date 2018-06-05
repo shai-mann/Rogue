@@ -69,7 +69,7 @@ public class Status {
         return weakened > 0;
     }
     public boolean isSleeping() {
-        return sleeping || sleepTurns <= 0;
+        return sleeping || sleepTurns > 0;
     }
     public boolean isPoisoned() {
         return poisoned > 0;

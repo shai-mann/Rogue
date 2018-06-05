@@ -38,7 +38,7 @@ public class GameManager {
 
     // SETUP METHODS
 
-    public static void runStaticSetupMethods() {
+    private static void runStaticSetupMethods() {
         Monster.loadCustomMonsters();
         Item.randomizeHiddenNames();
     }
