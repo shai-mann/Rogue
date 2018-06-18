@@ -178,9 +178,6 @@ public class Level extends JComponent {
             new Weapon("./data/weapons/mace",
                     getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
         }
-        new Wand(getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
-        new Monster("data/monsters/floating_eye", getStartingRoom().getRandomPointInBounds().x,
-                getStartingRoom().getRandomPointInBounds().y);
         // just for testing wands of fire ice and lightning
     }
 
