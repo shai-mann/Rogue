@@ -23,13 +23,13 @@ Features To Implement:
 - several wand powers (see animations)
 - one scroll type
 - change armor to be about damage reduction
-- give monsters custom hit chances
+- give data.monsters custom hit chances
 - ring wearing
 - shooting arrows
 - all potion powers
 - different food potencies
 - monster and item spawnChances
-- starting items in first room on first level (only when going down) and no monsters in that room (same circumstances)
+- starting items in first room on first level (only when going down) and no data.monsters in that room (same circumstances)
 
 ALPHA TESTER SUGGESTIONS:
 - resting 
@@ -38,7 +38,7 @@ ALPHA TESTER SUGGESTIONS:
 - two many secret doorways
 - make snake less health
 - staff of teleport to makes duplicate player
-- 
+- change regen mechanics to be about picking up health (or increase natural regeneration)
 - 
 - 
 - 

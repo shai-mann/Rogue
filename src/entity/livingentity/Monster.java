@@ -1,6 +1,7 @@
 package entity.livingentity;
 
 import com.sun.istack.internal.Nullable;
+import com.sun.xml.internal.ws.api.ResourceLoader;
 import entity.Effect;
 import entity.Entity;
 import entity.Status;
@@ -15,7 +16,10 @@ import map.level.Room;
 import javax.print.URIException;
 import java.awt.*;
 import java.io.*;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -505,6 +509,7 @@ public class Monster extends Entity {
 
     public static void createMonster(Room room) {
         Point location = room.getRandomPointInBounds();
+        //TODO: change back to Helper.getRandom(availableFiles)
         new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
     }
     public static void spawnMonsters() {
@@ -566,7 +571,9 @@ public class Monster extends Entity {
     }
     public static void loadCustomMonsters() {
         try {
-            files = new File(Monster.class.getClassLoader().getResource("monsters").toURI().getPath()).listFiles();
+            files = new File(new File(
+                    Monster.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                    + "/data/monsters").listFiles();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

@@ -107,7 +107,7 @@ public class Wand extends Item {
                         new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
-                m.setType((File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/monsters").listFiles()))));
+                m.setType((File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/data.monsters").listFiles()))));
                 break;
             case MAGIC_MISSILES:
                 m.getStatus().setHealth(m.health - Helper.random.nextInt(3) + 1);
@@ -129,7 +129,7 @@ public class Wand extends Item {
                 int damage = GameManager.getPlayer().getHealth() / 2;
                 GameManager.getPlayer().getStatus().setHealth(damage);
                 Map.getMap().getStatusBar().updateStatusBar();
-                // TODO: once visible vs. not visible monsters implemented, make all visible ones lose damage amount health
+                // TODO: once visible vs. not visible data.monsters implemented, make all visible ones lose damage amount health
                 break;
             case NOTHING:
                 // Yup, this is legitimately a wand type.

@@ -7,10 +7,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" afterPath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/images/Rogue_Background.PNG" afterPath="$PROJECT_DIR$/resources/data/images/Rogue_Background.PNG" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/bat.txt" afterPath="$PROJECT_DIR$/resources/data/monsters/bat.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/centaur.txt" afterPath="$PROJECT_DIR$/resources/data/monsters/centaur.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/dragon" afterPath="$PROJECT_DIR$/resources/data/monsters/dragon" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/floating_eye" afterPath="$PROJECT_DIR$/resources/data/monsters/floating_eye" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/giant_ant" afterPath="$PROJECT_DIR$/resources/data/monsters/giant_ant" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/griffin" afterPath="$PROJECT_DIR$/resources/data/monsters/griffin" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/hobgoblin" afterPath="$PROJECT_DIR$/resources/data/monsters/hobgoblin" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/invisible_stalker" afterPath="$PROJECT_DIR$/resources/data/monsters/invisible_stalker" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/jackal" afterPath="$PROJECT_DIR$/resources/data/monsters/jackal" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/kobold" afterPath="$PROJECT_DIR$/resources/data/monsters/kobold" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/leprechaun" afterPath="$PROJECT_DIR$/resources/data/monsters/leprechaun" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/mimic" afterPath="$PROJECT_DIR$/resources/data/monsters/mimic" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/nymph" afterPath="$PROJECT_DIR$/resources/data/monsters/nymph" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/orc" afterPath="$PROJECT_DIR$/resources/data/monsters/orc" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/purple_worm" afterPath="$PROJECT_DIR$/resources/data/monsters/purple_worm" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/quasit" afterPath="$PROJECT_DIR$/resources/data/monsters/quasit" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/rust_monster" afterPath="$PROJECT_DIR$/resources/data/monsters/rust_monster" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/snake" afterPath="$PROJECT_DIR$/resources/data/monsters/snake" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/troll" afterPath="$PROJECT_DIR$/resources/data/monsters/troll" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/umberhulk" afterPath="$PROJECT_DIR$/resources/data/monsters/umberhulk" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/vampire" afterPath="$PROJECT_DIR$/resources/data/monsters/vampire" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/violet_fungi" afterPath="$PROJECT_DIR$/resources/data/monsters/violet_fungi" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/wraith" afterPath="$PROJECT_DIR$/resources/data/monsters/wraith" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/xorn" afterPath="$PROJECT_DIR$/resources/data/monsters/xorn" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/yeti" afterPath="$PROJECT_DIR$/resources/data/monsters/yeti" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/monsters/zombie.txt" afterPath="$PROJECT_DIR$/resources/data/monsters/zombie.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/dagger" afterPath="$PROJECT_DIR$/resources/data/weapons/dagger" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/dart" afterPath="$PROJECT_DIR$/resources/data/weapons/dart" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/long_sword" afterPath="$PROJECT_DIR$/resources/data/weapons/long_sword" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/mace" afterPath="$PROJECT_DIR$/resources/data/weapons/mace" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/short_bow" afterPath="$PROJECT_DIR$/resources/data/weapons/short_bow" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/shuriken" afterPath="$PROJECT_DIR$/resources/data/weapons/shuriken" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/spear" afterPath="$PROJECT_DIR$/resources/data/weapons/spear" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/data/weapons/two-handed-sword" afterPath="$PROJECT_DIR$/resources/data/weapons/two-handed-sword" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rogue bugs.txt" afterPath="$PROJECT_DIR$/Rogue bugs.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rogue.iml" afterPath="$PROJECT_DIR$/Rogue.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/Effect.java" afterPath="$PROJECT_DIR$/src/entity/Effect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/entity/livingentity/Monster.java" afterPath="$PROJECT_DIR$/src/entity/livingentity/Monster.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/map/level/Level.java" afterPath="$PROJECT_DIR$/src/map/level/Level.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" afterPath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/ImagePanel.java" afterPath="$PROJECT_DIR$/src/util/ImagePanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/util/SavePane.java" afterPath="$PROJECT_DIR$/src/util/SavePane.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,8 +67,66 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Rogue$GameManager.coverage" NAME="GameManager Coverage Results" MODIFIED="1528238864680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/GameManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
+              <folding>
+                <element signature="e#1737#1738#0" expanded="true" />
+                <element signature="e#1808#1809#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Weapon.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="31" column="59" lean-forward="true" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Monster.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/entity/livingentity/Monster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="575" column="52" lean-forward="true" selection-start-line="575" selection-start-column="52" selection-end-line="575" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/map/level/Level.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="189" column="0" lean-forward="true" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+              <folding>
+                <element signature="e#10924#10925#0" expanded="true" />
+                <element signature="e#10952#10953#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -76,7 +178,6 @@
         <option value="$PROJECT_DIR$/data/weapons/short_bow" />
         <option value="$PROJECT_DIR$/data/weapons/spear" />
         <option value="$PROJECT_DIR$/data/weapons/dagger" />
-        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" />
         <option value="$PROJECT_DIR$/src/map/level/Door.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java" />
@@ -88,31 +189,32 @@
         <option value="$PROJECT_DIR$/data/monsters/kobold" />
         <option value="$PROJECT_DIR$/data/monsters/hobgoblin" />
         <option value="$PROJECT_DIR$/src/map/level/Level.form" />
-        <option value="$PROJECT_DIR$/src/map/Map.form" />
-        <option value="$PROJECT_DIR$/src/util/BeginPane.java" />
         <option value="$PROJECT_DIR$/src/entity/Entity.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/Trap.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java" />
-        <option value="$PROJECT_DIR$/src/util/ImagePanel.java" />
         <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" />
-        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" />
-        <option value="$PROJECT_DIR$/src/util/SavePane.java" />
         <option value="$PROJECT_DIR$/src/util/AnimationManager.java" />
         <option value="$PROJECT_DIR$/src/util/Animation.java" />
-        <option value="$PROJECT_DIR$/src/map/Map.java" />
         <option value="$PROJECT_DIR$/src/util/animation/AnimationManager.java" />
         <option value="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" />
         <option value="$PROJECT_DIR$/src/util/animation/Animation.java" />
-        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" />
-        <option value="$PROJECT_DIR$/src/entity/livingentity/Monster.java" />
         <option value="$PROJECT_DIR$/data/monsters/bat.txt" />
         <option value="$PROJECT_DIR$/src/entity/livingentity/Player.java" />
         <option value="$PROJECT_DIR$/data/monsters/floating_eye" />
         <option value="$PROJECT_DIR$/src/entity/Status.java" />
-        <option value="$PROJECT_DIR$/src/map/level/Level.java" />
         <option value="$PROJECT_DIR$/src/main/GameManager.java" />
+        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" />
+        <option value="$PROJECT_DIR$/src/util/ImagePanel.java" />
+        <option value="$PROJECT_DIR$/src/util/SavePane.java" />
+        <option value="$PROJECT_DIR$/src/util/BeginPane.java" />
+        <option value="$PROJECT_DIR$/src/map/Map.form" />
+        <option value="$PROJECT_DIR$/src/map/Map.java" />
+        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" />
+        <option value="$PROJECT_DIR$/src/entity/livingentity/Monster.java" />
+        <option value="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" />
+        <option value="$PROJECT_DIR$/src/map/level/Level.java" />
       </list>
     </option>
   </component>
@@ -144,6 +246,67 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+              <item name="livingentity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="level" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -186,88 +349,25 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="lifelessentity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="lifelessentity" type="462c0819:PsiDirectoryNode" />
-              <item name="item" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="livingentity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="inventory" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Rogue" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Rogue" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-              <item name="inventory" type="462c0819:PsiDirectoryNode" />
-              <item name="InventoryItem" type="e9f4de52:FormNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/Multiplayer-Pong" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.breadcrumbs" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Shai Mann-Robison/Desktop/Rogue/src/map/level/Room.java" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Shai Mann-Robison\Desktop\Rogue\data" />
       <recent name="C:\Users\Shai Mann-Robison\Desktop\Rogue\src\data\images" />
@@ -288,7 +388,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GameManager">
+  <component name="RunManager" selected="JAR Application.Rogue JAR">
     <configuration name="GameManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="main.GameManager" />
@@ -301,6 +401,13 @@
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="Rogue" />
+      <envs />
+    </configuration>
+    <configuration name="Rogue JAR" type="JarApplication" factoryName="JAR Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/Rogue_jar/Rogue.jar" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Shai Mann-Robison\Desktop\Rogue" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <envs />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -384,6 +491,10 @@
       <properties />
       <listeners />
     </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="JAR Application.Rogue JAR" />
+      <item index="1" class="java.lang.String" itemvalue="Application.GameManager" />
+    </list>
     <recent_temporary>
       <list size="1">
         <item index="0" class="java.lang.String" itemvalue="Application.GameManager" />
@@ -430,11 +541,23 @@
       <workItem from="1527884857161" duration="12346000" />
       <workItem from="1528232152840" duration="7777000" />
       <workItem from="1528899727678" duration="3124000" />
+      <workItem from="1529864364507" duration="272000" />
+      <workItem from="1529864660575" duration="29000" />
+      <workItem from="1529869847198" duration="178000" />
+      <workItem from="1530026545006" duration="2420000" />
+      <workItem from="1531334124945" duration="1634000" />
+      <workItem from="1536244069115" duration="8000" />
+      <workItem from="1537215954342" duration="13000" />
+      <workItem from="1537990153747" duration="9000" />
+      <workItem from="1542922963894" duration="1377000" />
+      <workItem from="1543949076504" duration="1842000" />
+      <workItem from="1544017759318" duration="209000" />
+      <workItem from="1545950439847" duration="22218000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255476000" />
+    <option name="totallyTimeSpent" value="285685000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -450,33 +573,33 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1825658" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20499243" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22919819" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37171054" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39802632" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1825658" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290469" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,13 +619,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>140</line>
+          <line>142</line>
           <properties />
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java</url>
-          <line>50</line>
+          <line>51</line>
           <properties />
           <option name="timeStamp" value="69" />
         </line-breakpoint>
@@ -512,449 +635,211 @@
           <properties />
           <option name="timeStamp" value="74" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java</url>
+          <line>24</line>
+          <properties />
+          <option name="timeStamp" value="187" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="151" />
+      <option name="time" value="188" />
     </breakpoint-manager>
     <watches-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/map/Map.form">
+    <entry file="file://$PROJECT_DIR$/src/util/ImagePanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="25" column="9" lean-forward="true" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/BeginPane.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/BeginPane.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/net/URL.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-286">
-          <caret line="15" column="35" lean-forward="false" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-          <folding>
-            <element signature="method#BeginPane#0;class#BeginPane#0" expanded="false" />
-            <element signature="method#setDefaults#0;class#BeginPane#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="229">
+          <caret line="944" column="15" lean-forward="false" selection-start-line="944" selection-start-column="15" selection-end-line="944" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Entity.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="138" column="20" lean-forward="false" selection-start-line="138" selection-start-column="20" selection-end-line="138" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/Trap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="49" column="26" lean-forward="false" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-14">
-          <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+        <state relative-caret-position="113">
+          <caret line="276" column="0" lean-forward="false" selection-start-line="276" selection-start-column="0" selection-end-line="276" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar!/sun/misc/Unsafe.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
+        <state relative-caret-position="119">
           <caret line="353" column="23" lean-forward="false" selection-start-line="353" selection-start-column="23" selection-end-line="353" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="121" column="5" lean-forward="false" selection-start-line="121" selection-start-column="5" selection-end-line="121" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Rogue Notes.txt" />
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="58" column="38" lean-forward="false" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Gold.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="121" column="36" lean-forward="false" selection-start-line="121" selection-start-column="36" selection-end-line="121" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#getAllItemsOfType#0;class#Item#0" expanded="false" />
-            <element signature="method#getAllItemsOfTypes#0;class#Item#0" expanded="false" />
-            <element signature="method#getItemAt#0;class#Item#0" expanded="false" />
-            <element signature="method#randomizeHiddenNames#0;class#Item#0" expanded="false" />
-            <element signature="method#spawnItems#0;class#Item#0" expanded="false" />
-            <element signature="method#spawnItem#0;class#Item#0" expanded="false" />
-            <element signature="method#spawnItemCopy#0;class#Item#0" expanded="false" />
-            <element signature="method#spawnItem#1;class#Item#0" expanded="false" />
-            <element signature="method#spawnItem#2;class#Item#0" expanded="false" />
-            <element signature="method#getRandomItemType#0;class#Item#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="676" column="23" lean-forward="false" selection-start-line="676" selection-start-column="23" selection-end-line="676" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/io/InputStreamReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/net/URL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="197" column="29" lean-forward="false" selection-start-line="197" selection-start-column="29" selection-end-line="197" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/KeyBinds.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="61" column="30" lean-forward="true" selection-start-line="61" selection-start-column="30" selection-end-line="61" selection-end-column="30" />
-          <folding>
-            <element signature="method#Potion#1;class#Potion#0" expanded="false" />
-            <element signature="method#randomizePotionData#0;class#Potion#0" expanded="false" />
-            <element signature="method#use#0;class#Potion#0" expanded="false" />
-            <element signature="method#randomizeObfuscatedNames#0;class#Potion#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="47" column="57" lean-forward="false" selection-start-line="47" selection-start-column="57" selection-end-line="47" selection-end-column="57" />
-          <folding>
-            <element signature="method#applyAttributeFromLine#0;class#Weapon#0" expanded="false" />
-            <element signature="method#parseDiceNotation#0;class#Weapon#0" expanded="false" />
-            <element signature="method#use#0;class#Weapon#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/Object.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="381" column="29" lean-forward="false" selection-start-line="381" selection-start-column="29" selection-end-line="381" selection-end-column="29" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/SavePane.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/javax/swing/JTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="218" column="13" lean-forward="false" selection-start-line="218" selection-start-column="13" selection-end-line="218" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/util/SavePane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="22" lean-forward="false" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Effect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="19" column="40" lean-forward="false" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state relative-caret-position="1054">
+          <caret line="84" column="61" lean-forward="true" selection-start-line="84" selection-start-column="61" selection-end-line="84" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java">
+    <entry file="file://$PROJECT_DIR$/out/production/Rogue/util/SavePane.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="122" column="63" lean-forward="true" selection-start-line="122" selection-start-column="63" selection-end-line="122" selection-end-column="63" />
+        <state relative-caret-position="-561">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#4837#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Rogue/util/BeginPane.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-543">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2091#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Rogue/entity/lifelessentity/item/combat/Weapon.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#5348#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/livingentity/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/Rogue/map/Map.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-143">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2191#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map/Map.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/data/monsters/bat.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helper/Helper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="14" column="47" lean-forward="false" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="126" column="28" lean-forward="false" selection-start-line="126" selection-start-column="28" selection-end-line="126" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/net/JarURLConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-839">
+          <caret line="136" column="28" lean-forward="false" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="1305" column="23" lean-forward="false" selection-start-line="1305" selection-start-column="23" selection-end-line="1305" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/map/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="36" column="34" lean-forward="false" selection-start-line="36" selection-start-column="34" selection-end-line="36" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/SettingsPane.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/SettingsPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="518" column="19" lean-forward="false" selection-start-line="518" selection-start-column="19" selection-end-line="518" selection-end-column="19" />
+        <state relative-caret-position="51">
+          <caret line="25" column="12" lean-forward="false" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/awt/Component.java">
+    <entry file="file://$PROJECT_DIR$/src/util/BeginPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="6490" column="0" lean-forward="false" selection-start-line="6490" selection-start-column="0" selection-end-line="6490" selection-end-column="0" />
+        <state relative-caret-position="170">
+          <caret line="43" column="20" lean-forward="false" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="40" column="54" lean-forward="false" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/animation/Animation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="36" column="25" lean-forward="false" selection-start-line="36" selection-start-column="25" selection-end-line="36" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/monsters/bat.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/monsters/invisible_stalker">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/monsters/dragon">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/images/Rogue_Background.PNG">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/animation/AnimationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/dagger">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/mace">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/long_sword">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/spear">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/weapons/two-handed-sword">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="9" lean-forward="true" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/livingentity/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="357" column="34" lean-forward="false" selection-start-line="357" selection-start-column="34" selection-end-line="357" selection-end-column="34" />
-          <folding>
-            <element signature="method#Player#0;class#Player#0" expanded="false" />
-            <element signature="method#search#0;class#Player#0" expanded="false" />
-            <element signature="method#isNextTo#0;class#Player#0" expanded="false" />
-            <element signature="method#toggleInventory#0;class#Player#0" expanded="false" />
-            <element signature="method#toggleInventory#1;class#Player#0" expanded="false" />
-            <element signature="method#hitMonster#0;class#Player#0" expanded="false" />
-            <element signature="method#moveRandom#0;class#Player#0" expanded="false" />
-            <element signature="method#changeLevel#0;class#Player#0" expanded="false" />
-            <element signature="method#updateHungerStatus#0;class#Player#0" expanded="false" />
-            <element signature="method#checkToPickUpItem#0;class#Player#0" expanded="false" />
-            <element signature="method#levelUp#0;class#Player#0" expanded="false" />
-            <element signature="method#getDamage#0;class#Player#0" expanded="false" />
-            <element signature="method#getHungerLevel#0;class#Player#0" expanded="false" />
-            <element signature="method#getRings#0;class#Player#0" expanded="false" />
-            <element signature="method#drainMaxHealth#0;class#Player#0" expanded="false" />
-            <element signature="method#eat#0;class#Player#0" expanded="false" />
-            <element signature="method#setWornItem#0;class#Player#0" expanded="false" />
-            <element signature="method#wearRing#0;class#Player#0" expanded="false" />
-            <element signature="method#setOverwrittenGraphic#0;class#Player#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/monsters/floating_eye">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/Status.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="71" column="39" lean-forward="false" selection-start-line="71" selection-start-column="39" selection-end-line="71" selection-end-column="39" />
-          <folding>
-            <element signature="e#1589#1590#0" expanded="false" />
-            <element signature="e#1638#1639#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/livingentity/Monster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="321" column="26" lean-forward="false" selection-start-line="321" selection-start-column="26" selection-end-line="321" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/map/level/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="179" column="9" lean-forward="false" selection-start-line="179" selection-start-column="9" selection-end-line="179" selection-end-column="9" />
-          <folding>
-            <element signature="method#Level#0;class#Level#0" expanded="false" />
-            <element signature="method#newLevel#0;class#Level#0" expanded="false" />
-            <element signature="method#generateLevel#0;class#Level#0" expanded="false" />
-            <element signature="method#update#0;class#Level#0" expanded="false" />
-            <element signature="method#addShownPoint#0;class#Level#0" expanded="false" />
-            <element signature="method#finalSetup#0;class#Level#0" expanded="false" />
-            <element signature="method#blind#0;class#Level#0" expanded="false" />
-            <element signature="method#unblind#0;class#Level#0" expanded="false" />
-            <element signature="method#generateRooms#0;class#Level#0" expanded="false" />
-            <element signature="method#generatePassageways#0;class#Level#0" expanded="false" />
-            <element signature="method#getRandomRoomSize#0;class#Level#0" expanded="false" />
-            <element signature="method#getRandomPoint#0;class#Level#0" expanded="false" />
-            <element signature="method#checkValidPoint#0;class#Level#0" expanded="false" />
-            <element signature="method#getClosestRoom#0;class#Level#0" expanded="false" />
-            <element signature="method#getClosestRoom#1;class#Level#0" expanded="false" />
-            <element signature="method#setDefaults#0;class#Level#0" expanded="false" />
-            <element signature="method#createUIComponents#0;class#Level#0" expanded="false" />
-            <element signature="method#createTableModel#0;class#Level#0" expanded="false" />
-            <element signature="method#createTableRow#0;class#Level#0" expanded="false" />
-            <element signature="method#resetTable#0;class#Level#0" expanded="false" />
-            <element signature="method#getRoom#0;class#Level#0" expanded="false" />
-            <element signature="method#getStaircase#0;class#Level#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-711">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="method#Wand#1;class#Wand#0" expanded="false" />
-            <element signature="method#randomizeWandData#0;class#Wand#0" expanded="false" />
-            <element signature="method#use#0;class#Wand#0" expanded="false" />
-            <element signature="method#randomizeObfuscatedNames#0;class#Wand#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="53" column="5" lean-forward="false" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state relative-caret-position="111">
+          <caret line="41" column="37" lean-forward="true" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
           <folding>
-            <element signature="method#main#0;class#GameManager#0" expanded="false" />
-            <element signature="method#replaceContentPane#0;class#GameManager#0" expanded="false" />
-            <element signature="method#runStaticSetupMethods#0;class#GameManager#0" expanded="false" />
-            <element signature="method#initFrame#0;class#GameManager#0" expanded="false" />
+            <element signature="e#1737#1738#0" expanded="true" />
+            <element signature="e#1808#1809#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/Staircase.java">
+    <entry file="file://$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="230">
+          <caret line="31" column="59" lean-forward="true" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/ImagePanel.java">
+    <entry file="file://$PROJECT_DIR$/src/entity/livingentity/Monster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+        <state relative-caret-position="198">
+          <caret line="575" column="52" lean-forward="true" selection-start-line="575" selection-start-column="52" selection-end-line="575" selection-end-column="52" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/inventory/InventoryItem.java">
+    <entry file="file://$PROJECT_DIR$/src/map/level/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-187">
-          <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-          <folding />
+        <state relative-caret-position="264">
+          <caret line="189" column="0" lean-forward="true" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding>
+            <element signature="e#10924#10925#0" expanded="true" />
+            <element signature="e#10952#10953#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -969,6 +854,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

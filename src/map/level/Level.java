@@ -15,6 +15,8 @@ import map.level.table.RoomTableModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,7 +27,7 @@ public class Level extends JComponent {
     * The Level class creates a new JTable the "level", and then generates rooms on it
     * Generates 5-8 rooms per level
     * Generates Passageways connecting all rooms to all other rooms
-    * Generates Treasure and monsters in each of the rooms
+    * Generates Treasure and data.monsters in each of the rooms
     * Generates the Player in the starting hiddenTable with the descendingStaircase up one level in the same hiddenTable
     * Generates descendingStaircase going down to next level (except on last level)
     * Level size is 69 * 40
@@ -175,10 +177,15 @@ public class Level extends JComponent {
         }
         if (levelNumber == 1 && direction == Player.DOWN) {
             // At the beginning of the game this gives you a mace
-            new Weapon("./data/weapons/mace",
-                    getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+            try {
+                new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                        + "/data/weapons/mace",
+                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+
         }
-        // just for testing wands of fire ice and lightning
     }
 
     // ROOM GENERATION HELPER METHODS

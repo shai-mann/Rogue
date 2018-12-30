@@ -32,7 +32,7 @@ public class SavePane {
         f.setLocationRelativeTo(null);
         f.pack();
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.revalidate();
         f.repaint();
 
@@ -110,7 +110,7 @@ public class SavePane {
                 try {
                     ObjectOutputStream output = new ObjectOutputStream(
                             new BufferedOutputStream(
-                                    new FileOutputStream("/data/saves/" + nameField.getText())
+                                    new FileOutputStream("/data/data.saves/" + nameField.getText())
                             )
                     );
                     output.writeObject(Monster.getMonsters());

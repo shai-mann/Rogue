@@ -39,7 +39,7 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
             return Color.YELLOW;
         } else if (containsPoint(new Point(col, row)) != null) {
             return containsPoint(new Point(col, row));
-        } else if (value.matches("[a-zA-Z]")) { // monsters
+        } else if (value.matches("[a-zA-Z]")) { // data.monsters
             return Color.RED;
         } else if (value.equals("*") || value.equals("]") || value.equals("&") || value.equals("%") ||
                 value.equals("?") || value.equals("/") || value.equals("^") || value.equals(":") ||

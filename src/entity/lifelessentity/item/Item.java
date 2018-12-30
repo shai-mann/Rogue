@@ -11,6 +11,7 @@ import map.level.Room;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Item extends Entity {
 
@@ -122,7 +123,8 @@ public class Item extends Entity {
     public static void spawnItems() {
         // TODO: Update to use Poisson's thingy
         for (Room room : Room.rooms) {
-            if (Helper.random.nextInt(99) + 1 >= 45) {
+            //TODO: change back to Helper.random
+            if (new Random().nextInt(99) + 1 >= 45) {
                 spawnItem(room, getRandomItemType());
             }
         }

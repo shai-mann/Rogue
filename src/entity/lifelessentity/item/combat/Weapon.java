@@ -6,6 +6,7 @@ import main.GameManager;
 import util.MessageBar;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,10 +22,19 @@ public class Weapon extends Item {
     public Weapon(String dataFilePath, int x, int y) {
         super(")", x, y);
         if (!(dataFilePath == null)) {
+            System.out.println(dataFilePath);
             loadDataFile(dataFilePath);
         } else {
-            File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(new File("./data/weapons").listFiles())));
-            loadDataFile(file.getPath());
+            try {
+                File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
+                        new File(new File(
+                                Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                                + "/data/weapons").listFiles()
+                )));
+                loadDataFile(file.getPath());
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
         if (damage <= 1) {
             damage = 2;
