@@ -56,13 +56,7 @@ public class Map {
             @Override
             public void windowClosing(WindowEvent e) {
                 new SavePane();
-                synchronized (this) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }
-                }
+                GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
             }
         });
         animationManager = new AnimationManager();

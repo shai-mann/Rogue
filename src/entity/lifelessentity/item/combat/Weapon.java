@@ -22,7 +22,6 @@ public class Weapon extends Item {
     public Weapon(String dataFilePath, int x, int y) {
         super(")", x, y);
         if (!(dataFilePath == null)) {
-            System.out.println(dataFilePath);
             loadDataFile(dataFilePath);
         } else {
             try {

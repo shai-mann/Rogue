@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.URISyntaxException;
 
 public class SavePane {
 
@@ -63,7 +64,6 @@ public class SavePane {
         nameField.setText("Enter a name for your save:");
         nameField.setVisible(false);
 
-        GameManager.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addListeners();
     }
     private void addListeners() {
@@ -103,14 +103,19 @@ public class SavePane {
                 }
             }
         });
-        nameField.addKeyListener(new KeyAdapter() {
+        nameField.addActionListener(new ActionListener() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
+            public void actionPerformed(ActionEvent e) {
+                // TODO: make this functional (i.e., make it create a file to hold each of the objects in a folder with the save name
                 try {
                     ObjectOutputStream output = new ObjectOutputStream(
                             new BufferedOutputStream(
-                                    new FileOutputStream("/data/data.saves/" + nameField.getText())
+                                    new FileOutputStream(
+                                            new File(
+                                                    new File(
+                                                            SavePane.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                                                    + "/data/saves")
+                                            + nameField.getText())
                             )
                     );
                     output.writeObject(Monster.getMonsters());
@@ -123,6 +128,8 @@ public class SavePane {
                     output.writeObject(Map.getMap().getStatusBar());
                 } catch (IOException i) {
                     i.printStackTrace();
+                } catch (URISyntaxException j) {
+                    j.printStackTrace();
                 }
             }
         });
