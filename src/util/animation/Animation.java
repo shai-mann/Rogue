@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Animation {
+public class Animation implements Serializable {
 
     private ArrayList<Point> points = new ArrayList<>();
     private ArrayList<Point> queuedPoints = new ArrayList<>();

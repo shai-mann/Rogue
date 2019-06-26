@@ -3,10 +3,11 @@ package map.level;
 import helper.Helper;
 import main.GameManager;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Room {
+public class Room implements Serializable {
 
     public static ArrayList<Room> rooms = new ArrayList<>();
     public ArrayList<Door> doors = new ArrayList<>();

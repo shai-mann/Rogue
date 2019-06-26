@@ -98,38 +98,82 @@ public class SavePane {
                 }
             }
         });
+        nameField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {
+                boolean duplicate = false;
+                for (File f : Save.getSaves()) {
+                    if (f.getName().equals(nameField.getText())) {
+                        duplicate = true;
+                    }
+                }
+                if (duplicate) {
+                    errorField.setText("You are going to overwrite an existing save.");
+                    errorField.setVisible(true);
+                } else {
+                    errorField.setVisible(false);
+                }
+                panel.repaint();
+            }
+        });
         nameField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: make this sad mess functional
+                /*
+                * This function saves:
+                *   Monsters
+                *   Player
+                *   Items
+                *   Hidden and revealed tables
+                *   Messages
+                *   Staircase
+                *   Level data
+                *   Animations
+                 */
                 try {
                     File f = new File(new File(SavePane.class.getProtectionDomain().getCodeSource().getLocation().getPath())
                             + "/data/saves/" + nameField.getText());
                     f = new File(f.getPath().replace("%20", " "));
-                    Files.createFile(f.toPath());
-                    errorField.setVisible(false);
-                    errorField.setText("");
-                    ObjectOutputStream output = new ObjectOutputStream(
-                            new BufferedOutputStream(new FileOutputStream(f.getPath()))
-                    );
-                    output.writeObject(Monster.getMonsters());
-                    output.writeObject(Item.items);
-                    output.writeObject(Level.getLevel().getHiddenTable());
-                    output.writeObject(GameManager.getTable());
+                    if (!f.exists()) {
+                        Files.createDirectory(f.toPath());
+                    }
+                    writeSave(nameField.getText());
 
-                    output.writeObject(GameManager.getPlayer());
-
-                    output.writeObject(Map.getMap().getMessageBar().getMessages());
                 } catch (IOException i) {
-                    errorField.setText("An error occurred. That name may be taken");
-                    nameField.setText("");
-                    errorField.setVisible(true);
-                    f.pack();
-                    f.revalidate();
-                    f.repaint();
                     i.printStackTrace();
                 }
             }
         });
+    }
+
+    private void writeSave(String dirPath) {
+        new Save(dirPath + "/monsters", Monster.getMonsters());
+        new Save(dirPath + "/items", Item.items);
+        new Save(dirPath + "/hidden_table", Level.getLevel().getHiddenTable());
+        new Save(dirPath + "/shown_table", Level.getLevel().getShownTable());
+        new Save(dirPath + "/player", GameManager.getPlayer());
+        new Save(dirPath + "/messages", (Object[]) Map.getMap().getMessageBar().getMessages());
+        new Save(dirPath + "/animations", Map.getMap().getAnimationManager().getAnimations());
+        // all of the extra bits and pieces of the level
+        // consider adding hidden and shown tables to this list
+        new Save(dirPath + "/level_data",
+                Level.getLevel().getStaircase(),
+                Level.getLevel().getDirection(),
+                Level.getLevel().getLevelNumber(),
+                Level.getLevel().getStartingRoom(),
+                Level.getLevel().getShownPoints(),
+                Level.getLevel().getBlindnessPoints()
+        );
+
+        Map.getMap().setSaved(true);
+        f.dispose();
     }
 }

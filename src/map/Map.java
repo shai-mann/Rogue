@@ -10,9 +10,12 @@ import map.level.Level;
 import util.animation.AnimationManager;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
+import java.security.Key;
 
 public class Map implements Serializable {
     private StatusBar statusBar;
@@ -20,6 +23,8 @@ public class Map implements Serializable {
     private JPanel panel;
     private MessageBar messageBar;
     private AnimationManager animationManager;
+
+    public boolean saved = false;
 
     private static Map map;
 
@@ -30,6 +35,7 @@ public class Map implements Serializable {
         map = this;
     }
     public void update() {
+        saved = false;
         MessageBar.nextTurn(); // must go first
         Monster.update();
         GameManager.getPlayer().update();
@@ -55,8 +61,34 @@ public class Map implements Serializable {
         GameManager.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                new SavePane();
-                GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                if (!saved) {
+                    new SavePane();
+                    GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                } else {
+                    super.windowClosing(e);
+                    GameManager.getFrame().dispose();
+                    System.exit(0);
+                }
+            }
+        });
+        GameManager.getFrame().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char s = '\u0013';
+                if (e.isControlDown() && e.getKeyChar() == s) {
+                    new SavePane();
+                    GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
             }
         });
         animationManager = new AnimationManager();
@@ -69,5 +101,8 @@ public class Map implements Serializable {
     }
     public AnimationManager getAnimationManager() {
         return animationManager;
+    }
+    public void setSaved(boolean saved) {
+        this.saved = saved;
     }
 }

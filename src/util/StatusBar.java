@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.Serializable;
 
-public class StatusBar extends JComponent implements Serializable {
+public class StatusBar extends JComponent {
     private JLabel healthField;
     private JPanel panel;
     private JLabel goldField;

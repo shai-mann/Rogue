@@ -8,9 +8,8 @@ public class AnimationManager implements Serializable {
 
     private ArrayList<Animation> animations = new ArrayList<>();
 
-    public AnimationManager() {
+    public AnimationManager() {}
 
-    }
     public void addAnimation(Animation a) {
         animations.add(a);
     }
@@ -32,5 +31,9 @@ public class AnimationManager implements Serializable {
             }
         }
         return null;
+    }
+
+    public ArrayList<Animation> getAnimations() {
+        return animations;
     }
 }

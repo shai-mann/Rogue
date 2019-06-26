@@ -344,4 +344,13 @@ public class Level extends JComponent {
     public ArrayList<Point> getShownPoints() {
         return shownPoints;
     }
+    public ArrayList<Point> getBlindnessPoints() {
+        return blindnessPoints;
+    }
+    public CustomRoomTable getShownTable() {
+        return table;
+    }
+    public int getDirection() {
+        return ascendingStaircase == null && levelNumber < 26 ? Player.DOWN : Player.UP;
+    }
 }
