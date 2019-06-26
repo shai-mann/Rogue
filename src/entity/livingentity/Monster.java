@@ -543,7 +543,6 @@ public class Monster extends Entity {
     public static void updateAvailableMonsters() {
         availableFiles.clear();
         if (files == null) {
-            // TODO: this is just for testing in IntelliJ (this entire if statement)
             files = new File("./resources/data/monsters").listFiles();
         }
         for (File file : files) {

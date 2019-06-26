@@ -60,7 +60,6 @@ public class Potion extends Item {
     public Potion(int x, int y) {
         super("!", x, y);
         randomizePotionData();
-        power = powers.BLINDNESS; //TODO: remove after testing
     }
     public Potion(Potion potion) {
         super("!", GameManager.getPlayer().getXPos(), GameManager.getPlayer().getYPos());

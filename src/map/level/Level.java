@@ -186,9 +186,8 @@ public class Level extends JComponent {
         if (levelNumber == 1 && direction == Player.DOWN) {
             // At the beginning of the game this gives you a mace
             try {
-                //TODO: change back to just what is in the else statement and remove all else when exporting to JAR
                 boolean notJAR = false;
-                if (!notJAR) {
+                if (notJAR) {
                     new Weapon("./resources/data/weapons/mace",
                             getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
                 } else {
