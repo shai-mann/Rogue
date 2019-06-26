@@ -1,2 +1,0 @@
-+ Mnsters now drop food or gold and sometimes items based on their treasure chances (individual per monster type)
-+ Item type spawn chance is now based on the rarity of the item (food is least rare)
