@@ -10,6 +10,7 @@ map update by the monster
 - Ascending Staircase is not functional... Check out what is wrong with it.
 - Staircase remains in level even when you change levels
 - One of the wands causes a monster duplication glitch
+- The last loaded row of the table doesn’t show (only in JAR form)
 
 
 Features To Implement:

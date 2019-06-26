@@ -110,9 +110,11 @@ public class SavePane {
             @Override
             public void keyReleased(KeyEvent e) {
                 boolean duplicate = false;
-                for (File f : Save.getSaves()) {
-                    if (f.getName().equals(nameField.getText())) {
-                        duplicate = true;
+                if (Save.getSaves() != null) {
+                    for (File f : Save.getSaves()) {
+                        if (f.getName().equals(nameField.getText())) {
+                            duplicate = true;
+                        }
                     }
                 }
                 if (duplicate) {
@@ -139,8 +141,7 @@ public class SavePane {
                 *   Animations
                  */
                 try {
-                    File f = new File(new File(SavePane.class.getProtectionDomain().getCodeSource().getLocation().getPath())
-                            + "/data/saves/" + nameField.getText());
+                    File f = new File(Save.getCorrectPath() + nameField.getText());
                     f = new File(f.getPath().replace("%20", " "));
                     if (!f.exists()) {
                         Files.createDirectory(f.toPath());

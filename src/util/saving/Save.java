@@ -1,5 +1,7 @@
 package util.saving;
 
+import main.GameManager;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -37,14 +39,7 @@ public class Save {
         // creates FileOutputStream object with the correct absolute path
         // also creates the file
         try {
-            f = new File(
-                    SavePane.class.getProtectionDomain()
-                            .getCodeSource()
-                            .getLocation()
-                            .getPath()
-                            .replace("%20", " ")
-                            + "/data/saves/" + fileName
-            );
+            f= new File(getCorrectPath() + fileName);
             fs = new FileOutputStream(f.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -54,12 +49,25 @@ public class Save {
     // LOADING (STATIC) METHODS
 
     public static File[] getSaves() {
-        return new File(Save.class.getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .getPath()
-                .replace("%20", " ")
-                + "/data/saves").listFiles();
+        return new File(getCorrectPath()).listFiles();
+    }
+    public static String getCorrectPath() {
+        if (GameManager.notJAR) {
+            return SavePane.class.getProtectionDomain()
+                            .getCodeSource()
+                            .getLocation()
+                            .getPath()
+                            .replace("%20", " ")
+                            + "/data/saves/";
+        } else {
+            return new File(
+                    SavePane.class.getProtectionDomain()
+                            .getCodeSource()
+                            .getLocation()
+                            .getPath()
+                            .replace("%20", " ")).getParent()
+                    + "/data/saves/";
+        }
     }
     public static Object loadObject(String fileName) {
         return null; //TODO: fix this when implementing loading

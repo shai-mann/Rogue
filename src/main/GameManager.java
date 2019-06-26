@@ -16,7 +16,7 @@ public class GameManager {
     private static JFrame frame;
     private static Player player;
 
-    public static boolean notJAR = true; // used purely for testing purposes. When in IntelliJ, true; when JAR, false.
+    public static boolean notJAR = false; // TODO: used purely for testing purposes. When in IntelliJ, true; when JAR, false.
 
     public static void main(String[] args) {
         initFrame();
