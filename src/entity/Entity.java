@@ -5,8 +5,9 @@ import helper.Helper;
 import main.GameManager;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Entity {
+public class Entity implements Serializable {
     private int xPos;
     private int yPos;
 

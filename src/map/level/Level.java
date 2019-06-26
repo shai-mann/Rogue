@@ -186,7 +186,7 @@ public class Level extends JComponent {
         if (levelNumber == 1 && direction == Player.DOWN) {
             // At the beginning of the game this gives you a mace
             try {
-                boolean notJAR = false;
+                boolean notJAR = true; //TODO: before exporting to JAR, make sure to swap this variable to false
                 if (notJAR) {
                     new Weapon("./resources/data/weapons/mace",
                             getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);

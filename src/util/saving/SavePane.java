@@ -1,4 +1,4 @@
-package util;
+package util.saving;
 
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Monster;
@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.net.URISyntaxException;
+import java.nio.file.Files;
 
 public class SavePane {
 
@@ -21,23 +21,18 @@ public class SavePane {
     private JButton dontSaveButton;
     private JLabel title;
     private JTextField nameField;
+    private JLabel errorField;
 
     private JFrame f;
 
     public SavePane() {
-        setDefaults();
-
         f = new JFrame("Save Your Game?");
         f.setContentPane(panel);
-        f.setVisible(true);
-        f.setLocationRelativeTo(null);
-        f.pack();
+
+        setDefaults();
+
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
         f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        f.revalidate();
-        f.repaint();
-
-        f.setContentPane(panel);
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
@@ -106,30 +101,33 @@ public class SavePane {
         nameField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: make this functional (i.e., make it create a file to hold each of the objects in a folder with the save name)
+                // TODO: make this sad mess functional
                 try {
+                    File f = new File(new File(SavePane.class.getProtectionDomain().getCodeSource().getLocation().getPath())
+                            + "/data/saves/" + nameField.getText());
+                    f = new File(f.getPath().replace("%20", " "));
+                    Files.createFile(f.toPath());
+                    errorField.setVisible(false);
+                    errorField.setText("");
                     ObjectOutputStream output = new ObjectOutputStream(
-                            new BufferedOutputStream(
-                                    new FileOutputStream(
-                                            new File(
-                                                    new File(
-                                                            SavePane.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                                                    + "/data/saves")
-                                            + nameField.getText())
-                            )
+                            new BufferedOutputStream(new FileOutputStream(f.getPath()))
                     );
                     output.writeObject(Monster.getMonsters());
                     output.writeObject(Item.items);
-                    output.writeObject(Level.getLevel());
+                    output.writeObject(Level.getLevel().getHiddenTable());
+                    output.writeObject(GameManager.getTable());
 
                     output.writeObject(GameManager.getPlayer());
 
-                    output.writeObject(Map.getMap().getMessageBar());
-                    output.writeObject(Map.getMap().getStatusBar());
+                    output.writeObject(Map.getMap().getMessageBar().getMessages());
                 } catch (IOException i) {
+                    errorField.setText("An error occurred. That name may be taken");
+                    nameField.setText("");
+                    errorField.setVisible(true);
+                    f.pack();
+                    f.revalidate();
+                    f.repaint();
                     i.printStackTrace();
-                } catch (URISyntaxException j) {
-                    j.printStackTrace();
                 }
             }
         });

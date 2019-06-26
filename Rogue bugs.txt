@@ -9,6 +9,7 @@ map update by the monster
 - stealItem has some bugs with it, but is mostly functional - stealItem should be changed so it only takes certain (magical) items
 - Ascending Staircase is not functional... Check out what is wrong with it.
 - Staircase remains in level even when you change levels
+- One of the wands causes a monster duplication glitch
 
 
 Features To Implement:

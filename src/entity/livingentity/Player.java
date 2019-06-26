@@ -28,14 +28,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player extends Entity implements KeyListener {
+public class Player extends Entity implements KeyListener, Serializable {
 
-    private Map map;
     private Status status;
     private boolean showInventory = false;
-    private Container savedContentPane;
 
     private Armor wornItem;
     private Item heldItem;
@@ -66,7 +65,6 @@ public class Player extends Entity implements KeyListener {
         GameManager.getFrame().addKeyListener(this);
         status = new Status(this);
         getStatus().setAc(9);
-        map = Map.getMap();
     }
 
     // KEY LISTENER OVERRIDES
@@ -121,7 +119,7 @@ public class Player extends Entity implements KeyListener {
             moved = moveRandom();
         }
         if (moved || getStatus().isParalyzed()) {
-            map.update();
+            Map.getMap().update();
             if (o != null) {
                 if (o instanceof Door) {
                     ((Door) o).reveal();
@@ -174,21 +172,21 @@ public class Player extends Entity implements KeyListener {
     public void toggleInventory() {
         showInventory = !showInventory;
         if (showInventory) {
-            savedContentPane = GameManager.getFrame().getContentPane();
-            new InventoryPane();
+            new InventoryPane((JPanel) GameManager.getFrame().getContentPane());
         } else {
-            GameManager.replaceContentPane((JPanel) savedContentPane);
+            GameManager.replaceContentPane(InventoryPane.getSavedPane());
         }
     }
     public void toggleInventory(String message) {
         showInventory = !showInventory;
-        savedContentPane = GameManager.getFrame().getContentPane();
         new InventoryPane(message, new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     for (int i = 0; i < InventoryItem.getInventoryItems().size(); i++) {
+
                         InventoryItem item = InventoryItem.getInventoryItems().get(i);
+
                         if (item.getPanel().getBounds().contains(e.getPoint())) {
                             GameManager.getPlayer().toggleInventory();
                             item.getItem().identify();
@@ -196,7 +194,7 @@ public class Player extends Entity implements KeyListener {
                     }
                 }
             }
-        });
+        }, (JPanel) GameManager.getFrame().getContentPane());
     }
     private void hitMonster(int direction) {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {
@@ -206,7 +204,7 @@ public class Player extends Entity implements KeyListener {
                 if (Helper.random.nextDouble() <= hitChance) {
                     Status monsterStatus = monster.getStatus();
                     monsterStatus.lowerHealth(getDamage());
-                    map.update();
+                    Map.getMap().update();
                     if (monster.getStatus().getHealth() > 0) {
                         MessageBar.addMessage("You hit the " + monster.getName());
                     }

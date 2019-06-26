@@ -5,6 +5,7 @@ import com.sun.istack.internal.Nullable;
 import entity.livingentity.Player;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Animation {

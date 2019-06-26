@@ -12,18 +12,20 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class InventoryPane {
+    private static JPanel savedPanel;
     private JPanel panel;
     private JScrollPane scrollablePane;
     private JPanel scrollingPanel;
 
-    public InventoryPane() {
+    public InventoryPane(JPanel savePane) {
+        savedPanel = savePane;
         setDefaults();
         addInventory();
         addMouseListener();
 
         GameManager.replaceContentPane(panel);
     }
-    public InventoryPane(String message, MouseAdapter l) {
+    public InventoryPane(String message, MouseAdapter l, JPanel savePane) {
         setDefaults();
         addInventory();
         setBorderTitle(message);
@@ -77,5 +79,9 @@ public class InventoryPane {
 
     private void createUIComponents() {
         scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
+    public static JPanel getSavedPane() {
+        return savedPanel;
     }
 }

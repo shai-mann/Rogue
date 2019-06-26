@@ -1,9 +1,10 @@
 package util.animation;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AnimationManager {
+public class AnimationManager implements Serializable {
 
     private ArrayList<Animation> animations = new ArrayList<>();
 

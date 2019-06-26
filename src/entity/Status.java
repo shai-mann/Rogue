@@ -2,7 +2,9 @@ package entity;
 
 import map.level.Level;
 
-public class Status {
+import java.io.Serializable;
+
+public class Status implements Serializable {
 
     private int paralyzed = -1;
     private int confused = 0;

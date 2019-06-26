@@ -1,9 +1,8 @@
 package map;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import entity.livingentity.Monster;
 import util.MessageBar;
-import util.SavePane;
+import util.saving.SavePane;
 import util.StatusBar;
 import helper.Helper;
 import main.GameManager;
@@ -13,8 +12,9 @@ import util.animation.AnimationManager;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Serializable;
 
-public class Map {
+public class Map implements Serializable {
     private StatusBar statusBar;
     private Level level;
     private JPanel panel;

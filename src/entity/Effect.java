@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Effect {
+public class Effect implements Serializable {
 
     // PROTECT_ARMOR is only for Player, and makes the player's armor impervious to rust attacks (reset when armor taken off)
     public static final int PROTECT_ARMOR = 0;

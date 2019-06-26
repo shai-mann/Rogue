@@ -8,8 +8,9 @@ import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
-public class StatusBar extends JComponent {
+public class StatusBar extends JComponent implements Serializable {
     private JLabel healthField;
     private JPanel panel;
     private JLabel goldField;

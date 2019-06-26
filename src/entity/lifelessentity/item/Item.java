@@ -10,6 +10,7 @@ import helper.Helper;
 import map.level.Room;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -6,6 +6,7 @@ import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 public class MessageBar extends JComponent {
 
@@ -62,4 +63,7 @@ public class MessageBar extends JComponent {
         messageBar._nextTurn();
     }
 
+    public String[] getMessages() {
+        return new String[] {message.getText(), oldMessage.getText(), olderMessage.getText()};
+    }
 }

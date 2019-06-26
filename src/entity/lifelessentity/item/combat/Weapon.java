@@ -25,24 +25,19 @@ public class Weapon extends Item {
             loadDataFile(dataFilePath);
         } else {
             try {
-                File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
-                        new File(new File(
-                                Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                                + "/data/weapons").listFiles()
-                )));
-//                File file = null; //TODO: when exporting game to JAR, delete this line and correct section below
-//
-//                if (file == null) {
-//                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
-//                            new File("./resources/data/weapons").listFiles()
-//                    )));
-//                } else {
-//                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
-//                            new File(new File(
-//                                    Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-//                                    + "/data/weapons").listFiles()
-//                    )));
-//                }
+                File file = null; //TODO: when exporting game to JAR, delete this line and correct section below
+
+                if (file == null) {
+                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
+                            new File("./resources/data/weapons").listFiles()
+                    )));
+                } else {
+                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
+                            new File(new File(
+                                    Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                                    + "/data/weapons").listFiles()
+                    )));
+                }
                 loadDataFile(file.getPath());
             } catch (URISyntaxException e) {
                 e.printStackTrace();

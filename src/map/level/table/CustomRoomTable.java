@@ -3,8 +3,9 @@ package map.level.table;
 import com.sun.istack.internal.Nullable;
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public class CustomRoomTable extends JTable {
+public class CustomRoomTable extends JTable implements Serializable {
 
     private RoomTableModel model;
     private boolean tableType = false;
