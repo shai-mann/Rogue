@@ -4,6 +4,7 @@ import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
+import settings.Settings;
 import util.MessageBar;
 import helper.Helper;
 import main.GameManager;
@@ -32,7 +33,11 @@ public class InventoryItem extends JComponent {
         this.item = item;
         setNames();
 
-        label.setText(number + ") " + item.getName());
+        if (item instanceof Wand) {
+            label.setText(number + ") " + item.getName() + " Uses: " + ((Wand) item).getUses());
+        } else {
+            label.setText(number + ") " + item.getName());
+        }
     }
     public JPanel getPanel() {
         return panel;
@@ -62,7 +67,11 @@ public class InventoryItem extends JComponent {
         throwButton.setForeground(Helper.FOREGROUND_COLOR);
         dropButton.setForeground(Helper.FOREGROUND_COLOR);
 
-        label.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 20));
+        if (Settings.getTextSize() == Settings.TEXT_SIZE) {
+            label.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 20));
+        } else {
+            label.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        }
         label.setForeground(Color.WHITE);
 
         useButton.setVisible(false);

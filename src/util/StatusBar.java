@@ -4,6 +4,7 @@ import entity.livingentity.Monster;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
+import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +40,13 @@ public class StatusBar extends JComponent {
         acLabel.setForeground(Helper.FOREGROUND_COLOR);
         floorLabel.setText("Level: 1");
         floorLabel.setForeground(Helper.FOREGROUND_COLOR);
+
+        healthField.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        goldField.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        experienceLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        hungerLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        acLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
+        floorLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
     }
     public void updateStatusBar() {
         healthField.setText("Health: " + GameManager.getPlayer().getHealth() +

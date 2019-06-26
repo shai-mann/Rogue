@@ -56,7 +56,7 @@ public class BeginPane extends JComponent {
         settingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new SettingsPane(panel);
             }
         });
     }

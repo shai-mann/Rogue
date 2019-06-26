@@ -25,11 +25,20 @@ public class Weapon extends Item {
             loadDataFile(dataFilePath);
         } else {
             try {
-                File file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
+                File file = null; //TODO: when exporting game to JAR, delete this line and correct section below
+
+                if (file == null) {
+                    // TODO: this is just for testing in IntelliJ (this entire if statement)
+                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
+                            new File("./resources/data/weapons").listFiles()
+                    )));
+                } else {
+                    file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
                         new File(new File(
                                 Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
                                 + "/data/weapons").listFiles()
                 )));
+                }
                 loadDataFile(file.getPath());
             } catch (URISyntaxException e) {
                 e.printStackTrace();
@@ -63,8 +72,10 @@ public class Weapon extends Item {
             bufferedReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error: file not found");
+            e.printStackTrace();
         } catch (IOException e) {
             System.out.println("Error reading file");
+            e.printStackTrace();
         }
     }
     private void applyAttributeFromLine(String line) {

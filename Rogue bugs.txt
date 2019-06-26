@@ -1,49 +1,48 @@
-- wanderMovement should have a chance to move away even when isNextTo(Player)
-- base armor needs to be 10
-- Wand names
-- I found a null LoL
-- When "found a" make it be a or an based on first letter of getName()
-- First input is bugged and updates map but not player
+BUGS:
 - Scrolls don't always have the same name for the same type
-- Get hungry too fast
-- Rings don't hide their names
-- Need to update stealing attacks so that the item one keeps the item and drops it as treasure, and stealgold drops gold one as treasure.
 - Both stealGold and stealItem attackTypes need to have the monster run away from player (or tp away) after it steals from player
-- Doors can generate next to each other
 - Monsters can spawn in the same place as an item, causing the item to look like it is there for one turn, and then be overwritten on the first
 map update by the monster
+- Leprechauns can take more gold than you have... you end up with negative gold...
+- When a monster dies standing on top of an item, if it drops an item, the item is just removed from existence...
+- Throw button is smaller than the other buttons
+- stealItem has some bugs with it, but is mostly functional - stealItem should be changed so it only takes certain (magical) items
+- Ascending Staircase is not functional... Check out what is wrong with it.
+- Staircase remains in level even when you change levels
 
 
 Features To Implement:
-- level mapping
-- animations
-    - Explosion animations (wands of fire, ice, and lightning)
-    - Cone animations (dragon fire breathing)
+- MAKE SURE TO TEST BLINDNESS
 - three ring powers
 - several wand powers (see animations)
 - one scroll type
 - change armor to be about damage reduction
-- give data.monsters custom hit chances
-- ring wearing
-- shooting arrows
-- all potion powers
+- throwing items
 - different food potencies
 - monster and item spawnChances
-- starting items in first room on first level (only when going down) and no data.monsters in that room (same circumstances)
+- make settings save to a file in data folder, so that settings are saved on exit of game.
+- runType movementType would be good, especially for monsters that steal items, becuase then they should run from the player
+- traps!!!! Make them spawn, even though they have already technically been implemented.
+- on close, SettingsPane should reopen BeginPane.
 
 ALPHA TESTER SUGGESTIONS:
-- resting 
 - kobold attack too high
-- throw button bugged
 - two many secret doorways
 - make snake less health
-- staff of teleport to makes duplicate player
-- change regen mechanics to be about picking up health (or increase natural regeneration)
-- 
-- 
-- 
+
+Plausible future changes:
+    Saving and loading!?!?!
+    Amulet of Yendor maybe?
+    Make the game easier to download and use
+    Scrolling inventory!?!?!???!
+    Settings:
+        Changeable keys
+        Changeable symbols (walls, floors, player) - cannot be the same as a monster symbol.
+        Changeable colors? - monsters, items, player.
+        hunger/difficulty - like in Minecraft; easy, normal, hard
+    Inventory stacking - if you have two food items of the same type, just make the name "[food] (x2)"
+    Add shop? a button you click to buy things using gold.
 
 
-DAD'S NOTES (USELESS, IGNORE)
-- Starting pack should include: food, bow, arrows (random numer) short sword (+1, +1),  ring mail (+1)
-- you should start with this stuff, or at least that stuff in the first room
+DAD'S NOTES (USELESS, IGNORE (JK))
+- Starting pack should include: food, bow, arrows (random number) short sword (+1, +1),  ring mail (+1)

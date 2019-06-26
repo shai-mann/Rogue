@@ -77,11 +77,18 @@ public class Level extends JComponent {
         if (GameManager.getPlayer().getStatus().isBlinded()) {
             blind();
         }
-        addShownPoint(location);
-        addShownPoint(new Point(location.x, location.y + 1));
-        addShownPoint(new Point(location.x, location.y - 1));
-        addShownPoint(new Point(location.x + 1, location.y));
-        addShownPoint(new Point(location.x - 1, location.y));
+        if (levelNumber > 5 || GameManager.getPlayer().overWrittenGraphic.equals("#")
+                || GameManager.getPlayer().overWrittenGraphic.equals("+")) {
+            addShownPoint(location);
+            addShownPoint(new Point(location.x, location.y + 1));
+            addShownPoint(new Point(location.x, location.y - 1));
+            addShownPoint(new Point(location.x + 1, location.y));
+            addShownPoint(new Point(location.x - 1, location.y));
+        } else if (GameManager.getPlayer() != null){
+            for (Point p: getRoom(GameManager.getPlayer()).getRoomPoints()) {
+                addShownPoint(p);
+            }
+        }
 
         for (Point p : shownPoints) {
             table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
@@ -104,6 +111,7 @@ public class Level extends JComponent {
         table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
     }
     public void blind() {
+        // TODO: make the player visible when blinded
         blindnessPoints.addAll(shownPoints);
         shownPoints.clear();
 
@@ -178,9 +186,16 @@ public class Level extends JComponent {
         if (levelNumber == 1 && direction == Player.DOWN) {
             // At the beginning of the game this gives you a mace
             try {
-                new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                        + "/data/weapons/mace",
-                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+                //TODO: change back to just what is in the else statement and remove all else when exporting to JAR
+                boolean notJAR = false;
+                if (!notJAR) {
+                    new Weapon("./resources/data/weapons/mace",
+                            getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+                } else {
+                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                            + "/data/weapons/mace",
+                            getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+                }
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -242,27 +257,29 @@ public class Level extends JComponent {
         panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
         panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        hiddenTable.setBackground(Helper.BACKGROUND_COLOR);
-        hiddenTable.setGridColor(Helper.BACKGROUND_COLOR);
-        hiddenTable.setRowHeight((int) (hiddenTable.getRowHeight() * 0.9));
+        panel.setSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
+        table.setBackground(Helper.BACKGROUND_COLOR);
+        table.setGridColor(Helper.BACKGROUND_COLOR);
+        table.setRowHeight(panel.getHeight() / table.getRowCount());
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setWidth(panel.getWidth() / table.getColumnCount());
+        }
+
 
         level = this;
     }
     private void createUIComponents() {
-        hiddenTable = new CustomRoomTable(createTableModel());
-        table = new CustomRoomTable(createTableModel());
+        hiddenTable = new CustomRoomTable(createTableModel(), false);
+        table = new CustomRoomTable(createTableModel(), false);
 
         table.setFocusable(false);
         table.setRowSelectionAllowed(false);
         table.setForeground(Helper.BACKGROUND_COLOR);
         table.setGridColor(Helper.BACKGROUND_COLOR);
         table.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 12));
-        table.setRowHeight(12);
 
         for (int i = 0; i < table.getColumnCount(); i++) {
             table.getColumnModel().getColumn(i).setCellRenderer(new CustomCellRenderer());
-            table.getColumnModel().getColumn(i).setMinWidth(20);
-            table.getColumnModel().getColumn(i).setMaxWidth(20);
         }
     }
     private RoomTableModel createTableModel() {
@@ -324,5 +341,8 @@ public class Level extends JComponent {
         } else {
             return descendingStaircase;
         }
+    }
+    public ArrayList<Point> getShownPoints() {
+        return shownPoints;
     }
 }

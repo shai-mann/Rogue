@@ -3,6 +3,7 @@ package main;
 import entity.livingentity.Player;
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Monster;
+import map.Map;
 import util.BeginPane;
 import helper.Helper;
 import map.level.table.CustomRoomTable;
@@ -43,7 +44,7 @@ public class GameManager {
         Item.randomizeHiddenNames();
     }
     private static void initFrame() {
-        frame = new JFrame("Rogue - A recreation of the 1980's game");
+        frame = new JFrame("Rogue - A commemoration of the 1980's game");
 
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);

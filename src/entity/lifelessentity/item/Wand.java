@@ -111,6 +111,7 @@ public class Wand extends Item {
                 break;
             case MAGIC_MISSILES:
                 m.getStatus().setHealth(m.health - Helper.random.nextInt(3) + 1);
+                MessageBar.addMessage("Missiles fly from your wand, hitting " + m.getName());
                 break;
             case HASTE_MONSTER:
                 if (m.getSpeed() > 0) {
@@ -129,10 +130,14 @@ public class Wand extends Item {
                 int damage = GameManager.getPlayer().getHealth() / 2;
                 GameManager.getPlayer().getStatus().setHealth(damage);
                 Map.getMap().getStatusBar().updateStatusBar();
-                // TODO: once visible vs. not visible data.monsters implemented, make all visible ones lose damage amount health
+                for (Monster monster : Monster.getLoadedMonsters()) {
+                    monster.getStatus().lowerHealth(5);
+                }
+                MessageBar.addMessage("All visible monsters take damage");
                 break;
             case NOTHING:
                 // Yup, this is legitimately a wand type.
+                MessageBar.addMessage("Nothing happens");
                 break;
             case TELEPORT_AWAY:
                 m.setLocation(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds());
@@ -142,6 +147,7 @@ public class Wand extends Item {
                 break;
             case CANCELLATION:
                 m.getStatus().getEffects().addEffect(Effect.SUPPRESS_POWER);
+                MessageBar.addMessage(m.getName() + " loses its special abilities");
                 break;
         }
         MessageBar.addMessage("You used the " + getName());
@@ -153,6 +159,9 @@ public class Wand extends Item {
     }
     private powers getPower() {
         return power;
+    }
+    public int getUses() {
+        return uses;
     }
 
     // STATIC METHODS

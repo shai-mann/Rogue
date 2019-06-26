@@ -126,11 +126,12 @@ public class Entity {
         return yPos;
     }
     public void setLocation(Point p) {
+        GameManager.getTable().setValueAt(overWrittenGraphic, yPos, xPos);
         xPos = p.x;
         yPos = p.y;
         overWrittenGraphic = (String) GameManager.getTable().getValueAt(yPos, xPos);
 
-        GameManager.getTable().setValueAt("@", p.y, p.x);
+        GameManager.getTable().setValueAt(this.graphic, p.y, p.x);
     }
     public Point getLocation() {
         return new Point(getXPos(), getYPos());

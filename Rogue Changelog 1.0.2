@@ -1,0 +1,30 @@
+New Features:
+    + Settings
+        + Changeable Text Size - 3 sizes, Small, Normal, Large. Default is Small.
+        + Changeable Inputs - change the 8 key inputs.
+    + Animations
+        + Cone animation for dragon fire-breathing - not yet in use by fireAttack
+        + Circle animation for ice, fire, and lightning wand uses
+    + New Level Mapping
+        + Levels 1-5 now map entire rooms on entry, levels 6-26 retain normal mapping
+    + Wand uses now display in the player's inventory
+    + Resting!
+        Note: as requested, hit 'R' to rest, and it will make you heal much faster.
+
+General Bug Fixes:
+    + Fixed bug where weapons can be named "null"
+    + Possibly fixed issue with game not resizing to fit other screen resolutions (beta testers need to confirm)
+    + Fixed duplication glitch with Wand of Teleport To
+
+Item changes:
+    + Updated Item spawns (55% chance to have 1 item in a room, 14% chance to have 2 items, 0.02% chance to have 3)
+    + Updated Gold amounts that relate to the player's level (minimum gold spawn is 80, maximum is 500)
+
+stealGold and stealItem attack changes:
+    + Fixed issue with stealItem attack, now functional - 30% chance on hit for item to be stolen.
+    + Fixed bug where stealGold will keep stealing after you have no gold (at one point I had -73 gold)
+    + Made stealItem and stealGold monsters drop the stolen items on death
+
+Clarification(s):
+    When using f (find), your hunger does NOT go down.
+    While resting, monsters WILL move, and your hunger WILL go down.

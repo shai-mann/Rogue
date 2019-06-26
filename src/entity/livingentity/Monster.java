@@ -5,6 +5,7 @@ import com.sun.xml.internal.ws.api.ResourceLoader;
 import entity.Effect;
 import entity.Entity;
 import entity.Status;
+import entity.lifelessentity.item.Gold;
 import entity.lifelessentity.item.Item;
 import map.level.Passageway;
 import util.MessageBar;
@@ -59,6 +60,7 @@ public class Monster extends Entity {
     private String hiddenChar;
 
     private Item stolenItem = null;
+    private int stolenGold = 0;
 
     private Status status;
 
@@ -90,9 +92,10 @@ public class Monster extends Entity {
             bufferedReader.close();
 
         } catch (FileNotFoundException e) {
-            // TODO: Better error handling
+            e.printStackTrace();
             System.out.println("Error: file not found");
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error reading file");
         }
     }
@@ -208,7 +211,7 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
-        // TODO: steal (magic) item, drain max HP, drain XP (levels loss if go below thresh-hold)
+        // TODO: drain max HP, drain XP (levels loss if go below thresh-hold)
         move(null);
         status.update();
         if (status.getHealth() <= 0) {
@@ -296,7 +299,7 @@ public class Monster extends Entity {
 
     }
     private void wanderMovement() {
-        if (isNextTo(GameManager.getPlayer()) && !(Helper.random.nextInt(99) + 1 <= 90)) {
+        if (isNextTo(GameManager.getPlayer()) && Helper.random.nextInt(99) + 1 < 90) {
             attack();
         } else {
             moveRandom();
@@ -367,7 +370,9 @@ public class Monster extends Entity {
         }
     }
     private void hitAttack() {
-        if (Helper.random.nextDouble() <= critChance) { // critical
+        if (hitDamage == 0) {
+            MessageBar.addMessage("The " + getName() + " misses");
+        } else if (Helper.random.nextDouble() <= critChance) { // critical
             if (Helper.random.nextDouble() <= 0.8) {
                 GameManager.getPlayer().health -= Helper.random.nextInt((int) critDamage) + 1;
                 MessageBar.addMessage("The " + getName() + " crits");
@@ -405,18 +410,29 @@ public class Monster extends Entity {
         }
     }
     private void stealGoldAttack() {
-        GameManager.getPlayer().stealGold(Helper.random.nextInt(50) + GameManager.getPlayer().getGold() / 4);
-        MessageBar.addMessage("Your pockets feel lighter");
+        Player p = GameManager.getPlayer();
+
+        if (p.getGold() > 0 && Helper.random.nextInt(99) + 1 > 70) {
+            stolenGold += p.stealGold(Helper.random.nextInt(50) + p.getGold() / 4);
+            MessageBar.addMessage("Your pockets feel lighter");
+            movementType = movementTypes.WANDER;
+            // TODO: update this and stealItem attack to change to RUN movement type after stealing
+        } else {
+            MessageBar.addMessage("The " + getName() + " couldn't take your gold");
+        }
     }
     private void stealItemAttack() {
         ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
-        Item.itemTypes[] itemTypes = {Item.itemTypes.RING, Item.itemTypes.WAND, Item.itemTypes.POTION, Item.itemTypes.SCROLL};
 
-        items = Item.getAllItemsOfTypes((ArrayList<Item.itemTypes>) Arrays.asList(itemTypes), items);
-
-        stolenItem = (Item) Helper.getRandom(items);
-        GameManager.getPlayer().getInventory().remove(stolenItem);
-        MessageBar.addMessage("Your backpack feels lighter");
+        if (stolenItem == null && items.size() != 0 && Helper.random.nextInt(99) + 1 > 70) {
+            stolenItem = (Item) Helper.getRandom(items);
+            GameManager.getPlayer().getInventory().remove(stolenItem);
+            MessageBar.addMessage("Your backpack feels lighter");
+            movementType = movementTypes.WANDER;
+            attackType = attackTypes.HIT;
+        } else {
+            MessageBar.addMessage("The " + getName() + " fails to steal from you");
+        }
     }
     private void rustAttack() {
         if (GameManager.getPlayer().getWornItem() != null &&
@@ -470,16 +486,19 @@ public class Monster extends Entity {
     private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         GameManager.getPlayer().addExperience(experience);
-
-        if (Helper.random.nextInt(99) + 1 < treasureChance) {
-            if (stolenItem == null) {
-                Item.spawnItem(getXPos(), getYPos(), null, null);
-            } else {
-                Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
-            }
-        }
-
         MessageBar.addMessage("You kill the " + name);
+
+        if (Helper.random.nextInt(99) + 1 < treasureChance || stolenItem != null) {
+            Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
+        } else if (stolenGold > 0) {
+            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null);
+        } else if (Helper.random.nextInt(2) == 1){
+            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.FOOD, null);
+            MessageBar.addMessage("The " + name + " drops some food");
+        } else {
+            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null);
+            MessageBar.addMessage("The " + name + " drops some gold");
+        }
         monsters.remove(this);
     }
 
@@ -509,7 +528,6 @@ public class Monster extends Entity {
 
     public static void createMonster(Room room) {
         Point location = room.getRandomPointInBounds();
-        //TODO: change back to Helper.getRandom(availableFiles)
         new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
     }
     public static void spawnMonsters() {
@@ -524,6 +542,10 @@ public class Monster extends Entity {
 
     public static void updateAvailableMonsters() {
         availableFiles.clear();
+        if (files == null) {
+            // TODO: this is just for testing in IntelliJ (this entire if statement)
+            files = new File("./resources/data/monsters").listFiles();
+        }
         for (File file : files) {
             try {
                 if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
@@ -600,5 +622,14 @@ public class Monster extends Entity {
     }
     public static ArrayList<Monster> getMonsters() {
         return monsters;
+    }
+    public static ArrayList<Monster> getLoadedMonsters() {
+        ArrayList<Monster> loadedMonsters = new ArrayList<>();
+        for (Monster m : monsters) {
+            if (Level.getLevel().getShownPoints().contains(m.getLocation())) {
+                loadedMonsters.add(m);
+            }
+        }
+        return loadedMonsters;
     }
 }

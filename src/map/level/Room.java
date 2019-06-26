@@ -102,4 +102,13 @@ public class Room {
         }
         return p;
     }
+    public ArrayList<Point> getRoomPoints() {
+        ArrayList<Point> points = new ArrayList<>();
+        for (int i = topLeft.x; i < topLeft.getX() + getSize().width; i++) {
+            for (int j = topLeft.y; j < topLeft.getY() + getSize().height; j++) {
+                points.add(new Point(i, j));
+            }
+        }
+        return points;
+    }
 }

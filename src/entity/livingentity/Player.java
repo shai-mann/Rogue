@@ -2,13 +2,13 @@ package entity.livingentity;
 
 import entity.Effect;
 import entity.Entity;
-import entity.KeyBinds;
 import entity.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
+import settings.Settings;
 import util.inventory.InventoryItem;
 import map.level.Door;
 import map.level.Level;
@@ -77,35 +77,42 @@ public class Player extends Entity implements KeyListener {
         }
         boolean moved = false;
         Object o = null;
-        if (e.getKeyCode() == KeyBinds.INVENTORY) {
+        if (e.getKeyCode() == Settings.INVENTORY) {
             toggleInventory();
         }
+        if (e.getKeyCode() == Settings.REST && health < maxHealth) {
+            moved = true;
+            regenStepsCounter++;
+            if (Helper.random.nextInt(99) + 1 < 15) {
+                health++;
+            }
+        }
         if (!status.isParalyzed() && !status.isConfused() && !showInventory) {
-            if(e.getKeyCode() == KeyBinds.MOVE_DOWN || e.getKeyCode() == KeyBinds.MOVE_DOWN_ALT) {
+            if(e.getKeyCode() == Settings.MOVE_DOWN) {
                 moved = move(DOWN);
                 if (!moved) {
                     hitMonster(DOWN);
                 }
-            } else if (e.getKeyCode() == KeyBinds.MOVE_UP || e.getKeyCode() == KeyBinds.MOVE_UP_ALT) {
+            } else if (e.getKeyCode() == Settings.MOVE_UP) {
                 moved = move(UP);
                 if (!moved) {
                     hitMonster(UP);
                 }
-            } else if (e.getKeyCode() == KeyBinds.MOVE_RIGHT || e.getKeyCode() == KeyBinds.MOVE_RIGHT_ALT) {
+            } else if (e.getKeyCode() == Settings.MOVE_RIGHT) {
                 moved = move(RIGHT);
                 if (!moved) {
                     hitMonster(RIGHT);
                 }
-            } else if (e.getKeyCode() == KeyBinds.MOVE_LEFT || e.getKeyCode() == KeyBinds.MOVE_LEFT_ALT) {
+            } else if (e.getKeyCode() == Settings.MOVE_LEFT) {
                 moved = move(LEFT);
                 if (!moved) {
                     hitMonster(LEFT);
                 }
-            } else if (e.getKeyCode() == KeyBinds.USE_STAIRCASE) {
+            } else if (e.getKeyCode() == Settings.USE_STAIRCASE) {
                 if (overWrittenGraphic.equals("%")) {
                     changeLevel(Level.getLevel().getStaircase().getDirection());
                 }
-            } else if (e.getKeyCode() == KeyBinds.SEARCH) {
+            } else if (e.getKeyCode() == Settings.SEARCH) {
                 moved = true;
                 o = search();
             }
@@ -198,7 +205,7 @@ public class Player extends Entity implements KeyListener {
                 double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
                 if (Helper.random.nextDouble() <= hitChance) {
                     Status monsterStatus = monster.getStatus();
-                    monsterStatus.setHealth(monsterStatus.getHealth() - getDamage());
+                    monsterStatus.lowerHealth(getDamage());
                     map.update();
                     if (monster.getStatus().getHealth() > 0) {
                         MessageBar.addMessage("You hit the " + monster.getName());
@@ -297,6 +304,10 @@ public class Player extends Entity implements KeyListener {
                 MessageBar.addMessage("You found some " + foundItem.getName().toLowerCase());
             } else if (foundItem instanceof Armor || foundItem instanceof Arrow) {
                 MessageBar.addMessage("You found " + foundItem.getName());
+            } else if (foundItem.getName().startsWith("A") || foundItem.getName().startsWith("E") ||
+                    foundItem.getName().startsWith("O") || foundItem.getName().startsWith("I") ||
+                    foundItem.getName().startsWith("U")) {
+                MessageBar.addMessage("You found an " + foundItem.getName());
             } else {
                 MessageBar.addMessage("You found a " + foundItem.getName());
             }
@@ -397,8 +408,14 @@ public class Player extends Entity implements KeyListener {
     public void addExperience(int experience) {
         this.experience += experience;
     }
-    public void stealGold(int amount) {
-        this.gold -= amount;
+    public int stealGold(int amount) {
+        if (gold - amount >= 0) {
+            this.gold -= amount;
+        } else {
+            amount = this.gold;
+            this.gold = 0;
+        }
+        return amount;
     }
     public void drainMaxHealth(int amount) {
         this.maxHealth -= amount;

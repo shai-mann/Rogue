@@ -2,6 +2,7 @@ package util;
 
 import helper.Helper;
 import main.GameManager;
+import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,7 @@ public class MessageBar extends JComponent {
     private void setTextareaDefaults(JTextArea textArea, Color foreground) {
         textArea.setBackground(Helper.BACKGROUND_COLOR);
         textArea.setForeground(foreground);
-        textArea.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 12));
+        textArea.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
         textArea.setFocusable(false);
     }
     private void _addMessage(String text) {

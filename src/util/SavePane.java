@@ -33,7 +33,7 @@ public class SavePane {
         f.setLocationRelativeTo(null);
         f.pack();
         f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         f.revalidate();
         f.repaint();
 
@@ -106,7 +106,7 @@ public class SavePane {
         nameField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: make this functional (i.e., make it create a file to hold each of the objects in a folder with the save name
+                // TODO: make this functional (i.e., make it create a file to hold each of the objects in a folder with the save name)
                 try {
                     ObjectOutputStream output = new ObjectOutputStream(
                             new BufferedOutputStream(
