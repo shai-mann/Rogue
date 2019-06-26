@@ -1,6 +1,6 @@
 package map.level;
 
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import main.GameManager;
 
 import java.awt.*;

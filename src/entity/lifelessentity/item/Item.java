@@ -5,14 +5,12 @@ import entity.Entity;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import map.level.Room;
 
 import java.awt.*;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Item extends Entity {
 

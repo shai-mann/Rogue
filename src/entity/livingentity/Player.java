@@ -16,9 +16,9 @@ import map.level.Room;
 
 import java.awt.*;
 
-import util.GravePane;
+import util.gamepanes.GravePane;
 import util.inventory.InventoryPane;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.Map;

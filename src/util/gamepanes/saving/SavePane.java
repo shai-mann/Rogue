@@ -1,4 +1,4 @@
-package util.saving;
+package util.gamepanes.saving;
 
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Monster;

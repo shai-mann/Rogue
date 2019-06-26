@@ -4,7 +4,7 @@ import entity.lifelessentity.item.Item;
 import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 
 public class Armor extends Item {
 

@@ -5,7 +5,7 @@ import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
 import settings.Settings;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import main.GameManager;
 

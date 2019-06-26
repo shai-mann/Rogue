@@ -1,11 +1,10 @@
 package settings;
 
 import javafx.util.Pair;
-import util.SettingsPane;
+import util.menupanes.SettingsPane;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.function.BinaryOperator;
 
 public class Settings {
 

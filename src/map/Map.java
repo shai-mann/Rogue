@@ -1,9 +1,9 @@
 package map;
 
 import entity.livingentity.Monster;
-import util.MessageBar;
-import util.saving.SavePane;
-import util.StatusBar;
+import util.gamepanes.MessageBar;
+import util.gamepanes.saving.SavePane;
+import util.gamepanes.StatusBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
@@ -15,7 +15,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
-import java.security.Key;
 
 public class Map implements Serializable {
     private StatusBar statusBar;

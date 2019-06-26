@@ -1,4 +1,4 @@
-package util;
+package util.gamepanes;
 
 import entity.livingentity.Monster;
 import helper.Helper;

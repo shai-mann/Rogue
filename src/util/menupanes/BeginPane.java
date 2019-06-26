@@ -1,9 +1,10 @@
-package util;
+package util.menupanes;
 
 import helper.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
+import util.ImagePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

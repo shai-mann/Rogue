@@ -5,7 +5,7 @@ import entity.livingentity.Monster;
 import main.GameManager;
 import map.Map;
 import map.level.Room;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import util.animation.Animation;
 

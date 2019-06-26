@@ -1,10 +1,8 @@
-package util.saving;
+package util.gamepanes.saving;
 
 import main.GameManager;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.util.ArrayList;
 
 public class Save {
 
@@ -70,6 +68,6 @@ public class Save {
         }
     }
     public static Object loadObject(String fileName) {
-        return null; //TODO: fix this when implementing loading
+        return null; //TODO: fix this when implementing util.menupanes.loading
     }
 }

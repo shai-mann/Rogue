@@ -1,6 +1,6 @@
 package entity.lifelessentity.item;
 
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import main.GameManager;
 

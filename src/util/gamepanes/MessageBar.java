@@ -1,4 +1,4 @@
-package util;
+package util.gamepanes;
 
 import helper.Helper;
 import main.GameManager;
@@ -6,7 +6,6 @@ import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 
 public class MessageBar extends JComponent {
 

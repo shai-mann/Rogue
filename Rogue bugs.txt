@@ -11,6 +11,7 @@ map update by the monster
 - Staircase remains in level even when you change levels
 - One of the wands causes a monster duplication glitch
 - The last loaded row of the table doesn’t show (only in JAR form)
+- Button text in BeginPane doesn't appear on Mac
 
 
 Features To Implement:
@@ -25,7 +26,8 @@ Features To Implement:
 - make settings save to a file in data folder, so that settings are saved on exit of game.
 - runType movementType would be good, especially for monsters that steal items, becuase then they should run from the player
 - traps!!!! Make them spawn, even though they have already technically been implemented.
-- on close, SettingsPane should reopen BeginPane.
+- on quit, game should reopen BeginPane.
+- Make background of BeginPane and SettingsPane
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
@@ -33,7 +35,7 @@ ALPHA TESTER SUGGESTIONS:
 - make snake less health
 
 Plausible future changes:
-    Saving and loading!?!?!
+    Saving and util.menupanes.loading!?!?!
     Amulet of Yendor maybe?
     Make the game easier to download and use
     Scrolling inventory!?!?!???!

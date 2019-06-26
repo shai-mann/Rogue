@@ -3,7 +3,7 @@ package entity.lifelessentity.item.combat;
 import entity.lifelessentity.item.Item;
 import helper.Helper;
 import main.GameManager;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 
 import java.io.*;
 import java.net.URISyntaxException;

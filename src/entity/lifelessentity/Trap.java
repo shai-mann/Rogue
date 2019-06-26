@@ -4,9 +4,8 @@ import entity.Entity;
 import helper.Helper;
 import main.GameManager;
 import map.level.Room;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 

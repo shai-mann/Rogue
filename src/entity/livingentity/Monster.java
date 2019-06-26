@@ -1,26 +1,20 @@
 package entity.livingentity;
 
 import com.sun.istack.internal.Nullable;
-import com.sun.xml.internal.ws.api.ResourceLoader;
 import entity.Effect;
 import entity.Entity;
 import entity.Status;
-import entity.lifelessentity.item.Gold;
 import entity.lifelessentity.item.Item;
 import map.level.Passageway;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 import helper.Helper;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
 
-import javax.print.URIException;
 import java.awt.*;
 import java.io.*;
-import java.net.JarURLConnection;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;

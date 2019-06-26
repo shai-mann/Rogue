@@ -1,4 +1,4 @@
-package util;
+package util.menupanes;
 
 import javafx.util.Pair;
 import main.GameManager;

@@ -4,7 +4,7 @@ import entity.Effect;
 import entity.livingentity.Player;
 import helper.Helper;
 import main.GameManager;
-import util.MessageBar;
+import util.gamepanes.MessageBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
