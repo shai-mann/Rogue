@@ -25,9 +25,9 @@ public class Weapon extends Item {
             loadDataFile(dataFilePath);
         } else {
             try {
-                File file = null; //TODO: when exporting game to JAR, delete this line and correct section below
+                File file;
 
-                if (file == null) {
+                if (GameManager.notJAR) {
                     file = (File) Helper.getRandom(new ArrayList(Arrays.asList(
                             new File("./resources/data/weapons").listFiles()
                     )));
