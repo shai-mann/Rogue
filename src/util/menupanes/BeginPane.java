@@ -5,6 +5,7 @@ import main.GameManager;
 import map.Map;
 import map.level.Level;
 import util.ImagePanel;
+import util.menupanes.loading.LoadPane;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -51,7 +52,7 @@ public class BeginPane extends JComponent {
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: add code to load games
+                new LoadPane((JPanel) GameManager.getFrame().getContentPane());
             }
         });
         settingsButton.addActionListener(new ActionListener() {
@@ -63,6 +64,6 @@ public class BeginPane extends JComponent {
     }
 
     private void createUIComponents() {
-        imagePanel = new ImagePanel();
+        imagePanel = new ImagePanel("data/images/Rogue_Background.PNG", GameManager.getFrame());
     }
 }

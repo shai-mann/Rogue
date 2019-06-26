@@ -26,6 +26,7 @@ public class InventoryPane {
         GameManager.replaceContentPane(panel);
     }
     public InventoryPane(String message, MouseAdapter l, JPanel savePane) {
+        savedPanel = savePane;
         setDefaults();
         addInventory();
         setBorderTitle(message);
@@ -75,10 +76,12 @@ public class InventoryPane {
                 new Font(Helper.THEME_FONT, Font.PLAIN, 25),
                 Helper.FOREGROUND_COLOR)
         );
+
+        scrollablePane.getVerticalScrollBar().setPreferredSize(new Dimension(0, Integer.MAX_VALUE));
     }
 
     private void createUIComponents() {
-        scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     public static JPanel getSavedPane() {
