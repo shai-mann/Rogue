@@ -74,6 +74,8 @@ public class InventoryItem extends JComponent {
         }
         label.setForeground(Color.WHITE);
 
+        Helper.setSize(panel, new Dimension(GameManager.getFrame().getWidth(), 75));
+
         useButton.setVisible(false);
         throwButton.setVisible(false);
         dropButton.setVisible(false);

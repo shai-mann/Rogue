@@ -12,7 +12,9 @@ public class GravePane extends JComponent {
     private JTextArea textArea;
 
     public GravePane() {
-        GameManager.getFrame().removeWindowListener(GameManager.getFrame().getWindowListeners()[0]);
+        if (GameManager.getFrame().getWindowListeners().length > 0) {
+            GameManager.getFrame().removeWindowListener(GameManager.getFrame().getWindowListeners()[0]);
+        }
         GameManager.getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         GameManager.replaceContentPane(panel);
 

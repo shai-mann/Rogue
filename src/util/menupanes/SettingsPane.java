@@ -51,6 +51,7 @@ public class SettingsPane {
         setDefaultSettings(keyValuesTable);
 
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, Integer.MAX_VALUE));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         panel.setSize(new Dimension(panel.getPreferredSize().width + 150, panel.getPreferredSize().height));
 
         textSizeSelector.setEditable(false);

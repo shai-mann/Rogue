@@ -19,16 +19,16 @@ public class InventoryPane {
 
     public InventoryPane(JPanel savePane) {
         savedPanel = savePane;
-        setDefaults();
         addInventory();
+        setDefaults();
         addMouseListener();
 
         GameManager.replaceContentPane(panel);
     }
     public InventoryPane(String message, MouseAdapter l, JPanel savePane) {
         savedPanel = savePane;
-        setDefaults();
         addInventory();
+        setDefaults();
         setBorderTitle(message);
         scrollingPanel.addMouseListener(l);
 
@@ -43,8 +43,9 @@ public class InventoryPane {
         ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
             scrollingPanel.add(new InventoryItem(i + 1, playerInventory.get(i)).getPanel());
-            panel.revalidate();
+            panel.validate();
         }
+        panel.revalidate();
     }
     private void addMouseListener() {
         scrollingPanel.addMouseListener(new MouseAdapter() {
@@ -63,11 +64,21 @@ public class InventoryPane {
         });
     }
     private void setDefaults() {
-        Helper.setSize(panel, GameManager.getFrame().getSize());
+        scrollablePane.setViewportView(scrollingPanel);
+        if (GameManager.getPlayer().getInventory().size() > 0) {
+            Helper.setSize(scrollingPanel, new Dimension(GameManager.getFrame().getWidth() - 5,
+                    GameManager.getPlayer().getInventory().size() * 76 + 20
+            ));
+        }
+
+        scrollablePane.getVerticalScrollBar().setPreferredSize(new Dimension(10, Integer.MAX_VALUE));
+        scrollablePane.getVerticalScrollBar().setUnitIncrement(16);
+
         panel.setBackground(Helper.BACKGROUND_COLOR);
         scrollingPanel.setBackground(Helper.BACKGROUND_COLOR);
         scrollingPanel.setLayout(new BoxLayout(scrollingPanel, BoxLayout.Y_AXIS));
         scrollablePane.getViewport().setBackground(Helper.BACKGROUND_COLOR);
+
         panel.setBorder(new TitledBorder(
                 panel.getBorder(),
                 "Inventory",
@@ -76,15 +87,16 @@ public class InventoryPane {
                 new Font(Helper.THEME_FONT, Font.PLAIN, 25),
                 Helper.FOREGROUND_COLOR)
         );
-
-        scrollablePane.getVerticalScrollBar().setPreferredSize(new Dimension(0, Integer.MAX_VALUE));
-    }
-
-    private void createUIComponents() {
-        scrollablePane = new JScrollPane(scrollingPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        Helper.setSize(panel, GameManager.getFrame().getSize());
+        GameManager.getFrame().pack();
     }
 
     public static JPanel getSavedPane() {
         return savedPanel;
+    }
+
+    private void createUIComponents() {
+        scrollablePane = new JScrollPane();
+        scrollingPanel = new JPanel();
     }
 }

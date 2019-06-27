@@ -45,9 +45,8 @@ public class LoadGame {
         nameLabel.setForeground(Color.RED);
         loadButton.setVisible(false);
         imagePanel.setBackground(Helper.BACKGROUND_COLOR);
-        Helper.setSize(imagePanel, new Dimension(GameManager.getFrame().getWidth(), 100));
-        Helper.setSize(panel, new Dimension(GameManager.getFrame().getWidth(), 100));
-        panel.repaint();
+        Helper.setSize(imagePanel, new Dimension(GameManager.getFrame().getWidth(),80));
+        Helper.setSize(panel, new Dimension(GameManager.getFrame().getWidth(), 80));
     }
     private void setDefaultSettings(JComponent jc) {
         jc.setBackground(Helper.BACKGROUND_COLOR);

@@ -14,7 +14,7 @@
         </constraints>
         <properties>
           <horizontalScrollBarPolicy value="31"/>
-          <verticalScrollBarPolicy value="22"/>
+          <verticalScrollBarPolicy value="20"/>
         </properties>
         <border type="none"/>
         <children>

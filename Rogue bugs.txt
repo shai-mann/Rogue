@@ -1,17 +1,13 @@
 BUGS:
 - Scrolls don't always have the same name for the same type
 - Both stealGold and stealItem attackTypes need to have the monster run away from player (or tp away) after it steals from player
-- Monsters can spawn in the same place as an item, causing the item to look like it is there for one turn, and then be overwritten on the first
-map update by the monster
-- Leprechauns can take more gold than you have... you end up with negative gold...
-- When a monster dies standing on top of an item, if it drops an item, the item is just removed from existence...
-- Throw button is smaller than the other buttons
 - stealItem has some bugs with it, but is mostly functional - stealItem should be changed so it only takes certain (magical) items
-- Ascending Staircase is not functional... Check out what is wrong with it.
 - Staircase remains in level even when you change levels
 - One of the wands causes a monster duplication glitch
 - The last loaded row of the table doesn’t show (only in JAR form)
 - Button text in BeginPane doesn't appear on Mac
+- When you put on a ring it says "held", when it should say "worn"
+- When monsters drop an item somewhere other than where they are, after picking up, it looks like there is a monster there.
 
 
 Features To Implement:
@@ -28,6 +24,12 @@ Features To Implement:
 - traps!!!! Make them spawn, even though they have already technically been implemented.
 - on quit, game should reopen BeginPane.
 - Make background of BeginPane and SettingsPane
+- Maybe, and this could be difficult, have the load panel show images of the games that were taken right before they were saved
+    Essentially, when saving, take a screenshot of the game (somehow) and then keep it with the save, and display it in the
+    loading panel
+- Lower damage done by mace
+- Items should on use reveal their hidden names
+- When using an item, everything should update.
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
@@ -35,12 +37,10 @@ ALPHA TESTER SUGGESTIONS:
 - make snake less health
 
 Plausible future changes:
-    Saving and util.menupanes.loading!?!?!
+    Saving and loading!?!?!
     Amulet of Yendor maybe?
     Make the game easier to download and use
-    Scrolling inventory!?!?!???!
     Settings:
-        Changeable keys
         Changeable symbols (walls, floors, player) - cannot be the same as a monster symbol.
         Changeable colors? - monsters, items, player.
         hunger/difficulty - like in Minecraft; easy, normal, hard

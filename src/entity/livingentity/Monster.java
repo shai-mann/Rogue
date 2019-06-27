@@ -406,7 +406,7 @@ public class Monster extends Entity {
     private void stealGoldAttack() {
         Player p = GameManager.getPlayer();
 
-        if (p.getGold() > 0 && Helper.random.nextInt(99) + 1 > 70) {
+        if (p.getGold() > 0 && Helper.random.nextInt(99) + 1 < 40) {
             stolenGold += p.stealGold(Helper.random.nextInt(50) + p.getGold() / 4);
             MessageBar.addMessage("Your pockets feel lighter");
             movementType = movementTypes.WANDER;
@@ -482,6 +482,9 @@ public class Monster extends Entity {
         GameManager.getPlayer().addExperience(experience);
         MessageBar.addMessage("You kill the " + name);
 
+        if (Item.getItemAt(getXPos(), getYPos()) != null) {
+            setLocation(Level.getLevel().getRoom(this).getRandomPointInBounds());
+        }
         if (Helper.random.nextInt(99) + 1 < treasureChance || stolenItem != null) {
             Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
         } else if (stolenGold > 0) {

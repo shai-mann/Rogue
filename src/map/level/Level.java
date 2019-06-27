@@ -184,20 +184,23 @@ public class Level extends JComponent {
             ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
         if (levelNumber == 1 && direction == Player.DOWN) {
-            // At the beginning of the game this gives you a mace
-            try {
-                if (GameManager.notJAR) {
-                    new Weapon("./resources/data/weapons/mace",
-                            getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
-                } else {
-                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                            + "/data/weapons/mace",
-                            getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+            // give player mace
+            spawnStartingPackItem("/data/weapons/mace");
+        }
+    }
 
+    private void spawnStartingPackItem(String itemPath) {
+        try {
+            if (GameManager.notJAR) {
+                new Weapon("./resources" + itemPath,
+                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+            } else {
+                new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                        + itemPath,
+                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+            }
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 
