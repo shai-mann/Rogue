@@ -194,30 +194,30 @@ public class Item extends Entity {
             }
         }
     }
-    private static void spawnItem(Point p, itemTypes type) {
+    public static Item spawnItem(Point p, itemTypes type) {
         switch (type) {
             case WAND:
-                new Wand(p.x, p.y);
-                break;
+                return new Wand(p.x, p.y);
             case RING:
-                new Ring(p.x, p.y);
-                break;
+                return new Ring(p.x, p.y);
             case GOLD:
-                new Gold(p.x, p.y);
-                break;
+                return new Gold(p.x, p.y);
             case ARMOR:
-                new Armor(p.x, p.y);
-                break;
+                return new Armor(p.x, p.y);
             case FOOD:
-                new Food(p.x, p.y);
-                break;
+                return new Food(p.x, p.y);
             case POTION:
-                new Potion(p.x, p.y);
-                break;
+                return new Potion(p.x, p.y);
             case SCROLL:
-                new Scroll(p.x, p.y);
+                return new Scroll(p.x, p.y);
+            case ARROW:
+                new Arrow(p.x, p.y);
+                break;
+            case WEAPON:
+                new Weapon(null, p.x, p.y);
                 break;
         }
+        return null;
     }
     private static itemTypes getRandomItemType() {
         int randInt = Helper.random.nextInt(99) + 1;

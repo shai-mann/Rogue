@@ -4,6 +4,7 @@ import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
+import map.Map;
 import settings.Settings;
 import util.gamepanes.MessageBar;
 import helper.Helper;
@@ -24,6 +25,8 @@ public class InventoryItem extends JComponent {
     private JLabel label;
 
     private Item item;
+    private int duplicity = 1;
+    private String defaultText = "";
 
     private static ArrayList<InventoryItem> inventoryItems = new ArrayList<>();
 
@@ -32,12 +35,14 @@ public class InventoryItem extends JComponent {
         inventoryItems.add(this);
         this.item = item;
         setNames();
+        duplicity = 1;
 
         if (item instanceof Wand) {
             label.setText(number + ") " + item.getName() + " Uses: " + ((Wand) item).getUses());
         } else {
             label.setText(number + ") " + item.getName());
         }
+        defaultText = label.getText();
     }
     public JPanel getPanel() {
         return panel;
@@ -87,7 +92,8 @@ public class InventoryItem extends JComponent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 GameManager.getPlayer().toggleInventory();
-                MessageBar.nextTurn();
+                Map.getMap().update();
+                GameManager.getPlayer().getStatus().update();
                 item.use();
                 GameManager.getFrame().requestFocus();
             }
@@ -148,5 +154,25 @@ public class InventoryItem extends JComponent {
                 useButton.setText("Put away");
             }
         }
+    }
+    public void addDuplicity() {
+        duplicity++;
+        label.setText(defaultText + " (x" + duplicity + ")");
+    }
+    public void addArrowDuplicity(int arrows) {
+        duplicity = ((Arrow) getItem()).getAmount() + arrows;
+        label.setText(defaultText.substring(0, 2) + " " + duplicity + " arrows");
+    }
+
+    public static InventoryItem checkDuplicity(Item i) {
+        for (InventoryItem it : inventoryItems) {
+            if (it.getItem() != i && it.duplicity == 1 &&
+                    it.getItem().getName().equals(i.getName())) {
+                return it;
+            } else if (it.getItem() instanceof Arrow && i instanceof Arrow) {
+                return it;
+            }
+        }
+        return null;
     }
 }

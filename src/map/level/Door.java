@@ -29,8 +29,6 @@ public class Door extends Point {
     public void reveal() {
         secret = false;
         GameManager.getTable().setValueAt("+", y, x);
-
-        MessageBar.addMessage("You have discovered a secret door");
     }
     public static ArrayList<Door> getDoors() {
         return doors;

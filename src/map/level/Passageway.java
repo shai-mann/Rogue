@@ -178,12 +178,12 @@ public class Passageway implements Serializable {
         return points;
     }
     private boolean getIsSecret() {
-        int randomInt = Helper.random.nextInt(100) + 1;
+        int randomInt = Helper.random.nextInt(99) + 1;
         int percentChance;
-        if ((5* Level.getLevel().getLevelNumber()) > 50) {
+        if ((3 * Level.getLevel().getLevelNumber()) > 35) {
             percentChance = 50;
         } else {
-            percentChance = 5* Level.getLevel().getLevelNumber();
+            percentChance = 3 * Level.getLevel().getLevelNumber();
         }
         return randomInt <= percentChance;
     }

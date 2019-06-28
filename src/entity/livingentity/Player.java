@@ -78,10 +78,10 @@ public class Player extends Entity implements KeyListener, Serializable {
         if (e.getKeyCode() == Settings.INVENTORY) {
             toggleInventory();
         }
-        if (e.getKeyCode() == Settings.REST && health < maxHealth) {
+        if (e.getKeyCode() == Settings.REST) {
             moved = true;
             regenStepsCounter++;
-            if (Helper.random.nextInt(99) + 1 < 15) {
+            if (health < maxHealth && Helper.random.nextInt(99) + 1 < 15) {
                 health++;
             }
         }
@@ -119,13 +119,17 @@ public class Player extends Entity implements KeyListener, Serializable {
             moved = moveRandom();
         }
         if (moved || getStatus().isParalyzed()) {
-            Map.getMap().update();
             if (o != null) {
                 if (o instanceof Door) {
                     ((Door) o).reveal();
                 } else if (o instanceof Trap) {
                     ((Trap) o).reveal();
                 }
+            }
+            Map.getMap().update();
+            if (o != null) {
+                if (o instanceof Door) MessageBar.addMessage("You discovered a secret door");
+                if (o instanceof Trap) MessageBar.addMessage("You discovered a trap");
             }
         }
         if (moved && health < maxHealth) {
@@ -175,6 +179,7 @@ public class Player extends Entity implements KeyListener, Serializable {
             new InventoryPane((JPanel) GameManager.getFrame().getContentPane());
         } else {
             GameManager.replaceContentPane(InventoryPane.getSavedPane());
+            InventoryItem.getInventoryItems().clear();
         }
     }
     public void toggleInventory(String message) {
@@ -190,6 +195,10 @@ public class Player extends Entity implements KeyListener, Serializable {
                         if (item.getPanel().getBounds().contains(e.getPoint())) {
                             GameManager.getPlayer().toggleInventory();
                             item.getItem().identify();
+                            if (item.getItem() instanceof Scroll) {
+                                Scroll.revealedTypes.add(((Scroll) item.getItem()).getPower());
+                            }
+                            // TODO: make this reveal all items of the same type (or same power)
                         }
                     }
                 }
@@ -447,8 +456,13 @@ public class Player extends Entity implements KeyListener, Serializable {
             leftRing = ring;
         } else if (rightRing == null) {
             rightRing = ring;
-        } else {
-            // TODO: figure out what to do if both hands already have rings (how to replace an already worn ring)
+        }
+    }
+    public void removeRing(Ring ring) {
+        if (leftRing == ring) {
+            leftRing = null;
+        } else if (rightRing == ring) {
+            rightRing = null;
         }
     }
     public void setOverwrittenGraphic(String overwrittenGraphic) {

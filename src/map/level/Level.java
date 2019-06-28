@@ -1,9 +1,11 @@
 package map.level;
 
+import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.Monster;
 import entity.livingentity.Player;
@@ -185,22 +187,33 @@ public class Level extends JComponent {
         }
         if (levelNumber == 1 && direction == Player.DOWN) {
             // give player mace
-            spawnStartingPackItem("/data/weapons/mace");
+            spawnStartingPackItem("/data/weapons/mace", null);
+            spawnStartingPackItem(null, Item.itemTypes.ARMOR);
+            spawnStartingPackItem(null, Item.itemTypes.ARROW);
+            spawnStartingPackItem(null, Item.itemTypes.ARROW);
         }
     }
 
-    private void spawnStartingPackItem(String itemPath) {
-        try {
-            if (GameManager.notJAR) {
-                new Weapon("./resources" + itemPath,
-                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
-            } else {
-                new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                        + itemPath,
-                        getStartingRoom().getRandomPointInBounds().x, getStartingRoom().getRandomPointInBounds().y);
+    private void spawnStartingPackItem(@Nullable String itemPath, Item.itemTypes type) {
+        Point p = getStartingRoom().getRandomPointInBounds();
+        if (type != null) {
+            Item i = Item.spawnItem(p, type);
+            if (i instanceof Armor) {
+                ((Armor) i).setAc(8);
+                ((Armor) i).setName("Leather Armor");
+                ((Armor) i).setCursed(false);
             }
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        } else if (itemPath != null){
+            try {
+                if (GameManager.notJAR) {
+                    new Weapon("./resources" + itemPath, p.x, p.y);
+                } else {
+                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+                            + itemPath, p.x, p.y);
+                }
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
     }
 

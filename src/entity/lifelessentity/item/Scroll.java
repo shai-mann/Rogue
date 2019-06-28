@@ -40,6 +40,7 @@ public class Scroll extends Item {
         REMOVE_CURSE,
         PROTECT_ARMOR
     }
+    public static ArrayList<powers> revealedTypes = new ArrayList<>();
 
     public Scroll(int x, int y) {
         super("?", x, y);
@@ -109,16 +110,23 @@ public class Scroll extends Item {
                 }
                 break;
             case CREATE_MONSTER:
-                if (Helper.random.nextInt(99) + 1 <= 90) {
-                    Room room = Level.getLevel().getRoom(player);
-                    if (room != null) {
-                        Monster.createMonster(room);
-                    } else {
-                        MessageBar.addMessage("You hear a faint cry of anguish in the distance");
-                    }
+                Room room = Level.getLevel().getRoom(player);
+                if (room != null) {
+                    Monster.createMonster(room);
+                } else {
+                    MessageBar.addMessage("You hear a faint cry of anguish in the distance");
                 }
                 break;
         }
+        revealedTypes.add(this.power);
+    }
+
+    @Override
+    public String getName() {
+        return revealedTypes.contains(power) ? hiddenName : super.getName();
+    }
+    public powers getPower() {
+        return power;
     }
 
     // SCROLL DATA RANDOMIZING

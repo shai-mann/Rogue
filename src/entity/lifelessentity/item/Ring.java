@@ -78,6 +78,9 @@ public class Ring extends Item {
         if (p.getRings().contains(this)) {
             remove();
             return;
+        } else if (p.getRings().size() == 2) {
+            MessageBar.addMessage("You cannot wear more than 2 rings");
+            return;
         }
         p.wearRing(this);
         switch (power) {
@@ -125,8 +128,7 @@ public class Ring extends Item {
         MessageBar.addMessage("You put on the " + getName());
     }
     public void remove() {
-        GameManager.getPlayer().getInventory().add(this);
-        GameManager.getPlayer().wearRing(null);
+        GameManager.getPlayer().removeRing(this);
         MessageBar.addMessage("You take off the " + getName());
         GameManager.getPlayer().getStatus().getEffects().removeEffect(effect);
     }
@@ -152,7 +154,7 @@ public class Ring extends Item {
     @Override
     public String getName() {
         if (GameManager.getPlayer().getRings().contains(this)) {
-            return super.getName().concat(" (held)");
+            return super.getName().concat(" (worn)");
         }
         return super.getName();
     }

@@ -1,6 +1,7 @@
 package util.inventory;
 
 import entity.lifelessentity.item.Item;
+import entity.lifelessentity.item.combat.Arrow;
 import helper.Helper;
 import main.GameManager;
 
@@ -42,7 +43,16 @@ public class InventoryPane {
     private void addInventory() {
         ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
-            scrollingPanel.add(new InventoryItem(i + 1, playerInventory.get(i)).getPanel());
+            InventoryItem iv = InventoryItem.checkDuplicity(playerInventory.get(i));
+            if (iv != null) {
+                if (iv.getItem() instanceof Arrow) {
+                    iv.addArrowDuplicity(((Arrow) playerInventory.get(i)).getAmount());
+                } else {
+                    iv.addDuplicity();
+                }
+            } else {
+                scrollingPanel.add(new InventoryItem(i + 1, playerInventory.get(i)).getPanel());
+            }
             panel.validate();
         }
         panel.revalidate();
@@ -67,7 +77,7 @@ public class InventoryPane {
         scrollablePane.setViewportView(scrollingPanel);
         if (GameManager.getPlayer().getInventory().size() > 0) {
             Helper.setSize(scrollingPanel, new Dimension(GameManager.getFrame().getWidth() - 5,
-                    GameManager.getPlayer().getInventory().size() * 76 + 20
+                    GameManager.getPlayer().getInventory().size() * 76
             ));
         }
 

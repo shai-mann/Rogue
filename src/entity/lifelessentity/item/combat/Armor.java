@@ -95,7 +95,7 @@ public class Armor extends Item {
         }
     }
     private void randomizeCursed() {
-        cursed = Helper.random.nextInt(99) + 1 >= 90;
+        cursed = Helper.random.nextInt(99) + 1 >= 95;
     }
     public boolean isCursed() {
         return cursed;
@@ -108,5 +108,8 @@ public class Armor extends Item {
     }
     public void setAc(int ac) {
         this.ac = ac;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 }

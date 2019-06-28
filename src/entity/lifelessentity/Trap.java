@@ -44,7 +44,6 @@ public class Trap extends Entity {
         hidden = false;
 
         overWrittenGraphic = GameManager.getPlayer().overWrittenGraphic;
-        GameManager.getPlayer().setOverwrittenGraphic("^");
     }
     public void trigger() {
         reveal();
