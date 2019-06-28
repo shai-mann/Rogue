@@ -6,8 +6,12 @@ BUGS:
 - One of the wands causes a monster duplication glitch
 - The last loaded row of the table doesn’t show (only in JAR form)
 - Button text in BeginPane doesn't appear on Mac
-- When you put on a ring it says "held", when it should say "worn"
 - When monsters drop an item somewhere other than where they are, after picking up, it looks like there is a monster there.
+- You can use the scroll of identify on non-hidden objects - the entire hidden and non-hidden items system sucks
+- Only one monster can spawn per room
+- Wand of Polymorph needs to get its file path fixed
+- Wand of Supress Power may make the monster incapable of attacking
+- Chance to find secret door is too high
 
 
 Features To Implement:
@@ -23,13 +27,13 @@ Features To Implement:
 - runType movementType would be good, especially for monsters that steal items, becuase then they should run from the player
 - traps!!!! Make them spawn, even though they have already technically been implemented.
 - on quit, game should reopen BeginPane.
-- Make background of BeginPane and SettingsPane
+- Make background of BeginPane and LoadPane a bunch of rotating images of the game
 - Maybe, and this could be difficult, have the load panel show images of the games that were taken right before they were saved
     Essentially, when saving, take a screenshot of the game (somehow) and then keep it with the save, and display it in the
     loading panel
 - Lower damage done by mace
-- Items should on use reveal their hidden names
-- When using an item, everything should update.
+- Bats need to do less damage
+- treasure zoos!!!!!!!
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
@@ -44,7 +48,6 @@ Plausible future changes:
         Changeable symbols (walls, floors, player) - cannot be the same as a monster symbol.
         Changeable colors? - monsters, items, player.
         hunger/difficulty - like in Minecraft; easy, normal, hard
-    Inventory stacking - if you have two food items of the same type, just make the name "[food] (x2)"
     Add shop? a button you click to buy things using gold.
 
 
