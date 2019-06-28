@@ -189,8 +189,6 @@ public class Level extends JComponent {
             // give player mace
             spawnStartingPackItem("/data/weapons/mace", null);
             spawnStartingPackItem(null, Item.itemTypes.ARMOR);
-            spawnStartingPackItem(null, Item.itemTypes.ARROW);
-            spawnStartingPackItem(null, Item.itemTypes.ARROW);
         }
     }
 
