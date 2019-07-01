@@ -156,7 +156,7 @@ public class Player extends Entity implements KeyListener, Serializable {
                 int chance = Helper.random.nextInt(99) + 1;
                 if (getStatus().getEffects().hasEffect(Effect.SEARCHING) && chance <= 90) {
                     return door;
-                } else if (chance <= 75){
+                } else if (chance >= 70){
                     return door;
                 }
             }
@@ -169,9 +169,13 @@ public class Player extends Entity implements KeyListener, Serializable {
         return null;
     }
     private boolean isNextTo(Point p) {
-        return
-                ((p.getX() + 1 == getXPos() || p.getX() - 1 == getXPos()) && p.getY() == getYPos()) ||
-                        ((p.getY() + 1 == getYPos() || p.getY() - 1 == getYPos()) && p.getX() == getXPos());
+        // checks all 8 spots around the player
+        for (int i = getXPos() - 1; i <= getXPos() + 1; i++) {
+            for (int j = getYPos() - 1; j <= getYPos(); j++) {
+                if (p.x == i && p.y == j) return true;
+            }
+        }
+        return false;
     }
     public void toggleInventory() {
         showInventory = !showInventory;

@@ -9,6 +9,7 @@ import map.level.table.CustomRoomTable;
 import map.level.Level;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class GameManager {
 

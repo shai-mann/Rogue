@@ -7,13 +7,15 @@ BUGS:
 - The last loaded row of the table doesn’t show (only in JAR form)
 - Button text in BeginPane doesn't appear on Mac
 - When monsters drop an item somewhere other than where they are, after picking up, it looks like there is a monster there.
-- You can use the scroll of identify on non-hidden objects - the entire hidden and non-hidden items system sucks
+- You can use the scroll of identify on non-hidden objects - the code of the entire hidden and non-hidden items system sucks
 - Only one monster can spawn per room
 - Wand of Polymorph needs to get its file path fixed
 - Wand of Supress Power may make the monster incapable of attacking
-- Chance to find secret door is too high
 - LoadPane doesn't scroll properly (again)
-- Rooms aren't saved, causing Level not to update properly
+- After loading a saved game, asks if want to save. Should change savepane to not ask if want to overwrite save
+- After loading saved game, trying to use staircase causes gamebreaking glitch?
+- If you die in a saved game, you can just quit the window and start back up from the last saved spot...
+- switching panes causes frame to become unmaximized
 
 
 Features To Implement:
@@ -39,11 +41,9 @@ Features To Implement:
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
-- two many secret doorways
 - make snake less health
 
 Plausible future changes:
-    Saving and loading!?!?!
     Amulet of Yendor maybe?
     Make the game easier to download and use
     Settings:
