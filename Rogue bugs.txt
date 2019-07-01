@@ -8,14 +8,14 @@ BUGS:
 - Button text in BeginPane doesn't appear on Mac
 - When monsters drop an item somewhere other than where they are, after picking up, it looks like there is a monster there.
 - You can use the scroll of identify on non-hidden objects - the code of the entire hidden and non-hidden items system sucks
-- Only one monster can spawn per room
 - Wand of Polymorph needs to get its file path fixed
 - Wand of Supress Power may make the monster incapable of attacking
 - LoadPane doesn't scroll properly (again)
 - After loading a saved game, asks if want to save. Should change savepane to not ask if want to overwrite save
 - After loading saved game, trying to use staircase causes gamebreaking glitch?
 - If you die in a saved game, you can just quit the window and start back up from the last saved spot...
-- switching panes causes frame to become unmaximized
+- Switching panes causes frame to become unmaximized no matter what state it was in before
+- Scroll of Teleportation moves you a turn after you read it...
 
 
 Features To Implement:
@@ -38,6 +38,9 @@ Features To Implement:
 - Lower damage done by mace
 - Bats need to do less damage
 - treasure zoos!!!!!!!
+- Make something that (in game) is able to show you the function of each of the items.
+    It would be based on category, so if you tried to see what a scroll did, it would tell you all powers of all scrolls
+    That way it wouldn't give away what the type of scroll is.
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
@@ -49,5 +52,5 @@ Plausible future changes:
     Settings:
         Changeable symbols (walls, floors, player) - cannot be the same as a monster symbol.
         Changeable colors? - monsters, items, player.
-        hunger/difficulty - like in Minecraft; easy, normal, hard
+        hunger/difficulty - like in Minecraft: easy, normal, hard
     Add shop? a button you click to buy things using gold.

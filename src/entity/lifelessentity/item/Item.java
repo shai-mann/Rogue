@@ -126,6 +126,7 @@ public class Item extends Entity {
                 spawnItem(room, getRandomItemType());
                 // 25% chance of 2nd item
                 if (Helper.random.nextInt(99) + 1 >= 75) {
+                    spawnItem(room, getRandomItemType());
                     // 2% chance of 3rd item
                     if (Helper.random.nextInt(99) + 1 >= 98) {
                         spawnItem(room, getRandomItemType());

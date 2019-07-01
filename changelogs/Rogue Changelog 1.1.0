@@ -22,5 +22,7 @@ Changes:
     + The player can now rest even when at full health
     + Lowered chance to find a secret door (now 30%)
     + Lowered chance of a secret door existing
+    + Monsters now follow the same chance to spawn as items:
+        55% chance of first monster, 25% chance second monster, 2% chance 3rd
 Notes:
 

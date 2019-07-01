@@ -482,7 +482,7 @@ public class Monster extends Entity {
         GameManager.getPlayer().addExperience(experience);
         MessageBar.addMessage("You kill the " + name);
 
-        if (Item.getItemAt(getXPos(), getYPos()) != null) {
+        if (Item.getItemAt(getXPos(), getYPos()) != null && Level.getLevel().getRoom(this) != null) {
             setLocation(Level.getLevel().getRoom(this).getRandomPointInBounds());
         }
         if (Helper.random.nextInt(99) + 1 < treasureChance || stolenItem != null) {
@@ -530,7 +530,18 @@ public class Monster extends Entity {
     public static void spawnMonsters() {
         for (Room room : Room.rooms) {
             if (!room.equals(Level.getLevel().getStartingRoom())) {
-                createMonster(room);
+                // 55% chance of 1st monster
+                if (Helper.random.nextInt(99) + 1 >= 45) {
+                    createMonster(room);
+                    // 25% chance of 2nd monster
+                    if (Helper.random.nextInt(99) + 1 >= 75) {
+                        createMonster(room);
+                        // 2% chance of 3rd monster
+                        if (Helper.random.nextInt(99) + 1 >= 98) {
+                            createMonster(room);
+                        }
+                    }
+                }
             }
         }
     }
