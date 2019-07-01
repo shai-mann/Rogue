@@ -32,7 +32,6 @@ public class SavePane {
 
         setDefaults();
 
-        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
         f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         f.pack();
         f.setLocationRelativeTo(null);
