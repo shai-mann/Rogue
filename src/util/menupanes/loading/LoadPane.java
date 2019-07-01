@@ -31,7 +31,7 @@ public class LoadPane {
     }
     private void loadGames() {
         for (File f : Save.getSaves()) {
-            scrollablePanel.add(new LoadGame(f.getName()).getPanel());
+            scrollablePanel.add(new LoadGame(f.getName(), f.getPath()).getPanel());
             scrollingPanel.validate();
         }
         scrollablePanel.add(cancelButton);
@@ -39,6 +39,7 @@ public class LoadPane {
     }
 
     private void setDefaults() {
+        Helper.setSize(panel, GameManager.getFrame().getSize());
         scrollingPanel.setViewportView(scrollablePanel);
         if (LoadGame.games.size() > 0) {
             Helper.setSize(scrollablePanel, new Dimension(GameManager.getFrame().getWidth() - 5,

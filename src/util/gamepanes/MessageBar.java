@@ -65,4 +65,11 @@ public class MessageBar extends JComponent {
     public String[] getMessages() {
         return new String[] {message.getText(), oldMessage.getText(), olderMessage.getText()};
     }
+    public void setMessages(String[] messages) {
+        try {
+            message.setText(messages[0]);
+            oldMessage.setText(messages[1]);
+            olderMessage.setText(messages[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {}
+    }
 }

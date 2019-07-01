@@ -1,6 +1,7 @@
 package map;
 
 import entity.livingentity.Monster;
+import util.animation.Animation;
 import util.gamepanes.MessageBar;
 import util.gamepanes.saving.SavePane;
 import util.gamepanes.StatusBar;
@@ -15,6 +16,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Map implements Serializable {
     private StatusBar statusBar;
@@ -33,6 +35,13 @@ public class Map implements Serializable {
         GameManager.replaceContentPane(panel);
         map = this;
     }
+    public Map(ArrayList<Animation> animations, String[] messages) {
+        this();
+        for (Animation a : animations) {
+            animationManager.addAnimation(a);
+        }
+        messageBar.setMessages(messages);
+    }
     public void update() {
         saved = false;
         MessageBar.nextTurn(); // must go first
@@ -49,7 +58,11 @@ public class Map implements Serializable {
         return map;
     }
     private void createUIComponents() {
-        level = new Level();
+        if (Level.getLevel() == null) {
+            level = new Level();
+        } else {
+            level = Level.getLevel();
+        }
         statusBar = new StatusBar();
     }
     private void setDefaults() {
@@ -79,12 +92,10 @@ public class Map implements Serializable {
                     GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
-
             @Override
             public void keyPressed(KeyEvent e) {
 
             }
-
             @Override
             public void keyReleased(KeyEvent e) {
 

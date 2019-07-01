@@ -67,7 +67,4 @@ public class Save {
                     + "/data/saves/";
         }
     }
-    public static Object loadObject(String fileName) {
-        return null; //TODO: fix this when implementing util.menupanes.loading
-    }
 }

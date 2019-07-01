@@ -52,6 +52,32 @@ public class Level extends JComponent {
         setDefaults();
         newLevel(Player.DOWN);
     }
+    public Level(CustomRoomTable hiddenTable,
+                 CustomRoomTable shownTable,
+                 Staircase staircase,
+                 int direction,
+                 int levelNumber,
+                 Room startingRoom,
+                 ArrayList<Point> shownPoints,
+                 ArrayList<Point> blindnessPoints) {
+        setDefaults();
+        this.hiddenTable = hiddenTable;
+        this.table = shownTable;
+        if (levelNumber != 26 && direction == Player.DOWN) {
+            descendingStaircase = staircase;
+        } else {
+            ascendingStaircase = staircase;
+        }
+        this.startingRoom = startingRoom;
+        this.shownPoints = shownPoints;
+        this.blindnessPoints = blindnessPoints;
+
+        panel.add(table);
+
+        panel.revalidate();
+        panel.repaint();
+        GameManager.getFrame().requestFocus();
+    }
     public void newLevel(int direction) {
         generateLevel(direction);
         spawnEntities(direction);

@@ -12,6 +12,8 @@ BUGS:
 - Wand of Polymorph needs to get its file path fixed
 - Wand of Supress Power may make the monster incapable of attacking
 - Chance to find secret door is too high
+- LoadPane doesn't scroll properly (again)
+- Rooms aren't saved, causing Level not to update properly
 
 
 Features To Implement:
@@ -49,7 +51,3 @@ Plausible future changes:
         Changeable colors? - monsters, items, player.
         hunger/difficulty - like in Minecraft; easy, normal, hard
     Add shop? a button you click to buy things using gold.
-
-
-DAD'S NOTES (USELESS, IGNORE (JK))
-- Starting pack should include: food, bow, arrows (random number) short sword (+1, +1),  ring mail (+1)

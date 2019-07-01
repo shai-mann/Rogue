@@ -619,6 +619,9 @@ public class Monster extends Entity {
     public static ArrayList<Monster> getMonsters() {
         return monsters;
     }
+    public static void setMonsters(ArrayList<Monster> ms) {
+        monsters = ms;
+    }
     public static ArrayList<Monster> getLoadedMonsters() {
         ArrayList<Monster> loadedMonsters = new ArrayList<>();
         for (Monster m : monsters) {

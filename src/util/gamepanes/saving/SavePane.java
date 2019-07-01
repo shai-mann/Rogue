@@ -6,6 +6,7 @@ import helper.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
+import map.level.Room;
 
 import javax.swing.*;
 import java.awt.*;
@@ -163,6 +164,7 @@ public class SavePane {
         new Save(dirPath + "/player", GameManager.getPlayer());
         new Save(dirPath + "/messages", (Object[]) Map.getMap().getMessageBar().getMessages());
         new Save(dirPath + "/animations", Map.getMap().getAnimationManager().getAnimations());
+        new Save(dirPath + "/rooms", Room.rooms);
         // all of the extra bits and pieces of the level
         // consider adding hidden and shown tables to this list
         new Save(dirPath + "/level_data",

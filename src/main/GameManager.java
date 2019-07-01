@@ -66,6 +66,9 @@ public class GameManager {
     public static Player getPlayer() {
         return player;
     }
+    public static void setPlayer(Player p) {
+        player = p;
+    }
     public static void createPlayer() {
         player = new Player(Level.getLevel().getStartingRoom());
     }

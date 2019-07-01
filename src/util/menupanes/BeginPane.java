@@ -52,7 +52,7 @@ public class BeginPane extends JComponent {
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LoadPane((JPanel) GameManager.getFrame().getContentPane());
+                new LoadPane(panel);
             }
         });
         settingsButton.addActionListener(new ActionListener() {
