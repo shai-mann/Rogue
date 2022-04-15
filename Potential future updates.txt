@@ -1,0 +1,10 @@
+Potential future overhauls:
+
+1) Map -> Break out into Window and Map classes
+2) GameManager -> Window/Main and GameState classes
+3) Level.getLevel() convert to include null check/level generation
+4) Level generation method (generateLevel()) improvements
+    4a) Change parameter to be new level value (not the delta)
+    4b) Make two wrappers for generateLevel to move up and down a level
+5) Add test level generation (single large room for testing various features)
+6) Break out entity spawning from Level into EntitySpawner class
