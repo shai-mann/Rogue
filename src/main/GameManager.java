@@ -17,6 +17,13 @@ public class GameManager {
     private static Player player;
 
     public static boolean notJAR = true; // TODO: used purely for testing purposes. When in IntelliJ, true; when JAR, false.
+    /*
+        Testing environment should be extended as more testing-related features are implemented.
+        For now, the testing environment adjusts the following:
+
+        1) Level generation is only a single room.
+     */
+    public static boolean bootTestingEnvironment = true;
 
     public static void main(String[] args) {
         initFrame();
