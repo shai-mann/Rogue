@@ -16,6 +16,8 @@ BUGS:
 - If you die in a saved game, you can just quit the window and start back up from the last saved spot...
 - Switching panes causes frame to become unmaximized no matter what state it was in before
 - Scroll of Teleportation moves you a turn after you read it...
+- Bottom row of current room doesn't render
+- Changing panes resets window's maximized state
 
 
 Features To Implement:
