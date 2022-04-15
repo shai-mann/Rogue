@@ -35,6 +35,7 @@ public class Map implements Serializable {
         GameManager.replaceContentPane(panel);
         map = this;
     }
+
     public Map(ArrayList<Animation> animations, String[] messages) {
         this();
         for (Animation a : animations) {
@@ -42,6 +43,7 @@ public class Map implements Serializable {
         }
         messageBar.setMessages(messages);
     }
+
     public void update() {
         saved = false;
         MessageBar.nextTurn(); // must go first

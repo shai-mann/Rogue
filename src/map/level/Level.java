@@ -53,6 +53,7 @@ public class Level extends JComponent {
         setDefaults();
         newLevel(Player.DOWN);
     }
+
     public Level(CustomRoomTable hiddenTable,
                  CustomRoomTable shownTable,
                  Staircase staircase,
@@ -79,6 +80,7 @@ public class Level extends JComponent {
         panel.repaint();
         GameManager.getFrame().requestFocus();
     }
+
     public void newLevel(int direction) {
         generateLevel(direction);
         spawnEntities(direction);
@@ -87,6 +89,7 @@ public class Level extends JComponent {
         GameManager.getFrame().requestFocus();
         shownPoints.clear();
     }
+
     private void generateLevel(int direction) {
         if (levelNumber != 0 && direction == Player.DOWN) {
             resetTable();

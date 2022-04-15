@@ -23,6 +23,7 @@ public class Status implements Serializable {
     public Status(Entity e) {
         target = e;
     }
+
     public void update() {
         if (isParalyzed()) {
             this.paralyzed -= 1;
