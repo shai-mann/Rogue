@@ -1,10 +1,10 @@
 package entity.lifelessentity.item;
 
-import com.sun.istack.internal.Nullable;
 import entity.Entity;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
+import org.jetbrains.annotations.Nullable;
 import util.gamepanes.MessageBar;
 import helper.Helper;
 import map.level.Room;

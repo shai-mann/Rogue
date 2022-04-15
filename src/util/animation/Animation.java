@@ -1,7 +1,8 @@
 package util.animation;
 
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import entity.livingentity.Player;
 
 import java.awt.*;

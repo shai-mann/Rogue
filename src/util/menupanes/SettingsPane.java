@@ -28,7 +28,7 @@ public class SettingsPane {
     private JLabel keyLabel;
     private CustomRoomTable keyValuesTable;
 
-    private JPanel savedPane;
+    private final JPanel savedPane;
 
     private static ArrayList<Pair> actionQueue = new ArrayList<>();
 
@@ -75,6 +75,7 @@ public class SettingsPane {
         jc.setForeground(Helper.FOREGROUND_COLOR);
         jc.setFont(Font.getFont(Helper.THEME_FONT));
     }
+
     private void addActionListeners() {
         cancelButton.addActionListener(new ActionListener() {
             @Override

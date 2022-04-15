@@ -1,6 +1,7 @@
 package map.level.table;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 
 import javax.swing.*;
 import java.io.Serializable;

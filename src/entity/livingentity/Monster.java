@@ -1,6 +1,7 @@
 package entity.livingentity;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import entity.Effect;
 import entity.Entity;
 import entity.Status;

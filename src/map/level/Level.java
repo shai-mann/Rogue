@@ -1,6 +1,7 @@
 package map.level;
 
-import com.sun.istack.internal.Nullable;
+import org.jetbrains.annotations.Nullable;
+
 import entity.Entity;
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.Trap;
