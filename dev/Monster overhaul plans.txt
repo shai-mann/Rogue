@@ -1,0 +1,26 @@
+Monsters have:
+
+	AI:
+		Movement AI
+		(Optional) Secondary movement AI
+		Attack AI
+
+Stats
+	Status effects
+	Movement speed, etc.
+
+Loot table
+
+Monster (static class) has:
+
+	File loading
+	File validation (by level)
+	Static monsters list (why?)
+
+
+Potential improvements:
+
+	1) Break AI into separate classes
+	2) Break monster loading into separate class
+	3) Have list of monster types that get validated by level and spawned in
+	4) Move list of currently spawned monsters into Level or Map?
