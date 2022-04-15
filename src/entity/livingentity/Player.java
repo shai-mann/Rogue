@@ -235,8 +235,9 @@ public class Player extends Entity implements KeyListener, Serializable {
         int[] directions = {UP,DOWN,RIGHT,LEFT};
         return move(directions[Helper.random.nextInt(directions.length)]);
     }
+
     private void changeLevel(int direction) {
-        Level.getLevel().newLevel(direction);
+        Level.getLevel().newLevel(direction == Player.DOWN);
         setLocation(Level.getLevel().getStartingRoom());
         Map.getMap().getStatusBar().updateStatusBar();
     }

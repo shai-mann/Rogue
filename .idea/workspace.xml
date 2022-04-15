@@ -7,6 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -492,7 +499,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>143</line>
+          <line>156</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

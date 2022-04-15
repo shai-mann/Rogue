@@ -18,17 +18,27 @@ public class Helper {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         return toolkit.getScreenSize();
     }
+
     public static void setSize(JComponent component, Dimension size) {
         component.setPreferredSize(size);
         component.setMaximumSize(size);
         component.setMinimumSize(size);
     }
+
     public static Color changeOpacity(Color color, int opacity) {
         return new Color(color.getRed(), color.getGreen(), color.getBlue(), opacity);
     }
-    public static Object getRandom(ArrayList objects) {
+
+    /* RANDOMNESS METHODS */
+
+    public static int getRandom(int min, int max) {
+        return random.nextInt(max - min + 1) + min;
+    }
+
+    public static <T> T getRandom(ArrayList<T> objects) {
         return objects.get(random.nextInt(objects.size()));
     }
+
     public static String createRandomString(int length) {
         String chars = "abcdefghijklmnopqrstuvwxyz";
         String string = "";

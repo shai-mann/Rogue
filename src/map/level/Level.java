@@ -51,7 +51,18 @@ public class Level extends JComponent {
 
     public Level() {
         setDefaults();
-        newLevel(Player.DOWN);
+        newLevel(true);
+    }
+
+    /**
+     * Used to generate a {@link Level} that only contains one room. Generally used
+     * to test various monster/player/item related features.
+     * @param generateAsTestLevel parameter value is ignored - only used to distinguish between other constructors.
+     */
+    public Level(boolean generateAsTestLevel) {
+        setDefaults();
+        startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
+        GameManager.getFrame().requestFocus();
     }
 
     public Level(CustomRoomTable hiddenTable,
@@ -76,30 +87,41 @@ public class Level extends JComponent {
 
         panel.add(table);
 
-        panel.revalidate();
+        panel.revalidate(); // TODO: confirm that these are unnecessary?
         panel.repaint();
         GameManager.getFrame().requestFocus();
     }
 
-    public void newLevel(int direction) {
-        generateLevel(direction);
-        spawnEntities(direction);
+    public void newLevel(boolean descending) {
+        if (descending) {
+            descendLevel();
+        } else {
+            ascendLevel();
+        }
+
+        spawnEntities();
         panel.revalidate();
         panel.repaint();
         GameManager.getFrame().requestFocus();
         shownPoints.clear();
     }
 
-    private void generateLevel(int direction) {
-        if (levelNumber != 0 && direction == Player.DOWN) {
+    private void descendLevel() {
+        levelNumber++;
+        generateLevel();
+    }
+
+    private void ascendLevel() {
+        levelNumber--;
+        generateLevel();
+    }
+
+    private void generateLevel() {
+        if (levelNumber != 0) {
             resetTable();
         }
-        if (direction == Player.DOWN) {
-            levelNumber++;
-        } else {
-            levelNumber--;
-        }
-        generateRooms();
+
+        generateRooms(Helper.getRandom(5, 8)); // TODO: convert from hardcoded literals
         startingRoom = generatePassageways();
     }
 
@@ -160,9 +182,8 @@ public class Level extends JComponent {
 
     // PHYSICAL LEVEL GENERATION METHODS
 
-    private void generateRooms() {
-        int roomNumber = Helper.random.nextInt(4) + 5;
-        for (int i = 0; i < roomNumber; i++) {
+    private void generateRooms(int numRooms) {
+        for (int i = 0; i < numRooms; i++) {
             Dimension size = getRandomRoomSize();
             Point point;
             do {
@@ -205,17 +226,17 @@ public class Level extends JComponent {
 
     // ENTITY SPAWNING METHODS
 
-    private void spawnEntities(int direction) {
+    private void spawnEntities() {
         Monster.updateAvailableMonsters();
         Monster.spawnMonsters();
         Item.spawnItems();
-        if (levelNumber != 26 && direction == Player.DOWN) {
-            descendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);
+        if (levelNumber != 26) {
+            descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);
         }
-        if (levelNumber != 1 && direction == Player.UP) {
-            ascendingStaircase = new Staircase(((Room) Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
+        if (levelNumber != 1) {
+            ascendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
         }
-        if (levelNumber == 1 && direction == Player.DOWN) {
+        if (levelNumber == 1) {
             // give player mace
             spawnStartingPackItem("/data/weapons/mace", null);
             spawnStartingPackItem(null, Item.itemTypes.ARMOR);
