@@ -5,11 +5,11 @@ Monsters have:
 		(Optional) Secondary movement AI
 		Attack AI
 
-Stats
-	Status effects
-	Movement speed, etc.
+    Stats
+        Status effects
+        Movement speed, etc.
 
-Loot table
+    Loot table
 
 Monster (static class) has:
 

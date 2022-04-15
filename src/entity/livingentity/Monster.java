@@ -28,7 +28,14 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes { WANDER, TRACK, MIMIC, STILL, SLEEP }
+    private enum movementTypes {
+        WANDER,
+        TRACK,
+        MIMIC,
+        STILL,
+        SLEEP
+    }
+
     private enum attackTypes {
         HIT,
         PARALYZE,
@@ -94,6 +101,7 @@ public class Monster extends Entity {
             System.out.println("Error reading file");
         }
     }
+
     private void applyAttributeFromLine(String line) {
         String[] parsed = line.split(":");
         switch (parsed[0].toLowerCase()) {
@@ -170,6 +178,7 @@ public class Monster extends Entity {
                 return movementTypes.TRACK; // default movement type
         }
     }
+
     private attackTypes attackTypeFromString(String string) {
         switch (string) {
             case "attack":
@@ -230,6 +239,7 @@ public class Monster extends Entity {
             }
         }
     }
+
     private void moveHelper(@Nullable movementTypes type) {
         if (type != null) {
             switch (type) {
@@ -269,6 +279,7 @@ public class Monster extends Entity {
                 break;
         }
     }
+
     private void trackMovement() {
         Player player = GameManager.getPlayer();
 
@@ -290,9 +301,8 @@ public class Monster extends Entity {
         } else {
             moveRandom();
         }
-
-
     }
+
     private void wanderMovement() {
         if (isNextTo(GameManager.getPlayer()) && Helper.random.nextInt(99) + 1 < 90) {
             attack();
@@ -300,16 +310,19 @@ public class Monster extends Entity {
             moveRandom();
         }
     }
+
     private void stillMovement() {
         if (isNextTo(GameManager.getPlayer())) {
             attack();
         }
     }
+
     private void sleepMovement() {
         if (!getStatus().isSleeping() || GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.AGGRAVATE_MONSTER)) {
             move(secondaryMovementType);
         }
     }
+
     private void mimicMovement() {
         if (!getStatus().isSleeping()) {
             move(secondaryMovementType);
@@ -364,6 +377,7 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + getName() + " misses");
         }
     }
+
     private void hitAttack() {
         if (hitDamage == 0) {
             MessageBar.addMessage("The " + getName() + " misses");
@@ -380,6 +394,7 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + getName() + " hits");
         }
     }
+
     private void paralyzeAttack() {
         Player player = GameManager.getPlayer();
         if (!player.getStatus().isParalyzed()) {
@@ -387,15 +402,18 @@ public class Monster extends Entity {
         }
         MessageBar.addMessage("You can't move");
     }
+
     private void confuseAttack() {
         GameManager.getPlayer().getStatus().setConfused(Helper.random.nextInt(11) + 10);
         MessageBar.addMessage("You feel confused");
     }
+
     private void intoxicateAttack() {
         // TODO: delay between two steps
         GameManager.getPlayer().getStatus().setDrunk(3);
         MessageBar.addMessage("You feel strange");
     }
+
     private void weakenAttack() {
         if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SUSTAIN_STRENGTH)) {
             MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
@@ -404,6 +422,7 @@ public class Monster extends Entity {
             MessageBar.addMessage("You feel weaker");
         }
     }
+
     private void stealGoldAttack() {
         Player p = GameManager.getPlayer();
 
@@ -416,6 +435,7 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + getName() + " couldn't take your gold");
         }
     }
+
     private void stealItemAttack() {
         ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
 
@@ -429,6 +449,7 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + getName() + " fails to steal from you");
         }
     }
+
     private void rustAttack() {
         if (GameManager.getPlayer().getWornItem() != null &&
                 !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
@@ -439,10 +460,12 @@ public class Monster extends Entity {
             MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
         }
     }
+
     private void xpDrainAttack() {
         GameManager.getPlayer().addExperience((int) -(GameManager.getPlayer().getExperience() * 0.9));
         MessageBar.addMessage("The " + name + " preys on your mind. Your experience drains away");
     }
+
     private void healthDrainAttack() {
         GameManager.getPlayer().drainMaxHealth((int) (GameManager.getPlayer().getMaxHealth() * 0.9));
         MessageBar.addMessage("");
@@ -463,11 +486,13 @@ public class Monster extends Entity {
     private boolean isInRange(Entity entity) {
         return Math.pow(entity.getXPos() - getXPos(), 2) + Math.pow(entity.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
     }
+
     private boolean isNextTo(Player player) {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
     }
+
     private static int parseDiceNotation(String die) {
         String[] parts = die.split("d");
         return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
@@ -478,6 +503,7 @@ public class Monster extends Entity {
         move(directions[new Random().nextInt(directions.length)]);
         moveCounter = 1;
     }
+    
     private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         GameManager.getPlayer().addExperience(experience);
