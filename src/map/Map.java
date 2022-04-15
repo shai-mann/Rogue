@@ -61,7 +61,7 @@ public class Map implements Serializable {
     }
     private void createUIComponents() {
         if (Level.getLevel() == null) {
-            level = new Level();
+            level = GameManager.bootTestingEnvironment ? new Level(true) : new Level();
         } else {
             level = Level.getLevel();
         }
