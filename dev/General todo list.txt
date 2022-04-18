@@ -4,3 +4,5 @@
     1c) Entity directions aren't an enum...
 2) Graphic overwriting - perhaps general view layout overhaul
     2a) have view draw map as first layer then overwrite with entities
+3) Effects overhaul?
+    3a) Currently a class called Effect singular, but has list of effects
