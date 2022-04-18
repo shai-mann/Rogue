@@ -62,7 +62,6 @@ public class Level extends JComponent {
         setDefaults();
         startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
 
-        new Monster(MonsterLoader.monsterClasses.get(25), 20, 6);
         GameManager.getFrame().requestFocus();
     }
 
@@ -164,6 +163,10 @@ public class Level extends JComponent {
         Point p = GameManager.getPlayer().getLocation();
         addShownPoint(p);
         table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
+
+        if (GameManager.bootTestingEnvironment) {
+            new Monster(MonsterLoader.monsterClasses.get(25), 20, 6);
+        }
     }
     public void blind() {
         // TODO: make the player visible when blinded
