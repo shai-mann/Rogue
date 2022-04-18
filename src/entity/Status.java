@@ -16,9 +16,9 @@ public class Status implements Serializable {
     private int poisoned = 0;
     private int strengthened = 0;
     private int blinded = 0;
-    private Effect effects = new Effect();
+    private final Effect effects = new Effect();
 
-    private Entity target;
+    private final Entity target;
 
     public Status(Entity e) {
         target = e;

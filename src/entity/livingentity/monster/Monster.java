@@ -35,6 +35,7 @@ public class Monster extends Entity {
         status = new Status(this);
         monsterAttr = new MonsterAttributes(monsterClass, this);
         super.name = monsterClass.name();
+        status.setAc(monsterAttr.defaultAC());
     }
 
     // MONSTER BEHAVIOR
