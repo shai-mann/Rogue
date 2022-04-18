@@ -11,8 +11,6 @@ public class MimicAI extends AbstractMovementAI {
 
     private boolean hiding = true;
 
-    public MimicAI() {}
-
     public MimicAI(Monster self) {
         super(self);
     }

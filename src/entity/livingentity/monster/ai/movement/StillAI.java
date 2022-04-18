@@ -5,8 +5,6 @@ import entity.livingentity.monster.ai.AbstractMovementAI;
 
 public class StillAI extends AbstractMovementAI {
 
-    public StillAI() {}
-
     public StillAI(Monster self) {
         super(self);
     }

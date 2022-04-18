@@ -7,8 +7,6 @@ import main.GameManager;
 
 public class SleepAI extends AbstractMovementAI {
 
-    public SleepAI() {}
-
     public SleepAI(Monster self) {
         super(self);
 

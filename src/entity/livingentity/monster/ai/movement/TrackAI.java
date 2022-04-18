@@ -10,8 +10,6 @@ import static entity.Entity.*;
 
 public class TrackAI extends AbstractMovementAI {
 
-    public TrackAI() {}
-
     public TrackAI(Monster self) {
         super(self);
     }
@@ -22,7 +20,7 @@ public class TrackAI extends AbstractMovementAI {
 
         Player player = GameManager.getPlayer();
 
-        if (Helper.isInRange(self, player, self.monsterClass().range())) {
+        if (Helper.isInRange(self, player, self.attributes().range())) {
             if (!isNextTo(self, player)) {
                 int direction = self.getYPos() > player.getYPos() ? UP : DOWN;
                 self.move(direction);

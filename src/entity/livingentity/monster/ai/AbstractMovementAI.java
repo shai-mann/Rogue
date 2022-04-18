@@ -14,9 +14,6 @@ public abstract class AbstractMovementAI implements MovementAI {
 
     protected Monster self;
 
-    // allows for MonsterClasses to be constructed without sources for their AIs
-    public AbstractMovementAI() {}
-
     public AbstractMovementAI(Monster self) {
         this.self = self;
     }

@@ -7,8 +7,6 @@ import util.Helper;
 
 public class WanderAI extends AbstractMovementAI {
 
-    public WanderAI() {}
-
     public WanderAI(Monster self) {
         super(self);
     }
