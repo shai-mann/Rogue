@@ -1,6 +1,7 @@
 package entity.livingentity.monster.ai;
 
 import entity.livingentity.monster.Monster;
+import entity.livingentity.monster.ai.attack.*;
 import entity.livingentity.monster.ai.movement.*;
 
 import java.util.HashMap;
@@ -20,10 +21,26 @@ public class AIFactory {
         put("wander", WanderAI::new);
     }};
 
+    private static final Map<String, Function<Monster, AttackAI>> attackAIMap = new HashMap<>() {{
+        put("confuse", ConfuseAttack::new);
+        put("hp_drain", HealthDrainAttack::new);
+        put("hit", HitAttack::new);
+        put("intoxicate", IntoxicateAttack::new);
+        put("paralyze", ParalyzeAttack::new);
+        put("trap", ParalyzeAttack::new); // TODO: trap attack?
+        put("rust", RustAttack::new);
+        put("steal_gold", StealGoldAttack::new);
+        put("steal_item", StealItemAttack::new);
+        put("weaken", WeakenAttack::new);
+        put("xp_drain", XPDrainAttack::new);
+    }};
+
     public static MovementAI constructMovementAI(String type, Monster monster) {
         return movementAIMap.get(type.toLowerCase()).apply(monster);
     }
 
-    // TODO: add AttackAI factory methods
+    public static AttackAI constructAttackAI(String type, Monster monster) {
+        return attackAIMap.get(type.toLowerCase()).apply(monster);
+    }
 
 }

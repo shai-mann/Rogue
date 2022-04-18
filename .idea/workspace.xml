@@ -7,16 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/HealthDrainAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/RustAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealItemAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/XPDrainAttack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Rogue bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Rogue bugs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterClassBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterClassBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractAttackAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractAttackAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AttackAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AttackAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AIFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AIFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealGoldAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealGoldAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

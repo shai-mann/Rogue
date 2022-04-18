@@ -6,6 +6,7 @@ import util.Helper;
 
 public class StealGoldAttack extends AbstractAttackAI {
 
+    // TODO: update this and stealItem attack to change to RUN movement type after stealing
     public StealGoldAttack(Monster self) {
         super(self);
     }

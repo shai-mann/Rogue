@@ -1,6 +1,7 @@
 package entity.livingentity.monster;
 
 import entity.livingentity.monster.ai.AIFactory;
+import entity.livingentity.monster.ai.AttackAI;
 import entity.livingentity.monster.ai.MovementAI;
 import util.DiceRange;
 
@@ -15,7 +16,7 @@ public class MonsterAttributes {
     private int health, speed, range, defaultAC, experience;
     private MovementAI movementAI;
     private final MovementAI secondaryMovementAI;
-    private String attackAI; // TODO: change to AttackAI once implemented
+    private AttackAI attackAI;
     private boolean invisible;
 
     public MonsterAttributes(MonsterClass monsterClass, Monster self) {
@@ -33,7 +34,7 @@ public class MonsterAttributes {
 
         this.movementAI = AIFactory.constructMovementAI(monsterClass.movementAI(), self);
         this.secondaryMovementAI = AIFactory.constructMovementAI(monsterClass.secondaryMovementAI(), self);
-        this.attackAI = monsterClass.attackAI();
+        this.attackAI = AIFactory.constructAttackAI(monsterClass.attackAI(), self);
 
         this.invisible = monsterClass.invisible();
     }
@@ -71,7 +72,7 @@ public class MonsterAttributes {
     public MovementAI secondaryMovementAI() {
         return secondaryMovementAI;
     }
-    public String attackAI() {
+    public AttackAI attackAI() {
         return attackAI;
     }
     public boolean isInvisible() {
@@ -109,7 +110,7 @@ public class MonsterAttributes {
         this.movementAI = AIFactory.constructMovementAI(type, m);
     }
     public void setAttackAI(String type, Monster m) {
-        this.attackAI = type;
+        this.attackAI = AIFactory.constructAttackAI(type, m);
     }
     public void setInvisible(boolean invisible) {
         this.invisible = invisible;

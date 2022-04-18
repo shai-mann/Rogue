@@ -4,7 +4,6 @@ import entity.Effect;
 import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
-import entity.livingentity.Player;
 import entity.livingentity.monster.ai.MovementAI;
 import main.GameManager;
 import map.level.Level;
@@ -41,7 +40,6 @@ public class Monster extends Entity {
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
-        // TODO: drain max HP, drain XP (levels loss if go below thresh-hold)
         move();
         status.update();
         if (status.getHealth() <= 0) {
@@ -61,9 +59,8 @@ public class Monster extends Entity {
             loopMovement(monsterAttr.secondaryMovementAI());
             shouldAttack = shouldAttack && !monsterAttr.secondaryMovementAI().blockAttackAITrigger();
         }
-        if (shouldAttack) {
-            attack(); // TODO: switch to AttackAI when implemented
-            // TODO: include in if statement other factors that could prevent attacking
+        if (shouldAttack && !attackBlocked()) {
+            monsterAttr.attackAI().attack();
         }
     }
 
@@ -83,143 +80,8 @@ public class Monster extends Entity {
         return getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER);
     }
 
-    // MONSTER ATTACK
-
-    private void attack() {
-        if (Helper.calculateChance(GameManager.getPlayer().getStatus().getAc() / 10.0)) {
-            if (!getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
-                switch (monsterAttr.attackAI().toLowerCase()) {
-                    case "hit":
-                        hitAttack();
-                        break;
-                    case "paralyze":
-                    case "trap":
-                        paralyzeAttack();
-                        break;
-                    case "confuse":
-                        confuseAttack();
-                        break;
-                    case "intoxicate":
-                        intoxicateAttack();
-                        break;
-                    case "weaken":
-                        weakenAttack();
-                        break;
-                    case "steal_gold":
-                        stealGoldAttack();
-                        break;
-                    case "steal_item":
-                        stealItemAttack();
-                        break;
-                    case "rust":
-                        rustAttack();
-                        break;
-                    case "xp_drain":
-                        xpDrainAttack();
-                        break;
-                    case "hp_drain":
-                        healthDrainAttack();
-                        break;
-                }
-            } else {
-                hitAttack();
-            }
-        } else {
-            MessageBar.addMessage("The " + getName() + " misses");
-        }
-    }
-
-    private void hitAttack() {
-        if (monsterAttr.hitDamage() == 0) {
-            MessageBar.addMessage("The " + getName() + " misses");
-        } else if (Helper.random.nextDouble() <= monsterAttr.critChance()) { // critical
-            if (Helper.random.nextDouble() <= 0.8) {
-                GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.critDamage()) + 1;
-                MessageBar.addMessage("The " + getName() + " crits");
-            } else {
-                GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.hitDamage()) + 1;
-                GameManager.getPlayer().getStatus().setParalyzed(3);
-            }
-        } else {
-            GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.hitDamage()) + 1;
-            MessageBar.addMessage("The " + getName() + " hits");
-        }
-    }
-
-    private void paralyzeAttack() {
-        Player player = GameManager.getPlayer();
-        if (!player.getStatus().isParalyzed()) {
-            GameManager.getPlayer().getStatus().setParalyzed(3);
-        }
-        MessageBar.addMessage("You can't move");
-    }
-
-    private void confuseAttack() {
-        GameManager.getPlayer().getStatus().setConfused(Helper.random.nextInt(11) + 10);
-        MessageBar.addMessage("You feel confused");
-    }
-
-    private void intoxicateAttack() {
-        // TODO: delay between two steps
-        GameManager.getPlayer().getStatus().setDrunk(3);
-        MessageBar.addMessage("You feel strange");
-    }
-
-    private void weakenAttack() {
-        if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SUSTAIN_STRENGTH)) {
-            MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
-        } else {
-            GameManager.getPlayer().getStatus().setWeakened(Helper.random.nextInt(10) + 2);
-            MessageBar.addMessage("You feel weaker");
-        }
-    }
-
-    private void stealGoldAttack() {
-        Player p = GameManager.getPlayer();
-
-        if (p.getGold() > 0 && Helper.random.nextInt(99) + 1 < 40) {
-            stolenGold += p.stealGold(Helper.random.nextInt(50) + p.getGold() / 4);
-            MessageBar.addMessage("Your pockets feel lighter");
-            monsterAttr.setMovementAI("wander", this);
-            // TODO: update this and stealItem attack to change to RUN movement type after stealing
-        } else {
-            MessageBar.addMessage("The " + getName() + " couldn't take your gold");
-        }
-    }
-
-    private void stealItemAttack() {
-        ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
-
-        if (stolenItem == null && items.size() != 0 && Helper.random.nextInt(99) + 1 > 70) {
-            stolenItem = Helper.getRandom(items);
-            GameManager.getPlayer().getInventory().remove(stolenItem);
-            MessageBar.addMessage("Your backpack feels lighter");
-            monsterAttr.setMovementAI("wander", this);
-            monsterAttr.setAttackAI("hit", this);
-        } else {
-            MessageBar.addMessage("The " + getName() + " fails to steal from you");
-        }
-    }
-
-    private void rustAttack() {
-        if (GameManager.getPlayer().getWornItem() != null &&
-                !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
-            GameManager.getPlayer().getStatus().setAc(GameManager.getPlayer().getStatus().getAc() + 1);
-
-            MessageBar.addMessage("Your armor feels worse");
-        } else if (GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.PROTECT_ARMOR)) {
-            MessageBar.addMessage("The " + getName() + "'s attack was magically deflected");
-        }
-    }
-
-    private void xpDrainAttack() {
-        GameManager.getPlayer().addExperience((int) -(GameManager.getPlayer().getExperience() * 0.9));
-        MessageBar.addMessage("The " + name + " preys on your mind. Your experience drains away");
-    }
-
-    private void healthDrainAttack() {
-        GameManager.getPlayer().drainMaxHealth((int) (GameManager.getPlayer().getMaxHealth() * 0.9));
-        MessageBar.addMessage("");
+    private boolean attackBlocked() {
+        return false;
     }
 
     // OVERRIDES
