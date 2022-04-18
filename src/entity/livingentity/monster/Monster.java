@@ -25,8 +25,8 @@ public class Monster extends Entity {
     private MonsterAttributes monsterAttr;
     private final Status status;
 
-    private Item stolenItem = null;
-    private int stolenGold = 0;
+    public Item stolenItem = null;
+    public int stolenGold = 0;
 
     public Monster(MonsterClass monsterClass, int x, int y) {
         super(monsterClass.graphic(), x, y);
@@ -229,7 +229,7 @@ public class Monster extends Entity {
         super.move(direction);
         if (monsterAttr.isInvisible() && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
-        }
+        } // TODO: bad pattern
         return true;
     }
 

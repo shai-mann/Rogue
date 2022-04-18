@@ -23,7 +23,8 @@ public interface AttackAI {
         UNPERFORMED,
         SUCCESS,
         FAIL,
-        CRIT
+        CRIT,
+        BLOCKED
     }
 
     /**

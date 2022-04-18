@@ -22,6 +22,7 @@ public abstract class AbstractAttackAI implements AttackAI {
         put(Outcome.SUCCESS, () -> successMessage());
         put(Outcome.FAIL, () -> failMessage());
         put(Outcome.CRIT, () -> critMessage());
+        put(Outcome.BLOCKED, () -> blockedMessage());
     }};
 
     public AbstractAttackAI(Monster self) {
@@ -29,21 +30,39 @@ public abstract class AbstractAttackAI implements AttackAI {
         this.self = self;
     }
 
-    protected boolean isSuccessfulAttack() {
-        return Helper.calculateChance(GameManager.getPlayer().getStatus().getAc() / 10.0);
+    private boolean isSuccessfulAttack() {
+        return Helper.calculateChance(player.getStatus().getAc() / 10.0);
     }
 
-    protected boolean isCrit() {
+    private boolean isCrit() {
         return Helper.calculateChance(self.attributes().critChance());
+    }
+
+    protected boolean isCrit(Outcome outcome) {
+        return outcome.equals(Outcome.CRIT);
     }
 
     protected abstract String successMessage();
     protected String failMessage() {
         return "The " + self.getName() + " misses";
     }
-    protected abstract String critMessage();
+    protected String critMessage() {
+        return successMessage();
+    }
+    protected String blockedMessage() {
+        return failMessage();
+    }
 
-    protected abstract void performAttack(boolean isCrit);
+    /**
+     * Attempts to perform the attack, which can change the {@link entity.livingentity.monster.ai.AttackAI.Outcome}.
+     * The resulting outcome is returned.
+     *
+     * <p>An example of the outcome being changed during this method would be the weaken attack. If
+     * the player is immune to weakness attacks, the outcome should mutate to a FAIL.</p>
+     * @param outcome the current outcome (either CRIT or SUCCESS).
+     * @return the adjusted outcome after performing the attack.
+     */
+    protected abstract Outcome performAttack(Outcome outcome);
 
     @Override
     public Outcome attack() {
@@ -56,11 +75,9 @@ public abstract class AbstractAttackAI implements AttackAI {
             return Outcome.FAIL;
         }
 
-        boolean isCrit = isCrit();
-        Outcome outcome = isCrit ? Outcome.CRIT : Outcome.SUCCESS;
-
-        performAttack(isCrit);
-        MessageBar.addMessage(messageMap.get(outcome).get());
+        Outcome outcome = isCrit() ? Outcome.CRIT : Outcome.SUCCESS;
+        outcome = performAttack(outcome);
+        if (outcome != Outcome.UNPERFORMED) MessageBar.addMessage(messageMap.get(outcome).get());
 
         return outcome;
     }
