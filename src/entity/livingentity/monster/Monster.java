@@ -15,7 +15,6 @@ import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Monster extends Entity {
 
@@ -34,7 +33,8 @@ public class Monster extends Entity {
         monsters.add(this);
 
         status = new Status(this);
-        this.monsterAttr = new MonsterAttributes(monsterClass, this);
+        monsterAttr = new MonsterAttributes(monsterClass, this);
+        super.name = monsterClass.name();
     }
 
     // MONSTER BEHAVIOR
@@ -232,22 +232,6 @@ public class Monster extends Entity {
     }
 
     // HELPERS
-
-    private boolean isInRange(Entity entity) {
-        return Math.pow(entity.getXPos() - getXPos(), 2) + Math.pow(entity.getYPos() - getYPos(), 2) < Math.pow(monsterAttr.range() + 1, 2);
-    }
-
-    private boolean isNextTo(Player player) {
-        return
-                ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
-                        ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
-    }
-
-    private void moveRandom() {
-        int[] directions = {UP,DOWN,RIGHT,LEFT};
-        move(directions[new Random().nextInt(directions.length)]);
-        moveCounter = 1;
-    }
     
     private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());

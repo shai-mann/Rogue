@@ -10,7 +10,6 @@ import util.DiceRange;
  */
 public class MonsterAttributes {
 
-    private final String name, graphic;
     private double critChance, treasureChance;
     private DiceRange hitDamage, critDamage;
     private int health, speed, range, defaultAC, experience;
@@ -20,9 +19,6 @@ public class MonsterAttributes {
     private boolean invisible;
 
     public MonsterAttributes(MonsterClass monsterClass, Monster self) {
-        this.name = monsterClass.name();
-        this.graphic = monsterClass.graphic();
-
         this.critChance = monsterClass.critChance();
         this.treasureChance = monsterClass.treasureChance();
 
@@ -42,12 +38,6 @@ public class MonsterAttributes {
         this.invisible = monsterClass.invisible();
     }
 
-    public String name() {
-        return name;
-    }
-    public String graphic() {
-        return graphic;
-    }
     public double critChance() {
         return critChance;
     }
