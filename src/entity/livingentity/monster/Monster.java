@@ -5,18 +5,16 @@ import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Player;
+import entity.livingentity.monster.ai.MovementAI;
 import main.GameManager;
 import map.level.Level;
 import map.level.Passageway;
 import map.level.Room;
-import org.jetbrains.annotations.Nullable;
 import util.Helper;
 import util.gamepanes.MessageBar;
 
 import java.awt.*;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Monster extends Entity {
@@ -25,212 +23,28 @@ public class Monster extends Entity {
 
     public static int DEFAULT_HEALTH = 20;
 
-    private enum movementTypes {
-        WANDER,
-        TRACK,
-        MIMIC,
-        STILL,
-        SLEEP
-    }
+    private MonsterAttributes monsterAttr;
+    private final Status status;
 
-    private enum attackTypes {
-        HIT,
-        PARALYZE,
-        CONFUSE,
-        INTOXICATE,
-        WEAKEN,
-        HP_DRAIN,
-        XP_DRAIN,
-        RUST,
-        TRAP,
-        STEAL_GOLD,
-        STEAL_ITEM
-    }
-
-    private MonsterClass monsterClass; // TODO: collapse into mutable form of MonsterClass MonsterAttr?
-    // the problem is that invisible isn't going to be mutable, but it needs to be
-    // this conversion would be a good place to turn the AI from strings to classes
-
-    private int speed = 1;
     private int moveCounter = 1;
-    private int range = 10;
-    private int hitDamage = 1;
-    private double critChance = 0.05;
-    private double critDamage = hitDamage * 2;
-    private boolean invisible = false;
-    private int experience = 2;
-    private double treasureChance = 0.3;
     private String hiddenChar;
 
     private Item stolenItem = null;
     private int stolenGold = 0;
-
-    private final Status status;
-
-    private movementTypes movementType = movementTypes.TRACK;
-    private movementTypes secondaryMovementType = movementTypes.WANDER;
-    // Only wander and track can be secondary movement types.
-    private attackTypes attackType = attackTypes.HIT;
-
-    public Monster(String dataFilePath, int x, int y) {
-        super("-", x, y);
-        monsters.add(this);
-        status = new Status(this);
-        loadDataFile(dataFilePath);
-    }
 
     public Monster(MonsterClass monsterClass, int x, int y) {
         super("-", x, y);
         monsters.add(this);
 
         status = new Status(this);
-        this.monsterClass = monsterClass;
-    }
-
-    // DATA LOADING
-
-    private void loadDataFile(String path) {
-
-        String line;
-        try {
-            FileReader fileReader = new FileReader(path);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            while ((line = bufferedReader.readLine()) != null) {
-                applyAttributeFromLine(line);
-            }
-
-            bufferedReader.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Error: file [" + path + "] not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error reading file");
-        }
-    }
-
-    private void applyAttributeFromLine(String line) {
-        String[] parsed = line.split(":");
-        switch (parsed[0].toLowerCase()) {
-            case "name":
-                name = parsed[1];
-                break;
-            case "graphic":
-                this.graphic = parsed[1];
-                GameManager.add(graphic, getXPos(), getYPos());
-                break;
-            case "critchance":
-                this.critChance = Double.parseDouble(parsed[1]);
-                break;
-            case "hitdamage":
-                this.hitDamage = parseDiceNotation(parsed[1]);
-                break;
-            case "critdamage":
-                this.critDamage = parseDiceNotation(parsed[1]);
-                break;
-            case "speed":
-                this.speed = Integer.parseInt(parsed[1]);
-                break;
-            case "range":
-                this.range = Integer.parseInt(parsed[1]);
-                break;
-            case "health":
-                this.health = parseDiceNotation(parsed[1]);
-                break;
-            case "movementtype":
-                this.movementType = movementTypeFromString(parsed[1]);
-                break;
-            case "secondarymovementtype":
-                this.secondaryMovementType = movementTypeFromString(parsed[1]);
-                break;
-            case "attacktype":
-                this.attackType = attackTypeFromString(parsed[1]);
-                break;
-            case "invisible":
-                this.invisible = Boolean.valueOf(parsed[1]);
-                break;
-            case "ac":
-                this.status.setAc(Integer.valueOf(parsed[1]));
-                break;
-            case "experience":
-                this.experience = Integer.parseInt(parsed[1]);
-                break;
-            case "treasure":
-                this.treasureChance = Integer.parseInt(parsed[1]) / 100;
-                break;
-        }
-    }
-
-    // DATA PARSING HELPER METHODS
-
-    private movementTypes movementTypeFromString(String string) {
-        switch (string.toLowerCase().trim()) {
-            case "wander":
-                return movementTypes.WANDER;
-            case "track":
-                return movementTypes.TRACK;
-            case "sleep":
-                getStatus().setSleeping(true);
-                return movementTypes.SLEEP;
-            case "mimic":
-                getStatus().setSleeping(true);
-                hiddenChar = graphic;
-                String[] chars = {"\\", "&", "*", "]", "%", "?", "!", "(", ","};
-                graphic = Helper.getRandom(new ArrayList<>(Arrays.asList(chars)));
-                GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
-                return movementTypes.MIMIC;
-            case "still":
-                return movementTypes.STILL;
-            default:
-                return movementTypes.TRACK; // default movement type
-        }
-    }
-
-    private attackTypes attackTypeFromString(String string) {
-        switch (string) {
-            case "attack":
-                return attackTypes.HIT;
-            case "paralyze":
-                return attackTypes.PARALYZE;
-            case "confuse":
-                return attackTypes.CONFUSE;
-            case "intoxicate":
-                return attackTypes.INTOXICATE;
-            case "weaken":
-                return attackTypes.WEAKEN;
-            case "hpdrain":
-            case "hp_drain":
-                return attackTypes.HP_DRAIN;
-            case "xpdrain":
-            case "xp_drain":
-                return attackTypes.XP_DRAIN;
-            case "rust":
-                return attackTypes.RUST;
-            case "trap":
-                return attackTypes.TRAP;
-            case "stealgold":
-            case "steal_gold":
-                return attackTypes.STEAL_GOLD;
-            case "stealitem":
-            case "steal_item":
-                return attackTypes.STEAL_ITEM;
-            default:
-                return attackTypes.HIT; // default attack type
-        }
-    }
-
-    private static int parseDiceNotation(String die) {
-        String[] parts = die.split("d");
-        return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
+        this.monsterAttr = new MonsterAttributes(monsterClass, this);
     }
 
     // MONSTER BEHAVIOR
 
     private void runUpdate() {
         // TODO: drain max HP, drain XP (levels loss if go below thresh-hold)
-        move(null);
+        move();
         status.update();
         if (status.getHealth() <= 0) {
             this.die();
@@ -239,111 +53,40 @@ public class Monster extends Entity {
 
     // MONSTER MOVEMENT
 
-    private void move(@Nullable movementTypes type) {
-        if (speed > 0 && !getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
-            for (int i = 0; i < speed; i++) {
-                moveHelper(type);
-            }
-        } else {
-            if (moveCounter == -speed) {
-                moveHelper(type);
-                moveCounter = 1;
-            } else {
-                moveCounter += 1;
-            }
+    private void move() {
+        if (stuck()) return;
+        graphic = monsterAttr.graphic();
+
+        loopMovement(monsterAttr.movementAI());
+        boolean shouldAttack = !monsterAttr.movementAI().blockAttackAITrigger();
+
+        if (monsterAttr.movementAI().shouldTriggerSecondaryAI()) {
+            loopMovement(monsterAttr.secondaryMovementAI());
+            shouldAttack = shouldAttack && !monsterAttr.secondaryMovementAI().blockAttackAITrigger();
+        }
+        if (shouldAttack) {
+            attack(); // TODO: switch to AttackAI when implemented
+        }
+
+        if (monsterAttr.movementAI().hasOverriddenGraphic().isPresent()) {
+            graphic = monsterAttr.movementAI().hasOverriddenGraphic().get();
         }
     }
 
-    private void moveHelper(@Nullable movementTypes type) {
-        if (type != null) {
-            switch (type) {
-                case TRACK:
-                    trackMovement();
-                    break;
-                case WANDER:
-                    wanderMovement();
-                    break;
-                case STILL:
-                    stillMovement();
-                    break;
-                case SLEEP:
-                    sleepMovement();
-                    break;
-                case MIMIC:
-                    mimicMovement();
-                    break;
-            }
-            return;
-        }
-        switch (movementType) {
-            case TRACK:
-                trackMovement();
-                break;
-            case WANDER:
-                wanderMovement();
-                break;
-            case STILL:
-                stillMovement();
-                break;
-            case SLEEP:
-                sleepMovement();
-                break;
-            case MIMIC:
-                mimicMovement();
-                break;
+    /* MOVEMENT HELPERS */
+
+    private void loopMovement(MovementAI ai) {
+        for (int i = 0; i < monsterAttr.speed(); i++) {
+            ai.move();
         }
     }
 
-    private void trackMovement() {
-        Player player = GameManager.getPlayer();
-
-        if (isInRange(player)) {
-            if (!isNextTo(player)) {
-                if (this.getYPos() > player.getYPos()) {
-                    move(UP);
-                } else {
-                    move(DOWN);
-                }
-                if (this.getXPos() < player.getXPos()) {
-                    move(RIGHT);
-                } else {
-                    move(LEFT);
-                }
-            } else {
-                attack();
-            }
-        } else {
-            moveRandom();
-        }
-    }
-
-    private void wanderMovement() {
-        if (isNextTo(GameManager.getPlayer()) && Helper.random.nextInt(99) + 1 < 90) {
-            attack();
-        } else {
-            moveRandom();
-        }
-    }
-
-    private void stillMovement() {
-        if (isNextTo(GameManager.getPlayer())) {
-            attack();
-        }
-    }
-
-    private void sleepMovement() {
-        if (!getStatus().isSleeping() || GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.AGGRAVATE_MONSTER)) {
-            move(secondaryMovementType);
-        }
-    }
-
-    private void mimicMovement() {
-        if (!getStatus().isSleeping()) {
-            move(secondaryMovementType);
-            GameManager.getTable().setValueAt(hiddenChar, getYPos(), getXPos());
-        } else {
-            GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
-        }
+    /**
+     * Any and all external logic that might prevent the monster from moving should be checked here
+     * @return true if the monster cannot move, false otherwise
+     */
+    private boolean stuck() {
+        return getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER);
     }
 
     // MONSTER ATTACK
@@ -351,36 +94,36 @@ public class Monster extends Entity {
     private void attack() {
         if (Helper.random.nextDouble() <= (double) GameManager.getPlayer().getStatus().getAc() / 10) {
             if (!getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
-                switch (attackType) {
-                    case HIT:
+                switch (monsterAttr.attackAI().toLowerCase()) {
+                    case "hit":
                         hitAttack();
                         break;
-                    case PARALYZE:
-                    case TRAP:
+                    case "paralyze":
+                    case "trap":
                         paralyzeAttack();
                         break;
-                    case CONFUSE:
+                    case "confuse":
                         confuseAttack();
                         break;
-                    case INTOXICATE:
+                    case "intoxicate":
                         intoxicateAttack();
                         break;
-                    case WEAKEN:
+                    case "weaken":
                         weakenAttack();
                         break;
-                    case STEAL_GOLD:
+                    case "steal_gold":
                         stealGoldAttack();
                         break;
-                    case STEAL_ITEM:
+                    case "steal_item":
                         stealItemAttack();
                         break;
-                    case RUST:
+                    case "rust":
                         rustAttack();
                         break;
-                    case XP_DRAIN:
+                    case "xp_drain":
                         xpDrainAttack();
                         break;
-                    case HP_DRAIN:
+                    case "hp_drain":
                         healthDrainAttack();
                         break;
                 }
@@ -393,18 +136,18 @@ public class Monster extends Entity {
     }
 
     private void hitAttack() {
-        if (hitDamage == 0) {
+        if (monsterAttr.hitDamage() == 0) {
             MessageBar.addMessage("The " + getName() + " misses");
-        } else if (Helper.random.nextDouble() <= critChance) { // critical
+        } else if (Helper.random.nextDouble() <= monsterAttr.critChance()) { // critical
             if (Helper.random.nextDouble() <= 0.8) {
-                GameManager.getPlayer().health -= Helper.random.nextInt((int) critDamage) + 1;
+                GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.critDamage()) + 1;
                 MessageBar.addMessage("The " + getName() + " crits");
             } else {
-                GameManager.getPlayer().health -= Helper.random.nextInt(hitDamage) + 1;
+                GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.hitDamage()) + 1;
                 GameManager.getPlayer().getStatus().setParalyzed(3);
             }
         } else {
-            GameManager.getPlayer().health -= Helper.random.nextInt(hitDamage) + 1;
+            GameManager.getPlayer().health -= Helper.random.nextInt(monsterAttr.hitDamage()) + 1;
             MessageBar.addMessage("The " + getName() + " hits");
         }
     }
@@ -443,7 +186,7 @@ public class Monster extends Entity {
         if (p.getGold() > 0 && Helper.random.nextInt(99) + 1 < 40) {
             stolenGold += p.stealGold(Helper.random.nextInt(50) + p.getGold() / 4);
             MessageBar.addMessage("Your pockets feel lighter");
-            movementType = movementTypes.WANDER;
+            monsterAttr.setMovementAI("wander", this);
             // TODO: update this and stealItem attack to change to RUN movement type after stealing
         } else {
             MessageBar.addMessage("The " + getName() + " couldn't take your gold");
@@ -457,8 +200,8 @@ public class Monster extends Entity {
             stolenItem = Helper.getRandom(items);
             GameManager.getPlayer().getInventory().remove(stolenItem);
             MessageBar.addMessage("Your backpack feels lighter");
-            movementType = movementTypes.WANDER;
-            attackType = attackTypes.HIT;
+            monsterAttr.setMovementAI("wander", this);
+            monsterAttr.setAttackAI("hit", this);
         } else {
             MessageBar.addMessage("The " + getName() + " fails to steal from you");
         }
@@ -490,7 +233,7 @@ public class Monster extends Entity {
     @Override
     public boolean move(int direction) {
         super.move(direction);
-        if (this.invisible && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
+        if (monsterAttr.isInvisible() && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         }
         return true;
@@ -499,7 +242,7 @@ public class Monster extends Entity {
     // HELPERS
 
     private boolean isInRange(Entity entity) {
-        return Math.pow(entity.getXPos() - getXPos(), 2) + Math.pow(entity.getYPos() - getYPos(), 2) < Math.pow(range + 1, 2);
+        return Math.pow(entity.getXPos() - getXPos(), 2) + Math.pow(entity.getYPos() - getYPos(), 2) < Math.pow(monsterAttr.range() + 1, 2);
     }
 
     private boolean isNextTo(Player player) {
@@ -516,13 +259,13 @@ public class Monster extends Entity {
     
     private void die() {
         GameManager.add(overWrittenGraphic, getXPos(), getYPos());
-        GameManager.getPlayer().addExperience(experience);
+        GameManager.getPlayer().addExperience(monsterAttr.experience());
         MessageBar.addMessage("You kill the " + name);
 
         if (Item.getItemAt(getXPos(), getYPos()) != null && Level.getLevel().getRoom(this) != null) {
             setLocation(Level.getLevel().getRoom(this).getRandomPointInBounds());
         }
-        if (Helper.random.nextInt(99) + 1 < treasureChance || stolenItem != null) {
+        if (Helper.random.nextInt(99) + 1 < monsterAttr.treasureChance() || stolenItem != null) {
             Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
         } else if (stolenGold > 0) {
             Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null);
@@ -536,14 +279,9 @@ public class Monster extends Entity {
         monsters.remove(this);
     }
 
-    public void setInvisible(boolean invisible) {
-        this.invisible = invisible;
-    }
-    public void setType(File file) {
-        loadDataFile(file.getPath());
-    }
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public void polymorph(MonsterClass monsterClass) {
+        // TODO: make not change health and certain other attributes?
+        monsterAttr = new MonsterAttributes(monsterClass, this);
     }
 
     // GETTERS
@@ -551,14 +289,11 @@ public class Monster extends Entity {
     public Status getStatus() {
         return status;
     }
+    public MonsterAttributes attributes() {
+        return monsterAttr;
+    }
     public String getHiddenChar() {
         return hiddenChar;
-    }
-    public MonsterClass monsterClass() {
-        return monsterClass;
-    }
-    public int getSpeed() {
-        return speed;
     }
 
     // MONSTER SPAWNING METHODS

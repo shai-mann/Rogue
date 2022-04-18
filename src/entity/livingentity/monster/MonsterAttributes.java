@@ -14,8 +14,9 @@ public class MonsterAttributes {
     private double critChance, treasureChance;
     private DiceRange hitDamage, critDamage;
     private int health, speed, range, defaultAC, experience;
-    private final MovementAI movementAI, secondaryMovementAI;
-    private final String attackAI; // TODO: change to AttackAI once implemented
+    private MovementAI movementAI;
+    private final MovementAI secondaryMovementAI;
+    private String attackAI; // TODO: change to AttackAI once implemented
     private boolean invisible;
 
     public MonsterAttributes(MonsterClass monsterClass, Monster self) {
@@ -113,6 +114,12 @@ public class MonsterAttributes {
     }
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+    public void setMovementAI(String type, Monster m) {
+        this.movementAI = AIFactory.constructMovementAI(type, m);
+    }
+    public void setAttackAI(String type, Monster m) {
+        this.attackAI = type;
     }
     public void setInvisible(boolean invisible) {
         this.invisible = invisible;

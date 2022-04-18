@@ -2,15 +2,15 @@ package entity.lifelessentity.item;
 
 import entity.Effect;
 import entity.livingentity.monster.Monster;
+import entity.livingentity.monster.MonsterLoader;
 import main.GameManager;
 import map.Map;
 import map.level.Room;
-import util.gamepanes.MessageBar;
 import util.Helper;
 import util.animation.Animation;
+import util.gamepanes.MessageBar;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -93,7 +93,7 @@ public class Wand extends Item {
         }
         switch (power) {
             case INVISIBILITY:
-                m.setInvisible(true);
+                m.attributes().setInvisible(true);
                 GameManager.getTable().setValueAt(m.overWrittenGraphic, m.getYPos(), m.getXPos());
                 break;
             case LIGHTNING:
@@ -107,24 +107,24 @@ public class Wand extends Item {
                         new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
-                m.setType((File) Helper.getRandom(new ArrayList(Arrays.asList(new File("data/data.monsters").listFiles()))));
+                m.polymorph(Helper.getRandom(MonsterLoader.monsterClasses));
                 break;
             case MAGIC_MISSILES:
                 m.getStatus().setHealth(m.health - Helper.random.nextInt(3) + 1);
                 MessageBar.addMessage("Missiles fly from your wand, hitting " + m.getName());
                 break;
             case HASTE_MONSTER:
-                if (m.getSpeed() > 0) {
-                    m.setSpeed(m.getSpeed() + 1);
+                if (m.attributes().speed() > 0) {
+                    m.attributes().setSpeed(m.attributes().speed() + 1);
                 } else {
-                    m.setSpeed(1);
+                    m.attributes().setSpeed(1);
                 }
                 break;
             case SLOW_MONSTER:
-                if (m.getSpeed() < 0) {
-                    m.setSpeed(m.getSpeed() - 1);
+                if (m.attributes().speed() < 0) {
+                    m.attributes().setSpeed(m.attributes().speed() - 1);
                 } else {
-                    m.setSpeed(-1);
+                    m.attributes().setSpeed(-1);
                 }
             case DRAIN_LIFE:
                 int damage = GameManager.getPlayer().getHealth() / 2;

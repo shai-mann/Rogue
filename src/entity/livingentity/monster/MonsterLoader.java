@@ -31,19 +31,17 @@ public class MonsterLoader {
         }
     }
 
-    private static File[] files;
-    private static List<MonsterClass> monsterClasses;
+    public static List<MonsterClass> monsterClasses;
 
     public static void loadMonsters() {
-        files = new File(FILE_PATH).listFiles();
-        monsterClasses = loadMonsterClasses();
+        monsterClasses = loadMonsterClasses(Objects.requireNonNull(new File(FILE_PATH).listFiles()));
     }
 
     public static List<MonsterClass> getSpawnableMonsterClasses(int level) {
         return monsterClasses.stream().filter((clazz) -> clazz.spawnableLevels().contains(level)).toList();
     }
 
-    private static List<MonsterClass> loadMonsterClasses() {
+    private static List<MonsterClass> loadMonsterClasses(File[] files) {
         List<MonsterClass> monsterClasses = new ArrayList<>();
 
         for (File f : files) {
