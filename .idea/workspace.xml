@@ -7,11 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterAttributes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterClass.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

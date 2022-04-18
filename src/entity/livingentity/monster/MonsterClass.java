@@ -30,4 +30,20 @@ public record MonsterClass(
         double treasureChance,
         List<Integer> spawnableLevels
         ) {
+
+        // override certain getters to force deep copies
+        @Override
+        public DiceRange hitDamage() {
+                return hitDamage.scale(1);
+        }
+
+        @Override
+        public DiceRange critDamage() {
+                return critDamage.scale(1);
+        }
+
+        @Override
+        public DiceRange health() {
+                return health.scale(1);
+        }
 }
