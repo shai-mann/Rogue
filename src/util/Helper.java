@@ -37,6 +37,16 @@ public class Helper {
         return random.nextInt(max - min + 1) + min;
     }
 
+    /**
+     * Given a double between 0.0 and 1.0, treats this as a % chance of success (0.2 -> 20%),
+     * and determines if the chance succeeds randomly.
+     * @param chance the percent chance of success (as decimal).
+     * @return true if the chance succeeds, false otherwise
+     */
+    public static boolean calculateChance(double chance) {
+        return random.nextDouble() <= chance;
+    }
+
     public static <T> T getRandom(List<T> objects) {
         return objects.get(random.nextInt(objects.size()));
     }

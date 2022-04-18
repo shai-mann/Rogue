@@ -213,7 +213,7 @@ public class Player extends Entity implements KeyListener, Serializable {
             Monster monster = Monster.getMonsters().get(i);
             if (fakeMove(direction).getX() == monster.getXPos() && fakeMove(direction).getY() == monster.getYPos()) {
                 double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
-                if (Helper.random.nextDouble() <= hitChance) {
+                if (Helper.calculateChance(hitChance)) {
                     Status monsterStatus = monster.getStatus();
                     monsterStatus.lowerHealth(getDamage());
                     Map.getMap().update();
