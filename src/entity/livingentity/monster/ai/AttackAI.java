@@ -12,6 +12,22 @@ package entity.livingentity.monster.ai;
  */
 public interface AttackAI {
 
+    /**
+     * Used to indicate the outcome of an attempted attack.
+     *  - Unperformed: no attack was performed (generally not in range of a {@link entity.livingentity.Player}).
+     *  - Success: successfully performed the attack.
+     *  - Fail: Swung at the player but missed.
+     *  - Crit: Dealt a critical hit to the player.
+     */
+    enum Outcome {
+        UNPERFORMED,
+        SUCCESS,
+        FAIL,
+        CRIT
+    }
 
+    Outcome attack();
+
+    boolean canAttack();
 
 }
