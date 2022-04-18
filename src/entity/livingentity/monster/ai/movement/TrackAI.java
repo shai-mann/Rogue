@@ -21,7 +21,7 @@ public class TrackAI extends AbstractMovementAI {
         Player player = GameManager.getPlayer();
 
         if (Helper.isInRange(self, player, self.attributes().range())) {
-            if (!isNextTo(self, player)) {
+            if (!Helper.isNextTo(self, player)) {
                 int direction = self.getYPos() > player.getYPos() ? UP : DOWN;
                 self.move(direction);
 
@@ -31,12 +31,6 @@ public class TrackAI extends AbstractMovementAI {
         } else {
             shouldTriggerSecondaryMovementAI = true;
         }
-    }
-
-    /* HELPERS */
-
-    private boolean isNextTo(Monster self, Player player) {
-        return Helper.isInRange(self, player, 1);
     }
 
 }

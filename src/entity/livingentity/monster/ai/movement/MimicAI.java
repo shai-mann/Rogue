@@ -17,7 +17,7 @@ public class MimicAI extends AbstractMovementAI {
 
     @Override
     public void move() {
-        if (Helper.isInRange(self, GameManager.getPlayer(), 1)) {
+        if (Helper.isNextTo(self, GameManager.getPlayer())) {
             hiding = false; // next to player, will attack, should therefore also reveal
         }
     }

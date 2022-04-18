@@ -63,4 +63,8 @@ public class Helper {
 
         return dist <= range;
     }
+
+    public static boolean isNextTo(Entity e1, Entity e2) {
+        return isInRange(e1, e2, 1);
+    }
 }
