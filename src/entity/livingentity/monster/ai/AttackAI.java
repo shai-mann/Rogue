@@ -26,8 +26,11 @@ public interface AttackAI {
         CRIT
     }
 
+    /**
+     * Handles the attacking sequence of a monster (checks that an attack is possible,
+     * then performs the attack).
+     * @return the {@link Outcome} of the attack.
+     */
     Outcome attack();
-
-    boolean canAttack();
 
 }
