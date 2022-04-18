@@ -65,4 +65,9 @@ public abstract class AbstractAttackAI implements AttackAI {
         return outcome;
     }
 
+    @Override
+    public boolean canAttack() {
+        return Helper.isNextTo(self, player);
+    }
+
 }
