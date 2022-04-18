@@ -107,7 +107,7 @@ public class Monster extends Entity {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Error: file not found");
+            System.out.println("Error: file [" + path + "] not found");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error reading file");
