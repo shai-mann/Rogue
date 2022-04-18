@@ -26,14 +26,11 @@ public class Monster extends Entity {
     private MonsterAttributes monsterAttr;
     private final Status status;
 
-    private int moveCounter = 1;
-    private String hiddenChar;
-
     private Item stolenItem = null;
     private int stolenGold = 0;
 
     public Monster(MonsterClass monsterClass, int x, int y) {
-        super("-", x, y);
+        super(monsterClass.graphic(), x, y);
         monsters.add(this);
 
         status = new Status(this);
@@ -55,7 +52,6 @@ public class Monster extends Entity {
 
     private void move() {
         if (stuck()) return;
-        graphic = monsterAttr.graphic();
 
         loopMovement(monsterAttr.movementAI());
         boolean shouldAttack = !monsterAttr.movementAI().blockAttackAITrigger();
@@ -66,10 +62,6 @@ public class Monster extends Entity {
         }
         if (shouldAttack) {
             attack(); // TODO: switch to AttackAI when implemented
-        }
-
-        if (monsterAttr.movementAI().hasOverriddenGraphic().isPresent()) {
-            graphic = monsterAttr.movementAI().hasOverriddenGraphic().get();
         }
     }
 
@@ -291,9 +283,6 @@ public class Monster extends Entity {
     }
     public MonsterAttributes attributes() {
         return monsterAttr;
-    }
-    public String getHiddenChar() {
-        return hiddenChar;
     }
 
     // MONSTER SPAWNING METHODS

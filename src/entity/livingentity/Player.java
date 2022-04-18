@@ -222,9 +222,6 @@ public class Player extends Entity implements KeyListener, Serializable {
                     }
                     if (monster.getStatus().isSleeping()) {
                         monster.getStatus().setSleeping(false); // TODO: move to part of monster class
-                        if (monster.getHiddenChar() != null) {
-                            GameManager.getTable().setValueAt(monster.getHiddenChar(), monster.getYPos(), monster.getXPos());
-                        }
                     }
                 }
             }
