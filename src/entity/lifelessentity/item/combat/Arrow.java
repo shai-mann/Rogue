@@ -1,7 +1,7 @@
 package entity.lifelessentity.item.combat;
 
 import entity.lifelessentity.item.Item;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 public class Arrow extends Item {

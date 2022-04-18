@@ -4,13 +4,12 @@ import org.jetbrains.annotations.Nullable;
 
 import entity.Entity;
 import entity.lifelessentity.Staircase;
-import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.table.CustomCellRenderer;
 import map.level.table.CustomRoomTable;
@@ -62,6 +61,8 @@ public class Level extends JComponent {
     public Level(boolean generateAsTestLevel) {
         setDefaults();
         startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
+
+        new Monster("", 20, 6);
         GameManager.getFrame().requestFocus();
     }
 

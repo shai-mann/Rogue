@@ -1,6 +1,6 @@
 package util.gamepanes;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import settings.Settings;
 

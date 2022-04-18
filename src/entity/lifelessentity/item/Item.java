@@ -6,7 +6,7 @@ import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
 import org.jetbrains.annotations.Nullable;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import map.level.Room;
 
 import java.awt.*;

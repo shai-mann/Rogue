@@ -1,11 +1,11 @@
 package map;
 
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import util.animation.Animation;
 import util.gamepanes.MessageBar;
 import util.gamepanes.saving.SavePane;
 import util.gamepanes.StatusBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import util.animation.AnimationManager;

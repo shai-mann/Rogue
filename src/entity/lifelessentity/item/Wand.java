@@ -1,12 +1,12 @@
 package entity.lifelessentity.item;
 
 import entity.Effect;
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.Map;
 import map.level.Room;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import util.animation.Animation;
 
 import java.awt.*;

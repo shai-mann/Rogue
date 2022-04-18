@@ -1,14 +1,12 @@
 package map.level.table;
-import helper.Helper;
+import util.Helper;
 import map.Map;
 import util.animation.Animation;
-import util.animation.AnimationManager;
 
 import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CustomCellRenderer extends DefaultTableCellRenderer {
 

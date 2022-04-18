@@ -83,6 +83,9 @@ public class Status implements Serializable {
     public boolean isBlinded() {
         return blinded > 0;
     }
+    public boolean hasEffect(int effect) {
+        return effects.hasEffect(effect);
+    }
     public Effect getEffects() {
         return effects;
     }

@@ -8,22 +8,21 @@ import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
-import settings.Settings;
-import util.inventory.InventoryItem;
+import entity.livingentity.monster.Monster;
+import main.GameManager;
+import map.Map;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
-
-import java.awt.*;
-
+import settings.Settings;
+import util.Helper;
 import util.gamepanes.GravePane;
-import util.inventory.InventoryPane;
 import util.gamepanes.MessageBar;
-import helper.Helper;
-import main.GameManager;
-import map.Map;
+import util.inventory.InventoryItem;
+import util.inventory.InventoryPane;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -222,7 +221,7 @@ public class Player extends Entity implements KeyListener, Serializable {
                         MessageBar.addMessage("You hit the " + monster.getName());
                     }
                     if (monster.getStatus().isSleeping()) {
-                        monster.getStatus().setSleeping(false);
+                        monster.getStatus().setSleeping(false); // TODO: move to part of monster class
                         if (monster.getHiddenChar() != null) {
                             GameManager.getTable().setValueAt(monster.getHiddenChar(), monster.getYPos(), monster.getXPos());
                         }

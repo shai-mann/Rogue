@@ -8,18 +8,46 @@
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/Trap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Gold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Gold.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Rogue$GameManager.coverage" NAME="GameManager Coverage Results" MODIFIED="1546219601769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
@@ -38,6 +66,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -499,7 +529,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>156</line>
+          <line>157</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

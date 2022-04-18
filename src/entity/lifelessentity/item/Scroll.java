@@ -2,10 +2,10 @@ package entity.lifelessentity.item;
 
 import entity.Effect;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
