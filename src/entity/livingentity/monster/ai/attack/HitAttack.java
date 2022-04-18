@@ -16,7 +16,10 @@ public class HitAttack extends AbstractAttackAI {
     private String getFormattedDamage() {
         if (damage == -1) new Exception("Damage value retrieved before calculation.").printStackTrace();
 
-        return damage == 0 ? "no" : String.valueOf(damage);
+        String out = damage == 0 ? "no" : String.valueOf(damage);
+
+        damage = -1;
+        return out;
     }
 
     @Override
@@ -39,8 +42,6 @@ public class HitAttack extends AbstractAttackAI {
         }
 
         player.health -= damage; // TODO: make method in player to handle this that can have Listeners
-
-        damage = -1;
 
         return outcome;
     }
