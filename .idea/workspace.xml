@@ -8,38 +8,34 @@
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Rogue/helper/Helper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/Trap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/Trap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Gold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Gold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Ring.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Wand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Armor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Arrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/combat/Weapon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/bat" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/bat.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/centaur" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/centaur.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/dragon" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/dragon.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/floating_eye" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/floating_eye.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/giant_ant" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/giant_ant.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/griffin" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/griffin.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/hobgoblin" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/hobgoblin.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/invisible_stalker" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/invisible_stalker.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/jackal" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/jackal.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/kobold" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/kobold.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/leprechaun" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/leprechaun.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/mimic" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/mimic.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/nymph" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/nymph.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/orc" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/orc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/purple_worm" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/purple_worm.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/quasit" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/quasit.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/rust_monster" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/rust_monster.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/snake" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/snake.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/troll" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/troll.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/umberhulk" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/umberhulk.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/vampire" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/vampire.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/violet_fungi" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/violet_fungi.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/wraith" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/wraith.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/xorn" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/xorn.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/yeti" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/yeti.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/zombie" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/zombie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -529,7 +525,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>157</line>
+          <line>156</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
