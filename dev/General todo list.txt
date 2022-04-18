@@ -1,0 +1,1 @@
+1) Why does Entity have a health value? Does food have health??
