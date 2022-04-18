@@ -18,6 +18,7 @@ BUGS:
 - Scroll of Teleportation moves you a turn after you read it...
 - Bottom row of current room doesn't render
 - Changing panes resets window's maximized state
+- Mimic movement AI doesn't hide monster properly
 
 
 Features To Implement:

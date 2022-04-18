@@ -42,6 +42,7 @@ public interface MovementAI {
      */
     boolean blockAttackAITrigger();
 
+    // TODO: actually implement?
     default Optional<String> hasOverriddenGraphic() {
         return Optional.empty();
     }
