@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/entity/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/monsters/zombie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/zombie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractMovementAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractMovementAI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -497,11 +498,6 @@
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>157</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Item.java</url>
           <line>51</line>
           <option name="timeStamp" value="69" />
@@ -512,9 +508,14 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
+          <url>file://$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java</url>
           <line>64</line>
-          <option name="timeStamp" value="83" />
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="87" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
