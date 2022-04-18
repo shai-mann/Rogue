@@ -10,7 +10,7 @@ import java.util.Objects;
 public abstract class AbstractMovementAI implements MovementAI {
 
     protected boolean shouldTriggerSecondaryMovementAI = false;
-    protected boolean shouldBlockAttackAI = true;
+    protected boolean shouldBlockAttackAI = false;
 
     protected Monster self;
 
@@ -27,7 +27,7 @@ public abstract class AbstractMovementAI implements MovementAI {
         Objects.requireNonNull(self);
 
         shouldTriggerSecondaryMovementAI = false;
-        shouldBlockAttackAI = true;
+        shouldBlockAttackAI = false;
     }
 
     @Override
