@@ -26,6 +26,7 @@ Potential improvements:
 	4) Move list of currently spawned monsters into Level or Map?
 	5) Convert attribute formatting to be camel case?
 	6) Convert player hitting method to send most of monster-related logic into a monster damage() function
+	7) Give Monsters an Inventory (items, gold) that each have drop chances that can be included in the Loot Table
 
 Questions for future adjustments:
 
