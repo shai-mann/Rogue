@@ -1,5 +1,6 @@
-package entity.livingentity;
+package entity.livingentity.monster;
 
+import entity.livingentity.Player;
 import org.jetbrains.annotations.Nullable;
 
 import entity.Effect;
@@ -8,7 +9,7 @@ import entity.Status;
 import entity.lifelessentity.item.Item;
 import map.level.Passageway;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
@@ -50,6 +51,9 @@ public class Monster extends Entity {
         STEAL_ITEM
     }
 
+    private MonsterClass monsterClass; // TODO: collapse into mutable form of MonsterClass MonsterAttr?
+    // the problem is that invisible isn't going to be mutable, but it needs to be
+
     private int speed = 1;
     private int moveCounter = 1;
     private int range = 10;
@@ -64,7 +68,7 @@ public class Monster extends Entity {
     private Item stolenItem = null;
     private int stolenGold = 0;
 
-    private Status status;
+    private final Status status;
 
     private movementTypes movementType = movementTypes.TRACK;
     private movementTypes secondaryMovementType = movementTypes.WANDER;
@@ -76,6 +80,14 @@ public class Monster extends Entity {
         monsters.add(this);
         status = new Status(this);
         loadDataFile(dataFilePath);
+    }
+
+    public Monster(MonsterClass monsterClass, int x, int y) {
+        super("-", x, y);
+        monsters.add(this);
+
+        status = new Status(this);
+        this.monsterClass = monsterClass;
     }
 
     // DATA LOADING
@@ -169,7 +181,7 @@ public class Monster extends Entity {
                 getStatus().setSleeping(true);
                 hiddenChar = graphic;
                 String[] chars = {"\\", "&", "*", "]", "%", "?", "!", "(", ","};
-                graphic = (String) Helper.getRandom(new ArrayList(Arrays.asList(chars)));
+                graphic = Helper.getRandom(new ArrayList<>(Arrays.asList(chars)));
                 GameManager.getTable().setValueAt(graphic, getYPos(), getXPos());
                 return movementTypes.MIMIC;
             case "still":
@@ -210,6 +222,11 @@ public class Monster extends Entity {
             default:
                 return attackTypes.HIT; // default attack type
         }
+    }
+
+    private static int parseDiceNotation(String die) {
+        String[] parts = die.split("d");
+        return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
     }
 
     // MONSTER BEHAVIOR
@@ -440,7 +457,7 @@ public class Monster extends Entity {
         ArrayList<Item> items = (ArrayList<Item>) GameManager.getPlayer().getInventory().clone();
 
         if (stolenItem == null && items.size() != 0 && Helper.random.nextInt(99) + 1 > 70) {
-            stolenItem = (Item) Helper.getRandom(items);
+            stolenItem = Helper.getRandom(items);
             GameManager.getPlayer().getInventory().remove(stolenItem);
             MessageBar.addMessage("Your backpack feels lighter");
             movementType = movementTypes.WANDER;
@@ -473,6 +490,7 @@ public class Monster extends Entity {
 
     // OVERRIDES
 
+    @Override
     public boolean move(int direction) {
         super.move(direction);
         if (this.invisible && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
@@ -491,11 +509,6 @@ public class Monster extends Entity {
         return
                 ((player.getXPos() + 1 == getXPos() || player.getXPos() - 1 == getXPos()) && player.getYPos() == getYPos()) ||
                         ((player.getYPos() + 1 == getYPos() || player.getYPos() - 1 == getYPos()) && player.getXPos() == getXPos());
-    }
-
-    private static int parseDiceNotation(String die) {
-        String[] parts = die.split("d");
-        return Integer.valueOf(parts[0]) * Integer.valueOf(parts[1]);
     }
 
     private void moveRandom() {
@@ -544,6 +557,9 @@ public class Monster extends Entity {
     public String getHiddenChar() {
         return hiddenChar;
     }
+    public MonsterClass monsterClass() {
+        return monsterClass;
+    }
     public int getSpeed() {
         return speed;
     }
@@ -552,7 +568,7 @@ public class Monster extends Entity {
 
     public static void createMonster(Room room) {
         Point location = room.getRandomPointInBounds();
-        new Monster(((File) Helper.getRandom(availableFiles)).getPath(), location.x, location.y);
+        new Monster(Helper.getRandom(availableFiles).getPath(), location.x, location.y);
     }
     public static void spawnMonsters() {
         for (Room room : Room.rooms) {
