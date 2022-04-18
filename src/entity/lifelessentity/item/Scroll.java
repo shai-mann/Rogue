@@ -112,7 +112,7 @@ public class Scroll extends Item {
             case CREATE_MONSTER:
                 Room room = Level.getLevel().getRoom(player);
                 if (room != null) {
-                    Monster.createMonster(room);
+                    Monster.createMonster(room, Level.getLevel().getLevelNumber());
                 } else {
                     MessageBar.addMessage("You hear a faint cry of anguish in the distance");
                 }

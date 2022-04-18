@@ -1,22 +1,20 @@
 package entity.livingentity.monster;
 
-import entity.livingentity.Player;
-import org.jetbrains.annotations.Nullable;
-
 import entity.Effect;
 import entity.Entity;
 import entity.Status;
 import entity.lifelessentity.item.Item;
-import map.level.Passageway;
-import util.gamepanes.MessageBar;
-import util.Helper;
+import entity.livingentity.Player;
 import main.GameManager;
 import map.level.Level;
+import map.level.Passageway;
 import map.level.Room;
+import org.jetbrains.annotations.Nullable;
+import util.Helper;
+import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -24,8 +22,6 @@ import java.util.Random;
 public class Monster extends Entity {
 
     private static ArrayList<Monster> monsters = new ArrayList<>();
-    private static File[] files;
-    private static ArrayList<File> availableFiles = new ArrayList<>();
 
     public static int DEFAULT_HEALTH = 20;
 
@@ -53,6 +49,7 @@ public class Monster extends Entity {
 
     private MonsterClass monsterClass; // TODO: collapse into mutable form of MonsterClass MonsterAttr?
     // the problem is that invisible isn't going to be mutable, but it needs to be
+    // this conversion would be a good place to turn the AI from strings to classes
 
     private int speed = 1;
     private int moveCounter = 1;
@@ -566,22 +563,22 @@ public class Monster extends Entity {
 
     // MONSTER SPAWNING METHODS
 
-    public static void createMonster(Room room) {
+    public static void createMonster(Room room, int level) {
         Point location = room.getRandomPointInBounds();
-        new Monster(Helper.getRandom(availableFiles).getPath(), location.x, location.y);
+        new Monster(Helper.getRandom(MonsterLoader.getSpawnableMonsterClasses(level)), location.x, location.y);
     }
-    public static void spawnMonsters() {
+    public static void spawnMonsters(int level) {
         for (Room room : Room.rooms) {
             if (!room.equals(Level.getLevel().getStartingRoom())) {
                 // 55% chance of 1st monster
                 if (Helper.random.nextInt(99) + 1 >= 45) {
-                    createMonster(room);
+                    createMonster(room, level);
                     // 25% chance of 2nd monster
                     if (Helper.random.nextInt(99) + 1 >= 75) {
-                        createMonster(room);
+                        createMonster(room, level);
                         // 2% chance of 3rd monster
                         if (Helper.random.nextInt(99) + 1 >= 98) {
-                            createMonster(room);
+                            createMonster(room, level);
                         }
                     }
                 }
@@ -591,65 +588,6 @@ public class Monster extends Entity {
 
     // STATIC METHODS
 
-    public static void updateAvailableMonsters() {
-        availableFiles.clear();
-        if (files == null) {
-            files = new File("./resources/data/monsters").listFiles();
-        }
-        for (File file : files) {
-            try {
-                if (getLevel(file).contains(Level.getLevel().getLevelNumber())) {
-                    availableFiles.add(file);
-                }
-            } catch (NullPointerException e) {
-                if (getLevel(file).contains(1)) {
-                    availableFiles.add(file);
-                }
-            }
-        }
-    }
-    private static ArrayList<Integer> getLevel(File file) {
-        String line;
-        ArrayList<Integer> validLevels = new ArrayList<>();
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.contains("level")) {
-                    line = line.split(":")[1];
-                    String[] numbers = line.split(",");
-                    for (String string : numbers) {
-                        if (string.contains("-")) {
-                            for (int i = Integer.parseInt(string.split("-")[0].trim());
-                                 i <= Integer.parseInt(string.split("-")[1].trim()); i++) {
-                                validLevels.add(i);
-                            }
-                        } else {
-                            validLevels.add(Integer.parseInt(string.trim()));
-                        }
-                    }
-                }
-            }
-            bufferedReader.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Error: file not found");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error reading file");
-        }
-        return validLevels;
-    }
-    public static void loadCustomMonsters() {
-        try {
-            files = new File(new File(
-                    Monster.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                    + "/data/monsters").listFiles();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }
     public static void update() {
         for (int i = 0; i < monsters.size(); i++) {
             Monster monster = monsters.get(i);

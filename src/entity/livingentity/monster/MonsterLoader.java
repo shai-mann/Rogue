@@ -39,6 +39,10 @@ public class MonsterLoader {
         monsterClasses = loadMonsterClasses();
     }
 
+    public static List<MonsterClass> getSpawnableMonsterClasses(int level) {
+        return monsterClasses.stream().filter((clazz) -> clazz.spawnableLevels().contains(level)).toList();
+    }
+
     private static List<MonsterClass> loadMonsterClasses() {
         List<MonsterClass> monsterClasses = new ArrayList<>();
 

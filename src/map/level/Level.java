@@ -227,8 +227,7 @@ public class Level extends JComponent {
     // ENTITY SPAWNING METHODS
 
     private void spawnEntities() {
-        Monster.updateAvailableMonsters();
-        Monster.spawnMonsters();
+        Monster.spawnMonsters(levelNumber);
         Item.spawnItems();
         if (levelNumber != 26) {
             descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);

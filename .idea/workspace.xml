@@ -8,33 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/bat" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/bat.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/centaur" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/centaur.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/dragon" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/dragon.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/floating_eye" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/floating_eye.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/giant_ant" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/giant_ant.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/griffin" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/griffin.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/hobgoblin" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/hobgoblin.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/invisible_stalker" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/invisible_stalker.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/jackal" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/jackal.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/kobold" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/kobold.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/leprechaun" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/leprechaun.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/mimic" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/mimic.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/nymph" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/nymph.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/orc" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/orc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/purple_worm" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/purple_worm.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/quasit" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/quasit.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/rust_monster" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/rust_monster.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/snake" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/snake.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/troll" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/troll.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/umberhulk" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/umberhulk.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/vampire" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/vampire.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/violet_fungi" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/violet_fungi.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/wraith" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/wraith.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/xorn" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/xorn.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/yeti" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/yeti.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data/monsters/zombie" beforeDir="false" afterPath="$PROJECT_DIR$/resources/data/monsters/zombie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/MonsterLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
