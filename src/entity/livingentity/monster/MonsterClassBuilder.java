@@ -50,7 +50,7 @@ public class MonsterClassBuilder {
     private String attackAI = "hit";
     private boolean invisible = false;
     private int defaultAC = 0;
-    private int experience = 0; // TODO: range?
+    private int experience = 0;
     private double treasureChance = 0;
     private List<Integer> spawnableLevels = Collections.singletonList(-1);
 
