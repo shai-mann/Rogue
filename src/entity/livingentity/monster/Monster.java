@@ -63,6 +63,7 @@ public class Monster extends Entity {
         }
         if (shouldAttack) {
             attack(); // TODO: switch to AttackAI when implemented
+            // TODO: include in if statement other factors that could prevent attacking
         }
     }
 
@@ -85,7 +86,7 @@ public class Monster extends Entity {
     // MONSTER ATTACK
 
     private void attack() {
-        if (Helper.random.nextDouble() <= (double) GameManager.getPlayer().getStatus().getAc() / 10) {
+        if (Helper.calculateChance(GameManager.getPlayer().getStatus().getAc() / 10.0)) {
             if (!getStatus().getEffects().hasEffect(Effect.SUPPRESS_POWER)) {
                 switch (monsterAttr.attackAI().toLowerCase()) {
                     case "hit":
