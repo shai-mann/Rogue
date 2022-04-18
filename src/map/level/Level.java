@@ -1,19 +1,18 @@
 package map.level;
 
-import org.jetbrains.annotations.Nullable;
-
 import entity.Entity;
 import entity.lifelessentity.Staircase;
-import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.Item;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import util.Helper;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.level.table.CustomCellRenderer;
 import map.level.table.CustomRoomTable;
 import map.level.table.RoomTableModel;
+import org.jetbrains.annotations.Nullable;
+import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +61,7 @@ public class Level extends JComponent {
         setDefaults();
         startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
 
-        new Monster("", 20, 6);
+        new Monster(Level.class.getClassLoader().getResource("./data/monsters/zombie.txt").getPath(), 20, 6);
         GameManager.getFrame().requestFocus();
     }
 
