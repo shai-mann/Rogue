@@ -12,9 +12,9 @@ public class WanderAI extends AbstractMovementAI {
     }
 
     @Override
-    public void move() {
+    public boolean move() {
         super.move();
 
-        self.move(Helper.getRandom(Entity.DIRECTIONS));
+        return self.move(Helper.getRandom(Entity.DIRECTIONS));
     }
 }
