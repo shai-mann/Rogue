@@ -55,11 +55,6 @@ public class Monster extends Entity {
         boolean shouldAttack = !loopMovement(monsterAttr.movementAI())
                 && !monsterAttr.movementAI().blockAttackAITrigger();
 
-        if (monsterAttr.movementAI().shouldTriggerSecondaryAI()) {
-            loopMovement(monsterAttr.secondaryMovementAI());
-            shouldAttack = shouldAttack && !monsterAttr.secondaryMovementAI().blockAttackAITrigger();
-        }
-
         if (shouldAttack && !attackBlocked()) {
             monsterAttr.attackAI().attack();
         }

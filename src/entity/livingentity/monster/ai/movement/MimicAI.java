@@ -27,6 +27,11 @@ public class MimicAI extends AbstractMovementAI {
     }
 
     @Override
+    public boolean shouldTriggerSecondaryAI() {
+        return !hiding;
+    }
+
+    @Override
     public Optional<String> hasOverriddenGraphic() {
         return hiding ? Optional.of("*") : super.hasOverriddenGraphic(); // pretends to be a piece of gold until it can attack
     }

@@ -67,7 +67,7 @@ public class MonsterAttributes {
         return experience;
     }
     public MovementAI movementAI() {
-        return movementAI;
+        return movementAI.shouldTriggerSecondaryAI() ? secondaryMovementAI : movementAI;
     }
     public MovementAI secondaryMovementAI() {
         return secondaryMovementAI;

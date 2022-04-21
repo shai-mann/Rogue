@@ -32,8 +32,9 @@ public interface MovementAI {
     boolean move();
 
     /**
-     * Used by {@link Monster} to determine if the secondary AI should be triggered.
-     * The secondary AI defaults as {@link entity.livingentity.monster.ai.movement.WanderAI} in the
+     * Used by {@link entity.livingentity.monster.MonsterAttributes} to determine if the secondary AI should be used
+     * instead of the main movementAI. The secondary AI defaults as
+     * {@link entity.livingentity.monster.ai.movement.WanderAI} in the
      * {@link entity.livingentity.monster.MonsterClassBuilder}.
      * @return true if the secondary AI should be triggered.
      */
