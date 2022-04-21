@@ -7,7 +7,7 @@ import entity.lifelessentity.item.combat.Weapon;
 import map.Map;
 import settings.Settings;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 import javax.swing.*;

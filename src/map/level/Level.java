@@ -1,20 +1,19 @@
 package map.level;
 
-import org.jetbrains.annotations.Nullable;
-
 import entity.Entity;
 import entity.lifelessentity.Staircase;
-import entity.lifelessentity.Trap;
-import entity.lifelessentity.item.*;
+import entity.lifelessentity.item.Item;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Monster;
 import entity.livingentity.Player;
-import helper.Helper;
+import entity.livingentity.monster.Monster;
+import entity.livingentity.monster.MonsterLoader;
 import main.GameManager;
 import map.level.table.CustomCellRenderer;
 import map.level.table.CustomRoomTable;
 import map.level.table.RoomTableModel;
+import org.jetbrains.annotations.Nullable;
+import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +61,7 @@ public class Level extends JComponent {
     public Level(boolean generateAsTestLevel) {
         setDefaults();
         startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
+
         GameManager.getFrame().requestFocus();
     }
 
@@ -163,6 +163,10 @@ public class Level extends JComponent {
         Point p = GameManager.getPlayer().getLocation();
         addShownPoint(p);
         table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
+
+        if (GameManager.bootTestingEnvironment) {
+            new Monster(MonsterLoader.monsterClasses.get(25), 20, 6);
+        }
     }
     public void blind() {
         // TODO: make the player visible when blinded
@@ -227,8 +231,7 @@ public class Level extends JComponent {
     // ENTITY SPAWNING METHODS
 
     private void spawnEntities() {
-        Monster.updateAvailableMonsters();
-        Monster.spawnMonsters();
+        Monster.spawnMonsters(levelNumber);
         Item.spawnItems();
         if (levelNumber != 26) {
             descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);

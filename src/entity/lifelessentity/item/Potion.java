@@ -1,9 +1,9 @@
 package entity.lifelessentity.item;
 
-import entity.Effect;
-import entity.livingentity.Monster;
+import entity.component.Effect;
+import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import util.gamepanes.MessageBar;

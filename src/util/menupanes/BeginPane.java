@@ -1,6 +1,6 @@
 package util.menupanes;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;

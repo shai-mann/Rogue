@@ -1,8 +1,8 @@
 package util.gamepanes.saving;
 
 import entity.lifelessentity.item.Item;
-import entity.livingentity.Monster;
-import helper.Helper;
+import entity.livingentity.monster.Monster;
+import util.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;

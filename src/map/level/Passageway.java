@@ -1,6 +1,6 @@
 package map.level;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 import java.awt.*;
@@ -131,23 +131,13 @@ public class Passageway implements Serializable {
     private Point getFrontStep(Point door) {
         Point temp;
         for (int i = 0; i < 4; i++) {
-            switch (i) {
-                case 0:
-                    temp = new Point(door.x, door.y - 1);
-                    break;
-                case 1:
-                    temp = new Point(door.x, door.y + 1);
-                    break;
-                case 2:
-                    temp = new Point(door.x + 1, door.y);
-                    break;
-                case 3:
-                    temp = new Point(door.x - 1, door.y);
-                    break;
-                default:
-                    temp = door;
-                    break;
-            }
+            temp = switch (i) {
+                case 0 -> new Point(door.x, door.y - 1);
+                case 1 -> new Point(door.x, door.y + 1);
+                case 2 -> new Point(door.x + 1, door.y);
+                case 3 -> new Point(door.x - 1, door.y);
+                default -> door;
+            };
             if (GameManager.getTable().getValueAt(temp.y, temp.x).equals("")) {
                 return temp;
             }
@@ -165,6 +155,8 @@ public class Passageway implements Serializable {
         }
         return points.get(indexOfClosestPoint);
     }
+
+    // TODO: move to Helper?
     public static double getDistance(Point p, Point p2) {
         return Math.sqrt(Math.pow(p2.getX() - p.getX(), 2) + Math.pow(p2.getY() - p.getY(), 2));
     }

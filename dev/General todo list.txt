@@ -1,0 +1,11 @@
+1) Why does Entity have a health value? Does food have health??
+    1a) General Entity system overhaul? Constructor doesn't take in name - expects to be set later?
+    1b) Entity has public fields - bad practice
+    1c) Entity directions aren't an enum...
+2) Graphic overwriting - perhaps general view layout overhaul
+    2a) have view draw map as first layer then overwrite with entities
+    2b) make entities and rooms/passageways have a shown/hidden value that determines if the map
+        displays them or not.
+3) Effects overhaul?
+    3a) Currently a class called Effect singular, but has list of effects
+    3b) Listeners with MessageBar messages that could act as hooks when effects are applied?

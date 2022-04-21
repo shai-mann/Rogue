@@ -2,9 +2,9 @@ package util.menupanes.loading;
 
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.item.Item;
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;

@@ -1,7 +1,7 @@
 package entity.lifelessentity;
 
 import entity.Entity;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Room;
 import util.gamepanes.MessageBar;

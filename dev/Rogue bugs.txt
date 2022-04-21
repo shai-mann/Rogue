@@ -9,7 +9,7 @@ BUGS:
 - When monsters drop an item somewhere other than where they are, after picking up, it looks like there is a monster there.
 - You can use the scroll of identify on non-hidden objects - the code of the entire hidden and non-hidden items system sucks
 - Wand of Polymorph needs to get its file path fixed
-- Wand of Supress Power may make the monster incapable of attacking
+- Wand of Suppress Power may make the monster incapable of attacking
 - LoadPane doesn't scroll properly (again)
 - After loading a saved game, asks if want to save. Should change savepane to not ask if want to overwrite save
 - After loading saved game, trying to use staircase causes gamebreaking glitch?
@@ -18,6 +18,8 @@ BUGS:
 - Scroll of Teleportation moves you a turn after you read it...
 - Bottom row of current room doesn't render
 - Changing panes resets window's maximized state
+- Mimic movement AI doesn't hide monster properly
+- If the MessagePane is given an empty string as a message, behaves weirdly
 
 
 Features To Implement:
@@ -43,6 +45,7 @@ Features To Implement:
 - Make something that (in game) is able to show you the function of each of the items.
     It would be based on category, so if you tried to see what a scroll did, it would tell you all powers of all scrolls
     That way it wouldn't give away what the type of scroll is.
+- Make Staircase orange color (or generally not item color)
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high

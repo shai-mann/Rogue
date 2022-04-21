@@ -1,7 +1,7 @@
 package entity.lifelessentity.item;
 
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 import java.util.ArrayList;

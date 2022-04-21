@@ -1,11 +1,11 @@
 package entity.lifelessentity.item;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Monster;
+import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
 import util.gamepanes.MessageBar;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
@@ -112,7 +112,7 @@ public class Scroll extends Item {
             case CREATE_MONSTER:
                 Room room = Level.getLevel().getRoom(player);
                 if (room != null) {
-                    Monster.createMonster(room);
+                    Monster.createMonster(room, Level.getLevel().getLevelNumber());
                 } else {
                     MessageBar.addMessage("You hear a faint cry of anguish in the distance");
                 }

@@ -1,6 +1,6 @@
 package entity.lifelessentity.item;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 public class Gold extends Item {

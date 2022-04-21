@@ -1,5 +1,6 @@
-package entity;
+package entity.component;
 
+import entity.Entity;
 import map.level.Level;
 
 import java.io.Serializable;
@@ -16,9 +17,9 @@ public class Status implements Serializable {
     private int poisoned = 0;
     private int strengthened = 0;
     private int blinded = 0;
-    private Effect effects = new Effect();
+    private final Effect effects = new Effect();
 
-    private Entity target;
+    private final Entity target;
 
     public Status(Entity e) {
         target = e;
@@ -83,6 +84,9 @@ public class Status implements Serializable {
     public boolean isBlinded() {
         return blinded > 0;
     }
+    public boolean hasEffect(int effect) {
+        return effects.hasEffect(effect);
+    }
     public Effect getEffects() {
         return effects;
     }
@@ -103,11 +107,7 @@ public class Status implements Serializable {
         this.drunk = drunk;
     }
     public void setAc(int ac) {
-        if (ac >= 3) {
-            this.ac = ac;
-        } else {
-            this.ac = 3;
-        }
+        this.ac = Math.max(ac, 3);
     }
     public void setWeakened(int weakened) {
         this.weakened = weakened;

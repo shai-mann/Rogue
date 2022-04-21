@@ -1,11 +1,12 @@
 package entity;
 
-import entity.livingentity.Monster;
-import helper.Helper;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
+import util.Helper;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.List;
 
 public class Entity implements Serializable {
     private int xPos;
@@ -15,12 +16,13 @@ public class Entity implements Serializable {
 
     public String graphic;
     protected String name = "<Default>";
-    public String overWrittenGraphic = "-";
+    public String overWrittenGraphic;
 
     public static final int UP = 0;
     public static final int DOWN = 1;
     public static final int RIGHT = 2;
     public static final int LEFT = 3;
+    public static final List<Integer> DIRECTIONS = List.of(new Integer[]{ UP, DOWN, LEFT, RIGHT });
 
     public Entity(String g, int x, int y) {
         xPos = x;

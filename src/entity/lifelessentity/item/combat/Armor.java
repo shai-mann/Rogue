@@ -2,7 +2,7 @@ package entity.lifelessentity.item.combat;
 
 import entity.lifelessentity.item.Item;
 import entity.livingentity.Player;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import util.gamepanes.MessageBar;
 

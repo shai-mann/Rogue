@@ -1,8 +1,8 @@
 package entity.lifelessentity.item;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.livingentity.Player;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import util.gamepanes.MessageBar;
 

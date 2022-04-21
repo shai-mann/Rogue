@@ -1,39 +1,40 @@
 package entity.livingentity;
 
-import entity.Effect;
 import entity.Entity;
-import entity.Status;
+import entity.component.Effect;
+import entity.component.Inventory;
+import entity.component.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
 import entity.lifelessentity.item.combat.Arrow;
 import entity.lifelessentity.item.combat.Weapon;
-import settings.Settings;
-import util.inventory.InventoryItem;
+import entity.livingentity.monster.Monster;
+import main.GameManager;
+import map.Map;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
-
-import java.awt.*;
-
+import settings.Settings;
+import util.Helper;
 import util.gamepanes.GravePane;
-import util.inventory.InventoryPane;
 import util.gamepanes.MessageBar;
-import helper.Helper;
-import main.GameManager;
-import map.Map;
+import util.inventory.InventoryItem;
+import util.inventory.InventoryPane;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity implements KeyListener, Serializable {
 
-    private Status status;
+    private final Status status;
     private boolean showInventory = false;
 
     private Armor wornItem;
@@ -41,7 +42,6 @@ public class Player extends Entity implements KeyListener, Serializable {
     private Ring leftRing;
     private Ring rightRing;
 
-    private int gold = 0;
     private int experience = 0;
     private int stepsTakenSinceMeal = 0;
     private int hungerLevel = SATISFIED;
@@ -54,9 +54,9 @@ public class Player extends Entity implements KeyListener, Serializable {
 
     private int maxHealth = Monster.DEFAULT_HEALTH;
     private int level = 1;
-    private int[] levelingThresholds = {0, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
+    private static final int[] levelingThresholds = {0, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
 
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private final Inventory inventory = new Inventory();
 
     public Player(Room room) {
         super("@", 0, 0);
@@ -213,8 +213,8 @@ public class Player extends Entity implements KeyListener, Serializable {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {
             Monster monster = Monster.getMonsters().get(i);
             if (fakeMove(direction).getX() == monster.getXPos() && fakeMove(direction).getY() == monster.getYPos()) {
-                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
-                if (Helper.random.nextDouble() <= hitChance) {
+                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100.0;
+                if (Helper.calculateChance(hitChance)) {
                     Status monsterStatus = monster.getStatus();
                     monsterStatus.lowerHealth(getDamage());
                     Map.getMap().update();
@@ -222,10 +222,7 @@ public class Player extends Entity implements KeyListener, Serializable {
                         MessageBar.addMessage("You hit the " + monster.getName());
                     }
                     if (monster.getStatus().isSleeping()) {
-                        monster.getStatus().setSleeping(false);
-                        if (monster.getHiddenChar() != null) {
-                            GameManager.getTable().setValueAt(monster.getHiddenChar(), monster.getYPos(), monster.getXPos());
-                        }
+                        monster.getStatus().setSleeping(false); // TODO: move to part of monster class
                     }
                 }
             }
@@ -296,7 +293,7 @@ public class Player extends Entity implements KeyListener, Serializable {
             }
 
             overWrittenGraphic = foundGold.overWrittenGraphic;
-            gold += foundGold.getAmount();
+            inventory.addGold(foundGold);
 
             MessageBar.addMessage("You picked up " + foundGold.getAmount() + " gold");
             Item.items.remove(foundGold);
@@ -311,7 +308,7 @@ public class Player extends Entity implements KeyListener, Serializable {
 
             overWrittenGraphic = foundItem.overWrittenGraphic;
 
-            inventory.add(foundItem);
+            inventory.addItems(foundItem);
             if (foundItem instanceof Food) {
                 MessageBar.addMessage("You found some " + foundItem.getName().toLowerCase());
             } else if (foundItem instanceof Armor || foundItem instanceof Arrow) {
@@ -346,13 +343,13 @@ public class Player extends Entity implements KeyListener, Serializable {
         return health;
     }
     public int getGold() {
-        return gold;
+        return inventory.getGold();
     }
     public Status getStatus() {
         return status;
     }
-    public ArrayList<Item> getInventory() {
-        return inventory;
+    public List<Item> getInventory() {
+        return inventory.getItems();
     }
     public int getExperienceDigitsNumber() {
         return String.valueOf(experience).length();
@@ -382,18 +379,13 @@ public class Player extends Entity implements KeyListener, Serializable {
         return levelingThresholds[level];
     }
     public String getHungerLevel() {
-        switch (hungerLevel) {
-            case 0:
-                return "";
-            case 1:
-                return "hungry";
-            case 2:
-                return "starving";
-            case 3:
-                return "weak";
-            default:
-                return "";
-        }
+        return switch (hungerLevel) {
+            case 0 -> "";
+            case 1 -> "hungry";
+            case 2 -> "starving";
+            case 3 -> "weak";
+            default -> "";
+        };
     }
     public Item getHeldItem() {
         return heldItem;
@@ -421,11 +413,11 @@ public class Player extends Entity implements KeyListener, Serializable {
         this.experience += experience;
     }
     public int stealGold(int amount) {
-        if (gold - amount >= 0) {
-            this.gold -= amount;
+        if (inventory.getGold() - amount >= 0) {
+            inventory.addGold(-amount);
         } else {
-            amount = this.gold;
-            this.gold = 0;
+            amount = inventory.getGold();
+            inventory.setGold(0);
         }
         return amount;
     }

@@ -2,7 +2,7 @@ package util.menupanes;
 
 import javafx.util.Pair;
 import main.GameManager;
-import helper.Helper;
+import util.Helper;
 
 import javax.swing.*;
 

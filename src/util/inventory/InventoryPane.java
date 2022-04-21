@@ -2,7 +2,7 @@ package util.inventory;
 
 import entity.lifelessentity.item.Item;
 import entity.lifelessentity.item.combat.Arrow;
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package map.level;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import java.awt.*;
 import java.io.Serializable;

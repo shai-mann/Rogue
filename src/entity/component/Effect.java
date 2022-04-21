@@ -1,4 +1,4 @@
-package entity;
+package entity.component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Effect implements Serializable {
     public static final int AGGRAVATE_MONSTER = 9;
     public static final int SLOW_DIGESTION = 10;
 
-    private ArrayList<Integer> effects = new ArrayList<>();
+    private final ArrayList<Integer> effects = new ArrayList<>();
 
     public Effect() {
 
@@ -30,7 +30,7 @@ public class Effect implements Serializable {
         effects.add(type);
     }
     public void removeEffect(int type) {
-        if (effects != null && effects.contains(type)) {
+        if (effects.contains(type)) {
             effects.remove(Integer.valueOf(type));
         }
     }

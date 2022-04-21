@@ -1,14 +1,13 @@
 package util.gamepanes;
 
-import entity.livingentity.Monster;
-import helper.Helper;
+import entity.livingentity.monster.Monster;
+import util.Helper;
 import main.GameManager;
 import map.level.Level;
 import settings.Settings;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 
 public class StatusBar extends JComponent {
     private JLabel healthField;

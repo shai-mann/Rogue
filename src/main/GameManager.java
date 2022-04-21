@@ -1,15 +1,14 @@
 package main;
 
-import entity.livingentity.Player;
 import entity.lifelessentity.item.Item;
-import entity.livingentity.Monster;
-import util.menupanes.BeginPane;
-import helper.Helper;
-import map.level.table.CustomRoomTable;
+import entity.livingentity.Player;
+import entity.livingentity.monster.MonsterLoader;
 import map.level.Level;
+import map.level.table.CustomRoomTable;
+import util.Helper;
+import util.menupanes.BeginPane;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class GameManager {
 
@@ -49,7 +48,7 @@ public class GameManager {
     // SETUP METHODS
 
     private static void runStaticSetupMethods() {
-        Monster.loadCustomMonsters();
+        MonsterLoader.loadMonsters();
         Item.randomizeHiddenNames();
     }
     private static void initFrame() {
