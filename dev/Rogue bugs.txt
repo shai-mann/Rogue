@@ -45,6 +45,7 @@ Features To Implement:
 - Make something that (in game) is able to show you the function of each of the items.
     It would be based on category, so if you tried to see what a scroll did, it would tell you all powers of all scrolls
     That way it wouldn't give away what the type of scroll is.
+- Make Staircase orange color (or generally not item color)
 
 ALPHA TESTER SUGGESTIONS:
 - kobold attack too high
