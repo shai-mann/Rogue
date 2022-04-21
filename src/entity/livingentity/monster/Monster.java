@@ -1,8 +1,8 @@
 package entity.livingentity.monster;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.Entity;
-import entity.Status;
+import entity.component.Status;
 import entity.lifelessentity.item.Item;
 import entity.livingentity.monster.ai.MovementAI;
 import main.GameManager;
@@ -160,8 +160,7 @@ public class Monster extends Entity {
     // STATIC METHODS
 
     public static void update() {
-        for (int i = 0; i < monsters.size(); i++) {
-            Monster monster = monsters.get(i);
+        for (Monster monster : monsters) {
             monster.runUpdate();
         }
     }

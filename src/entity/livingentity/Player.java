@@ -1,8 +1,8 @@
 package entity.livingentity;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.Entity;
-import entity.Status;
+import entity.component.Status;
 import entity.lifelessentity.Trap;
 import entity.lifelessentity.item.*;
 import entity.lifelessentity.item.combat.Armor;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class Player extends Entity implements KeyListener, Serializable {
 
-    private Status status;
+    private final Status status;
     private boolean showInventory = false;
 
     private Armor wornItem;
@@ -53,9 +53,9 @@ public class Player extends Entity implements KeyListener, Serializable {
 
     private int maxHealth = Monster.DEFAULT_HEALTH;
     private int level = 1;
-    private int[] levelingThresholds = {0, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
+    private static final int[] levelingThresholds = {0, 10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240, 20480};
 
-    private ArrayList<Item> inventory = new ArrayList<>();
+    private final ArrayList<Item> inventory = new ArrayList<>();
 
     public Player(Room room) {
         super("@", 0, 0);
@@ -212,7 +212,7 @@ public class Player extends Entity implements KeyListener, Serializable {
         for (int i = 0; i < Monster.getMonsters().size(); i++) {
             Monster monster = Monster.getMonsters().get(i);
             if (fakeMove(direction).getX() == monster.getXPos() && fakeMove(direction).getY() == monster.getYPos()) {
-                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100;
+                double hitChance = (100 - ((10 - monster.getStatus().getAc()) * 3) + 30) / 100.0;
                 if (Helper.calculateChance(hitChance)) {
                     Status monsterStatus = monster.getStatus();
                     monsterStatus.lowerHealth(getDamage());
@@ -378,18 +378,13 @@ public class Player extends Entity implements KeyListener, Serializable {
         return levelingThresholds[level];
     }
     public String getHungerLevel() {
-        switch (hungerLevel) {
-            case 0:
-                return "";
-            case 1:
-                return "hungry";
-            case 2:
-                return "starving";
-            case 3:
-                return "weak";
-            default:
-                return "";
-        }
+        return switch (hungerLevel) {
+            case 0 -> "";
+            case 1 -> "hungry";
+            case 2 -> "starving";
+            case 3 -> "weak";
+            default -> "";
+        };
     }
     public Item getHeldItem() {
         return heldItem;

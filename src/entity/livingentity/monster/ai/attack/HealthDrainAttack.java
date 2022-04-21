@@ -16,7 +16,7 @@ public class HealthDrainAttack extends AbstractAttackAI {
 
     @Override
     protected Outcome performAttack(Outcome outcome) {
-        player.addExperience((int) -(player.getExperience() * 0.9));
+        player.drainMaxHealth((int) -(player.getMaxHealth() * 0.9));
 
         return outcome;
     }

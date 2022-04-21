@@ -1,5 +1,6 @@
-package entity;
+package entity.component;
 
+import entity.Entity;
 import map.level.Level;
 
 import java.io.Serializable;
@@ -106,11 +107,7 @@ public class Status implements Serializable {
         this.drunk = drunk;
     }
     public void setAc(int ac) {
-        if (ac >= 3) {
-            this.ac = ac;
-        } else {
-            this.ac = 3;
-        }
+        this.ac = Math.max(ac, 3);
     }
     public void setWeakened(int weakened) {
         this.weakened = weakened;

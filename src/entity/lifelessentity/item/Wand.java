@@ -1,6 +1,6 @@
 package entity.lifelessentity.item;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.livingentity.monster.Monster;
 import entity.livingentity.monster.MonsterLoader;
 import main.GameManager;

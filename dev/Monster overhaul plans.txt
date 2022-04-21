@@ -20,11 +20,11 @@ Monster (static class) has:
 
 Potential improvements:
 
-	1) Break AI into separate classes
-	2) Break monster loading into separate class
-	3) Have list of monster types that get validated by level and spawned in
+	1) Break AI into separate classes - DONE
+	2) Break monster loading into separate class - DONE
+	3) Have list of monster types that get validated by level and spawned in - DONE, unconfirmed
 	4) Move list of currently spawned monsters into Level or Map?
-	5) Convert attribute formatting to be camel case?
+	5) Convert attribute formatting to be camel case? - DONE
 	6) Convert player hitting method to send most of monster-related logic into a monster damage() function
 	7) Give Monsters an Inventory (items, gold) that each have drop chances that can be included in the Loot Table
 

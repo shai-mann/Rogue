@@ -1,6 +1,6 @@
 package entity.livingentity.monster.ai.attack;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.livingentity.monster.Monster;
 import entity.livingentity.monster.ai.AbstractAttackAI;
 import util.Helper;

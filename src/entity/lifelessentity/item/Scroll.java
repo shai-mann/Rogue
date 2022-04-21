@@ -1,6 +1,6 @@
 package entity.lifelessentity.item;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.lifelessentity.item.combat.Weapon;
 import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;

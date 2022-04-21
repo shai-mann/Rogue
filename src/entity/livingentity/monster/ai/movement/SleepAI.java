@@ -1,6 +1,6 @@
 package entity.livingentity.monster.ai.movement;
 
-import entity.Effect;
+import entity.component.Effect;
 import entity.livingentity.monster.Monster;
 import entity.livingentity.monster.ai.AbstractMovementAI;
 import main.GameManager;
