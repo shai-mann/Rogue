@@ -8,12 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Rogue bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Rogue bugs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractMovementAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/AbstractMovementAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/MovementAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/MovementAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/MimicAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/MimicAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/SleepAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/SleepAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/TrackAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/TrackAI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -434,6 +429,7 @@
       <workItem from="1650037158262" duration="733000" />
       <workItem from="1650038281285" duration="3528000" />
       <workItem from="1650408226164" duration="3093000" />
+      <workItem from="1650560109989" duration="390000" />
     </task>
     <servers />
   </component>
@@ -515,6 +511,11 @@
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java</url>
           <line>35</line>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/livingentity/monster/ai/movement/TrackAI.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

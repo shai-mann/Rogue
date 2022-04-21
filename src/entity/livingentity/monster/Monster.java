@@ -92,11 +92,11 @@ public class Monster extends Entity {
 
     @Override
     public boolean move(int direction) {
-        super.move(direction);
+        boolean out = super.move(direction);
         if (monsterAttr.isInvisible() && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         } // TODO: bad pattern
-        return true; // TODO: return actual value?
+        return out; // TODO: return actual value?
     }
 
     // HELPERS
