@@ -25,17 +25,17 @@ public class TrackAI extends AbstractMovementAI {
         }
 
         int direction = self.getYPos() > player.getYPos() ? UP : DOWN;
-        out &= self.move(direction);
+        out |= self.move(direction);
 
         direction = self.getXPos() < player.getXPos() ? RIGHT : LEFT;
-        out &= self.move(direction);
+        out |= self.move(direction);
 
         return out;
     }
 
     @Override
     public boolean shouldTriggerSecondaryAI() {
-        return Helper.isInRange(self, GameManager.getPlayer(), self.attributes().range());
+        return !Helper.isInRange(self, GameManager.getPlayer(), self.attributes().range());
     }
 
 }
