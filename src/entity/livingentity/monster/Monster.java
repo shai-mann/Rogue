@@ -52,13 +52,14 @@ public class Monster extends Entity {
     private void move() {
         if (stuck()) return;
 
-        loopMovement(monsterAttr.movementAI());
-        boolean shouldAttack = !monsterAttr.movementAI().blockAttackAITrigger();
+        boolean shouldAttack = !loopMovement(monsterAttr.movementAI())
+                && !monsterAttr.movementAI().blockAttackAITrigger();
 
         if (monsterAttr.movementAI().shouldTriggerSecondaryAI()) {
             loopMovement(monsterAttr.secondaryMovementAI());
             shouldAttack = shouldAttack && !monsterAttr.secondaryMovementAI().blockAttackAITrigger();
         }
+
         if (shouldAttack && !attackBlocked()) {
             monsterAttr.attackAI().attack();
         }
@@ -66,10 +67,13 @@ public class Monster extends Entity {
 
     /* MOVEMENT HELPERS */
 
-    private void loopMovement(MovementAI ai) {
+    private boolean loopMovement(MovementAI ai) {
+        boolean hasMoved = false;
         for (int i = 0; i < monsterAttr.speed(); i++) {
-            ai.move();
+            hasMoved = ai.move() || hasMoved;
         }
+
+        return hasMoved;
     }
 
     /**
@@ -92,7 +96,7 @@ public class Monster extends Entity {
         if (monsterAttr.isInvisible() && !GameManager.getPlayer().getStatus().getEffects().hasEffect(Effect.SEE_INVISIBLE)) {
             GameManager.add(overWrittenGraphic, getXPos(), getYPos());
         } // TODO: bad pattern
-        return true;
+        return true; // TODO: return actual value?
     }
 
     // HELPERS

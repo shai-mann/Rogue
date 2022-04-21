@@ -15,7 +15,7 @@ public class TrackAI extends AbstractMovementAI {
     }
 
     @Override
-    public void move() {
+    public boolean move() {
         super.move();
 
         Player player = GameManager.getPlayer();

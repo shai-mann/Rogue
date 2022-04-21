@@ -23,11 +23,13 @@ public abstract class AbstractMovementAI implements MovementAI {
     }
 
     @Override
-    public void move() {
+    public boolean move() {
         Objects.requireNonNull(self);
 
         shouldTriggerSecondaryMovementAI = false;
         shouldBlockAttackAI = false;
+
+        return false;
     }
 
     @Override

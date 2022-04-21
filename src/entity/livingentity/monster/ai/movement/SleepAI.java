@@ -15,11 +15,13 @@ public class SleepAI extends AbstractMovementAI {
     }
 
     @Override
-    public void move() {
-        super.move();
+    public boolean move() {
+        boolean out = super.move();
 
         if (!self.getStatus().isSleeping() || GameManager.getPlayer().getStatus().hasEffect(Effect.AGGRAVATE_MONSTER)) {
-            shouldTriggerSecondaryMovementAI = true;
+            shouldTriggerSecondaryMovementAI = true; // TODO: make sure when switching to secondary movement, a successful move won't let an attack trigger
         }
+
+        return out;
     }
 }

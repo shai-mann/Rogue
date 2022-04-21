@@ -25,7 +25,11 @@ import java.util.Optional;
  */
 public interface MovementAI {
 
-    void move();
+    /**
+     * Attempts to make a move. Returns true if the movement was successful, false otherwise.
+     * @return true if the move occurred, false otherwise.
+     */
+    boolean move();
 
     /**
      * Used by {@link Monster} to determine if the secondary AI should be triggered.
