@@ -27,7 +27,7 @@ public class StealGoldAttack extends AbstractAttackAI {
 
         if (gold <= 0) return Outcome.BLOCKED;
 
-        self.stolenGold += player.stealGold(Helper.getRandom(gold / 4, 50 + (gold / 4)));
+        self.inventory.addGold(player.stealGold(Helper.getRandom(gold / 4, 50 + (gold / 4))));
         self.attributes().setMovementAI("wander", self);
 
         return outcome;

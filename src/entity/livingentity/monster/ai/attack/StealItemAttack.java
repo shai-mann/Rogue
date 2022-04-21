@@ -28,12 +28,13 @@ public class StealItemAttack extends AbstractAttackAI {
     protected Outcome performAttack(Outcome outcome) {
         List<Item> items = GameManager.getPlayer().getInventory();
 
-        if (self.stolenItem != null || items.isEmpty()) {
+        if (self.inventory.hasItems() || items.isEmpty()) {
             return Outcome.FAIL;
         }
 
-        self.stolenItem = Helper.getRandom(items);
-        items.remove(self.stolenItem);
+        Item item = Helper.getRandom(items);
+        self.inventory.addItems(item);
+        items.remove(item);
 
         self.attributes().setMovementAI("wander", self);
         self.attributes().setAttackAI("hit", self);

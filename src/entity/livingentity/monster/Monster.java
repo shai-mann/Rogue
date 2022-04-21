@@ -1,7 +1,8 @@
 package entity.livingentity.monster;
 
-import entity.component.Effect;
 import entity.Entity;
+import entity.component.Effect;
+import entity.component.Inventory;
 import entity.component.Status;
 import entity.lifelessentity.item.Item;
 import entity.livingentity.monster.ai.MovementAI;
@@ -23,9 +24,7 @@ public class Monster extends Entity {
 
     private MonsterAttributes monsterAttr;
     private final Status status;
-
-    public Item stolenItem = null;
-    public int stolenGold = 0;
+    public final Inventory inventory = new Inventory();
 
     public Monster(MonsterClass monsterClass, int x, int y) {
         super(monsterClass.graphic(), x, y);
@@ -104,10 +103,10 @@ public class Monster extends Entity {
         if (Item.getItemAt(getXPos(), getYPos()) != null && Level.getLevel().getRoom(this) != null) {
             setLocation(Level.getLevel().getRoom(this).getRandomPointInBounds());
         }
-        if (Helper.random.nextInt(99) + 1 < monsterAttr.treasureChance() || stolenItem != null) {
-            Item.spawnItem(getXPos(), getYPos(), null, stolenItem);
-        } else if (stolenGold > 0) {
-            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null);
+        if (Helper.random.nextInt(99) + 1 < monsterAttr.treasureChance() || inventory.hasItems()) {
+            Item.spawnItem(getXPos(), getYPos(), null, inventory.getItems().get(0));
+        } else if (inventory.getGold() > 0) {
+            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null); // TODO: not right amount of gold??
         } else if (Helper.random.nextInt(2) == 1){
             Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.FOOD, null);
             MessageBar.addMessage("The " + name + " drops some food");
