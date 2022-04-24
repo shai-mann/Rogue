@@ -10,7 +10,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryPane {
     private static JPanel savedPanel;
@@ -41,7 +41,7 @@ public class InventoryPane {
         panel.repaint();
     }
     private void addInventory() {
-        ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
+        List<Item> playerInventory = GameManager.getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
             InventoryItem iv = InventoryItem.checkDuplicity(playerInventory.get(i));
             if (iv != null) {

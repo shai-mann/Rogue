@@ -1,0 +1,9 @@
+Planned final rendering process:
+    1) Render shown rooms + passageways
+    2) Render shown entities
+    3) Render animations
+
+Steps of adjustment:
+    1)
+
+Ultimate goal: REMOVE REFERENCES TO "OVERWRITTEN CHARACTERS"

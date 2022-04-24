@@ -152,7 +152,7 @@ public class Player extends Entity implements KeyListener, Serializable {
 
     private Object search() {
         for (Door door : Door.getDoors()) {
-            if (door.isSecret() && isNextTo(door)) {
+            if (door.isSecret() && isNextTo(door.getLocation())) {
                 int chance = Helper.random.nextInt(99) + 1;
                 if (getStatus().getEffects().hasEffect(Effect.SEARCHING) && chance <= 90) {
                     return door;

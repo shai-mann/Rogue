@@ -1,20 +1,25 @@
 package map.level;
 
-import util.gamepanes.MessageBar;
 import main.GameManager;
+import map.level.table.CustomRoomTable;
+import rendering.DoorRenderer;
+import rendering.Renderable;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Door extends Point {
+public class Door implements Renderable {
 
-    private boolean secret = false;
+    private static final ArrayList<Door> doors = new ArrayList<>(); // TODO: remove
 
-    private static ArrayList<Door> doors = new ArrayList<>();
+    private final DoorRenderer renderer;
+    private final Point location;
 
-    public Door(Point p, boolean secret, String overWrittenGraphic) {
-        super(p);
-        this.secret = secret;
+    public Door(Point p, boolean shown, String overWrittenGraphic) {
+        location = p;
+        renderer = new DoorRenderer(location, shown);
         doors.add(this);
         if (isSecret()) {
             GameManager.getTable().setValueAt(overWrittenGraphic, p.y, p.x);
@@ -24,12 +29,32 @@ public class Door extends Point {
     // GETTER METHODS
 
     public boolean isSecret() {
-        return secret;
+        return !renderer.isShown();
     }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    @Override
+    public void render(CustomRoomTable table) {
+
+    }
+
+    @Override
+    public void addShownPoints(List<Point> points) {
+        renderer.addShownPoints(points);
+    }
+
+    @Override
+    public List<Point> getShownPoints() {
+        return Collections.singletonList(location);
+    }
+
     public void reveal() {
-        secret = false;
-        GameManager.getTable().setValueAt("+", y, x);
+        renderer.reveal();
     }
+
     public static ArrayList<Door> getDoors() {
         return doors;
     }

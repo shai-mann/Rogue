@@ -22,7 +22,7 @@ public class GameManager {
 
         1) Level generation is only a single room.
      */
-    public static boolean bootTestingEnvironment = true;
+    public static boolean bootTestingEnvironment = false;
 
     public static void main(String[] args) {
         initFrame();

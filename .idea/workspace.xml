@@ -7,12 +7,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/entity/component/Inventory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/Rendering overhaul plans.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rendering/DoorRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rendering/PassagewayRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rendering/Renderable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/rendering/RoomRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/component/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/component/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealGoldAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealGoldAttack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealItemAttack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/ai/attack/StealItemAttack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/table/CustomRoomTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/CustomRoomTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -514,6 +535,31 @@
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java</url>
           <line>35</line>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
+          <line>159</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/Entity.java</url>
+          <line>131</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/util/menupanes/BeginPane.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/livingentity/Player.java</url>
+          <line>430</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/entity/livingentity/Player.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="94" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

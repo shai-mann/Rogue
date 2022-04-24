@@ -187,7 +187,7 @@ public class Monster extends Entity {
         ArrayList<Monster> loadedMonsters = new ArrayList<>();
         for (Monster m : monsters) {
             if (Level.getLevel().getShownPoints().contains(m.getLocation())) {
-                loadedMonsters.add(m);
+                loadedMonsters.add(m); // todo: adjust to new rendering/loading system
             }
         }
         return loadedMonsters;

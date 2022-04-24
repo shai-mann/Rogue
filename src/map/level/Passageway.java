@@ -1,21 +1,50 @@
 package map.level;
 
+import map.level.table.CustomRoomTable;
+import rendering.PassagewayRenderer;
+import rendering.Renderable;
 import util.Helper;
 import main.GameManager;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Passageway implements Serializable {
+public class Passageway implements Serializable, Renderable {
 
     // CONSTRUCTORS
 
+    private final PassagewayRenderer renderer;
+    private final List<Point> points = new ArrayList<>();
+
     public Passageway(Room roomTo, Room roomFrom) {
         createPassageway(roomFrom, roomTo);
+
+        renderer = new PassagewayRenderer(points);
     }
-    public Passageway(Room room) {
-        // this passageway will just wander off randomly for a ways. It will be based on where the
+
+    public void addShownPoints(List<Point> points) {
+        renderer.addShownPoints(points);
+    }
+
+    @Override
+    public List<Point> getShownPoints() {
+        return renderer.getShownPoints();
+    }
+
+    @Override
+    public void reveal() {
+        renderer.reveal();
+    }
+
+    @Override
+    public void render(CustomRoomTable table) {
+        renderer.render(table);
+    }
+
+    public boolean contains(Point p) {
+        return points.contains(p); // TODO: test this works?
     }
 
     // PASSAGEWAY GENERATION METHODS
@@ -35,9 +64,7 @@ public class Passageway implements Serializable {
         equalize(doorFrom, doorTo);
     }
     private void drawHallwayMark(Point p) {
-        if (GameManager.getTable().getValueAt(p.y, p.x).equals("")) {
-            GameManager.getTable().setValueAt("#", p.y, p.x);
-        }
+        points.add(p);
     }
 
     // EQUALIZE METHODS
@@ -113,7 +140,7 @@ public class Passageway implements Serializable {
         while (!isWall(markerPoint)) {
             markerPoint = getClosestPoint(getConnectedPoints(markerPoint), centerTo);
         }
-        room.doors.add(new Door(markerPoint, getIsSecret(), (String) GameManager.getTable().getValueAt(markerPoint.y, markerPoint.x)));
+        room.doors.add(new Door(markerPoint, isShown(), (String) GameManager.getTable().getValueAt(markerPoint.y, markerPoint.x)));
         if (!room.doors.get(room.doors.size() - 1).isSecret()) {
             GameManager.getTable().setValueAt("+", markerPoint.y, markerPoint.x);
         }
@@ -169,14 +196,9 @@ public class Passageway implements Serializable {
 
         return points;
     }
-    private boolean getIsSecret() {
-        int randomInt = Helper.random.nextInt(99) + 1;
-        int percentChance;
-        if ((3 * Level.getLevel().getLevelNumber()) > 35) {
-            percentChance = 50;
-        } else {
-            percentChance = 3 * Level.getLevel().getLevelNumber();
-        }
-        return randomInt <= percentChance;
+    private boolean isShown() {
+        int percentChance = Level.getLevel().getLevelNumber() > 11 ? 50 : 3 * Level.getLevel().getLevelNumber();
+
+        return !Helper.calculateChance(percentChance / 100.0);
     }
 }

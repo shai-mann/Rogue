@@ -4,6 +4,7 @@ import entity.Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +26,7 @@ public class Helper {
         component.setPreferredSize(size);
         component.setMaximumSize(size);
         component.setMinimumSize(size);
+        component.setSize(size);
     }
 
     public static Color changeOpacity(Color color, int opacity) {
@@ -76,5 +78,21 @@ public class Helper {
 
     public static boolean isNextTo(Entity e1, Entity e2) {
         return isInRange(e1, e2, 1);
+    }
+
+    /* RENDERING HELPER METHODS */
+
+    public static List<Point> getAdjacentPoints(Point p, boolean includeGiven) {
+        List<Point> points = new ArrayList<>(List.of(new Point[]{
+                new Point(p.x, p.y + 1),
+                new Point(p.x, p.y - 1),
+                new Point(p.x + 1, p.y),
+                new Point(p.x - 1, p.y)}));
+
+        if (includeGiven) {
+            points.add(p);
+        }
+
+        return points;
     }
 }

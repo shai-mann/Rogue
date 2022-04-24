@@ -170,9 +170,7 @@ public class SavePane {
                 Level.getLevel().getStaircase(),
                 Level.getLevel().getDirection(),
                 Level.getLevel().getLevelNumber(),
-                Level.getLevel().getStartingRoom(),
-                Level.getLevel().getShownPoints(),
-                Level.getLevel().getBlindnessPoints()
+                Level.getLevel().getStartingRoom()
         );
 
         Map.getMap().setSaved(true);

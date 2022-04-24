@@ -1,7 +1,6 @@
 package entity.component;
 
 import entity.Entity;
-import map.level.Level;
 
 import java.io.Serializable;
 
@@ -46,8 +45,6 @@ public class Status implements Serializable {
         }
         if (isBlinded()) {
             blinded--;
-        } else {
-            Level.getLevel().unblind();
         }
     }
     public int getHealth() {

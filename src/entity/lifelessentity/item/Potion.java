@@ -1,11 +1,10 @@
 package entity.lifelessentity.item;
 
 import entity.component.Effect;
-import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import util.Helper;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
-import map.level.Level;
+import util.Helper;
 import util.gamepanes.MessageBar;
 
 import java.util.ArrayList;
@@ -122,7 +121,6 @@ public class Potion extends Item {
                 break;
             case BLINDNESS:
                 GameManager.getPlayer().getStatus().setBlinded(Helper.random.nextInt(1) + 10);
-                Level.getLevel().blind();
                 MessageBar.addMessage("You feel your eyesight magically deteriorate");
                 break;
         }

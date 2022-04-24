@@ -125,11 +125,9 @@ public class LoadGame {
         int direction = (int) os.readObject();
         int levelNumber = (int) os.readObject();
         Room startingRoom = (Room) os.readObject();
-        ArrayList<Point> shownPoints = (ArrayList<Point>) os.readObject();
-        ArrayList<Point> blindnessPoints = (ArrayList<Point>) os.readObject();
 
         new Level(
-                hiddenTable, shownTable, staircase, direction, levelNumber, startingRoom, shownPoints, blindnessPoints
+                hiddenTable, shownTable, staircase, direction, levelNumber, startingRoom
         );
     }
     private void loadMonsters() throws IOException, ClassNotFoundException {

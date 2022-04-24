@@ -51,7 +51,7 @@ public class Map implements Serializable {
         GameManager.getPlayer().update();
         statusBar.updateStatusBar(); // must go after player update
         animationManager.update();
-        level.update();
+        level.render();
     }
 
     // GETTER/HELPER METHODS
@@ -88,7 +88,7 @@ public class Map implements Serializable {
         GameManager.getFrame().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                char s = '\u0013';
+                char s = '\u0013'; // TODO: ????????? change to encoded constant for god's sake
                 if (e.isControlDown() && e.getKeyChar() == s) {
                     new SavePane();
                     GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);

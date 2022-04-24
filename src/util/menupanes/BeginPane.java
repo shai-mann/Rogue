@@ -1,15 +1,13 @@
 package util.menupanes;
 
-import util.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
+import util.Helper;
 import util.ImagePanel;
 import util.menupanes.loading.LoadPane;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BeginPane extends JComponent {
 
@@ -40,27 +38,14 @@ public class BeginPane extends JComponent {
         addActionListeners();
     }
     private void addActionListeners() {
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Map();
-                GameManager.createPlayer();
-                Level.getLevel().finalSetup();
-                GameManager.getFrame().requestFocus();
-            }
+        newGameButton.addActionListener(e -> {
+            new Map();
+            GameManager.createPlayer();
+            Level.getLevel().finalSetup();
+            GameManager.getFrame().requestFocus();
         });
-        loadGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new LoadPane(panel);
-            }
-        });
-        settingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new SettingsPane(panel);
-            }
-        });
+        loadGameButton.addActionListener(e -> new LoadPane(panel));
+        settingsButton.addActionListener(e -> new SettingsPane(panel));
     }
 
     private void createUIComponents() {

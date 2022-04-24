@@ -2,15 +2,14 @@ package entity.lifelessentity.item;
 
 import entity.component.Effect;
 import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import util.gamepanes.MessageBar;
-import util.Helper;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.level.Level;
 import map.level.Room;
+import util.Helper;
+import util.gamepanes.MessageBar;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -93,7 +92,7 @@ public class Scroll extends Item {
             case MAGIC_MAPPING:
                 for (int i = 0; i < GameManager.getTable().getRowCount(); i++) {
                     for (int j = 0; j < GameManager.getTable().getColumnCount(); j++) {
-                        Level.getLevel().addShownPoint(new Point(j, i));
+//                        Level.getLevel().addShownPoint(new Point(j, i)); // TODO: adjust to new rendering
                     }
                 }
                 break;
