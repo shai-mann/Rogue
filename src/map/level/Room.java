@@ -1,20 +1,21 @@
 package map.level;
 
-import map.level.table.CustomRoomTable;
-import rendering.Renderable;
+import map.level.table.GameTable;
+import rendering.AbstractRenderedModel;
+import rendering.Renderer;
 import rendering.RoomRenderer;
 import util.Helper;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Room implements Serializable, Renderable {
+public class Room extends AbstractRenderedModel implements Serializable, Renderer {
 
     public static ArrayList<Room> rooms = new ArrayList<>(); // TODO: remove
-    public ArrayList<Door> doors = new ArrayList<>();
-    public ArrayList<Passageway> passageways = new ArrayList<>();
+    private final ArrayList<Door> doors = new ArrayList<>();
 
     private final RoomRenderer renderer;
     private final RoomAttributes attributes;
@@ -26,57 +27,48 @@ public class Room implements Serializable, Renderable {
         renderer = new RoomRenderer(attributes);
     }
 
-    @Override
-    public void addShownPoints(List<Point> points) {
-        renderer.addShownPoints(points);
+    public Point createDoor(Point destination) {
+        List<Point> wallPoints = attributes.getPoints().stream().filter(
+                (p) -> p.x == getTopLeft().x ^ p.y == getTopLeft().y ^
+                        p.x == getTopLeft().x + getSize().width ^ p.y == getTopLeft().y + getSize().height
+        ).filter(GameTable::isNotAgainstEdge).toList();
+
+        // filter out all but X closest points
+        wallPoints = wallPoints.stream().sorted(
+                Comparator.comparingDouble(p -> p.distance(destination))
+        ).limit(10).toList();
+
+        Point doorLocation = Helper.getRandom(wallPoints);
+        int hiddenDoorChance = Level.getLevel().getLevelNumber() > 11 ? 50 : 3 * Level.getLevel().getLevelNumber();
+
+        doors.add(new Door(doorLocation, !Helper.calculateChance(hiddenDoorChance / 100.0)));
+
+        return doorLocation;
     }
 
     @Override
-    public List<Point> getShownPoints() {
-        return renderer.getShownPoints();
+    protected Renderer renderer() {
+        return renderer;
     }
 
     @Override
-    public void reveal() {
-        renderer.reveal();
-    }
+    public void render(GameTable table) {
+        super.render(table);
 
-    @Override
-    public void render(CustomRoomTable table) {
-        renderer.render(table);
-    }
+        if (!renderer.shown()) return;
 
-    // ROOM GENERATION METHODS
-    public static boolean checkValidSpace(int x, int y, Dimension size) {
-        int[] xPoints = {x - 2, x + size.width + 2, x + size.width + 2, x - 2};
-        int[] yPoints = {y - 2, y - 2, y + size.height + 2, y + size.height + 2};
-
-        Polygon tempBounds = new Polygon(xPoints, yPoints, 4);
-        for (Room room : rooms ) {
-            RoomAttributes attr = room.attributes;
-            
-            int[] xPoints1 = { attr.x(), attr.x() + attr.width(), attr.x() + attr.width(), attr.x() };
-            int[] yPoints1 = { attr.y(), attr.y(), attr.y() + attr.height(), attr.y() + attr.height() };
-
-            Polygon temp = new Polygon(xPoints1, yPoints1, 4);
-
-            if (temp.intersects(tempBounds.getBounds())) {
-                return false;
-            }
+        for (Door d : doors) {
+            d.render(table);
         }
-        if (tempBounds.getBounds().getMaxX() > Level.getLevel().getHiddenTable().getColumnCount() - 2 ||
-                tempBounds.getBounds().getMinX() < 0 ||
-                tempBounds.getBounds().getMaxY() > Level.getLevel().getHiddenTable().getRowCount() - 2 ||
-                tempBounds.getBounds().getMinY() < 0) {
-            return false;
-        }
-        return true;
     }
 
     // GETTER METHODS
 
     public Point getTopLeft() {
         return attributes.topLeft();
+    }
+    public Point getCenter() {
+        return Helper.translate(getTopLeft(), new Point(getSize().width / 2, getSize().height / 2));
     }
     public Dimension getSize() {
         return attributes.size();
@@ -87,12 +79,5 @@ public class Room implements Serializable, Renderable {
     public Point getRandomPointInBounds() {
         return Helper.getRandom(attributes.getPoints());
         // todo: prevent from overlapping with other entities when spawning
-
-//        Point p;
-//        do {
-//            p = Helper.getRandom(attributes.getPoints());
-//        } while (!GameManager.getTable().getValueAt(p.y, p.x).equals("-"));
-//
-//        return p;
     }
 }
