@@ -80,6 +80,10 @@ public class Helper {
         return isInRange(e1, e2, 1);
     }
 
+    public static boolean isNextTo(Point p1, Point p2) {
+        return getAdjacentPoints(p1, true).contains(p2);
+    }
+
     /* RENDERING HELPER METHODS */
 
     public static List<Point> getAdjacentPoints(Point p, boolean includeGiven) {
@@ -94,5 +98,22 @@ public class Helper {
         }
 
         return points;
+    }
+
+    /* GENERAL MATH HELPER METHODS */
+
+    /**
+     * Determines if the given value is in the range given (inclusive)
+     */
+    public static boolean isInRange(int value, int min, int max) {
+        return value >= min && value <= max;
+    }
+
+    public static Point translate(Point p, Point dp) {
+        return new Point(p.x + dp.x, p.y + dp.y);
+    }
+
+    public static Dimension translate(Dimension dim1, Dimension dim2) {
+        return new Dimension(dim1.width + dim2.width, dim1.height + dim2.height);
     }
 }
