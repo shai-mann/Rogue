@@ -20,6 +20,7 @@ BUGS:
 - Changing panes resets window's maximized state
 - Mimic movement AI doesn't hide monster properly
 - If the MessagePane is given an empty string as a message, behaves weirdly
+- Rooms can generate outside of bounds of table (barely, 69 <= 69)
 
 
 Features To Implement:
