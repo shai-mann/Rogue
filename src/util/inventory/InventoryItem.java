@@ -44,9 +44,11 @@ public class InventoryItem extends JComponent {
         }
         defaultText = label.getText();
     }
+
     public JPanel getPanel() {
         return panel;
     }
+
     public void setButtonsVisible(boolean visible) {
         useButton.setVisible(visible);
         dropButton.setVisible(visible);
@@ -54,12 +56,15 @@ public class InventoryItem extends JComponent {
             throwButton.setVisible(visible);
         }
     }
+
     public static ArrayList<InventoryItem> getInventoryItems() {
         return inventoryItems;
     }
+
     public Item getItem() {
         return item;
     }
+
     private void setDefaults() {
         panel.setBorder(new TitledBorder(""));
 
@@ -87,6 +92,7 @@ public class InventoryItem extends JComponent {
 
         addActionListeners();
     }
+
     private void addActionListeners() {
         useButton.addActionListener(new ActionListener() {
             @Override
@@ -131,6 +137,7 @@ public class InventoryItem extends JComponent {
             }
         });
     }
+
     private void setNames() {
         if (item instanceof Armor || item instanceof Ring) {
             if (item instanceof Armor && ((Armor) item).isBeingWorn()) {
@@ -155,10 +162,12 @@ public class InventoryItem extends JComponent {
             }
         }
     }
+
     public void addDuplicity() {
         duplicity++;
         label.setText(defaultText + " (x" + duplicity + ")");
     }
+
     public void addArrowDuplicity(int arrows) {
         duplicity = ((Arrow) getItem()).getAmount() + arrows;
         label.setText(defaultText.substring(0, 2) + " " + duplicity + " arrows");
@@ -175,4 +184,5 @@ public class InventoryItem extends JComponent {
         }
         return null;
     }
+
 }

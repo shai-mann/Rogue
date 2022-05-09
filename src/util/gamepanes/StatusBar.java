@@ -22,6 +22,7 @@ public class StatusBar extends JComponent {
     public StatusBar() {
         setDefaults();
     }
+
     public void setDefaults() {
         panel.setForeground(Helper.BACKGROUND_COLOR);
         panel.setBackground(Helper.BACKGROUND_COLOR);
@@ -48,6 +49,7 @@ public class StatusBar extends JComponent {
         acLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
         floorLabel.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
     }
+
     public void updateStatusBar() {
         healthField.setText("Health: " + GameManager.getPlayer().getHealth() +
                 "(" + GameManager.getPlayer().getMaxHealth() + ")");
@@ -60,4 +62,5 @@ public class StatusBar extends JComponent {
         panel.revalidate();
         panel.repaint();
     }
+
 }

@@ -1,14 +1,14 @@
 package map;
 
 import entity.livingentity.monster.Monster;
-import util.animation.Animation;
-import util.gamepanes.MessageBar;
-import util.gamepanes.saving.SavePane;
-import util.gamepanes.StatusBar;
-import util.Helper;
 import main.GameManager;
 import map.level.Level;
+import util.Helper;
+import util.animation.Animation;
 import util.animation.AnimationManager;
+import util.gamepanes.MessageBar;
+import util.gamepanes.StatusBar;
+import util.gamepanes.saving.SavePane;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -59,14 +59,16 @@ public class Map implements Serializable {
     public static Map getMap() {
         return map;
     }
+
     private void createUIComponents() {
         if (Level.getLevel() == null) {
-            level = GameManager.bootTestingEnvironment ? new Level(true) : new Level();
+            level = new Level();
         } else {
             level = Level.getLevel();
         }
         statusBar = new StatusBar();
     }
+
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
@@ -94,10 +96,12 @@ public class Map implements Serializable {
                     GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
+
             @Override
             public void keyPressed(KeyEvent e) {
 
             }
+
             @Override
             public void keyReleased(KeyEvent e) {
 
@@ -105,16 +109,21 @@ public class Map implements Serializable {
         });
         animationManager = new AnimationManager();
     }
+
     public MessageBar getMessageBar() {
         return messageBar;
     }
+
     public StatusBar getStatusBar() {
         return statusBar;
     }
+
     public AnimationManager getAnimationManager() {
         return animationManager;
     }
+
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
+
 }

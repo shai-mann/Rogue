@@ -2,16 +2,17 @@ package util.gamepanes.saving;
 
 import entity.lifelessentity.item.Item;
 import entity.livingentity.monster.Monster;
-import util.Helper;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
 import map.level.Room;
+import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 
 public class SavePane {
@@ -39,6 +40,7 @@ public class SavePane {
         f.validate();
         f.repaint();
     }
+
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.FOREGROUND_COLOR);
@@ -61,6 +63,7 @@ public class SavePane {
 
         addListeners();
     }
+
     private void addListeners() {
         saveButton.addActionListener(new ActionListener() {
             @Override
@@ -91,6 +94,7 @@ public class SavePane {
                     nameField.setText("");
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 if (nameField.getText().equals("")) {
@@ -103,10 +107,12 @@ public class SavePane {
             public void keyTyped(KeyEvent e) {
 
             }
+
             @Override
             public void keyPressed(KeyEvent e) {
 
             }
+
             @Override
             public void keyReleased(KeyEvent e) {
                 boolean duplicate = false;
@@ -130,15 +136,15 @@ public class SavePane {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /*
-                * This function saves:
-                *   Monsters
-                *   Player
-                *   Items
-                *   Hidden and revealed tables
-                *   Messages
-                *   Staircase
-                *   Level data
-                *   Animations
+                 * This function saves:
+                 *   Monsters
+                 *   Player
+                 *   Items
+                 *   Hidden and revealed tables
+                 *   Messages
+                 *   Staircase
+                 *   Level data
+                 *   Animations
                  */
                 try {
                     File f = new File(Save.getCorrectPath() + nameField.getText());
@@ -158,8 +164,7 @@ public class SavePane {
     private void writeSave(String dirPath) {
         new Save(dirPath + "/monsters", Monster.getMonsters());
         new Save(dirPath + "/items", Item.items);
-        new Save(dirPath + "/hidden_table", Level.getLevel().getHiddenTable());
-        new Save(dirPath + "/shown_table", Level.getLevel().getShownTable());
+        new Save(dirPath + "/table", Level.getLevel().getTable());
         new Save(dirPath + "/player", GameManager.getPlayer());
         new Save(dirPath + "/messages", (Object[]) Map.getMap().getMessageBar().getMessages());
         new Save(dirPath + "/animations", Map.getMap().getAnimationManager().getAnimations());
@@ -176,4 +181,5 @@ public class SavePane {
         Map.getMap().setSaved(true);
         f.dispose();
     }
+
 }

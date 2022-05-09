@@ -22,6 +22,7 @@ public class BeginPane extends JComponent {
 
         GameManager.replaceContentPane(panel);
     }
+
     private void setDefaults() {
         imagePanel.setBackground(Helper.BACKGROUND_COLOR);
         Helper.setSize(panel, Helper.getScreenSize());
@@ -37,6 +38,7 @@ public class BeginPane extends JComponent {
 
         addActionListeners();
     }
+
     private void addActionListeners() {
         newGameButton.addActionListener(e -> {
             new Map();
@@ -51,4 +53,5 @@ public class BeginPane extends JComponent {
     private void createUIComponents() {
         imagePanel = new ImagePanel("data/images/Rogue_Background.PNG", GameManager.getFrame());
     }
+
 }

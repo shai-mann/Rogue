@@ -26,6 +26,7 @@ public class InventoryPane {
 
         GameManager.replaceContentPane(panel);
     }
+
     public InventoryPane(String message, MouseAdapter l, JPanel savePane) {
         savedPanel = savePane;
         addInventory();
@@ -35,11 +36,13 @@ public class InventoryPane {
 
         GameManager.replaceContentPane(panel);
     }
+
     public void setBorderTitle(String borderTitle) {
         panel.setBorder(new TitledBorder(borderTitle));
         panel.revalidate();
         panel.repaint();
     }
+
     private void addInventory() {
         List<Item> playerInventory = GameManager.getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
@@ -57,6 +60,7 @@ public class InventoryPane {
         }
         panel.revalidate();
     }
+
     private void addMouseListener() {
         scrollingPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -73,6 +77,7 @@ public class InventoryPane {
             }
         });
     }
+
     private void setDefaults() {
         scrollablePane.setViewportView(scrollingPanel);
         if (GameManager.getPlayer().getInventory().size() > 0) {
@@ -109,4 +114,5 @@ public class InventoryPane {
         scrollablePane = new JScrollPane();
         scrollingPanel = new JPanel();
     }
+
 }

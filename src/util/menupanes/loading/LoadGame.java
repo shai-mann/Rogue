@@ -2,15 +2,15 @@ package util.menupanes.loading;
 
 import entity.lifelessentity.Staircase;
 import entity.lifelessentity.item.Item;
-import entity.livingentity.monster.Monster;
 import entity.livingentity.Player;
-import util.Helper;
+import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
 import map.level.Room;
 import map.level.table.CustomRoomTable;
 import settings.Settings;
+import util.Helper;
 import util.ImagePanel;
 import util.animation.Animation;
 
@@ -58,21 +58,23 @@ public class LoadGame {
         setDefaultSettings(nameLabel);
         setDefaultSettings(loadButton);
 
-        nameLabel.setText("<html><u>"+ name + "</u></html>");
+        nameLabel.setText("<html><u>" + name + "</u></html>");
         nameLabel.setForeground(Color.RED);
         loadButton.setVisible(false);
         imagePanel.setBackground(Helper.BACKGROUND_COLOR);
-        Helper.setSize(imagePanel, new Dimension(GameManager.getFrame().getWidth(),80));
+        Helper.setSize(imagePanel, new Dimension(GameManager.getFrame().getWidth(), 80));
         Helper.setSize(panel, new Dimension(GameManager.getFrame().getWidth(), 80));
 
         addActionListener();
     }
+
     private void setDefaultSettings(JComponent jc) {
         jc.setBackground(Helper.BACKGROUND_COLOR);
         jc.setForeground(Helper.FOREGROUND_COLOR);
         jc.setFont(new Font(Helper.THEME_FONT, Font.PLAIN,
                 Settings.getTextSize() < 24 ? 24 : Settings.getTextSize()));
     }
+
     private void addActionListener() {
         loadButton.addActionListener(new ActionListener() {
             @Override
@@ -108,16 +110,17 @@ public class LoadGame {
                     filePath + "/messages"
             )).readObject();
         } catch (ClassCastException e) {
-            messages = new String[] {(String) new ObjectInputStream(new FileInputStream(
+            messages = new String[]{(String) new ObjectInputStream(new FileInputStream(
                     filePath + "/messages"
             )).readObject()};
         }
         new Map(animations, messages);
     }
+
     private void loadLevel() throws IOException, ClassNotFoundException {
         CustomRoomTable hiddenTable = (CustomRoomTable) new ObjectInputStream(new FileInputStream(
                 filePath + "/hidden_table")).readObject();
-        CustomRoomTable shownTable = (CustomRoomTable)new ObjectInputStream(new FileInputStream(
+        CustomRoomTable shownTable = (CustomRoomTable) new ObjectInputStream(new FileInputStream(
                 filePath + "/shown_table")).readObject();
         ObjectInputStream os = new ObjectInputStream(new FileInputStream(
                 filePath + "/level_data"));
@@ -130,21 +133,25 @@ public class LoadGame {
                 hiddenTable, shownTable, staircase, direction, levelNumber, startingRoom
         );
     }
+
     private void loadMonsters() throws IOException, ClassNotFoundException {
         Monster.setMonsters((ArrayList<Monster>) new ObjectInputStream(
                 new FileInputStream(filePath + "/monsters")
         ).readObject());
     }
+
     private void loadItems() throws IOException, ClassNotFoundException {
         Item.items = (ArrayList<Item>) new ObjectInputStream(
                 new FileInputStream(filePath + "/items")
         ).readObject();
     }
+
     private void loadPlayer() throws IOException, ClassNotFoundException {
         GameManager.setPlayer((Player) new ObjectInputStream(
                 new FileInputStream(filePath + "/player")
         ).readObject());
     }
+
     private void loadRooms() throws IOException, ClassNotFoundException {
         Room.rooms = (ArrayList<Room>) new ObjectInputStream(new FileInputStream(filePath + "/rooms")).readObject();
     }
@@ -157,7 +164,9 @@ public class LoadGame {
     public void setButtonVisibility(boolean visible) {
         loadButton.setVisible(visible);
     }
+
     public JPanel getPanel() {
         return panel;
     }
+
 }
