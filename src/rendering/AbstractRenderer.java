@@ -1,13 +1,14 @@
 package rendering;
 
-import map.level.table.CustomRoomTable;
+import map.level.table.GameTable;
+import util.Helper;
 
 import java.awt.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class AbstractRenderer implements Renderable {
+public abstract class AbstractRenderer implements Renderer {
 
     protected final List<Point> points;
     protected final Set<Point> shownPoints = new HashSet<>();
@@ -19,10 +20,15 @@ public abstract class AbstractRenderer implements Renderable {
 
     protected abstract String getTile(Point p);
 
+    protected Color getTileColor() {
+        return Helper.FOREGROUND_COLOR;
+    }
+
     @Override
-    public void render(CustomRoomTable table) {
+    public void render(GameTable table) {
         for (Point p : shown ? points : shownPoints) {
             table.add(getTile(p), p);
+            table.setColor(p, getTileColor());
         }
     }
 
@@ -39,5 +45,10 @@ public abstract class AbstractRenderer implements Renderable {
     @Override
     public void reveal() {
         shown = true;
+    }
+
+    @Override
+    public boolean shown() {
+        return shown;
     }
 }

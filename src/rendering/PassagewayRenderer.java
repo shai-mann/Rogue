@@ -3,7 +3,7 @@ package rendering;
 import java.awt.*;
 import java.util.List;
 
-public class PassagewayRenderer extends AbstractRenderer implements Renderable {
+public class PassagewayRenderer extends AbstractRenderer implements Renderer {
 
     public static final String HALLWAY_TILE = "#";
 

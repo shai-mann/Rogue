@@ -1,17 +1,17 @@
 package rendering;
 
-import map.level.table.CustomRoomTable;
+import map.level.table.GameTable;
 
 import java.awt.*;
 import java.util.List;
 
-public interface Renderable {
+public interface Renderer {
 
     /**
      * Promises a rendering method that draws this object on the given table.
      * @param table the table to render the object on.
      */
-    void render(CustomRoomTable table);
+    void render(GameTable table);
 
     /**
      * Promises the capability to add visible points to the renderable object.
@@ -28,5 +28,10 @@ public interface Renderable {
      * Promises the capability to set entire object to be rendered at once.
      */
     void reveal();
+
+    /**
+     * Returns true if the rendered object is marked as shown, false otherwise.
+     */
+    boolean shown();
 
 }

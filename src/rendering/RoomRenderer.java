@@ -4,7 +4,7 @@ import map.level.RoomAttributes;
 
 import java.awt.*;
 
-public class RoomRenderer extends AbstractRenderer implements Renderable {
+public class RoomRenderer extends AbstractRenderer implements Renderer {
 
     public static final String HORIZONTAL_WALL_TILE = "=";
     public static final String VERTICAL_WALL_TILE = "|";

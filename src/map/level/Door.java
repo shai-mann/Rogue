@@ -1,29 +1,32 @@
 package map.level;
 
 import main.GameManager;
-import map.level.table.CustomRoomTable;
+import rendering.AbstractRenderedModel;
 import rendering.DoorRenderer;
-import rendering.Renderable;
+import rendering.Renderer;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class Door implements Renderable {
+public class Door extends AbstractRenderedModel implements Renderer {
 
     private static final ArrayList<Door> doors = new ArrayList<>(); // TODO: remove
 
     private final DoorRenderer renderer;
     private final Point location;
 
+    // todo: remove
     public Door(Point p, boolean shown, String overWrittenGraphic) {
-        location = p;
-        renderer = new DoorRenderer(location, shown);
+        this(p, shown);
         doors.add(this);
         if (isSecret()) {
             GameManager.getTable().setValueAt(overWrittenGraphic, p.y, p.x);
         }
+    }
+
+    public Door(Point location, boolean shown) {
+        this.location = location;
+        renderer = new DoorRenderer(location, shown);
     }
 
     // GETTER METHODS
@@ -37,24 +40,11 @@ public class Door implements Renderable {
     }
 
     @Override
-    public void render(CustomRoomTable table) {
-
+    protected Renderer renderer() {
+        return renderer;
     }
 
-    @Override
-    public void addShownPoints(List<Point> points) {
-        renderer.addShownPoints(points);
-    }
-
-    @Override
-    public List<Point> getShownPoints() {
-        return Collections.singletonList(location);
-    }
-
-    public void reveal() {
-        renderer.reveal();
-    }
-
+    // todo: remove
     public static ArrayList<Door> getDoors() {
         return doors;
     }
