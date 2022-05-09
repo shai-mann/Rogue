@@ -1,5 +1,7 @@
 package map.level;
 
+import util.Helper;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,6 @@ public class RoomAttributes {
 
     private final Dimension size;
     private final Point topLeft;
-    private final List<Door> doors = new ArrayList<>();
 
     private final Rectangle bounds;
     private final List<Point> points = new ArrayList<>();
@@ -17,23 +18,18 @@ public class RoomAttributes {
         this.size = size;
         this.topLeft = topLeft;
 
-        bounds = new Rectangle(topLeft(), size());
+        // bounds are one longer because rectangles don't consider boundary included when running contains()
+        bounds = new Rectangle(topLeft(), Helper.translate(size, new Dimension(1, 1)));
 
         initPoints();
     }
 
     private void initPoints() {
-        for (int i = x(); i < x() + width(); i++) {
-            for (int j = y(); j < y() + height(); j++) {
+        for (int i = x(); i <= x() + width(); i++) {
+            for (int j = y(); j <= y() + height(); j++) {
                 points.add(new Point(i, j));
             }
         }
-    }
-
-    /* SETTERS */
-
-    public void addDoors(Door... doors) {
-        this.doors.addAll(List.of(doors));
     }
 
     /* GETTERS */

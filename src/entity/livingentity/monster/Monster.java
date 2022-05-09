@@ -8,7 +8,6 @@ import entity.lifelessentity.item.Item;
 import entity.livingentity.monster.ai.MovementAI;
 import main.GameManager;
 import map.level.Level;
-import map.level.Passageway;
 import map.level.Room;
 import util.Helper;
 import util.gamepanes.MessageBar;
@@ -171,7 +170,7 @@ public class Monster extends Entity {
             return null;
         }
         for (Monster m : getMonsters()) {
-            if (Passageway.getDistance(m.getLocation(), e.getLocation()) < Passageway.getDistance(closest.getLocation(), e.getLocation())) {
+            if (m.getLocation().distance(e.getLocation()) < closest.getLocation().distance(e.getLocation())) {
                 closest = m;
             }
         }

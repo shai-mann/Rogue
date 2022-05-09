@@ -25,6 +25,10 @@ public class CustomRoomTable extends JTable implements Serializable {
         this.setValueAt(s, y, x);
     }
 
+    public void setColor(Point p, Color c) {
+        CustomCellRenderer.colorMap.put(p, c);
+    }
+
     public void clear() {
         for (int x = 0; x < model.getColumnCount(); x++) {
             for (int y = 0; y < model.getRowCount(); y++) {

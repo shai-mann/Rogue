@@ -15,14 +15,8 @@ public class GameManager {
     private static JFrame frame;
     private static Player player;
 
-    public static boolean notJAR = true; // TODO: used purely for testing purposes. When in IntelliJ, true; when JAR, false.
-    /*
-        Testing environment should be extended as more testing-related features are implemented.
-        For now, the testing environment adjusts the following:
-
-        1) Level generation is only a single room.
-     */
-    public static boolean bootTestingEnvironment = false;
+    // TODO: used purely for testing purposes. When in development environment, true; when JAR, false.
+    public static boolean notJAR = true;
 
     public static void main(String[] args) {
         initFrame();
@@ -65,7 +59,7 @@ public class GameManager {
     // GETTER AND SETTER METHODS
 
     public static CustomRoomTable getTable() {
-        return Level.getLevel().getHiddenTable();
+        return Level.getLevel().getTable();
     }
     public static JFrame getFrame() {
         return frame;
