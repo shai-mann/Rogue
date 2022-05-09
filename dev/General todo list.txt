@@ -9,3 +9,8 @@
 3) Effects overhaul?
     3a) Currently a class called Effect singular, but has list of effects
     3b) Listeners with MessageBar messages that could act as hooks when effects are applied?
+4) Dimension/Point/Rectangle custom classes?
+    4a) Allow for translation and other simple math methods
+    4b) Allow for switching between Dimension <-> Point
+    4c) Fix issue with rectangles not including boundary edge when running contains()
+    4d) interface for math methods (translate(T))

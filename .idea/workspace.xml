@@ -5,35 +5,44 @@
       <artifact name="Rogue:jar" />
     </artifacts-to-build>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/Rendering overhaul plans.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/DoorRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/PassagewayRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/Renderable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/RoomRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/level/table/GameTable.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/level/table/GameTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/General todo list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/General todo list.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/component/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/component/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Potion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/lifelessentity/item/Scroll.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/livingentity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/livingentity/monster/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/Level.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/CustomCellRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/table/CustomRoomTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/CustomRoomTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/level/table/RoomTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/table/RoomTableModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/DoorRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/DoorRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rendering/Renderable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/Renderable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Helper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/MessageBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/SettingsPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadPane.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +176,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-61" />
@@ -309,15 +318,16 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Shai Mann-Robison/Desktop/Rogue/src/map/level/Room.java" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="project.propGUI" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -344,9 +354,9 @@
       <module />
     </configuration>
     <configuration name="GameManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="BUNDLED" />
       <option name="MAIN_CLASS_NAME" value="main.GameManager" />
       <module name="Rogue" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -454,6 +464,21 @@
       <workItem from="1650038281285" duration="3528000" />
       <workItem from="1650408226164" duration="3093000" />
       <workItem from="1650560109989" duration="3826000" />
+      <workItem from="1650932469001" duration="3308000" />
+      <workItem from="1651343353811" duration="1022000" />
+      <workItem from="1651344417012" duration="1296000" />
+      <workItem from="1651345752889" duration="638000" />
+      <workItem from="1651346421709" duration="1010000" />
+      <workItem from="1651347578718" duration="381000" />
+      <workItem from="1651347992596" duration="1000" />
+      <workItem from="1651433378723" duration="452000" />
+      <workItem from="1651433857931" duration="591000" />
+      <workItem from="1651437318255" duration="629000" />
+      <workItem from="1651438051287" duration="4334000" />
+      <workItem from="1651601757930" duration="1386000" />
+      <workItem from="1651714227514" duration="724000" />
+      <workItem from="1651715663202" duration="3536000" />
+      <workItem from="1651789180093" duration="21631000" />
     </task>
     <servers />
   </component>
@@ -537,29 +562,9 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/map/level/Level.java</url>
-          <line>159</line>
-          <option name="timeStamp" value="84" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/Entity.java</url>
-          <line>131</line>
-          <option name="timeStamp" value="91" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/util/menupanes/BeginPane.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="92" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/livingentity/Player.java</url>
-          <line>430</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/livingentity/Player.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="94" />
+          <url>file://$PROJECT_DIR$/src/map/level/Room.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="138" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
