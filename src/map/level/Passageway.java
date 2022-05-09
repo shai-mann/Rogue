@@ -17,7 +17,7 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
 
     // CONSTRUCTORS
 
-    public static final int DEFAULT_WEIGHT = 1, DIRECTION_MATCHING_WEIGHT = 200, PREVIOUS_STEP_MATCHING_WEIGHT = 100;
+    public static final int DEFAULT_WEIGHT = 1, DIRECTION_MATCHING_WEIGHT = 200, PREVIOUS_STEP_MATCHING_WEIGHT = 350;
     private static final List<Point> steps = Helper.getAdjacentPoints(new Point(0, 0), false);
 
     private final PassagewayRenderer renderer;
@@ -122,11 +122,7 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
      * @return the directional value based on the given inputs.
      */
     private int getDirectionalValue(int pointer, int destination) {
-        if (pointer == destination) {
-            return 0;
-        }
-
-        return pointer < destination ? 1 : -1;
+        return Integer.compare(destination, pointer);
     }
 
     private int calculateDirectionalWeight(Point p, Point previousStep, Point direction) {
