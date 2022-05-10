@@ -17,7 +17,7 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
 
     // CONSTRUCTORS
 
-    public static final int DEFAULT_WEIGHT = 1, DIRECTION_MATCHING_WEIGHT = 200, PREVIOUS_STEP_MATCHING_WEIGHT = 350;
+    public static final int DEFAULT_WEIGHT = 1, DIRECTION_MATCHING_WEIGHT = 35000, PREVIOUS_STEP_MATCHING_WEIGHT = 200;
     private static final List<Point> steps = Helper.getAdjacentPoints(new Point(0, 0), false);
 
     private final PassagewayRenderer renderer;

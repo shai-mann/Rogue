@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Rogue bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Rogue bugs.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" afterDir="false" />
     </list>
@@ -451,6 +450,7 @@
       <workItem from="1651715663202" duration="3536000" />
       <workItem from="1651789180093" duration="25113000" />
       <workItem from="1652133955644" duration="1411000" />
+      <workItem from="1652220665780" duration="1086000" />
     </task>
     <servers />
   </component>
