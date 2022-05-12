@@ -15,8 +15,6 @@ import java.util.Map;
 
 public class Passageway extends AbstractRenderedModel implements Serializable, Renderer {
 
-    // CONSTRUCTORS
-
     public static final int DEFAULT_WEIGHT = 1, DIRECTION_MATCHING_WEIGHT = 35000, PREVIOUS_STEP_MATCHING_WEIGHT = 200;
     private static final List<Point> steps = Helper.getAdjacentPoints(new Point(0, 0), false);
 
