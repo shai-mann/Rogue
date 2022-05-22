@@ -1,6 +1,6 @@
 package util.menupanes.loading;
 
-import entityimpl2.lifeless.Staircase;
+import entity.lifeless.Staircase;
 import main.GameManager;
 import map.Map;
 import map.level.Level;

@@ -1,7 +1,7 @@
 package util.gamepanes;
 
-import entityimpl2.monster.Monster;
-import entityimpl2.player.Player;
+import entity.monster.Monster;
+import entity.player.Player;
 import main.GameManager;
 import map.level.Level;
 import settings.Settings;

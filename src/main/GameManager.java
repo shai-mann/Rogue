@@ -1,10 +1,10 @@
 package main;
 
-import entityimpl2.lifeless.item.Potion;
-import entityimpl2.lifeless.item.Ring;
-import entityimpl2.lifeless.item.Scroll;
-import entityimpl2.lifeless.item.Wand;
-import entityimpl2.monster.MonsterLoader;
+import entity.lifeless.item.Potion;
+import entity.lifeless.item.Ring;
+import entity.lifeless.item.Scroll;
+import entity.lifeless.item.Wand;
+import entity.monster.MonsterLoader;
 import util.Helper;
 import util.menupanes.BeginPane;
 

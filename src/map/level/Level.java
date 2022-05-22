@@ -1,12 +1,12 @@
 package map.level;
 
-import entityimpl2.component.Status;
-import entityimpl2.lifeless.Staircase;
-import entityimpl2.lifeless.item.structure.Item;
-import entityimpl2.monster.Monster;
-import entityimpl2.player.Player;
-import entityimpl2.structure.Entity;
-import entityimpl2.util.MoveResult;
+import entity.component.Status;
+import entity.lifeless.Staircase;
+import entity.lifeless.item.structure.Item;
+import entity.monster.Monster;
+import entity.player.Player;
+import entity.structure.Entity;
+import entity.util.MoveResult;
 import main.GameManager;
 import map.level.table.CustomRoomTable;
 import map.level.table.GameTable;
@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-import static entityimpl2.lifeless.Staircase.Direction.*;
+import static entity.lifeless.Staircase.Direction.*;
 
 public class Level extends JComponent {
 
@@ -174,7 +174,7 @@ public class Level extends JComponent {
         throw new Exception("Failed to locate Renderable containing player");
     }
 
-    public MoveResult isValidMove(entityimpl2.structure.Entity target, Point displacement) {
+    public MoveResult isValidMove(entity.structure.Entity target, Point displacement) {
         Point newLocation = Helper.translate(target.location(), displacement);
 
         boolean out = rooms.stream().anyMatch((r) -> r.canPlaceEntityAt(newLocation) || r.isDoor(newLocation));

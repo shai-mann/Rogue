@@ -1,6 +1,6 @@
 package util;
 
-import entityimpl2.structure.Entity;
+import entity.structure.Entity;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,7 @@
 package util.inventory;
 
-import entityimpl2.lifeless.item.combat.Arrow;
-import entityimpl2.lifeless.item.structure.Item;
+import entity.lifeless.item.combat.Arrow;
+import entity.lifeless.item.structure.Item;
 import main.GameManager;
 import map.level.Level;
 import util.Helper;

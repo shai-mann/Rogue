@@ -1,6 +1,6 @@
 package rendering;
 
-import entityimpl2.structure.AbstractEntity;
+import entity.structure.AbstractEntity;
 import map.level.Level;
 import map.level.table.GameTable;
 

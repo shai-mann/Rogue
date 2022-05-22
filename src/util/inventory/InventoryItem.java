@@ -1,13 +1,13 @@
 package util.inventory;
 
-import entityimpl2.lifeless.item.Food;
-import entityimpl2.lifeless.item.Potion;
-import entityimpl2.lifeless.item.Ring;
-import entityimpl2.lifeless.item.Scroll;
-import entityimpl2.lifeless.item.combat.Armor;
-import entityimpl2.lifeless.item.combat.Arrow;
-import entityimpl2.lifeless.item.combat.Weapon;
-import entityimpl2.lifeless.item.structure.Item;
+import entity.lifeless.item.Food;
+import entity.lifeless.item.Potion;
+import entity.lifeless.item.Ring;
+import entity.lifeless.item.Scroll;
+import entity.lifeless.item.combat.Armor;
+import entity.lifeless.item.combat.Arrow;
+import entity.lifeless.item.combat.Weapon;
+import entity.lifeless.item.structure.Item;
 import main.GameManager;
 import map.level.Level;
 import settings.Settings;
