@@ -1,9 +1,8 @@
 package map.level;
 
-import main.GameManager;
 import rendering.AbstractRenderedModel;
-import rendering.DoorRenderer;
 import rendering.Renderer;
+import rendering.level.DoorRenderer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,15 +13,6 @@ public class Door extends AbstractRenderedModel implements Renderer {
 
     private final DoorRenderer renderer;
     private final Point location;
-
-    // todo: remove
-    public Door(Point p, boolean shown, String overWrittenGraphic) {
-        this(p, shown);
-        doors.add(this);
-        if (isSecret()) {
-            GameManager.getTable().setValueAt(overWrittenGraphic, p.y, p.x);
-        }
-    }
 
     public Door(Point location, boolean shown) {
         this.location = location;

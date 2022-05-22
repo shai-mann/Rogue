@@ -1,7 +1,5 @@
 package util.gamepanes.saving;
 
-import entity.lifelessentity.item.Item;
-import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
@@ -162,10 +160,10 @@ public class SavePane {
     }
 
     private void writeSave(String dirPath) {
-        new Save(dirPath + "/monsters", Monster.getMonsters());
-        new Save(dirPath + "/items", Item.items);
+        new Save(dirPath + "/monsters", Level.getLevel().getMonsters());
+        new Save(dirPath + "/items", Level.getLevel().getItems());
         new Save(dirPath + "/table", Level.getLevel().getTable());
-        new Save(dirPath + "/player", GameManager.getPlayer());
+        new Save(dirPath + "/player", Level.getLevel().getPlayer());
         new Save(dirPath + "/messages", (Object[]) Map.getMap().getMessageBar().getMessages());
         new Save(dirPath + "/animations", Map.getMap().getAnimationManager().getAnimations());
         new Save(dirPath + "/rooms", Room.rooms);

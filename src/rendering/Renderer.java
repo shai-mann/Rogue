@@ -1,17 +1,9 @@
 package rendering;
 
-import map.level.table.GameTable;
-
 import java.awt.*;
 import java.util.List;
 
-public interface Renderer {
-
-    /**
-     * Promises a rendering method that draws this object on the given table.
-     * @param table the table to render the object on.
-     */
-    void render(GameTable table);
+public interface Renderer extends Renderable {
 
     /**
      * Promises the capability to add visible points to the renderable object.

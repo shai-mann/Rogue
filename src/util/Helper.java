@@ -1,6 +1,6 @@
 package util;
 
-import entity.Entity;
+import entityimpl2.structure.Entity;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,6 +64,10 @@ public class Helper {
 
     /* ENTITY HELPER METHODS */
 
+    public static double distance(Entity e1, Entity e2) {
+        return e1.location().distance(e2.location());
+    }
+
     /**
      * Determines if the e1 is in range of e2.
      * @param e1 {@link Entity} searching for second entity.
@@ -71,7 +75,7 @@ public class Helper {
      * @param range range (circular, inclusive) to search in.
      */
     public static boolean isInRange(Entity e1, Entity e2, int range) {
-        double dist = Math.hypot(e2.getXPos() - e1.getXPos(), e2.getYPos() - e1.getYPos());
+        double dist = distance(e1, e2);
 
         return dist <= range;
     }
@@ -109,6 +113,10 @@ public class Helper {
         return value >= min && value <= max;
     }
 
+    /**
+     * Translates the given point, but does not mutate either given point.
+     * @return a new point where the translated point would land.
+     */
     public static Point translate(Point p, Point dp) {
         return new Point(p.x + dp.x, p.y + dp.y);
     }

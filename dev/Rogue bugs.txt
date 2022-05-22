@@ -21,6 +21,8 @@ BUGS:
 - Mimic movement AI doesn't hide monster properly
 - If the MessagePane is given an empty string as a message, behaves weirdly
 - Rooms can generate outside of bounds of table (barely, 69 <= 69)
+    - Room generation can place rooms such that passageways cannot actually be created between them (too close)
+- Player can walk into corner of room walls
 
 
 Features To Implement:

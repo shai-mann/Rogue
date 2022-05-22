@@ -1,6 +1,5 @@
 package map;
 
-import entity.livingentity.monster.Monster;
 import main.GameManager;
 import map.level.Level;
 import util.Helper;
@@ -11,8 +10,8 @@ import util.gamepanes.StatusBar;
 import util.gamepanes.saving.SavePane;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
@@ -47,8 +46,7 @@ public class Map implements Serializable {
     public void update() {
         saved = false;
         MessageBar.nextTurn(); // must go first
-        Monster.update();
-        GameManager.getPlayer().update();
+        level.update();
         statusBar.updateStatusBar(); // must go after player update
         animationManager.update();
         level.render();
@@ -87,7 +85,7 @@ public class Map implements Serializable {
                 }
             }
         });
-        GameManager.getFrame().addKeyListener(new KeyListener() {
+        GameManager.getFrame().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char s = '\u0013'; // TODO: ????????? change to encoded constant for god's sake
@@ -95,16 +93,6 @@ public class Map implements Serializable {
                     new SavePane();
                     GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
             }
         });
         animationManager = new AnimationManager();

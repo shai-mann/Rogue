@@ -1,20 +1,21 @@
 package util.inventory;
 
-import entity.lifelessentity.item.*;
-import entity.lifelessentity.item.combat.Armor;
-import entity.lifelessentity.item.combat.Arrow;
-import entity.lifelessentity.item.combat.Weapon;
-import map.Map;
-import settings.Settings;
-import util.gamepanes.MessageBar;
-import util.Helper;
+import entityimpl2.lifeless.item.Food;
+import entityimpl2.lifeless.item.Potion;
+import entityimpl2.lifeless.item.Ring;
+import entityimpl2.lifeless.item.Scroll;
+import entityimpl2.lifeless.item.combat.Armor;
+import entityimpl2.lifeless.item.combat.Arrow;
+import entityimpl2.lifeless.item.combat.Weapon;
+import entityimpl2.lifeless.item.structure.Item;
 import main.GameManager;
+import map.level.Level;
+import settings.Settings;
+import util.Helper;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class InventoryItem extends JComponent {
@@ -36,12 +37,7 @@ public class InventoryItem extends JComponent {
         this.item = item;
         setNames();
         duplicity = 1;
-
-        if (item instanceof Wand) {
-            label.setText(number + ") " + item.getName() + " Uses: " + ((Wand) item).getUses());
-        } else {
-            label.setText(number + ") " + item.getName());
-        }
+        label.setText(number + ") " + item.name());
         defaultText = label.getText();
     }
 
@@ -52,9 +48,9 @@ public class InventoryItem extends JComponent {
     public void setButtonsVisible(boolean visible) {
         useButton.setVisible(visible);
         dropButton.setVisible(visible);
-        if (item instanceof Weapon && ((Weapon) item).isThrowable()) {
-            throwButton.setVisible(visible);
-        }
+//        if (item instanceof Weapon && ((Weapon) item).isThrowable()) {
+//            throwButton.setVisible(visible);
+//        } // todo: throwing
     }
 
     public static ArrayList<InventoryItem> getInventoryItems() {
@@ -94,48 +90,44 @@ public class InventoryItem extends JComponent {
     }
 
     private void addActionListeners() {
-        useButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameManager.getPlayer().toggleInventory();
-                Map.getMap().update();
-                GameManager.getPlayer().getStatus().update();
-                item.use();
-                GameManager.getFrame().requestFocus();
-            }
-        });
-        dropButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!(item instanceof Armor && ((Armor) item).isBeingWorn()) &&
-                        !(item.equals(GameManager.getPlayer().getHeldItem()))) {
-                    GameManager.getPlayer().getInventory().remove(item);
-                    if (item instanceof Armor) {
-                        new Armor((Armor) item);
-                    } else if (item instanceof Ring) {
-                        new Ring((Ring) item);
-                    } else if (item instanceof Scroll) {
-                        new Scroll((Scroll) item);
-                    } else if (item instanceof Potion) {
-                        new Potion((Potion) item);
-                    } else if (item instanceof Food) {
-                        new Food((Food) item);
-                    } else if (item instanceof Wand) {
-                        new Wand((Wand) item);
-                    } else if (item instanceof Arrow) {
-                        new Arrow((Arrow) item);
-                    } else if (item instanceof Weapon) {
-                        new Weapon((Weapon) item);
-                    }
-                    GameManager.getPlayer().setOverwrittenGraphic(item.graphic);
-                    GameManager.getFrame().requestFocus();
-                    MessageBar.addMessage("You drop the " + getName());
-                } else {
-                    MessageBar.addMessage("You can't drop things you are wearing or holding.");
-                }
-                GameManager.getPlayer().toggleInventory();
-            }
-        });
+//        Player player = Level.getLevel().getPlayer();
+//
+//        useButton.addActionListener(e -> {
+//            player.toggleInventory();
+//            Map.getMap().update();
+//            player.getStatus().update();
+//            item.use();
+//            GameManager.getFrame().requestFocus();
+//        });
+//        dropButton.addActionListener(e -> {
+//            if (!(item instanceof Armor && ((Armor) item).isBeingWorn()) &&
+//                    !(item.equals(GameManager.getPlayer().getHeldItem()))) {
+//                player.getInventory().remove(item);
+//                if (item instanceof Armor) {
+//                    new Armor((Armor) item);
+//                } else if (item instanceof Ring) {
+//                    new Ring((Ring) item);
+//                } else if (item instanceof Scroll) {
+//                    new Scroll((Scroll) item);
+//                } else if (item instanceof Potion) {
+//                    new Potion((Potion) item);
+//                } else if (item instanceof Food) {
+//                    new Food((Food) item);
+//                } else if (item instanceof Wand) {
+//                    new Wand((Wand) item);
+//                } else if (item instanceof Arrow) {
+//                    new Arrow((Arrow) item);
+//                } else if (item instanceof Weapon) {
+//                    new Weapon((Weapon) item);
+//                }
+//                GameManager.getPlayer().setOverwrittenGraphic(item.graphic);
+//                GameManager.getFrame().requestFocus();
+//                MessageBar.addMessage("You drop the " + getName());
+//            } else {
+//                MessageBar.addMessage("You can't drop things you are wearing or holding.");
+//            }
+//            GameManager.getPlayer().toggleInventory();
+//        });
     }
 
     private void setNames() {
@@ -145,7 +137,7 @@ public class InventoryItem extends JComponent {
             } else {
                 useButton.setText("Wear");
             }
-            if (item instanceof Ring && GameManager.getPlayer().getRings().contains(item)) {
+            if (item instanceof Ring && Level.getLevel().getPlayer().isWorn((Ring) item)) {
                 useButton.setText("Remove");
             }
         } else if (item instanceof Potion) {
@@ -169,14 +161,14 @@ public class InventoryItem extends JComponent {
     }
 
     public void addArrowDuplicity(int arrows) {
-        duplicity = ((Arrow) getItem()).getAmount() + arrows;
+        duplicity = ((Arrow) getItem()).amount() + arrows;
         label.setText(defaultText.substring(0, 2) + " " + duplicity + " arrows");
     }
 
     public static InventoryItem checkDuplicity(Item i) {
         for (InventoryItem it : inventoryItems) {
             if (it.getItem() != i && it.duplicity == 1 &&
-                    it.getItem().getName().equals(i.getName())) {
+                    it.getItem().name().equals(i.name())) {
                 return it;
             } else if (it.getItem() instanceof Arrow && i instanceof Arrow) {
                 return it;

@@ -3,7 +3,7 @@ package map.level;
 import map.level.table.GameTable;
 import rendering.AbstractRenderedModel;
 import rendering.Renderer;
-import rendering.RoomRenderer;
+import rendering.level.RoomRenderer;
 import util.Helper;
 
 import java.awt.*;
@@ -21,17 +21,12 @@ public class Room extends AbstractRenderedModel implements Serializable, Rendere
     private final RoomAttributes attributes;
 
     public Room(Point topLeft, Dimension size) {
-        rooms.add(this);
-
         attributes = new RoomAttributes(topLeft, size);
         renderer = new RoomRenderer(attributes);
     }
 
     public Point createDoor(Point destination) {
-        List<Point> wallPoints = attributes.getPoints().stream().filter(
-                (p) -> p.x == getTopLeft().x ^ p.y == getTopLeft().y ^
-                        p.x == getTopLeft().x + getSize().width ^ p.y == getTopLeft().y + getSize().height
-        ).filter(GameTable::isNotAgainstEdge).toList();
+        List<Point> wallPoints = attributes.getWallPoints().stream().filter(GameTable::isNotAgainstEdge).toList();
 
         // filter out all but X closest points
         wallPoints = wallPoints.stream().sorted(
@@ -44,6 +39,14 @@ public class Room extends AbstractRenderedModel implements Serializable, Rendere
         doors.add(new Door(doorLocation, !Helper.calculateChance(hiddenDoorChance / 100.0)));
 
         return doorLocation;
+    }
+
+    public boolean canPlaceEntityAt(Point location) {
+        return attributes.getNonWallPoints().contains(location);
+    }
+
+    public boolean isDoor(Point location) {
+        return doors.stream().anyMatch(d -> d.getLocation().equals(location));
     }
 
     @Override
@@ -76,8 +79,11 @@ public class Room extends AbstractRenderedModel implements Serializable, Rendere
     public Rectangle bounds() {
         return attributes.bounds();
     }
+    public ArrayList<Door> doors() {
+        return doors;
+    }
     public Point getRandomPointInBounds() {
-        return Helper.getRandom(attributes.getPoints());
+        return Helper.getRandom(attributes.getNonWallPoints());
         // todo: prevent from overlapping with other entities when spawning
     }
 }

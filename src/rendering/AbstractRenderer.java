@@ -12,7 +12,7 @@ public abstract class AbstractRenderer implements Renderer {
 
     protected final List<Point> points;
     protected final Set<Point> shownPoints = new HashSet<>();
-    protected boolean shown = false;
+    protected boolean shown = true;
 
     public AbstractRenderer(List<Point> points) {
         this.points = points;

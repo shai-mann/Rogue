@@ -1,10 +1,10 @@
 package main;
 
-import entity.lifelessentity.item.Item;
-import entity.livingentity.Player;
-import entity.livingentity.monster.MonsterLoader;
-import map.level.Level;
-import map.level.table.CustomRoomTable;
+import entityimpl2.lifeless.item.Potion;
+import entityimpl2.lifeless.item.Ring;
+import entityimpl2.lifeless.item.Scroll;
+import entityimpl2.lifeless.item.Wand;
+import entityimpl2.monster.MonsterLoader;
 import util.Helper;
 import util.menupanes.BeginPane;
 
@@ -13,7 +13,6 @@ import javax.swing.*;
 public class GameManager {
 
     private static JFrame frame;
-    private static Player player;
 
     // TODO: used purely for testing purposes. When in development environment, true; when JAR, false.
     public static boolean notJAR = true;
@@ -35,16 +34,18 @@ public class GameManager {
         frame.validate();
         frame.repaint();
     }
-    public static void add(String s, int x, int y) {
-        GameManager.getTable().getCustomModel().setValueAt(s, y, x);
-    }
 
     // SETUP METHODS
 
+    // todo: move to Map?
     private static void runStaticSetupMethods() {
         MonsterLoader.loadMonsters();
-        Item.randomizeHiddenNames();
+        Ring.obfuscate();
+        Wand.obfuscate();
+        Potion.obfuscate();
+        Scroll.obfuscate();
     }
+
     private static void initFrame() {
         frame = new JFrame("Rogue - A commemoration of the 1980's game");
 
@@ -58,20 +59,8 @@ public class GameManager {
 
     // GETTER AND SETTER METHODS
 
-    public static CustomRoomTable getTable() {
-        return Level.getLevel().getTable();
-    }
     public static JFrame getFrame() {
         return frame;
-    }
-    public static Player getPlayer() {
-        return player;
-    }
-    public static void setPlayer(Player p) {
-        player = p;
-    }
-    public static void createPlayer() {
-        player = new Player(Level.getLevel().getStartingRoom());
     }
 
 }

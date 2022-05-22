@@ -1,11 +1,11 @@
 package map.level;
 
-import main.GameManager;
 import map.level.table.GameTable;
 import util.Helper;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LevelGenerator {
@@ -13,11 +13,15 @@ public class LevelGenerator {
     // default is 70% chance of nearest room, 30% chance random (connected) room
     private static final double CLOSEST_ROOM_CHANCE = 1;
 
+    public static List<Room> generateTestRoom() {
+        return Arrays.asList(
+                new Room(new Point(34 - 15, 20 - 15), new Dimension(15, 15)),
+                new Room(new Point(5, 5), new Dimension(7, 7))
+        );
+    }
+
     public static List<Room> generate(int numRooms) {
         List<Room> rooms = new ArrayList<>();
-
-//        rooms.add(new Room(new Point(10, 10), new Dimension(5, 5)));
-//        rooms.add(new Room(new Point(30, 30), new Dimension(5, 5)));
 
         for (int i = 0; i < numRooms; i++) {
             Dimension size = getRandomRoomSize();
@@ -71,8 +75,9 @@ public class LevelGenerator {
     }
 
     private static Point getRandomPoint() {
-        return new Point(Helper.random.nextInt(GameManager.getTable().getColumnCount() - 1),
-                Helper.random.nextInt(GameManager.getTable().getRowCount() - 1));
+        // todo: bad pattern
+        return new Point(Helper.random.nextInt(Level.getLevel().getTable().getColumnCount() - 1),
+                Helper.random.nextInt(Level.getLevel().getTable().getRowCount() - 1));
     }
 
     private static boolean isValidRoom(Point p, Dimension size, List<Room> rooms) {

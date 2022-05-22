@@ -1,10 +1,11 @@
 package util.gamepanes;
 
-import entity.livingentity.monster.Monster;
-import util.Helper;
+import entityimpl2.monster.Monster;
+import entityimpl2.player.Player;
 import main.GameManager;
 import map.level.Level;
 import settings.Settings;
+import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,13 +52,15 @@ public class StatusBar extends JComponent {
     }
 
     public void updateStatusBar() {
-        healthField.setText("Health: " + GameManager.getPlayer().getHealth() +
-                "(" + GameManager.getPlayer().getMaxHealth() + ")");
-        goldField.setText("Gold: " + GameManager.getPlayer().getGold());
-        experienceLabel.setText("Experience: " + GameManager.getPlayer().getExperience() +
-                "(" + GameManager.getPlayer().getLevelThreshold() + ")");
-        hungerLabel.setText(GameManager.getPlayer().getHungerLevel());
-        acLabel.setText("Arm: " + String.valueOf(GameManager.getPlayer().getStatus().getAc()));
+        Player player = Level.getLevel().getPlayer();
+        
+        healthField.setText("Health: " + player.health() +
+                "(" + player.maxHealth() + ")");
+        goldField.setText("Gold: " + player.getGold());
+        experienceLabel.setText("Experience: " + player.getExperience() +
+                "(" + player.getLevelingThreshold() + ")");
+        hungerLabel.setText(player.getHungerLevel());
+        acLabel.setText("Arm: " + player.getStatus().getAc());
         floorLabel.setText("Level: " + Level.getLevel().getLevelNumber());
         panel.revalidate();
         panel.repaint();

@@ -2,7 +2,7 @@ package map.level;
 
 import map.level.table.GameTable;
 import rendering.AbstractRenderedModel;
-import rendering.PassagewayRenderer;
+import rendering.level.PassagewayRenderer;
 import rendering.Renderer;
 import util.Helper;
 
@@ -48,7 +48,10 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
                 e.printStackTrace();
                 tries++;
 
-                if (tries > 50) break;
+                if (tries > 50) {
+                    System.out.println("Pointer: (" + pointer.x + ", " + pointer.y + ")");
+                    break;
+                }
             }
 
             pointer = Helper.translate(pointer, previousStep);
@@ -82,10 +85,16 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
         options.forEach(p -> weightMap.put(p, calculateDirectionalWeight(p, previousStep, direction)));
 
         int totalWeights = weightMap.values().stream().mapToInt(Integer::intValue).sum();
-        int chosenStep = Helper.getRandom(0, totalWeights - 1); // exclusive upper bound so that a point must be chosen
+        int chosenStep;
+        try {
+            // exclusive upper bound so that a point must be chosen
+            chosenStep = Helper.getRandom(0, totalWeights - 1);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("Total weight (" + totalWeights + ") resulted in no step being chosen.");
+        }
 
         for (Point p : options) {
-            if (chosenStep < weightMap.get(p)) {
+            if (chosenStep <= weightMap.get(p)) {
                 return p;
             }
 
@@ -127,8 +136,8 @@ public class Passageway extends AbstractRenderedModel implements Serializable, R
         int weight = DEFAULT_WEIGHT;
 
         if (p.equals(previousStep)) weight+= PREVIOUS_STEP_MATCHING_WEIGHT;
-        if (p.x == direction.x) weight+= DIRECTION_MATCHING_WEIGHT;
-        if (p.y == direction.y) weight+= DIRECTION_MATCHING_WEIGHT;
+        if (p.x != 0 && p.x == direction.x) weight+= DIRECTION_MATCHING_WEIGHT;
+        if (p.y != 0 && p.y == direction.y) weight+= DIRECTION_MATCHING_WEIGHT;
 
         return weight;
     }

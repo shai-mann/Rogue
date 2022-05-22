@@ -1,26 +1,26 @@
 package map.level;
 
-import entity.Entity;
-import entity.lifelessentity.Staircase;
-import entity.lifelessentity.item.Item;
-import entity.lifelessentity.item.combat.Armor;
-import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Player;
-import entity.livingentity.monster.Monster;
+import entityimpl2.component.Status;
+import entityimpl2.lifeless.Staircase;
+import entityimpl2.lifeless.item.structure.Item;
+import entityimpl2.monster.Monster;
+import entityimpl2.player.Player;
+import entityimpl2.structure.Entity;
+import entityimpl2.util.MoveResult;
 import main.GameManager;
 import map.level.table.CustomRoomTable;
 import map.level.table.GameTable;
 import map.level.table.RoomTableModel;
-import org.jetbrains.annotations.Nullable;
+import rendering.Renderable;
 import rendering.Renderer;
 import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.*;
+
+import static entityimpl2.lifeless.Staircase.Direction.*;
 
 public class Level extends JComponent {
 
@@ -40,9 +40,13 @@ public class Level extends JComponent {
 
     private GameTable gameTable;
     private CustomRoomTable hiddenTable; // todo: remove
+
     private Room startingRoom;
+
     private Staircase descendingStaircase;
     private Staircase ascendingStaircase;
+    private final Player player;
+
     private int levelNumber = 0;
 
     private final Set<Point> shownPoints = new HashSet<>();
@@ -51,34 +55,43 @@ public class Level extends JComponent {
     private final List<Passageway> passageways = new ArrayList<>();
     private final List<Renderer> renderables = new ArrayList<>();
 
+    private final List<Item> items = new ArrayList<>();
+    private final List<Monster> monsters = new ArrayList<>();
+
     private static Level level;
 
     public Level() {
         setDefaults();
         newLevel(true);
+        player = new Player(startingRoom.getCenter(), this);
+        player.apply(panel);
+        GameManager.getFrame().requestFocus();
+
+        render();
     }
 
-    public Level(CustomRoomTable hiddenTable,
-                 CustomRoomTable shownTable,
-                 Staircase staircase,
-                 int direction,
-                 int levelNumber,
-                 Room startingRoom) {
-        setDefaults();
-        this.hiddenTable = hiddenTable;
-//        this.table = shownTable;
-        if (levelNumber != 26 && direction == Player.DOWN) {
-            descendingStaircase = staircase;
-        } else {
-            ascendingStaircase = staircase;
-        }
-        this.startingRoom = startingRoom;
-
-        panel.add(gameTable.getPanel()); // TODO: necessary?
-
-        panel.revalidate(); // TODO: confirm that these are unnecessary?
-        panel.repaint();
-    }
+    // TODO: reimplement saving/loading with overhauled code
+//    public Level(CustomRoomTable hiddenTable,
+//                 CustomRoomTable shownTable,
+//                 Staircase staircase,
+//                 int direction,
+//                 int levelNumber,
+//                 Room startingRoom) {
+//        setDefaults();
+//        this.hiddenTable = hiddenTable;
+////        this.table = shownTable;
+//        if (levelNumber != 26 && direction == Player.DOWN) {
+//            descendingStaircase = staircase;
+//        } else {
+//            ascendingStaircase = staircase;
+//        }
+//        this.startingRoom = startingRoom;
+//
+//        panel.add(gameTable.getPanel()); // TODO: necessary?
+//
+//        panel.revalidate(); // TODO: confirm that these are unnecessary?
+//        panel.repaint();
+//    }
 
     public void newLevel(boolean descending) {
         levelNumber += descending ? 1 : -1;
@@ -98,6 +111,13 @@ public class Level extends JComponent {
         startingRoom = generatePassageways();
     }
 
+    public void update() {
+        player.update();
+        monsters.forEach(Monster::update);
+
+        render();
+    }
+
     public void render() {
         try {
             addShownPoints(); // take note of where player is and add
@@ -107,19 +127,25 @@ public class Level extends JComponent {
 
         gameTable.clear();
 
-        for (Renderer renderer : renderables) {
-            if (GameManager.getPlayer().getStatus().isBlinded() && !(renderer instanceof Player)) {
+        for (Renderable renderable : renderables) {
+            if (player.getStatus().is(Status.Stat.BLINDED)) {
                 continue;
-            }
+            } // todo: move if statement outside of for loop
 
-            renderer.render(gameTable);
+            renderable.render(gameTable);
         }
+
+        player.render(gameTable);
+    }
+
+    public boolean shouldRender(Point p) {
+        return shownPoints.contains(p);
     }
 
     private void addShownPoints() throws Exception {
-        Player player = GameManager.getPlayer();
+        Player player = getPlayer();
 
-        List<Point> newPoints = Helper.getAdjacentPoints(player.getLocation(), true);
+        List<Point> newPoints = Helper.getAdjacentPoints(player.location(), true);
 
         Renderer renderer = getRenderableContainingPlayer(player);
 
@@ -134,13 +160,13 @@ public class Level extends JComponent {
 
     private Renderer getRenderableContainingPlayer(Player player) throws Exception {
         for (Room room : rooms) {
-            if (room.bounds().contains(player.getLocation())) {
+            if (room.bounds().contains(player.location())) {
                 return room;
             }
         }
 
         for (Passageway p : passageways) {
-            if (p.contains(player.getLocation())) {
+            if (p.contains(player.location())) {
                 return p;
             }
         }
@@ -148,17 +174,23 @@ public class Level extends JComponent {
         throw new Exception("Failed to locate Renderable containing player");
     }
 
-    // UPDATE HELPER METHODS
-    public void finalSetup() {
-//        new Monster(MonsterLoader.monsterClasses.get(25), 20, 6);
+    public MoveResult isValidMove(entityimpl2.structure.Entity target, Point displacement) {
+        Point newLocation = Helper.translate(target.location(), displacement);
 
-        render(); // renders the first room the player is in
+        boolean out = rooms.stream().anyMatch((r) -> r.canPlaceEntityAt(newLocation) || r.isDoor(newLocation));
+
+        out |= passageways.stream().anyMatch((p) -> p.contains(newLocation));
+
+        // TODO: prevent certain entity collisions?
+
+        return new MoveResult(out);
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
 
     private void generateRooms(int numRooms) {
-        rooms.addAll(LevelGenerator.generate(numRooms));
+//        rooms.addAll(LevelGenerator.generate(numRooms));
+        rooms.addAll(LevelGenerator.generateTestRoom());
         renderables.addAll(rooms);
     }
 
@@ -173,42 +205,42 @@ public class Level extends JComponent {
 
     private void spawnEntities() {
         Monster.spawnMonsters(levelNumber);
-        Item.spawnItems();
+//        Item.spawnItems(); // todo: reimplement with new Item/ItemSpawner class
         if (levelNumber != 26) {
-            descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);
+            descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), DOWN);
         }
         if (levelNumber != 1) {
-            ascendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
+            ascendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), UP);
         }
         if (levelNumber == 1) {
             // give player mace
-            spawnStartingPackItem("/data/weapons/mace", null);
-            spawnStartingPackItem(null, Item.itemTypes.ARMOR);
+//            spawnStartingPackItem("/data/weapons/mace", null); // todo: reimplement with new Items
+//            spawnStartingPackItem(null, Item.itemTypes.ARMOR);
         }
     }
 
-    private void spawnStartingPackItem(@Nullable String itemPath, Item.itemTypes type) {
-        Point p = getStartingRoom().getRandomPointInBounds();
-        if (type != null) {
-            Item i = Item.spawnItem(p, type);
-            if (i instanceof Armor) {
-                ((Armor) i).setAc(8);
-                ((Armor) i).setName("Leather Armor");
-                ((Armor) i).setCursed(false);
-            }
-        } else if (itemPath != null) {
-            try {
-                if (GameManager.notJAR) {
-                    new Weapon("./resources" + itemPath, p.x, p.y);
-                } else {
-                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                            + itemPath, p.x, p.y);
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    private void spawnStartingPackItem(@Nullable String itemPath, Item.itemTypes type) {
+//        Point p = getStartingRoom().getRandomPointInBounds();
+//        if (type != null) {
+//            Item i = Item.spawnItem(p, type);
+//            if (i instanceof Armor) {
+//                ((Armor) i).setAc(8);
+//                ((Armor) i).setName("Leather Armor");
+//                ((Armor) i).setCursed(false);
+//            }
+//        } else if (itemPath != null) {
+//            try {
+//                if (GameManager.notJAR) {
+//                    new Weapon("./resources" + itemPath, p.x, p.y);
+//                } else {
+//                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+//                            + itemPath, p.x, p.y);
+//                }
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     // TABLE GENERATION METHODS
 
@@ -245,8 +277,8 @@ public class Level extends JComponent {
     }
 
     private void resetTable() {
-        Monster.getMonsters().clear();
-        Item.items.clear();
+        monsters.clear();
+        items.clear();
         Room.rooms.clear();
         Door.getDoors().clear();
         descendingStaircase = null;
@@ -270,7 +302,7 @@ public class Level extends JComponent {
 
     public Room getRoom(Entity entity) {
         for (Room room : Room.rooms) {
-            if (room.bounds().contains(new Point(entity.getXPos(), entity.getYPos()))) {
+            if (room.bounds().contains(entity.location())) {
                 return room;
             }
         }
@@ -288,13 +320,41 @@ public class Level extends JComponent {
             return descendingStaircase;
         }
     }
+    public List<Staircase> getStaircases() {
+        List<Staircase> staircases = new ArrayList<>();
+        if (descendingStaircase != null) staircases.add(descendingStaircase);
+        if (ascendingStaircase != null) staircases.add(ascendingStaircase);
 
-    public int getDirection() {
-        return ascendingStaircase == null && levelNumber < 26 ? Player.DOWN : Player.UP;
+        return staircases;
+    }
+
+    public Staircase.Direction getDirection() {
+        return ascendingStaircase == null && levelNumber < 26 ? DOWN : UP;
     }
 
     public Set<Point> getShownPoints() {
         return shownPoints;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public List<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public List<Monster> getLoadedMonsters() {
+        return getMonsters().stream().filter(Monster::shown).toList();
+    }
+
+    public void reveal() {
+        for (Renderer r : renderables) {
+            r.reveal();
+        }
+    }
 }

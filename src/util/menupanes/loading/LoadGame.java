@@ -1,9 +1,6 @@
 package util.menupanes.loading;
 
-import entity.lifelessentity.Staircase;
-import entity.lifelessentity.item.Item;
-import entity.livingentity.Player;
-import entity.livingentity.monster.Monster;
+import entityimpl2.lifeless.Staircase;
 import main.GameManager;
 import map.Map;
 import map.level.Level;
@@ -89,8 +86,7 @@ public class LoadGame {
                 } catch (IOException | ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-                Level.getLevel().finalSetup();
-                GameManager.getFrame().addKeyListener(GameManager.getPlayer());
+                Level.getLevel().getPlayer().apply((JPanel) GameManager.getFrame().getContentPane());
                 GameManager.getFrame().pack();
                 GameManager.getFrame().repaint();
                 GameManager.getFrame().requestFocus();
@@ -129,27 +125,27 @@ public class LoadGame {
         int levelNumber = (int) os.readObject();
         Room startingRoom = (Room) os.readObject();
 
-        new Level(
-                hiddenTable, shownTable, staircase, direction, levelNumber, startingRoom
-        );
+//        new Level(
+//                hiddenTable, shownTable, staircase, direction, levelNumber, startingRoom
+//        );
     }
 
     private void loadMonsters() throws IOException, ClassNotFoundException {
-        Monster.setMonsters((ArrayList<Monster>) new ObjectInputStream(
-                new FileInputStream(filePath + "/monsters")
-        ).readObject());
+//        Monster.setMonsters((ArrayList<Monster>) new ObjectInputStream(
+//                new FileInputStream(filePath + "/monsters")
+//        ).readObject());
     }
 
     private void loadItems() throws IOException, ClassNotFoundException {
-        Item.items = (ArrayList<Item>) new ObjectInputStream(
-                new FileInputStream(filePath + "/items")
-        ).readObject();
+//        Item.items = (ArrayList<Item>) new ObjectInputStream(
+//                new FileInputStream(filePath + "/items")
+//        ).readObject();
     }
 
     private void loadPlayer() throws IOException, ClassNotFoundException {
-        GameManager.setPlayer((Player) new ObjectInputStream(
-                new FileInputStream(filePath + "/player")
-        ).readObject());
+//        GameManager.setPlayer((Player) new ObjectInputStream(
+//                new FileInputStream(filePath + "/player")
+//        ).readObject());
     }
 
     private void loadRooms() throws IOException, ClassNotFoundException {

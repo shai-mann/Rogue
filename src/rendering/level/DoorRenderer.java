@@ -1,4 +1,7 @@
-package rendering;
+package rendering.level;
+
+import rendering.AbstractRenderer;
+import rendering.Renderer;
 
 import java.awt.*;
 import java.util.Collections;

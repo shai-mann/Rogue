@@ -1,9 +1,10 @@
 package util.inventory;
 
-import entity.lifelessentity.item.Item;
-import entity.lifelessentity.item.combat.Arrow;
-import util.Helper;
+import entityimpl2.lifeless.item.combat.Arrow;
+import entityimpl2.lifeless.item.structure.Item;
 import main.GameManager;
+import map.level.Level;
+import util.Helper;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -44,12 +45,12 @@ public class InventoryPane {
     }
 
     private void addInventory() {
-        List<Item> playerInventory = GameManager.getPlayer().getInventory();
+        List<Item> playerInventory = Level.getLevel().getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
             InventoryItem iv = InventoryItem.checkDuplicity(playerInventory.get(i));
             if (iv != null) {
                 if (iv.getItem() instanceof Arrow) {
-                    iv.addArrowDuplicity(((Arrow) playerInventory.get(i)).getAmount());
+                    iv.addArrowDuplicity(((Arrow) playerInventory.get(i)).amount());
                 } else {
                     iv.addDuplicity();
                 }
@@ -80,9 +81,9 @@ public class InventoryPane {
 
     private void setDefaults() {
         scrollablePane.setViewportView(scrollingPanel);
-        if (GameManager.getPlayer().getInventory().size() > 0) {
+        if (Level.getLevel().getPlayer().getInventory().size() > 0) {
             Helper.setSize(scrollingPanel, new Dimension(GameManager.getFrame().getWidth() - 5,
-                    GameManager.getPlayer().getInventory().size() * 76
+                    Level.getLevel().getPlayer().getInventory().size() * 76
             ));
         }
 

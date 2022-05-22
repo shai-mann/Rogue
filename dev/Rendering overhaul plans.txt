@@ -3,7 +3,8 @@ Planned final rendering process:
     2) Render shown entities
     3) Render animations
 
-Steps of adjustment:
-    1)
-
 Ultimate goal: REMOVE REFERENCES TO "OVERWRITTEN CHARACTERS"
+
+Generation parallel updates:
+    1) Fix bounding issues by converting Room boundaries to just use list of points
+    2) Give rooms inner and outer collision checks - one to prevent generation issues, another to prevent movement issues

@@ -13,6 +13,7 @@ public class RoomAttributes {
 
     private final Rectangle bounds;
     private final List<Point> points = new ArrayList<>();
+    private final List<Point> wallPoints = new ArrayList<>();
 
     public RoomAttributes(Point topLeft, Dimension size) {
         this.size = size;
@@ -30,6 +31,11 @@ public class RoomAttributes {
                 points.add(new Point(i, j));
             }
         }
+
+        wallPoints.addAll(getPoints().stream().filter(
+                (p) -> p.x == topLeft().x ^ p.y == topLeft().y ^
+                        p.x == topLeft().x + size().width ^ p.y == topLeft().y + size().height
+        ).toList());
     }
 
     /* GETTERS */
@@ -64,5 +70,13 @@ public class RoomAttributes {
 
     public int height() {
         return size.height;
+    }
+
+    public List<Point> getWallPoints() {
+        return wallPoints;
+    }
+
+    public List<Point> getNonWallPoints() {
+        return points.stream().filter(p -> !wallPoints.contains(p)).toList();
     }
 }
