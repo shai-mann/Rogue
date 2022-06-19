@@ -33,3 +33,4 @@
     15b) Valid walkable locations
     15c) Valid generation locations (not allowing rooms to intersect)
     15d) Make it not to computationally expensive too.
+    15e) Suggested implementation: custom RoomBounds class that computes these via rectangles or smthn
