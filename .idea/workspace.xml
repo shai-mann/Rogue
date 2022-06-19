@@ -10,88 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/component/Effect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/component/Inventory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/component/Status.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/Staircase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Food.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Gold.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Potion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Ring.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Scroll.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/Wand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/combat/Armor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/combat/Arrow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/combat/Weapon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/structure/AbstractItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/lifeless/item/structure/Item.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/Monster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/MonsterAttributes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/MonsterClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/MonsterClassBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/MonsterLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/AIFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/AbstractAttackAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/AbstractMovementAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/AttackAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/MovementAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/ConfuseAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/HealthDrainAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/HitAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/IntoxicateAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/ParalyzeAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/RustAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/StealGoldAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/StealItemAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/WeakenAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/attack/XPDrainAttack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/movement/MimicAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/movement/SleepAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/movement/StillAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/movement/TrackAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/monster/ai/movement/WanderAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/player/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/player/PlayerAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/player/PlayerKeyMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/player/PlayerStatsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/structure/AbstractEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/structure/AbstractLivingEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/structure/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/structure/EntityProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/structure/LivingEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/util/MoveResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entityimpl2/util/Obfuscator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/EntityRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/rendering/Renderable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/Counter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/Game Concept Ideas.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rogue.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Rogue.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/General todo list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/General todo list.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Rendering overhaul plans.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Rendering overhaul plans.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Rogue bugs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Rogue bugs.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/level/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Level.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/LevelGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Passageway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Passageway.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/level/RoomAttributes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/AbstractRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/DoorRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/level/DoorRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/PassagewayRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/level/PassagewayRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rendering/RoomRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/rendering/level/RoomRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Helper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/animation/Animation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/animation/Animation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/GravePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/StatusBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/gamepanes/saving/SavePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/inventory/InventoryPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/BeginPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/menupanes/loading/LoadGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -552,7 +474,10 @@
       <workItem from="1653084378559" duration="7847000" />
       <workItem from="1653190215821" duration="3731000" />
       <workItem from="1653243410127" duration="1972000" />
-      <workItem from="1653257953991" duration="1274000" />
+      <workItem from="1653257953991" duration="2031000" />
+      <workItem from="1653436809196" duration="863000" />
+      <workItem from="1654819840304" duration="2766000" />
+      <workItem from="1655602328821" duration="1502000" />
     </task>
     <servers />
   </component>

@@ -174,14 +174,16 @@ public class Level extends JComponent {
         throw new Exception("Failed to locate Renderable containing player");
     }
 
-    public MoveResult isValidMove(entity.structure.Entity target, Point displacement) {
+    public MoveResult isValidMove(Entity target, Point displacement) {
         Point newLocation = Helper.translate(target.location(), displacement);
 
         boolean out = rooms.stream().anyMatch((r) -> r.canPlaceEntityAt(newLocation) || r.isDoor(newLocation));
 
         out |= passageways.stream().anyMatch((p) -> p.contains(newLocation));
 
-        // TODO: prevent certain entity collisions?
+        for (Monster m : monsters) {
+            if (newLocation.equals(m.location())) return new MoveResult(m);
+        }
 
         return new MoveResult(out);
     }
