@@ -1,0 +1,47 @@
+Give the player five traits:
+    1) Dexterity
+    2) Strength
+    3) Health
+    4) Arcana
+    5) Stamina
+
+At every level up, you gain X (suggested: 4) trait points (to be determined) where each trait point
+allows you to level up one trait once. Levelling up a trait gives bonuses to related stats of that trait
+(i.e. levelling up health increases the player's max health by some amount), but can also unlock
+the use of certain items or abilities (see abilities section below). For example, progressing far enough
+in the strength trait could allow you to wield heavier or stronger weapons or wear stronger armor.
+
+Dexterity affects passive finding (capabilities of finding traps without using the find button), and active
+finding (finding doors or traps with the find button) - incrementally increasing chance of those abilities finding
+something if there is something to find.
+
+Strength affects your damage when attacking and your capabilities of holding heavy/stronger weapons and wearing
+stronger armor. Increases strength (and defense?) while also unlocking weapons and armor for the player to use.
+
+Health only increases the player's max health.
+
+Arcana increases the player's mana as well as unlocking certain magical objects and subcategories of those (spells,
+specific wands/potions, etc.)
+
+Stamina affects recovery rate - improves regeneration rate, decreases rate of hunger levelling, and
+can provide benefits/immunity against sleep-related attacks/traps/monsters.
+
+Abilities:
+
+The player has two active slots and one passive slot.
+Every other level, on level up, you will be presented with two abilities (can be either passive or active in nature).
+The abilities presented to you come from a weighted pool (weights calculated based on the compatibility with the stats
+you have been upgrading). The player then selects one of these two abilities, and adds it to one of their slots,
+overriding what was in the slot. If the ability slot was already taken the old ability is gone. The player does not
+have to choose one of the new abilities given to them.
+
+Smaller notes:
+    1) Cut rings - remove from game
+    2) Lower the number of monsters, make each monster more interesting
+    3) Add guard movement type that defends a specific entity or location
+    4) Change generation to include more interesting entity spawning (i.e. treasure zoos)
+    5) Redo UI/Inventory management so that held weapon/worn armor piece are more easily communicated
+    6) Generally add tooltips to things, perhaps progress bars for health that can be hovered to indicate
+        max health and current health.
+    7) Add ranged weapons, figure out a better way of using them than opening inventory and "using" an arrow.
+    8) Achievements?
