@@ -1,119 +1,105 @@
 package map.level;
 
-import entity.Entity;
-import entity.lifelessentity.Staircase;
-import entity.lifelessentity.item.Item;
-import entity.lifelessentity.item.combat.Armor;
-import entity.lifelessentity.item.combat.Weapon;
-import entity.livingentity.Player;
-import entity.livingentity.monster.Monster;
-import entity.livingentity.monster.MonsterLoader;
+import entity.component.Status;
+import entity.lifeless.Staircase;
+import entity.lifeless.item.structure.Item;
+import entity.monster.Monster;
+import entity.player.Player;
+import entity.structure.Entity;
+import entity.util.MoveResult;
 import main.GameManager;
-import map.level.table.CustomCellRenderer;
 import map.level.table.CustomRoomTable;
+import map.level.table.GameTable;
 import map.level.table.RoomTableModel;
-import org.jetbrains.annotations.Nullable;
+import rendering.Renderable;
+import rendering.Renderer;
 import util.Helper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+import java.util.*;
+
+import static entity.lifeless.Staircase.Direction.*;
 
 public class Level extends JComponent {
 
     /*
-    * LEVEL CLASS:
-    * The Level class creates a new JTable the "level", and then generates rooms on it
-    * Generates 5-8 rooms per level
-    * Generates Passageways connecting all rooms to all other rooms
-    * Generates Treasure and data.monsters in each of the rooms
-    * Generates the Player in the starting hiddenTable with the descendingStaircase up one level in the same hiddenTable
-    * Generates descendingStaircase going down to next level (except on last level)
-    * Level size is 69 * 40
+     * LEVEL CLASS:
+     * The Level class creates a new JTable the "level", and then generates rooms on it
+     * Generates 5-8 rooms per level
+     * Generates Passageways connecting all rooms to all other rooms
+     * Generates Treasure and data.monsters in each of the rooms
+     * Generates the Player in the starting hiddenTable with the descendingStaircase up one level in the same hiddenTable
+     * Generates descendingStaircase going down to next level (except on last level)
+     * Level size is 69 * 40
      */
 
     private JPanel panel;
-    private CustomRoomTable table;
-    private CustomRoomTable hiddenTable;
+    private JTable displayTable;
+
+    private GameTable gameTable;
+    private CustomRoomTable hiddenTable; // todo: remove
+
     private Room startingRoom;
+
     private Staircase descendingStaircase;
     private Staircase ascendingStaircase;
+    private final Player player;
+
     private int levelNumber = 0;
 
-    private ArrayList<Point> shownPoints = new ArrayList<>();
-    private ArrayList<Point> blindnessPoints = new ArrayList<>();
+    private final Set<Point> shownPoints = new HashSet<>();
+
+    private final List<Room> rooms = new ArrayList<>();
+    private final List<Passageway> passageways = new ArrayList<>();
+    private final List<Renderer> renderables = new ArrayList<>();
+
+    private final List<Item> items = new ArrayList<>();
+    private final List<Monster> monsters = new ArrayList<>();
 
     private static Level level;
 
     public Level() {
         setDefaults();
         newLevel(true);
-    }
-
-    /**
-     * Used to generate a {@link Level} that only contains one room. Generally used
-     * to test various monster/player/item related features.
-     * @param generateAsTestLevel parameter value is ignored - only used to distinguish between other constructors.
-     */
-    public Level(boolean generateAsTestLevel) {
-        setDefaults();
-        startingRoom = new Room(new Point(19, 5), new Dimension(15, 15));
-
+        player = new Player(startingRoom.getCenter(), this);
+        player.apply(panel);
         GameManager.getFrame().requestFocus();
+
+        render();
     }
 
-    public Level(CustomRoomTable hiddenTable,
-                 CustomRoomTable shownTable,
-                 Staircase staircase,
-                 int direction,
-                 int levelNumber,
-                 Room startingRoom,
-                 ArrayList<Point> shownPoints,
-                 ArrayList<Point> blindnessPoints) {
-        setDefaults();
-        this.hiddenTable = hiddenTable;
-        this.table = shownTable;
-        if (levelNumber != 26 && direction == Player.DOWN) {
-            descendingStaircase = staircase;
-        } else {
-            ascendingStaircase = staircase;
-        }
-        this.startingRoom = startingRoom;
-        this.shownPoints = shownPoints;
-        this.blindnessPoints = blindnessPoints;
-
-        panel.add(table);
-
-        panel.revalidate(); // TODO: confirm that these are unnecessary?
-        panel.repaint();
-        GameManager.getFrame().requestFocus();
-    }
+    // TODO: reimplement saving/loading with overhauled code
+//    public Level(CustomRoomTable hiddenTable,
+//                 CustomRoomTable shownTable,
+//                 Staircase staircase,
+//                 int direction,
+//                 int levelNumber,
+//                 Room startingRoom) {
+//        setDefaults();
+//        this.hiddenTable = hiddenTable;
+////        this.table = shownTable;
+//        if (levelNumber != 26 && direction == Player.DOWN) {
+//            descendingStaircase = staircase;
+//        } else {
+//            ascendingStaircase = staircase;
+//        }
+//        this.startingRoom = startingRoom;
+//
+//        panel.add(gameTable.getPanel()); // TODO: necessary?
+//
+//        panel.revalidate(); // TODO: confirm that these are unnecessary?
+//        panel.repaint();
+//    }
 
     public void newLevel(boolean descending) {
-        if (descending) {
-            descendLevel();
-        } else {
-            ascendLevel();
-        }
+        levelNumber += descending ? 1 : -1;
+        generateLevel();
 
-        spawnEntities();
+//        spawnEntities();
         panel.revalidate();
         panel.repaint();
-        GameManager.getFrame().requestFocus();
-        shownPoints.clear();
-    }
-
-    private void descendLevel() {
-        levelNumber++;
-        generateLevel();
-    }
-
-    private void ascendLevel() {
-        levelNumber--;
-        generateLevel();
     }
 
     private void generateLevel() {
@@ -126,228 +112,154 @@ public class Level extends JComponent {
     }
 
     public void update() {
-        Point location = GameManager.getPlayer().getLocation();
+        player.update();
+        monsters.forEach(Monster::update);
 
-        if (GameManager.getPlayer().getStatus().isBlinded()) {
-            blind();
+        render();
+    }
+
+    public void render() {
+        try {
+            addShownPoints(); // take note of where player is and add
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (levelNumber > 5 || GameManager.getPlayer().overWrittenGraphic.equals("#")
-                || GameManager.getPlayer().overWrittenGraphic.equals("+")) {
-            addShownPoint(location);
-            addShownPoint(new Point(location.x, location.y + 1));
-            addShownPoint(new Point(location.x, location.y - 1));
-            addShownPoint(new Point(location.x + 1, location.y));
-            addShownPoint(new Point(location.x - 1, location.y));
-        } else if (GameManager.getPlayer() != null){
-            for (Point p: getRoom(GameManager.getPlayer()).getRoomPoints()) {
-                addShownPoint(p);
+
+        gameTable.clear();
+
+        for (Renderable renderable : renderables) {
+            if (player.getStatus().is(Status.Stat.BLINDED)) {
+                continue;
+            } // todo: move if statement outside of for loop
+
+            renderable.render(gameTable);
+        }
+
+        player.render(gameTable);
+    }
+
+    public boolean shouldRender(Point p) {
+        return shownPoints.contains(p);
+    }
+
+    private void addShownPoints() throws Exception {
+        Player player = getPlayer();
+
+        List<Point> newPoints = Helper.getAdjacentPoints(player.location(), true);
+
+        Renderer renderer = getRenderableContainingPlayer(player);
+
+        if (levelNumber > 5 || renderer instanceof Passageway) {
+            renderer.addShownPoints(newPoints);
+            shownPoints.addAll(newPoints);
+        } else {
+            renderer.reveal();
+            shownPoints.addAll(renderer.getShownPoints());
+        }
+    }
+
+    private Renderer getRenderableContainingPlayer(Player player) throws Exception {
+        for (Room room : rooms) {
+            if (room.bounds().contains(player.location())) {
+                return room;
             }
         }
 
-        for (Point p : shownPoints) {
-            table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
-        }
-    }
-
-    // UPDATE HELPER METHODS
-
-    public void addShownPoint(Point p) {
-        for (Point point : shownPoints) {
-            if (p.getY() == point.getY() && p.getX() == point.getX()) {
-                return;
+        for (Passageway p : passageways) {
+            if (p.contains(player.location())) {
+                return p;
             }
         }
-        shownPoints.add(p);
-    }
-    public void finalSetup() {
-        Point p = GameManager.getPlayer().getLocation();
-        addShownPoint(p);
-        table.setValueAt(hiddenTable.getValueAt(p.y, p.x), p.y, p.x);
 
-        if (GameManager.bootTestingEnvironment) {
-            new Monster(MonsterLoader.monsterClasses.get(25), 20, 6);
-        }
+        throw new Exception("Failed to locate Renderable containing player");
     }
-    public void blind() {
-        // TODO: make the player visible when blinded
-        blindnessPoints.addAll(shownPoints);
-        shownPoints.clear();
 
-        for (int i = 0; i < hiddenTable.getRowCount(); i++) {
-            for (int j = 0; j < hiddenTable.getColumnCount(); j++) {
-                table.setValueAt("", i, j);
-            }
+    public MoveResult isValidMove(Entity target, Point displacement) {
+        Point newLocation = Helper.translate(target.location(), displacement);
+
+        boolean out = rooms.stream().anyMatch((r) -> r.canPlaceEntityAt(newLocation) || r.isDoor(newLocation));
+
+        out |= passageways.stream().anyMatch((p) -> p.contains(newLocation));
+
+        for (Monster m : monsters) {
+            if (newLocation.equals(m.location())) return new MoveResult(m);
         }
-    }
-    public void unblind() {
-        shownPoints.addAll(blindnessPoints);
-        blindnessPoints.clear();
+
+        return new MoveResult(out);
     }
 
     // PHYSICAL LEVEL GENERATION METHODS
 
     private void generateRooms(int numRooms) {
-        for (int i = 0; i < numRooms; i++) {
-            Dimension size = getRandomRoomSize();
-            Point point;
-            do {
-                point = getRandomPoint();
-                if (!checkValidPoint(point) || !Room.checkValidSpace(point.x, point.y, size)) {
-                    point = null;
-                } else {
-                    new Room(point, size);
-                }
-            } while (point == null);
-        }
+//        rooms.addAll(LevelGenerator.generate(numRooms));
+        rooms.addAll(LevelGenerator.generateTestRoom());
+        renderables.addAll(rooms);
     }
-    private Room generatePassageways() {
-        /*
-        * 1) Get closest unconnected hiddenTable to top left
-        * 2) Get closest connected hiddenTable to that hiddenTable
-        * 3) Connect those rooms
-        * 4) Repeat until there are no unconnected rooms
-         */
-        ArrayList<Room> unconnectedRooms = (ArrayList<Room>) Room.rooms.clone();
-        ArrayList<Room> connectedRooms = new ArrayList<>();
-        Room room;
-        Room closestRoom;
 
-        for (int i = 0; i < unconnectedRooms.size();) {
-            room = getClosestRoom(new Point(0,0), unconnectedRooms);
-            if (connectedRooms.size() != 0) {
-                closestRoom = getClosestRoom(room, connectedRooms);
-            } else {
-                closestRoom = getClosestRoom(room, unconnectedRooms);
-            }
-            new Passageway(room, closestRoom);
-            connectedRooms.add(room);
-            unconnectedRooms.remove(room);
-            connectedRooms.add(closestRoom);
-            unconnectedRooms.remove(closestRoom);
-        }
-        return getClosestRoom(new Point(34, 20), connectedRooms);
+    private Room generatePassageways() {
+        passageways.addAll(LevelGenerator.generate(rooms));
+        renderables.addAll(passageways);
+
+        return Helper.getRandom(rooms);
     }
 
     // ENTITY SPAWNING METHODS
 
     private void spawnEntities() {
         Monster.spawnMonsters(levelNumber);
-        Item.spawnItems();
+//        Item.spawnItems(); // todo: reimplement with new Item/ItemSpawner class
         if (levelNumber != 26) {
-            descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.DOWN);
+            descendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), DOWN);
         }
         if (levelNumber != 1) {
-            ascendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), Player.UP);
+            ascendingStaircase = new Staircase((Helper.getRandom(Room.rooms)).getRandomPointInBounds(), UP);
         }
         if (levelNumber == 1) {
             // give player mace
-            spawnStartingPackItem("/data/weapons/mace", null);
-            spawnStartingPackItem(null, Item.itemTypes.ARMOR);
+//            spawnStartingPackItem("/data/weapons/mace", null); // todo: reimplement with new Items
+//            spawnStartingPackItem(null, Item.itemTypes.ARMOR);
         }
     }
 
-    private void spawnStartingPackItem(@Nullable String itemPath, Item.itemTypes type) {
-        Point p = getStartingRoom().getRandomPointInBounds();
-        if (type != null) {
-            Item i = Item.spawnItem(p, type);
-            if (i instanceof Armor) {
-                ((Armor) i).setAc(8);
-                ((Armor) i).setName("Leather Armor");
-                ((Armor) i).setCursed(false);
-            }
-        } else if (itemPath != null){
-            try {
-                if (GameManager.notJAR) {
-                    new Weapon("./resources" + itemPath, p.x, p.y);
-                } else {
-                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
-                            + itemPath, p.x, p.y);
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    // ROOM GENERATION HELPER METHODS
-
-    private Dimension getRandomRoomSize() {
-        return new Dimension(Helper.random.nextInt(7) + 5,
-                Helper.random.nextInt(6) + 6);
-    }
-    private Point getRandomPoint() {
-        return new Point(Helper.random.nextInt(GameManager.getTable().getColumnCount() - 1),
-                Helper.random.nextInt(GameManager.getTable().getRowCount() - 1));
-    }
-    private boolean checkValidPoint(Point p) {
-        try {
-            return GameManager.getTable().getColumnCount() - p.x > 3 &&
-                    GameManager.getTable().getRowCount() - p.y > 3 &&
-                    p.x > 3 && p.y > 3;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-    }
-
-    // PASSAGEWAY GENERATION HELPER METHODS
-
-    private Room getClosestRoom(Room room, ArrayList<Room> rs) {
-        ArrayList<Room> rooms = (ArrayList<Room>) rs.clone();
-        rooms.remove(room);
-        Room closestRoom = rooms.get(0);
-        for (int i = 1; i < rooms.size(); i++) {
-            if (Passageway.getDistance(room.getTopLeft(), rooms.get(i).getTopLeft()) <
-                    Passageway.getDistance(room.getTopLeft(), closestRoom.getTopLeft())) {
-                closestRoom = rooms.get(i);
-            }
-        }
-        return closestRoom;
-    }
-    private Room getClosestRoom(Point p, ArrayList<Room> rs) {
-        ArrayList<Room> rooms = (ArrayList<Room>) rs.clone();
-        Room closestRoom = rooms.get(0);
-        for (int i = 0; i < rooms.size(); i++) {
-            if (Passageway.getDistance(p, rooms.get(i).getTopLeft()) <
-                    Passageway.getDistance(p, closestRoom.getTopLeft())) {
-                closestRoom = rooms.get(i);
-            }
-        }
-        return closestRoom;
-    }
+//    private void spawnStartingPackItem(@Nullable String itemPath, Item.itemTypes type) {
+//        Point p = getStartingRoom().getRandomPointInBounds();
+//        if (type != null) {
+//            Item i = Item.spawnItem(p, type);
+//            if (i instanceof Armor) {
+//                ((Armor) i).setAc(8);
+//                ((Armor) i).setName("Leather Armor");
+//                ((Armor) i).setCursed(false);
+//            }
+//        } else if (itemPath != null) {
+//            try {
+//                if (GameManager.notJAR) {
+//                    new Weapon("./resources" + itemPath, p.x, p.y);
+//                } else {
+//                    new Weapon(new File(Weapon.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
+//                            + itemPath, p.x, p.y);
+//                }
+//            } catch (URISyntaxException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     // TABLE GENERATION METHODS
 
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setBorder(null);
-        panel.setPreferredSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        panel.setMaximumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        panel.setMinimumSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        panel.setSize(new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
-        table.setBackground(Helper.BACKGROUND_COLOR);
-        table.setGridColor(Helper.BACKGROUND_COLOR);
-        table.setRowHeight(panel.getHeight() / table.getRowCount());
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setWidth(panel.getWidth() / table.getColumnCount());
-        }
-
+        Helper.setSize(panel, new Dimension(GameManager.getFrame().getWidth(), (int) (GameManager.getFrame().getHeight() * 0.8)));
 
         level = this;
     }
+
     private void createUIComponents() {
         hiddenTable = new CustomRoomTable(createTableModel(), false);
-        table = new CustomRoomTable(createTableModel(), false);
-
-        table.setFocusable(false);
-        table.setRowSelectionAllowed(false);
-        table.setForeground(Helper.BACKGROUND_COLOR);
-        table.setGridColor(Helper.BACKGROUND_COLOR);
-        table.setFont(new Font(Helper.THEME_FONT, Font.BOLD, 12));
-
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(new CustomCellRenderer());
-        }
+        gameTable = new GameTable();
+        displayTable = gameTable.getTable();
     }
+
     private RoomTableModel createTableModel() {
         RoomTableModel model = new RoomTableModel();
         for (int j = 0; j != 69; j++) {
@@ -358,49 +270,51 @@ public class Level extends JComponent {
         }
         return model;
     }
+
     private String[] createTableRow() {
         String[] rowValueList = new String[69];
         Arrays.fill(rowValueList, "");
 
         return rowValueList;
     }
+
     private void resetTable() {
-        Monster.getMonsters().clear();
-        Item.items.clear();
+        monsters.clear();
+        items.clear();
         Room.rooms.clear();
         Door.getDoors().clear();
         descendingStaircase = null;
         ascendingStaircase = null;
-        for (int i = 0; i < hiddenTable.getRowCount(); i++) {
-            for (int j = 0; j < hiddenTable.getColumnCount(); j++) {
-                hiddenTable.setValueAt("", i, j);
-                table.setValueAt("", i, j);
-            }
-        }
+        hiddenTable.clear();
     }
 
     // GETTER METHODS
 
-    public CustomRoomTable getHiddenTable() {
-        return hiddenTable;
+    public CustomRoomTable getTable() {
+        return hiddenTable; // todo: change to gameTable
     }
+
     public static Level getLevel() {
         return level;
     }
+
     public Room getStartingRoom() {
         return startingRoom;
     }
+
     public Room getRoom(Entity entity) {
         for (Room room : Room.rooms) {
-            if (room.getBounds().contains(new Point(entity.getXPos(), entity.getYPos()))) {
+            if (room.bounds().contains(entity.location())) {
                 return room;
             }
         }
         return null;
     }
+
     public int getLevelNumber() {
         return levelNumber;
     }
+
     public Staircase getStaircase() {
         if (descendingStaircase == null) {
             return ascendingStaircase;
@@ -408,16 +322,41 @@ public class Level extends JComponent {
             return descendingStaircase;
         }
     }
-    public ArrayList<Point> getShownPoints() {
+    public List<Staircase> getStaircases() {
+        List<Staircase> staircases = new ArrayList<>();
+        if (descendingStaircase != null) staircases.add(descendingStaircase);
+        if (ascendingStaircase != null) staircases.add(ascendingStaircase);
+
+        return staircases;
+    }
+
+    public Staircase.Direction getDirection() {
+        return ascendingStaircase == null && levelNumber < 26 ? DOWN : UP;
+    }
+
+    public Set<Point> getShownPoints() {
         return shownPoints;
     }
-    public ArrayList<Point> getBlindnessPoints() {
-        return blindnessPoints;
+
+    public Player getPlayer() {
+        return player;
     }
-    public CustomRoomTable getShownTable() {
-        return table;
+
+    public List<Item> getItems() {
+        return items;
     }
-    public int getDirection() {
-        return ascendingStaircase == null && levelNumber < 26 ? Player.DOWN : Player.UP;
+
+    public List<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public List<Monster> getLoadedMonsters() {
+        return getMonsters().stream().filter(Monster::shown).toList();
+    }
+
+    public void reveal() {
+        for (Renderer r : renderables) {
+            r.reveal();
+        }
     }
 }

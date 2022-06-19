@@ -1,18 +1,17 @@
 package map;
 
-import entity.livingentity.monster.Monster;
-import util.animation.Animation;
-import util.gamepanes.MessageBar;
-import util.gamepanes.saving.SavePane;
-import util.gamepanes.StatusBar;
-import util.Helper;
 import main.GameManager;
 import map.level.Level;
+import util.Helper;
+import util.animation.Animation;
 import util.animation.AnimationManager;
+import util.gamepanes.MessageBar;
+import util.gamepanes.StatusBar;
+import util.gamepanes.saving.SavePane;
 
 import javax.swing.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.Serializable;
@@ -47,11 +46,10 @@ public class Map implements Serializable {
     public void update() {
         saved = false;
         MessageBar.nextTurn(); // must go first
-        Monster.update();
-        GameManager.getPlayer().update();
+        level.update();
         statusBar.updateStatusBar(); // must go after player update
         animationManager.update();
-        level.update();
+        level.render();
     }
 
     // GETTER/HELPER METHODS
@@ -59,14 +57,16 @@ public class Map implements Serializable {
     public static Map getMap() {
         return map;
     }
+
     private void createUIComponents() {
         if (Level.getLevel() == null) {
-            level = GameManager.bootTestingEnvironment ? new Level(true) : new Level();
+            level = new Level();
         } else {
             level = Level.getLevel();
         }
         statusBar = new StatusBar();
     }
+
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
@@ -85,36 +85,33 @@ public class Map implements Serializable {
                 }
             }
         });
-        GameManager.getFrame().addKeyListener(new KeyListener() {
+        GameManager.getFrame().addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                char s = '\u0013';
+                char s = '\u0013'; // TODO: ????????? change to encoded constant for god's sake
                 if (e.isControlDown() && e.getKeyChar() == s) {
                     new SavePane();
                     GameManager.getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
                 }
             }
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
         });
         animationManager = new AnimationManager();
     }
+
     public MessageBar getMessageBar() {
         return messageBar;
     }
+
     public StatusBar getStatusBar() {
         return statusBar;
     }
+
     public AnimationManager getAnimationManager() {
         return animationManager;
     }
+
     public void setSaved(boolean saved) {
         this.saved = saved;
     }
+
 }

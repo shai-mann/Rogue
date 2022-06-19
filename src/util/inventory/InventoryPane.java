@@ -1,16 +1,17 @@
 package util.inventory;
 
-import entity.lifelessentity.item.Item;
-import entity.lifelessentity.item.combat.Arrow;
-import util.Helper;
+import entity.lifeless.item.combat.Arrow;
+import entity.lifeless.item.structure.Item;
 import main.GameManager;
+import map.level.Level;
+import util.Helper;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryPane {
     private static JPanel savedPanel;
@@ -26,6 +27,7 @@ public class InventoryPane {
 
         GameManager.replaceContentPane(panel);
     }
+
     public InventoryPane(String message, MouseAdapter l, JPanel savePane) {
         savedPanel = savePane;
         addInventory();
@@ -35,18 +37,20 @@ public class InventoryPane {
 
         GameManager.replaceContentPane(panel);
     }
+
     public void setBorderTitle(String borderTitle) {
         panel.setBorder(new TitledBorder(borderTitle));
         panel.revalidate();
         panel.repaint();
     }
+
     private void addInventory() {
-        ArrayList<Item> playerInventory = GameManager.getPlayer().getInventory();
+        List<Item> playerInventory = Level.getLevel().getPlayer().getInventory();
         for (int i = 0; i < playerInventory.size(); i++) {
             InventoryItem iv = InventoryItem.checkDuplicity(playerInventory.get(i));
             if (iv != null) {
                 if (iv.getItem() instanceof Arrow) {
-                    iv.addArrowDuplicity(((Arrow) playerInventory.get(i)).getAmount());
+                    iv.addArrowDuplicity(((Arrow) playerInventory.get(i)).amount());
                 } else {
                     iv.addDuplicity();
                 }
@@ -57,6 +61,7 @@ public class InventoryPane {
         }
         panel.revalidate();
     }
+
     private void addMouseListener() {
         scrollingPanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -73,11 +78,12 @@ public class InventoryPane {
             }
         });
     }
+
     private void setDefaults() {
         scrollablePane.setViewportView(scrollingPanel);
-        if (GameManager.getPlayer().getInventory().size() > 0) {
+        if (Level.getLevel().getPlayer().getInventory().size() > 0) {
             Helper.setSize(scrollingPanel, new Dimension(GameManager.getFrame().getWidth() - 5,
-                    GameManager.getPlayer().getInventory().size() * 76
+                    Level.getLevel().getPlayer().getInventory().size() * 76
             ));
         }
 
@@ -109,4 +115,5 @@ public class InventoryPane {
         scrollablePane = new JScrollPane();
         scrollingPanel = new JPanel();
     }
+
 }

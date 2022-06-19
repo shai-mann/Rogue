@@ -2,13 +2,12 @@ package util.menupanes;
 
 import javafx.util.Pair;
 import main.GameManager;
+import map.level.table.CustomRoomTable;
+import map.level.table.RoomTableModel;
+import settings.Settings;
 import util.Helper;
 
 import javax.swing.*;
-
-import map.level.table.CustomRoomTable;
-import map.level.table.RoomTableModel;
-import settings.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +37,7 @@ public class SettingsPane {
 
         setDefaults();
     }
+
     private void setDefaults() {
         setDefaultSettings(innerPanel);
         setDefaultSettings(textSizeField);
@@ -70,6 +70,7 @@ public class SettingsPane {
 
         addActionListeners();
     }
+
     private void setDefaultSettings(JComponent jc) {
         jc.setBackground(Helper.BACKGROUND_COLOR);
         jc.setForeground(Helper.FOREGROUND_COLOR);
@@ -100,6 +101,7 @@ public class SettingsPane {
             public void keyTyped(KeyEvent e) {
 
             }
+
             @Override
             public void keyPressed(KeyEvent e) {
                 int x = keyValuesTable.getSelectedColumn();
@@ -109,6 +111,7 @@ public class SettingsPane {
                     keyValuesTable.setValueAt(Character.toUpperCase(e.getKeyChar()), y, x);
                 }
             }
+
             @Override
             public void keyReleased(KeyEvent e) {
 
@@ -124,15 +127,17 @@ public class SettingsPane {
         RoomTableModel model = createTableModel();
         keyValuesTable = new CustomRoomTable(model, true);
     }
+
     private RoomTableModel createTableModel() {
         RoomTableModel model = new RoomTableModel();
         model.addColumn("Action:");
         model.addColumn("Key:");
-        model.addRow(new String[] {"Action:", "Key:"});
+        model.addRow(new String[]{"Action:", "Key:"});
         for (int i = 0; i < 8; i++) {
-            model.addRow(new String[] {Settings.keyCodeToString(Settings.getKeys().get(i)),
+            model.addRow(new String[]{Settings.keyCodeToString(Settings.getKeys().get(i)),
                     KeyEvent.getKeyText(Settings.getKeys().get(i))});
         }
         return model;
     }
+
 }

@@ -1,7 +1,6 @@
 package entity.component;
 
-import entity.lifelessentity.item.Gold;
-import entity.lifelessentity.item.Item;
+import entity.lifeless.item.structure.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +16,21 @@ public class Inventory {
         this.items.addAll(List.of(items));
     }
 
-    public void addGold(int gold) {
-        this.gold += gold;
-    }
-    public void addGold(Gold g) {
-        addGold(g.getAmount());
+    /**
+     * Changes the amount of gold in this Inventory by the given delta. If the delta is negative,
+     * returns the amount stolen from the Inventory (cannot be more than is in the inventory).
+     * @param delta the amount to adjust the gold in this Inventory by.
+     * @return 0 if gold was added, otherwise returns the amount stolen (as positive integer).
+     */
+    public int changeGold(int delta) {
+        int currentGold = gold;
+
+        gold += delta;
+        gold = Math.max(gold, 0); // prevent gold from being negative
+
+        if (delta > 0) return 0; // return 0 if delta was positive
+
+        return Math.min(currentGold, -delta);
     }
     public void setGold(int amount) {
         this.gold = amount;

@@ -1,9 +1,10 @@
 package util;
 
-import entity.Entity;
+import entity.structure.Entity;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,6 +26,7 @@ public class Helper {
         component.setPreferredSize(size);
         component.setMaximumSize(size);
         component.setMinimumSize(size);
+        component.setSize(size);
     }
 
     public static Color changeOpacity(Color color, int opacity) {
@@ -62,6 +64,10 @@ public class Helper {
 
     /* ENTITY HELPER METHODS */
 
+    public static double distance(Entity e1, Entity e2) {
+        return e1.location().distance(e2.location());
+    }
+
     /**
      * Determines if the e1 is in range of e2.
      * @param e1 {@link Entity} searching for second entity.
@@ -69,12 +75,53 @@ public class Helper {
      * @param range range (circular, inclusive) to search in.
      */
     public static boolean isInRange(Entity e1, Entity e2, int range) {
-        double dist = Math.hypot(e2.getXPos() - e1.getXPos(), e2.getYPos() - e1.getYPos());
+        double dist = distance(e1, e2);
 
         return dist <= range;
     }
 
     public static boolean isNextTo(Entity e1, Entity e2) {
         return isInRange(e1, e2, 1);
+    }
+
+    public static boolean isNextTo(Point p1, Point p2) {
+        return getAdjacentPoints(p1, true).contains(p2);
+    }
+
+    /* RENDERING HELPER METHODS */
+
+    public static List<Point> getAdjacentPoints(Point p, boolean includeGiven) {
+        List<Point> points = new ArrayList<>(List.of(new Point[]{
+                new Point(p.x, p.y + 1),
+                new Point(p.x, p.y - 1),
+                new Point(p.x + 1, p.y),
+                new Point(p.x - 1, p.y)}));
+
+        if (includeGiven) {
+            points.add(p);
+        }
+
+        return points;
+    }
+
+    /* GENERAL MATH HELPER METHODS */
+
+    /**
+     * Determines if the given value is in the range given (inclusive)
+     */
+    public static boolean isInRange(int value, int min, int max) {
+        return value >= min && value <= max;
+    }
+
+    /**
+     * Translates the given point, but does not mutate either given point.
+     * @return a new point where the translated point would land.
+     */
+    public static Point translate(Point p, Point dp) {
+        return new Point(p.x + dp.x, p.y + dp.y);
+    }
+
+    public static Dimension translate(Dimension dim1, Dimension dim2) {
+        return new Dimension(dim1.width + dim2.width, dim1.height + dim2.height);
     }
 }

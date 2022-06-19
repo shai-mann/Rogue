@@ -1,35 +1,40 @@
 package map.level;
 
-import util.gamepanes.MessageBar;
-import main.GameManager;
+import rendering.AbstractRenderedModel;
+import rendering.Renderer;
+import rendering.level.DoorRenderer;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Door extends Point {
+public class Door extends AbstractRenderedModel implements Renderer {
 
-    private boolean secret = false;
+    private static final ArrayList<Door> doors = new ArrayList<>(); // TODO: remove
 
-    private static ArrayList<Door> doors = new ArrayList<>();
+    private final DoorRenderer renderer;
+    private final Point location;
 
-    public Door(Point p, boolean secret, String overWrittenGraphic) {
-        super(p);
-        this.secret = secret;
-        doors.add(this);
-        if (isSecret()) {
-            GameManager.getTable().setValueAt(overWrittenGraphic, p.y, p.x);
-        }
+    public Door(Point location, boolean shown) {
+        this.location = location;
+        renderer = new DoorRenderer(location, shown);
     }
 
     // GETTER METHODS
 
     public boolean isSecret() {
-        return secret;
+        return !renderer.isShown();
     }
-    public void reveal() {
-        secret = false;
-        GameManager.getTable().setValueAt("+", y, x);
+
+    public Point getLocation() {
+        return location;
     }
+
+    @Override
+    protected Renderer renderer() {
+        return renderer;
+    }
+
+    // todo: remove
     public static ArrayList<Door> getDoors() {
         return doors;
     }
