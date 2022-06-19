@@ -5,9 +5,7 @@ public class Counter {
     private int value = 0;
 
     public void tick() {
-        if (isTicking()) {
-            value -= 1;
-        }
+        if (isTicking()) value -= 1;
     }
 
     public void add(int value) {
