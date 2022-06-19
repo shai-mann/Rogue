@@ -1,0 +1,11 @@
+name:Kobold
+graphic:K
+hitDamage:1d3
+speed:1
+movementType:track
+attackType:hit
+health:1d8
+AC:7
+experience:2
+treasure:30
+level:1-5

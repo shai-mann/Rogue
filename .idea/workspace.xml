@@ -10,8 +10,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/test-resources/data/images/Rogue_Background.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/bat.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/centaur.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/dragon.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/floating_eye.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/giant_ant.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/griffin.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/hobgoblin.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/invisible_stalker.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/jackal.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/kobold.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/leprechaun.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/mimic.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/nymph.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/orc.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/purple_worm.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/quasit.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/rust_monster.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/snake.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/troll.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/umberhulk.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/vampire.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/violet_fungi.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/wraith.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/xorn.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/yeti.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/zombie.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/dagger" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/long_sword" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/mace" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/short_bow" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/shuriken" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/spear" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/two-handed-sword" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/util/CounterTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Rogue/main/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rogue.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Rogue.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Counter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +78,7 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -297,7 +335,9 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/entityimpl2/lifeless" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -307,11 +347,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mannr\Desktop\Programming\Rogue" />
       <recent name="C:\Users\mannr\Documents\GitHub\Rogue\src\entityimpl2\lifeless" />
       <recent name="C:\Users\mannr\Documents\GitHub\Rogue\src\entityimpl2\lifeless\item" />
       <recent name="C:\Users\mannr\Documents\GitHub\Rogue\src\entityimpl2\monster\ai" />
       <recent name="C:\Users\mannr\Documents\GitHub\Rogue\src\entityimpl2\monster" />
-      <recent name="C:\Users\mannr\Documents\GitHub\Rogue\src\entityimpl2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Shai Mann-Robison\Desktop\Rogue\data" />
@@ -320,9 +360,15 @@
       <recent name="C:\Users\Shai Mann-Robison\Desktop\Rogue\data\weapons" />
       <recent name="C:\Users\Shai Mann-Robison\Desktop\Rogue\data\monsters" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
       <recent name="resources" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="util" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="entityimpl2.monster.ai" />
@@ -331,7 +377,7 @@
       <recent name="entity.livingentity.monster.ai.attack" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GameManager">
+  <component name="RunManager" selected="JUnit.CounterTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -349,6 +395,22 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CounterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Rogue" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="util" />
+      <option name="MAIN_CLASS_NAME" value="util.CounterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -387,9 +449,11 @@
     <list>
       <item itemvalue="Application.GameManager" />
       <item itemvalue="JAR Application.Rogue JAR" />
+      <item itemvalue="JUnit.CounterTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CounterTest" />
         <item itemvalue="Application.GameManager" />
       </list>
     </recent_temporary>
@@ -557,6 +621,11 @@
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java</url>
           <line>35</line>
           <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/util/CounterTest.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

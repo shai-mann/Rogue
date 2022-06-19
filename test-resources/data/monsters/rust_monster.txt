@@ -1,0 +1,11 @@
+name:Rust Monster
+graphic:R
+hitDamage:0d0
+speed:1
+movementType:track
+attackType:rust
+health:5d8
+AC:6
+experience:42
+treasure:20
+level:8-17

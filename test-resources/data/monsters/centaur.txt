@@ -1,0 +1,12 @@
+name:Centaur
+graphic:C
+hitDamage:3d8
+critDamage:4d8
+speed:1
+movementType:track
+attackType:hit
+health:4d8
+AC:7
+experience:29
+treasure:15
+level:7-13

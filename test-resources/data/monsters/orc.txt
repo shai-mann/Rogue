@@ -1,0 +1,11 @@
+name:Orc
+graphic:O
+hitDamage:2d8
+speed:1
+movementType:track
+attackType:hit
+health:2d9
+AC:6
+experience:5
+treasure:15
+level:4-8

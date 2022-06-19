@@ -1,0 +1,11 @@
+name:Wraith
+graphic:W
+hitDamage:4d6
+speed:1
+movementType:track
+attackType:xpdrain
+health:8d5
+AC:5
+experience:375
+treasure:10
+level:15-24

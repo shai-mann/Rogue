@@ -1,0 +1,11 @@
+name:Snake
+graphic:S
+hitDamage:1d2
+speed:1
+movementType:track
+attackType:hit
+health:1d8
+AC:8
+experience:2
+treasure:15
+level:1-3

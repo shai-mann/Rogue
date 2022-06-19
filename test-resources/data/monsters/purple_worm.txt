@@ -1,0 +1,11 @@
+name:Purple Worm
+graphic:P
+hitDamage:5d4
+speed:1
+movementType:sleep
+attackType:hit
+health:13d8
+AC:6
+experience:2100
+treasure:15
+level:21-23

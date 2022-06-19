@@ -1,0 +1,6 @@
+name:Dagger
+damage:1d6
+throwable:true
+throwDamage:1d4
+amount:2d1
+cursed:2

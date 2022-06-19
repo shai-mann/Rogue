@@ -1,0 +1,11 @@
+name:Violet Fungi
+graphic:F
+hitDamage:1d2
+speed:1
+movementType:still
+attackType:trap
+health:8d8
+AC:3
+experience:80
+treasure:20
+level:10-16

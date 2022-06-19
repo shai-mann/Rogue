@@ -1,0 +1,14 @@
+name:Dragon
+graphic:D
+critChance:0.15
+hitDamage:1d8
+critDamage:3d10
+speed:1
+movementType:sleep
+secondaryMovementType:track
+attackType:hit
+health:10d8
+AC:-1
+experience:5000
+treasure:100
+level:24-26

@@ -1,0 +1,12 @@
+name:Floating Eye
+graphic:E
+hitDamage:0d0
+speed:1
+movementType:sleep
+secondaryMovementType:still
+attackType:paralyze
+health:2d5
+AC:8
+experience:5
+treasure:10
+level:2-10

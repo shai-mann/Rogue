@@ -1,0 +1,11 @@
+name:Umberhulk
+graphic:U
+hitDamage:6d8
+speed:1
+movementType:track
+attackType:confuse
+health:8d7
+AC:6
+experience:142
+treasure:15
+level:18-23

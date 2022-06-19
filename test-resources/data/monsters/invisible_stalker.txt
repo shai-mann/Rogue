@@ -1,0 +1,12 @@
+name:Invisible Stalker
+graphic:I
+hitDamage:4d4
+speed:1
+movementType:wander
+attackType:hit
+health:5d8
+AC:5
+invisible:true
+experience:120
+treasure:10
+level:14-18

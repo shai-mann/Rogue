@@ -1,0 +1,5 @@
+name:Dart
+damage:1d1
+throwable:true
+throwDamage:1d3
+amount:3d4
