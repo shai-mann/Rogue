@@ -10,45 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12936cc2-3b66-46d9-b509-efef01534e2e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/test-resources/data/images/Rogue_Background.PNG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/bat.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/centaur.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/dragon.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/floating_eye.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/giant_ant.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/griffin.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/hobgoblin.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/invisible_stalker.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/jackal.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/kobold.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/leprechaun.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/mimic.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/nymph.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/orc.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/purple_worm.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/quasit.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/rust_monster.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/snake.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/troll.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/umberhulk.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/vampire.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/violet_fungi.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/wraith.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/xorn.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/yeti.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/monsters/zombie.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/dagger" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/long_sword" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/mace" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/short_bow" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/shuriken" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/spear" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-resources/data/weapons/two-handed-sword" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/util/CounterTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/util/DiceRangeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rogue.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Rogue.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ImagePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ImagePanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +41,8 @@
       <list>
         <option value="Record" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -377,7 +341,7 @@
       <recent name="entity.livingentity.monster.ai.attack" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CounterTest">
+  <component name="RunManager" selected="JUnit.DiceRangeTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -409,6 +373,22 @@
       </extension>
       <option name="PACKAGE_NAME" value="util" />
       <option name="MAIN_CLASS_NAME" value="util.CounterTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DiceRangeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Rogue" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="util" />
+      <option name="MAIN_CLASS_NAME" value="util.DiceRangeTest" />
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
@@ -450,9 +430,11 @@
       <item itemvalue="Application.GameManager" />
       <item itemvalue="JAR Application.Rogue JAR" />
       <item itemvalue="JUnit.CounterTest" />
+      <item itemvalue="JUnit.DiceRangeTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DiceRangeTest" />
         <item itemvalue="JUnit.CounterTest" />
         <item itemvalue="Application.GameManager" />
       </list>
@@ -545,6 +527,7 @@
       <workItem from="1653436809196" duration="863000" />
       <workItem from="1654819840304" duration="2766000" />
       <workItem from="1655602328821" duration="1502000" />
+      <workItem from="1655741981245" duration="1818000" />
     </task>
     <servers />
   </component>
@@ -621,11 +604,6 @@
           <url>file://$PROJECT_DIR$/src/entity/lifelessentity/item/Food.java</url>
           <line>35</line>
           <option name="timeStamp" value="74" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/util/CounterTest.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
