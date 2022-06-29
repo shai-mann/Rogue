@@ -6,7 +6,7 @@ import entity.lifeless.item.Scroll;
 import entity.lifeless.item.Wand;
 import entity.monster.MonsterLoader;
 import util.Helper;
-import util.menupanes.BeginPane;
+import rendering.panels.menupanes.BeginPane;
 
 import javax.swing.*;
 

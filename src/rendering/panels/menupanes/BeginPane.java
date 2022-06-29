@@ -1,10 +1,10 @@
-package util.menupanes;
+package rendering.panels.menupanes;
 
 import main.GameManager;
 import map.Map;
 import util.Helper;
 import util.ImagePanel;
-import util.menupanes.loading.LoadPane;
+import rendering.panels.menupanes.loading.LoadPane;
 
 import javax.swing.*;
 

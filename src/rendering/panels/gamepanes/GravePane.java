@@ -1,4 +1,4 @@
-package util.gamepanes;
+package rendering.panels.gamepanes;
 
 import map.level.Level;
 import util.Helper;

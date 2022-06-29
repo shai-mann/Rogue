@@ -11,8 +11,8 @@ import main.GameManager;
 import map.level.table.CustomRoomTable;
 import map.level.table.GameTable;
 import map.level.table.RoomTableModel;
-import rendering.Renderable;
-import rendering.Renderer;
+import rendering.structure.Renderable;
+import rendering.structure.Renderer;
 import util.Helper;
 
 import javax.swing.*;

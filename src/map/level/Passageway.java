@@ -1,9 +1,9 @@
 package map.level;
 
 import map.level.table.GameTable;
-import rendering.AbstractRenderedModel;
+import rendering.structure.AbstractRenderedModel;
 import rendering.level.PassagewayRenderer;
-import rendering.Renderer;
+import rendering.structure.Renderer;
 import util.Helper;
 
 import java.awt.*;

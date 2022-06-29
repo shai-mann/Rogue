@@ -1,7 +1,7 @@
 package settings;
 
 import javafx.util.Pair;
-import util.menupanes.SettingsPane;
+import rendering.panels.menupanes.SettingsPane;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package util.menupanes.loading;
+package rendering.panels.menupanes.loading;
 
 import entity.lifeless.Staircase;
 import main.GameManager;
