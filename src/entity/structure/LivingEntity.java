@@ -21,9 +21,13 @@ public interface LivingEntity extends Entity {
 
     void changeHealth(int delta);
 
+    void setHealth(int health);
+
     int maxHealth();
 
     void changeMaxHealth(int delta);
+
+    void setMaxHealth(int maxHealth);
 
     boolean shouldDie();
 
