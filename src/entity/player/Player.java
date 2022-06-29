@@ -11,7 +11,7 @@ import entity.structure.EntityProperties;
 import entity.structure.LivingEntity;
 import entity.util.MoveResult;
 import main.GameManager;
-import map.Map;
+import map.Game;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
@@ -115,7 +115,7 @@ public class Player extends AbstractLivingEntity {
         // todo: trap searching
 
         manager.tick(true);
-        Map.getMap().update();
+        Game.getMap().update();
     }
 
     public void inventory() {
@@ -134,7 +134,7 @@ public class Player extends AbstractLivingEntity {
 
         level.newLevel(direction == Staircase.Direction.DOWN);
         moveTo(Level.getLevel().getStartingRoom().getRandomPointInBounds());
-        Map.getMap().getStatusBar().updateStatusBar(); // todo: switch to general rendering update?
+        Game.getMap().getStatusBar().updateStatusBar(); // todo: switch to general rendering update?
 
         manager.tick(true);
     }
@@ -275,6 +275,6 @@ public class Player extends AbstractLivingEntity {
 
     public void eat() {
         manager.resetHunger();
-        Map.getMap().getStatusBar().updateStatusBar();
+        Game.getMap().getStatusBar().updateStatusBar();
     }
 }

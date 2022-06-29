@@ -17,7 +17,7 @@ import java.awt.event.WindowEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map implements Serializable {
+public class Game implements Serializable {
     private StatusBar statusBar;
     private Level level;
     private JPanel panel;
@@ -26,16 +26,16 @@ public class Map implements Serializable {
 
     public boolean saved = false;
 
-    private static Map map;
+    private static Game game;
 
-    public Map() {
+    public Game() {
         setDefaults();
 
         GameManager.replaceContentPane(panel);
-        map = this;
+        game = this;
     }
 
-    public Map(ArrayList<Animation> animations, String[] messages) {
+    public Game(ArrayList<Animation> animations, String[] messages) {
         this();
         for (Animation a : animations) {
             animationManager.addAnimation(a);
@@ -54,8 +54,8 @@ public class Map implements Serializable {
 
     // GETTER/HELPER METHODS
 
-    public static Map getMap() {
-        return map;
+    public static Game getMap() {
+        return game;
     }
 
     private void createUIComponents() {

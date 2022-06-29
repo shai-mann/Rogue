@@ -8,7 +8,7 @@ import entity.monster.MonsterLoader;
 import entity.player.Player;
 import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
-import map.Map;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import util.Helper;
@@ -86,13 +86,13 @@ public class Wand extends AbstractItem implements Item {
                 m.attributes().setInvisible(true);
                 break;
             case LIGHTNING:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
+                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
                 break;
             case FIRE:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
+                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
                 break;
             case COLD:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(),
+                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(),
                         new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
@@ -117,7 +117,7 @@ public class Wand extends AbstractItem implements Item {
                 }
             case DRAIN_LIFE:
                 player.changeHealth(-player.health() / 2);
-                Map.getMap().getStatusBar().updateStatusBar();
+                Game.getMap().getStatusBar().updateStatusBar();
                 for (Monster monster : Level.getLevel().getLoadedMonsters()) {
                     monster.changeHealth(-5);
                 }

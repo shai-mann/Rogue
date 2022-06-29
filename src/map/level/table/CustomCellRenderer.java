@@ -1,6 +1,6 @@
 package map.level.table;
 import util.Helper;
-import map.Map;
+import map.Game;
 import util.animation.Animation;
 
 import javax.swing.table.DefaultTableCellRenderer;
@@ -31,7 +31,7 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
     }
 
     private Color containsPoint(Point p) {
-        Animation a = Map.getMap().getAnimationManager().contains(p);
+        Animation a = Game.getMap().getAnimationManager().contains(p);
         if (a != null) {
             return a.getColor();
         }
