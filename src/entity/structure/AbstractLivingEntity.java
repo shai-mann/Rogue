@@ -44,6 +44,11 @@ public abstract class AbstractLivingEntity extends AbstractEntity implements Liv
     }
 
     @Override
+    public void setHealth(int health) {
+        this.health = Math.min(health, maxHealth);
+    }
+
+    @Override
     public int maxHealth() {
         return maxHealth;
     }
@@ -51,6 +56,11 @@ public abstract class AbstractLivingEntity extends AbstractEntity implements Liv
     @Override
     public void changeMaxHealth(int delta) {
         maxHealth += delta;
+    }
+
+    @Override
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     @Override

@@ -1,0 +1,51 @@
+{
+  "name": "Health",
+  "levels": [
+    {
+      "stat": [
+        {
+          "type": "add",
+          "trait": "max_health",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "stat": [
+        {
+          "type": "percent",
+          "trait": "max_health",
+          "delta": 1.09
+        }
+      ],
+      "unlock": [
+        {
+          "type": "weapon",
+          "name": "Two Handed Sword"
+        }
+      ]
+    },
+    {
+      "unlock": [
+        {
+          "type": "magic",
+          "name": "Scroll of Reveal Monster"
+        },
+        {
+          "type": "armor",
+          "name": "Studded Leather Chestplate"
+        }
+      ]
+    }
+  ],
+  "default_level": {
+    "stat": [
+      {
+        "type": "add",
+        "trait": "max_health",
+        "delta": 2
+      }
+    ]
+  },
+  "max_level": 100
+}

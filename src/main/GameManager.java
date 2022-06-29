@@ -5,6 +5,7 @@ import entity.lifeless.item.Ring;
 import entity.lifeless.item.Scroll;
 import entity.lifeless.item.Wand;
 import entity.monster.MonsterLoader;
+import entity.player.trait.TraitLoader;
 import util.Helper;
 import util.menupanes.BeginPane;
 
@@ -39,6 +40,7 @@ public class GameManager {
 
     // todo: move to Map?
     private static void runStaticSetupMethods() {
+        TraitLoader.loadTraits();
         MonsterLoader.loadMonsters();
         Ring.obfuscate();
         Wand.obfuscate();

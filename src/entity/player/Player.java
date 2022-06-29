@@ -6,6 +6,8 @@ import entity.lifeless.Staircase;
 import entity.lifeless.item.Ring;
 import entity.lifeless.item.combat.Armor;
 import entity.lifeless.item.structure.Item;
+import entity.player.trait.Trait;
+import entity.player.trait.TraitLoader;
 import entity.structure.AbstractLivingEntity;
 import entity.structure.EntityProperties;
 import entity.structure.LivingEntity;
@@ -49,6 +51,8 @@ public class Player extends AbstractLivingEntity {
     private Armor wornItem;
     private Item heldItem;
     private final List<Ring> rings = new ArrayList<>();
+
+    private final List<Trait> traits = TraitLoader.traits();
 
     public Player(Point location, Level level) {
         super(PLAYER_PROPERTIES, location, PLAYER_STARTING_HEALTH);
