@@ -1,7 +1,7 @@
 package rendering.level;
 
-import rendering.AbstractRenderer;
-import rendering.Renderer;
+import rendering.structure.AbstractRenderer;
+import rendering.structure.Renderer;
 
 import java.awt.*;
 import java.util.List;

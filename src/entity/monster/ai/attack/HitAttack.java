@@ -4,7 +4,7 @@ import entity.component.Status;
 import entity.monster.Monster;
 import entity.monster.ai.AbstractAttackAI;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 public class HitAttack extends AbstractAttackAI {
 

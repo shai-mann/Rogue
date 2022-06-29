@@ -1,4 +1,4 @@
-package rendering;
+package rendering.structure;
 
 import java.awt.*;
 import java.util.List;

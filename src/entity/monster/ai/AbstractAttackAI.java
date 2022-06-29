@@ -4,7 +4,7 @@ import entity.monster.Monster;
 import entity.player.Player;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 import java.util.HashMap;
 import java.util.Map;

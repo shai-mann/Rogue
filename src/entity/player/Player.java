@@ -16,7 +16,7 @@ import map.level.Door;
 import map.level.Level;
 import map.level.Room;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 import util.inventory.InventoryPane;
 
 import javax.swing.*;

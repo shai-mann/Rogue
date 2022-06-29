@@ -1,4 +1,4 @@
-package util.gamepanes;
+package rendering.panels.gamepanes;
 
 import entity.monster.Monster;
 import entity.player.Player;

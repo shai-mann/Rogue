@@ -13,7 +13,7 @@ import map.level.Level;
 import map.level.Room;
 import util.Helper;
 import util.animation.Animation;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Arrays;

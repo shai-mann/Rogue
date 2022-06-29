@@ -1,4 +1,4 @@
-package util.gamepanes.saving;
+package rendering.panels.gamepanes.saving;
 
 import main.GameManager;
 import map.Map;

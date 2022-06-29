@@ -1,7 +1,7 @@
 package map.level;
 
-import rendering.AbstractRenderedModel;
-import rendering.Renderer;
+import rendering.structure.AbstractRenderedModel;
+import rendering.structure.Renderer;
 import rendering.level.DoorRenderer;
 
 import java.awt.*;

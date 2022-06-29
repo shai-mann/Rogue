@@ -1,9 +1,9 @@
-package util.menupanes.loading;
+package rendering.panels.menupanes.loading;
 
 import util.Helper;
 import main.GameManager;
 import settings.Settings;
-import util.gamepanes.saving.Save;
+import rendering.panels.gamepanes.saving.Save;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

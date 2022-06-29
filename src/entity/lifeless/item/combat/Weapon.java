@@ -6,7 +6,7 @@ import entity.player.Player;
 import entity.structure.EntityProperties;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 import java.awt.*;
 

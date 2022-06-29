@@ -1,8 +1,8 @@
 package map.level;
 
 import map.level.table.GameTable;
-import rendering.AbstractRenderedModel;
-import rendering.Renderer;
+import rendering.structure.AbstractRenderedModel;
+import rendering.structure.Renderer;
 import rendering.level.RoomRenderer;
 import util.Helper;
 

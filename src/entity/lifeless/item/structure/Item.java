@@ -2,8 +2,8 @@ package entity.lifeless.item.structure;
 
 import entity.player.Player;
 import entity.structure.Entity;
-import rendering.Renderer;
-import util.gamepanes.MessageBar;
+import rendering.structure.Renderer;
+import rendering.panels.gamepanes.MessageBar;
 
 public interface Item extends Entity, Renderer {
 
