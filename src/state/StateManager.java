@@ -25,7 +25,9 @@ public class StateManager {
     private final Map<Update, Consumer<StateUpdate>> hooksMap = new HashMap<>();
 
     public void update(StateUpdate state) {
-        state.updates.forEach(u -> hooksMap.getOrDefault(u, u1 -> {}).accept(state));
+        state.updates.forEach(u -> hooksMap.getOrDefault(u, u1 -> {
+            System.out.println("[DEBUG] Failed to find hook for " + u1.toString());
+        }).accept(state));
     }
 
     public void addHook(Update update, Consumer<StateUpdate> consumer) {
