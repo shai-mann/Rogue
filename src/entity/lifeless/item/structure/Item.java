@@ -3,7 +3,7 @@ package entity.lifeless.item.structure;
 import entity.player.Player;
 import entity.structure.Entity;
 import map.Game;
-import rendering.Renderer;
+import rendering.structure.Renderer;
 
 public interface Item extends Entity, Renderer {
 

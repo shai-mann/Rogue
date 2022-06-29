@@ -1,8 +1,8 @@
 package rendering.level;
 
 import map.level.RoomAttributes;
-import rendering.AbstractRenderer;
-import rendering.Renderer;
+import rendering.structure.AbstractRenderer;
+import rendering.structure.Renderer;
 
 import java.awt.*;
 

@@ -1,4 +1,4 @@
-package util.gamepanes;
+package rendering.panels.gamepanes;
 
 import util.Helper;
 import main.GameManager;

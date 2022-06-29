@@ -1,7 +1,7 @@
 package entity.structure;
 
-import rendering.Renderable;
-import rendering.Renderer;
+import rendering.structure.Renderable;
+import rendering.structure.Renderer;
 
 import java.awt.*;
 

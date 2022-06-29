@@ -1,4 +1,4 @@
-package rendering;
+package rendering.structure;
 
 import map.level.table.GameTable;
 

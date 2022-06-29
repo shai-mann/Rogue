@@ -1,8 +1,9 @@
-package rendering;
+package rendering.entity;
 
 import entity.structure.AbstractEntity;
 import map.level.Level;
 import map.level.table.GameTable;
+import rendering.structure.Renderer;
 
 import java.awt.*;
 import java.util.List;
