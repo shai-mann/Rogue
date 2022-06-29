@@ -12,7 +12,7 @@ import map.level.Level;
 import map.level.Room;
 import map.level.table.GameTable;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Optional;

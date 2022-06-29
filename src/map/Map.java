@@ -5,9 +5,9 @@ import map.level.Level;
 import util.Helper;
 import util.animation.Animation;
 import util.animation.AnimationManager;
-import util.gamepanes.MessageBar;
-import util.gamepanes.StatusBar;
-import util.gamepanes.saving.SavePane;
+import rendering.panels.gamepanes.MessageBar;
+import rendering.panels.gamepanes.StatusBar;
+import rendering.panels.gamepanes.saving.SavePane;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;

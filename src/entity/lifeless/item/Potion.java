@@ -10,7 +10,7 @@ import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
+import rendering.panels.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.*;
