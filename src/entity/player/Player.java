@@ -15,6 +15,7 @@ import map.Game;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
+import state.StateManager;
 import util.Helper;
 import util.gamepanes.MessageBar;
 import util.inventory.InventoryPane;
@@ -60,13 +61,20 @@ public class Player extends AbstractLivingEntity {
         initKeyMap();
     }
 
+    public void addUpdateHooks(StateManager stateManager) {
+        stateManager.addHook(StateManager.Update.PLAYER, this::update);
+        stateManager.addHook(StateManager.Update.PLAYER_STATUS, status::update);
+        stateManager.addHook(StateManager.Update.PLAYER_REGEN, manager::tickRegenerate);
+        stateManager.addHook(StateManager.Update.PLAYER_HUNGER, manager::tickHunger);
+    }
+
     public void update() {
         if (shouldDie()) {
             die();
             return;
         }
 
-        status.update();
+        manager.tick();
     }
 
     /* SYSTEM METHODS */

@@ -2,6 +2,7 @@ package map;
 
 import main.GameManager;
 import map.level.Level;
+import state.StateManager;
 import util.Helper;
 import util.animation.Animation;
 import util.animation.AnimationManager;
@@ -18,6 +19,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
+
+    private final StateManager stateManager = new StateManager();
+
     private StatusBar statusBar;
     private Level level;
     private JPanel panel;
@@ -52,11 +56,7 @@ public class Game implements Serializable {
         level.render();
     }
 
-    // GETTER/HELPER METHODS
-
-    public static Game getMap() {
-        return game;
-    }
+    /* INITIALIZING HELPER METHODS */
 
     private void createUIComponents() {
         if (Level.getLevel() == null) {
@@ -96,6 +96,22 @@ public class Game implements Serializable {
             }
         });
         animationManager = new AnimationManager();
+    }
+
+    private void addStateHooks() {
+        level.addUpdateHooks(stateManager);
+
+        stateManager.addHook(StateManager.Update.PLAYER_GUI, statusBar::updateStatusBar);
+        stateManager.addHook(StateManager.Update.CHAT, MessageBar::nextTurn);
+        stateManager.addHook(StateManager.Update.ANIMATIONS, animationManager::update);
+
+        stateManager.addHook(level::render);
+    }
+
+    /* GETTER AND SETTER METHODS */
+
+    public static Game getMap() {
+        return game;
     }
 
     public MessageBar getMessageBar() {

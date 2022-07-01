@@ -45,6 +45,11 @@ public class PlayerStatsManager {
         this.player = player;
     }
 
+    public void tick() {
+        if (shouldLevelUp()) levelUp();
+    }
+
+    // todo: remove
     public void tick(boolean tickHunger) {
         if (shouldLevelUp()) levelUp();
         if (tickHunger) tickHunger();
