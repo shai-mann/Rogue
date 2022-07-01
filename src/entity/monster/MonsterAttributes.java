@@ -6,7 +6,7 @@ import entity.monster.ai.MovementAI;
 import util.DiceRange;
 
 /**
- * A mutable form of the {@link entity.livingentity.monster.MonsterClass} record that sticks with (and mutates)
+ * A mutable form of the {@link MonsterClass} record that sticks with (and mutates)
  * through a {@link Monster} entity's lifetime.
  */
 public class MonsterAttributes {
