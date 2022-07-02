@@ -2,6 +2,7 @@ package state;
 
 import entity.player.Player;
 import util.animation.AnimationManager;
+import util.gamepanes.MessageBar;
 
 import java.util.function.Supplier;
 
@@ -32,6 +33,10 @@ public class StateModel {
 
     public void update(StateUpdate stateUpdate) {
         this.stateManager.update(stateUpdate);
+    }
+
+    public void message(String message) {
+        MessageBar.addMessage(message);
     }
 
     public void debug(String message) {
