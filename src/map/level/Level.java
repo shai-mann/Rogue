@@ -59,7 +59,7 @@ public class Level extends JComponent {
     private final List<Item> items = new ArrayList<>();
     private final List<Monster> monsters = new ArrayList<>();
 
-    private static Level level;
+    private static Level level; // todo: remove
 
     public Level() {
         setDefaults();
