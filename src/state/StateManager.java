@@ -13,36 +13,52 @@ public class StateManager {
 
     // todo: force ordering using enum field + sorting of list
     public enum Update {
-        PLAYER_GUI, // updates display to represent new player stats
-        PLAYER, // checks for death and level up
-        PLAYER_STATUS, // updates player stats (data only)
-        PLAYER_HUNGER, // ticks hunger value
-        PLAYER_REGEN, // ticks regeneration counter
+        CHAT(0), // advances chat (adding new messages, hiding old ones)
+        PLAYER(1), // checks for death and level up
+        PLAYER_STATUS(2), // updates player stats (data only)
+        PLAYER_HUNGER(3), // ticks hunger value
+        PLAYER_REGEN(4), // ticks regeneration counter
         //PLAYER_MANA, // ticks mana regeneration
-        MONSTERS, // ticks monster AI
-        ITEMS, // checks for item pickup
-        CHAT, // advances chat (adding new messages, hiding old ones)
-        ANIMATIONS, // ticks active animations
+        MONSTERS(5), // ticks monster AI
+        PLAYER_GUI(6), // updates display to represent new player stats
+        ITEMS(7), // checks for item pickup
+        ANIMATIONS(8); // ticks active animations
+
+        final int z;
+
+        Update(int z) {
+            this.z = z;
+        }
+
+        public int compare(Update that) {
+            return Integer.compare(this.z, that.z);
+        }
     }
 
     private final Map<Update, UpdateHook> hooksMap = new HashMap<>();
-    private final List<RenderHook> renderHooks = new ArrayList<>();
-    // todo: add listeners to trigger when any update happens (like the Game marking itself as not saved)
+    private final List<UpdateListener> listeners = new ArrayList<>();
+
+    private final StateModel model;
+
+    public StateManager(StateModel model) {
+        this.model = model;
+    }
 
     public void update(StateUpdate state) {
-        state.updates.forEach(u -> hooksMap.getOrDefault(u, () -> {
-            System.out.println("[DEBUG] Failed to find hook for " + u.toString());
+        List<Update> updates = state.updates.stream().sorted(Update::compare).toList();
+        updates.forEach(u -> hooksMap.getOrDefault(u, () -> {
+            model.debug("Failed to find hook for " + u.toString());
         }).run());
 
-        renderHooks.forEach(Runnable::run);
+        listeners.forEach(Runnable::run);
     }
 
     public void addHook(Update update, UpdateHook hook) {
         hooksMap.put(update, hook);
     }
 
-    public void addHook(RenderHook hook) {
-        renderHooks.add(hook);
+    public void addListener(UpdateListener listener) {
+        listeners.add(listener);
     }
 
 }
