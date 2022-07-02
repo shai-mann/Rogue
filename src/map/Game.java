@@ -1,8 +1,10 @@
 package map;
 
+import entity.structure.AbstractEntity;
 import main.GameManager;
 import map.level.Level;
 import state.StateManager;
+import state.StateModel;
 import util.Helper;
 import util.animation.Animation;
 import util.animation.AnimationManager;
@@ -20,13 +22,14 @@ import java.util.ArrayList;
 
 public class Game implements Serializable {
 
-    private final StateManager stateManager = new StateManager();
-
     private StatusBar statusBar;
     private Level level;
     private JPanel panel;
     private MessageBar messageBar;
     private AnimationManager animationManager;
+
+    private final StateModel stateModel;
+    private final StateManager stateManager;
 
     public boolean saved = false;
 
@@ -34,6 +37,15 @@ public class Game implements Serializable {
 
     public Game() {
         setDefaults();
+
+        stateModel = new StateModel(
+                level::getPlayer,
+                this::getAnimationManager
+        );
+        stateManager = stateModel.getStateManager();
+        AbstractEntity.setStateModel(stateModel);
+
+        addStateHooks();
 
         GameManager.replaceContentPane(panel);
         game = this;
@@ -105,7 +117,8 @@ public class Game implements Serializable {
         stateManager.addHook(StateManager.Update.CHAT, MessageBar::nextTurn);
         stateManager.addHook(StateManager.Update.ANIMATIONS, animationManager::update);
 
-        stateManager.addHook(level::render);
+        stateManager.addListener(level::render);
+        stateManager.addListener(() -> saved = false);
     }
 
     /* GETTER AND SETTER METHODS */
