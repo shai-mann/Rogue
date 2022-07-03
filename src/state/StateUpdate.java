@@ -3,6 +3,7 @@ package state;
 import state.StateManager.Update;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,10 @@ public class StateUpdate {
     final Set<Update> updates = Arrays.stream(Update.values()).collect(Collectors.toSet());
 
     public StateUpdate() {}
+
+    public StateUpdate(List<Update> updates) {
+        this.updates.addAll(updates);
+    }
 
     public void add(Update update) {
         updates.add(update);
