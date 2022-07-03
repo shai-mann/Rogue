@@ -3,11 +3,9 @@ package entity.structure;
 import map.level.table.GameTable;
 import rendering.EntityRenderer;
 import rendering.Renderer;
-import state.StateModel;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class AbstractEntity implements Renderer, Entity {
 
@@ -15,20 +13,10 @@ public abstract class AbstractEntity implements Renderer, Entity {
     private final Renderer renderer;
     protected Point location;
 
-    private static StateModel stateModel;
-
     public AbstractEntity(EntityProperties properties, Point location) {
         this.properties = properties;
         this.renderer = new EntityRenderer(this);
         this.location = location;
-    }
-
-    public StateModel stateModel() {
-        return Objects.requireNonNull(stateModel);
-    }
-
-    public static void setStateModel(StateModel model) {
-        stateModel = model;
     }
 
     /* OVERRIDES */

@@ -1,6 +1,5 @@
 package map;
 
-import entity.structure.AbstractEntity;
 import main.GameManager;
 import map.level.Level;
 import state.StateManager;
@@ -43,7 +42,6 @@ public class Game implements Serializable {
                 this::getAnimationManager
         );
         stateManager = stateModel.getStateManager();
-        AbstractEntity.setStateModel(stateModel);
 
         addStateHooks();
 
@@ -125,6 +123,10 @@ public class Game implements Serializable {
 
     public static Game getMap() {
         return game;
+    }
+
+    public static StateModel stateModel() {
+        return game.stateModel;
     }
 
     public MessageBar getMessageBar() {
