@@ -22,10 +22,8 @@ import util.inventory.InventoryPane;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 import static settings.Settings.*;
 
@@ -287,6 +285,6 @@ public class Player extends AbstractLivingEntity {
 
     public void eat() {
         manager.resetHunger();
-        Game.getMap().getStatusBar().updateStatusBar();
+        Game.stateModel().update(new StateUpdate(StateManager.Update.PLAYER_GUI));
     }
 }

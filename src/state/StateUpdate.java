@@ -2,10 +2,7 @@ package state;
 
 import state.StateManager.Update;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * A StateUpdate represents an update to the game state. Various types of updates can occur,
@@ -18,9 +15,15 @@ public class StateUpdate {
 
     public static final StateUpdate GAME_TICK = new StateUpdate();
 
-    final Set<Update> updates = Arrays.stream(Update.values()).collect(Collectors.toSet());
+    final Set<Update> updates = new HashSet<>();
 
-    public StateUpdate() {}
+    public StateUpdate() {
+        this(Arrays.stream(Update.values()).toList());
+    }
+
+    public StateUpdate(Update update) {
+        this(Collections.singletonList(update));
+    }
 
     public StateUpdate(List<Update> updates) {
         this.updates.addAll(updates);

@@ -11,9 +11,10 @@ import entity.util.Obfuscator;
 import map.Game;
 import map.level.Level;
 import map.level.Room;
+import state.StateManager;
+import state.StateUpdate;
 import util.Helper;
 import util.animation.Animation;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -79,6 +80,7 @@ public class Wand extends AbstractItem implements Item {
                 Comparator.comparingDouble(m -> Helper.distance(m, player))
         );
 
+        // todo: make collect nearest monster a function and call it if necessary, skipping if no monster
         Monster m = opt.get();
 
         switch (power) {
@@ -86,13 +88,13 @@ public class Wand extends AbstractItem implements Item {
                 m.attributes().setInvisible(true);
                 break;
             case LIGHTNING:
-                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
                 break;
             case FIRE:
-                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
                 break;
             case COLD:
-                Game.getMap().getAnimationManager().addAnimation(new Animation(player.location(),
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(),
                         new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
@@ -117,7 +119,7 @@ public class Wand extends AbstractItem implements Item {
                 }
             case DRAIN_LIFE:
                 player.changeHealth(-player.health() / 2);
-                Game.getMap().getStatusBar().updateStatusBar();
+                Game.stateModel().update(new StateUpdate(StateManager.Update.PLAYER_GUI));
                 for (Monster monster : Level.getLevel().getLoadedMonsters()) {
                     monster.changeHealth(-5);
                 }

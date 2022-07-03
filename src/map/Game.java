@@ -39,7 +39,7 @@ public class Game implements Serializable {
 
         stateModel = new StateModel(
                 level::getPlayer,
-                this::getAnimationManager
+                () -> animationManager
         );
         stateManager = stateModel.getStateManager();
 
@@ -55,15 +55,6 @@ public class Game implements Serializable {
             animationManager.addAnimation(a);
         }
         messageBar.setMessages(messages);
-    }
-
-    public void update() {
-        saved = false;
-        MessageBar.nextTurn(); // must go first
-        level.update();
-        statusBar.updateStatusBar(); // must go after player update
-        animationManager.update();
-        level.render();
     }
 
     /* INITIALIZING HELPER METHODS */
@@ -121,6 +112,7 @@ public class Game implements Serializable {
 
     /* GETTER AND SETTER METHODS */
 
+    // todo: remove
     public static Game getMap() {
         return game;
     }
@@ -131,10 +123,6 @@ public class Game implements Serializable {
 
     public MessageBar getMessageBar() {
         return messageBar;
-    }
-
-    public StatusBar getStatusBar() {
-        return statusBar;
     }
 
     public AnimationManager getAnimationManager() {

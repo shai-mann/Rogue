@@ -31,7 +31,7 @@ public class CustomCellRenderer extends DefaultTableCellRenderer {
     }
 
     private Color containsPoint(Point p) {
-        Animation a = Game.getMap().getAnimationManager().contains(p);
+        Animation a = Game.stateModel().getAnimationManager().contains(p);
         if (a != null) {
             return a.getColor();
         }
