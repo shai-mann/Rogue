@@ -100,7 +100,7 @@ public class Wand extends AbstractItem implements Item {
                 break;
             case MAGIC_MISSILES:
                 m.changeHealth(-(Helper.random.nextInt(3) + 1));
-                MessageBar.addMessage("Missiles fly from your wand, hitting " + m.name());
+                Game.stateModel().message("Missiles fly from your wand, hitting " + m.name());
                 break;
             case HASTE_MONSTER:
                 if (m.attributes().speed() > 0) {
@@ -121,11 +121,11 @@ public class Wand extends AbstractItem implements Item {
                 for (Monster monster : Level.getLevel().getLoadedMonsters()) {
                     monster.changeHealth(-5);
                 }
-                MessageBar.addMessage("All visible monsters take damage");
+                Game.stateModel().message("All visible monsters take damage");
                 break;
             case NOTHING:
                 // Yup, this is legitimately a wand type.
-                MessageBar.addMessage("Nothing happens");
+                Game.stateModel().message("Nothing happens");
                 break;
             case TELEPORT_AWAY:
                 m.moveTo(Helper.getRandom(Room.rooms).getRandomPointInBounds());
@@ -135,15 +135,15 @@ public class Wand extends AbstractItem implements Item {
                 break;
             case CANCELLATION:
                 m.getStatus().add(new Effect(Effect.Type.SUPPRESS_POWER));
-                MessageBar.addMessage(m.name() + " loses its special abilities");
+                Game.stateModel().message(m.name() + " loses its special abilities");
                 break;
         }
 
-        MessageBar.addMessage("You used the " + name());
+        Game.stateModel().message("You used the " + name());
         uses--;
 
         if (uses <= 0) {
-            MessageBar.addMessage("Your " + name() + " breaks");
+            Game.stateModel().message("Your " + name() + " breaks");
             return true;
         }
 

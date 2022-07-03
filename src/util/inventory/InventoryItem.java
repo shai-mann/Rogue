@@ -122,9 +122,9 @@ public class InventoryItem extends JComponent {
 //                }
 //                GameManager.getPlayer().setOverwrittenGraphic(item.graphic);
 //                GameManager.getFrame().requestFocus();
-//                MessageBar.addMessage("You drop the " + getName());
+//                Game.stateModel().message("You drop the " + getName());
 //            } else {
-//                MessageBar.addMessage("You can't drop things you are wearing or holding.");
+//                Game.stateModel().message("You can't drop things you are wearing or holding.");
 //            }
 //            GameManager.getPlayer().toggleInventory();
 //        });

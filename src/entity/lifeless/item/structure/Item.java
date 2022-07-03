@@ -20,7 +20,7 @@ public interface Item extends Entity, Renderer {
     void pickup(Player p);
 
     default void identify() {
-        MessageBar.addMessage("You identified a " + name());
+        Game.stateModel().message("You identified a " + name());
     }
 
 }

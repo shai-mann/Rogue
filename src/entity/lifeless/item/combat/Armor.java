@@ -59,14 +59,14 @@ public class Armor extends AbstractItem implements Item {
         Player player = Level.getLevel().getPlayer();
         if (isBeingWorn()) {
             player.setWornItem(null);
-            MessageBar.addMessage("You remove the " + name());
+            Game.stateModel().message("You remove the " + name());
             return false;
         }
         if (!(player.getWornItem() != null && player.getWornItem().isCursed())) {
-            MessageBar.addMessage("You equip the " + name());
+            Game.stateModel().message("You equip the " + name());
             player.setWornItem(this);
         } else {
-            MessageBar.addMessage("You cannot take off the armor you are wearing");
+            Game.stateModel().message("You cannot take off the armor you are wearing");
         }
 
         return false; // never removed unless dropped

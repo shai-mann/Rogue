@@ -57,7 +57,7 @@ public class Scroll extends AbstractItem implements Item {
         switch (power) {
             case SLEEP:
                 player.getStatus().add(Status.Stat.SLEEPING, Helper.random.nextInt(3) + 5);
-                MessageBar.addMessage("You fall asleep");
+                Game.stateModel().message("You fall asleep");
                 break;
             case IDENTIFY:
                 player.inventory(/* "Select an item to identify" */);
@@ -65,25 +65,25 @@ public class Scroll extends AbstractItem implements Item {
             case ENCHANT_WEAPON:
                 if (player.getHeldItem() instanceof Weapon) {
                     ((Weapon) player.getHeldItem()).enchant();
-                    MessageBar.addMessage("Your weapon glows for a moment");
+                    Game.stateModel().message("Your weapon glows for a moment");
                 } else {
-                    MessageBar.addMessage("You feel a strange sense of loss");
+                    Game.stateModel().message("You feel a strange sense of loss");
                 }
                 break;
             case REMOVE_CURSE:
                 if (player.getWornItem() != null && player.getWornItem().isCursed()) {
                     player.getWornItem().setCursed(false);
-                    MessageBar.addMessage("You feel as if somebody is watching over you");
+                    Game.stateModel().message("You feel as if somebody is watching over you");
                 } else {
-                    MessageBar.addMessage("You feel a strange sense of loss");
+                    Game.stateModel().message("You feel a strange sense of loss");
                 }
                 break;
             case ENCHANT_ARMOR:
                 if (player.getWornItem() != null) {
                     player.getWornItem().setAc(player.getWornItem().getAc() - 1);
-                    MessageBar.addMessage("Your armor glows silver for a moment");
+                    Game.stateModel().message("Your armor glows silver for a moment");
                 } else {
-                    MessageBar.addMessage("You feel a strange sense of loss");
+                    Game.stateModel().message("You feel a strange sense of loss");
                 }
                 break;
             case MAGIC_MAPPING:
@@ -95,9 +95,9 @@ public class Scroll extends AbstractItem implements Item {
             case PROTECT_ARMOR:
                 if (player.getWornItem() != null) {
                     player.getStatus().add(new Effect(Effect.Type.PROTECT_ARMOR));
-                    MessageBar.addMessage("Your armor is covered by a shimmering gold shield");
+                    Game.stateModel().message("Your armor is covered by a shimmering gold shield");
                 } else {
-                    MessageBar.addMessage("You feel a strange sense of loss");
+                    Game.stateModel().message("You feel a strange sense of loss");
                 }
                 break;
             case CREATE_MONSTER:
@@ -105,7 +105,7 @@ public class Scroll extends AbstractItem implements Item {
                 if (room != null) {
                     Monster.createMonster(room, Level.getLevel().getLevelNumber());
                 } else {
-                    MessageBar.addMessage("You hear a faint cry of anguish in the distance");
+                    Game.stateModel().message("You hear a faint cry of anguish in the distance");
                 }
                 break;
         }

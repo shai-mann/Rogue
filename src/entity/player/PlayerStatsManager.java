@@ -49,13 +49,6 @@ public class PlayerStatsManager {
         if (shouldLevelUp()) levelUp();
     }
 
-    // todo: remove
-    public void tick(boolean tickHunger) {
-        if (shouldLevelUp()) levelUp();
-        if (tickHunger) tickHunger();
-        tickRegenerate();
-    }
-
     /* EXPERIENCE SYSTEM */
 
     public void changeExperience(int delta) {

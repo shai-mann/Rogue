@@ -43,12 +43,12 @@ public class Weapon extends AbstractItem implements Item {
 
         if (p.getHeldItem().equals(this)) {
             p.setHeldItem(null);
-            MessageBar.addMessage("You put away the " + name());
+            Game.stateModel().message("You put away the " + name());
             return false;
         }
 
         p.setHeldItem(this);
-        MessageBar.addMessage("You hold the " + name());
+        Game.stateModel().message("You hold the " + name());
 
         return false;
     }

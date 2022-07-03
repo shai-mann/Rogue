@@ -35,7 +35,7 @@ public class Food extends AbstractItem implements Item {
     public boolean use() {
         Level.getLevel().getPlayer().eat();
         Level.getLevel().getPlayer().getInventory().remove(this);
-        MessageBar.addMessage("You eat the " + name());
+        Game.stateModel().message("You eat the " + name());
 
         return true;
     }
