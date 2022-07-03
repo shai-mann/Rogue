@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Objects;
 
-public  class AbstractEntity implements Renderer, Entity {
+public abstract class AbstractEntity implements Renderer, Entity {
 
     private final EntityProperties properties;
     private final Renderer renderer;
