@@ -4,9 +4,9 @@ import entity.lifeless.item.structure.AbstractItem;
 import entity.lifeless.item.structure.Item;
 import entity.player.Player;
 import entity.structure.EntityProperties;
+import map.Game;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 

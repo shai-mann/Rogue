@@ -9,10 +9,10 @@ import entity.monster.Monster;
 import entity.player.Player;
 import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.ArrayList;

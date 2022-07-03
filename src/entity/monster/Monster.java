@@ -8,11 +8,11 @@ import entity.structure.AbstractLivingEntity;
 import entity.structure.EntityProperties;
 import entity.structure.LivingEntity;
 import entity.util.MoveResult;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import map.level.table.GameTable;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Optional;
