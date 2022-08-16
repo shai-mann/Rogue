@@ -1,6 +1,6 @@
 package util.menupanes.loading;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import settings.Settings;
 import util.gamepanes.saving.Save;
@@ -29,6 +29,7 @@ public class LoadPane {
 
         GameManager.replaceContentPane(panel);
     }
+
     private void loadGames() {
         for (File f : Save.getSaves()) {
             scrollablePanel.add(new LoadGame(f.getName(), f.getPath()).getPanel());
@@ -72,6 +73,7 @@ public class LoadPane {
 
         addListeners();
     }
+
     private void addListeners() {
         scrollablePanel.addMouseListener(new MouseAdapter() {
             @Override
@@ -101,4 +103,5 @@ public class LoadPane {
         scrollingPanel = new JScrollPane();
         cancelButton = new JButton("Cancel");
     }
+
 }

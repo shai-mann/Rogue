@@ -1,6 +1,6 @@
 package util.gamepanes;
 
-import helper.Helper;
+import util.Helper;
 import main.GameManager;
 import settings.Settings;
 
@@ -21,6 +21,7 @@ public class MessageBar extends JComponent {
         messageBar = this;
         setDefaults();
     }
+
     private void setDefaults() {
         panel.setBackground(Helper.BACKGROUND_COLOR);
         panel.setForeground(Helper.BACKGROUND_COLOR);
@@ -31,12 +32,14 @@ public class MessageBar extends JComponent {
         setTextareaDefaults(oldMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 99));
         setTextareaDefaults(olderMessage, Helper.changeOpacity(Helper.FOREGROUND_COLOR, 80));
     }
+
     private void setTextareaDefaults(JTextArea textArea, Color foreground) {
         textArea.setBackground(Helper.BACKGROUND_COLOR);
         textArea.setForeground(foreground);
         textArea.setFont(new Font(Helper.THEME_FONT, Font.BOLD, Settings.getTextSize()));
         textArea.setFocusable(false);
     }
+
     private void _addMessage(String text) {
         String currentMessage = message.getText();
         if (!currentMessage.trim().equals("")) {
@@ -45,6 +48,7 @@ public class MessageBar extends JComponent {
             message.setText(text);
         }
     }
+
     private void _nextTurn() {
         String currentMessage = message.getText();
         String currentOldMessage = oldMessage.getText();
@@ -57,19 +61,25 @@ public class MessageBar extends JComponent {
         panel.repaint();
     }
 
-    public static void addMessage(String text) { messageBar._addMessage(text); }
+    public static void addMessage(String text) {
+        messageBar._addMessage(text);
+    }
+
     public static void nextTurn() {
         messageBar._nextTurn();
     }
 
     public String[] getMessages() {
-        return new String[] {message.getText(), oldMessage.getText(), olderMessage.getText()};
+        return new String[]{message.getText(), oldMessage.getText(), olderMessage.getText()};
     }
+
     public void setMessages(String[] messages) {
         try {
             message.setText(messages[0]);
             oldMessage.setText(messages[1]);
             olderMessage.setText(messages[2]);
-        } catch (ArrayIndexOutOfBoundsException e) {}
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
     }
+
 }

@@ -1,0 +1,36 @@
+1) Why does Entity have a health value? Does food have health??
+    1a) General Entity system overhaul? Constructor doesn't take in name - expects to be set later?
+    1b) Entity has public fields - bad practice
+    1c) Entity directions aren't an enum...
+2) Graphic overwriting - perhaps general view layout overhaul
+    2a) have view draw map as first layer then overwrite with entities
+    2b) make entities and rooms/passageways have a shown/hidden value that determines if the map
+        displays them or not.
+3) Effects overhaul?
+    3a) Currently a class called Effect singular, but has list of effects
+    3b) Listeners with MessageBar messages that could act as hooks when effects are applied?
+4) Dimension/Point/Rectangle custom classes?
+    4a) Allow for translation and other simple math methods
+    4b) Allow for switching between Dimension <-> Point
+    4c) Fix issue with rectangles not including boundary edge when running contains()
+    4d) interface for math methods (translate(T))
+5) Weapons overhaul (similar to Monsters overhaul)
+6) Standardize rendering as Z value mapping for types of renderables?
+7) Move things like rendering graphics/colors to constants class?
+8) Reorganize move/hit for living entities -> MoveResult returned from move method, if includes entity, hit entity
+    8a) basically this prevents the hit method from being run inside the move method (which is confusing)
+9) Some type of overlay/display for the player's status?
+10) Condense Staircase + Animation enums into public constants class
+11) Organize methods in Player class
+12) Inventory <-> Item interactions (button text, action results, etc.)
+13) Saving/Loading system
+14) Debugging/Dev tools system
+    14a) Logging
+    14b) Entity spawning in-game
+    14c) Generation manipulation/refreshing game in-window
+15) Room boundaries - make them make sense
+    15a) Valid spawnable locations
+    15b) Valid walkable locations
+    15c) Valid generation locations (not allowing rooms to intersect)
+    15d) Make it not to computationally expensive too.
+    15e) Suggested implementation: custom RoomBounds class that computes these via rectangles or smthn

@@ -1,20 +1,28 @@
 package util.animation;
 
 
-import com.sun.istack.internal.Nullable;
-import entity.livingentity.Player;
-
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Animation implements Serializable {
 
-    private ArrayList<Point> points = new ArrayList<>();
-    private ArrayList<Point> queuedPoints = new ArrayList<>();
-    private Color color;
-    private Point center;
-    private int direction = -1;
+    public enum Direction {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        ALL
+    }
+
+    private final List<Point> points = new ArrayList<>();
+    private final Set<Point> queuedPoints = new HashSet<>();
+    private final Color color;
+    private final Point center;
+    private Direction direction = Direction.ALL;
     private int iterations = 0;
 
     // Constructors
@@ -25,7 +33,7 @@ public class Animation implements Serializable {
         this.center = center;
         color = c;
     }
-    public Animation(Point center, Color c, int direction) {
+    public Animation(Point center, Color c, Direction direction) {
         // Cone
         points.add(center);
         this.center = center;
@@ -37,7 +45,7 @@ public class Animation implements Serializable {
 
     public void update() {
         iterations++;
-        if (direction == -1) {
+        if (direction == Direction.ALL) {
             // Explosion
             for (Point p : points) {
                 addPoint(new Point(p.x,p.y + 1));
@@ -47,21 +55,21 @@ public class Animation implements Serializable {
             }
         } else {
             // Cone
-            if (direction == Player.DOWN) {
+            if (direction == Direction.DOWN) {
                 for (int i = points.size() - 1; i >= points.size() - (iterations * 2); i--) {
                     Point p = points.get(i);
                     addPoint(new Point(p.x, p.y + 1));
                     addPoint(new Point(p.x + 1, p.y + 1));
                     addPoint(new Point(p.x - 1, p.y + 1));
                 }
-            } else if (direction == Player.UP) {
+            } else if (direction == Direction.UP) {
                 for (int i = points.size() - 1; i >= points.size() - (iterations * 2); i--) {
                     Point p = points.get(i);
                     addPoint(new Point(p.x, p.y - 1));
                     addPoint(new Point(p.x + 1, p.y - 1));
                     addPoint(new Point(p.x - 1, p.y - 1));
                 }
-            } else if (direction == Player.LEFT) {
+            } else if (direction == Direction.LEFT) {
                 for (int i = points.size() - 1; i >= points.size() - (iterations * 2); i--) {
                     Point p = points.get(i);
                     addPoint(new Point(p.x - 1, p.y));
@@ -82,25 +90,15 @@ public class Animation implements Serializable {
         queuedPoints.clear();
     }
     private void addPoint(Point p) {
-        for (Point point : points) {
-            if (p.getX() == point.getX() && p.getY() == point.getY()) {
-                return;
-            }
-        }
         queuedPoints.add(p);
     }
     public int getIterations() {
         return iterations;
     }
     public boolean contains(Point p) {
-        for (Point point : points) {
-            if (p.getX() == point.getX() && p.getY() == point.getY()) {
-                return true;
-            }
-        }
-        return false;
+        return points.contains(p);
     }
-    public ArrayList<Point> getPoints() {
+    public List<Point> getPoints() {
         return points;
     }
     public Color getColor() {

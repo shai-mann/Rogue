@@ -9,7 +9,7 @@
       <color color="-1"/>
     </border>
     <children>
-      <component id="fc0bc" class="map.level.table.CustomRoomTable" binding="table" custom-create="true">
+      <component id="6b3f" class="javax.swing.JTable" binding="displayTable" custom-create="true">
         <constraints border-constraint="Center"/>
         <properties/>
       </component>

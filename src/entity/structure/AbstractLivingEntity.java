@@ -1,0 +1,61 @@
+package entity.structure;
+
+import map.Game;
+import util.Helper;
+
+import java.awt.*;
+
+public abstract class AbstractLivingEntity extends AbstractEntity implements LivingEntity {
+
+    private int maxHealth, health;
+
+    public AbstractLivingEntity(EntityProperties properties, Point location, int health) {
+        this(properties, location, health, health);
+    }
+
+    public AbstractLivingEntity(EntityProperties properties, Point location, int health, int maxHealth) {
+        super(properties, location);
+
+        this.maxHealth = maxHealth;
+        this.health = health;
+    }
+
+    @Override
+    public void move(Point displacement) {
+        this.location = Helper.translate(location(), displacement);
+
+        Game.stateModel().debug(name() + " moved to location (" + location().x + ", " + location().y + ")");
+    }
+
+    @Override
+    public void moveTo(Point newLocation) {
+        this.location.setLocation(newLocation);
+    }
+
+    @Override
+    public int health() {
+        return health;
+    }
+
+    @Override
+    public void changeHealth(int delta) {
+        health += delta;
+
+        health = Math.min(health, maxHealth); // cap out health at max health.
+    }
+
+    @Override
+    public int maxHealth() {
+        return maxHealth;
+    }
+
+    @Override
+    public void changeMaxHealth(int delta) {
+        maxHealth += delta;
+    }
+
+    @Override
+    public boolean shouldDie() {
+        return health <= 0;
+    }
+}
