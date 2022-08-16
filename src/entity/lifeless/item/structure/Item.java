@@ -2,8 +2,8 @@ package entity.lifeless.item.structure;
 
 import entity.player.Player;
 import entity.structure.Entity;
+import map.Game;
 import rendering.Renderer;
-import util.gamepanes.MessageBar;
 
 public interface Item extends Entity, Renderer {
 
@@ -20,7 +20,7 @@ public interface Item extends Entity, Renderer {
     void pickup(Player p);
 
     default void identify() {
-        MessageBar.addMessage("You identified a " + name());
+        Game.stateModel().message("You identified a " + name());
     }
 
 }

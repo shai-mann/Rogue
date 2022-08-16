@@ -1,5 +1,7 @@
 package entity.monster;
 
+import entity.monster.ai.AttackAI;
+import entity.monster.ai.MovementAI;
 import util.DiceRange;
 
 import java.util.List;

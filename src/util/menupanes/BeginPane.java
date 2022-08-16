@@ -1,7 +1,7 @@
 package util.menupanes;
 
 import main.GameManager;
-import map.Map;
+import map.Game;
 import util.Helper;
 import util.ImagePanel;
 import util.menupanes.loading.LoadPane;
@@ -40,7 +40,7 @@ public class BeginPane extends JComponent {
 
     private void addActionListeners() {
         newGameButton.addActionListener(e -> {
-            new Map();
+            new Game();
             GameManager.getFrame().requestFocus();
         });
         loadGameButton.addActionListener(e -> new LoadPane(panel));

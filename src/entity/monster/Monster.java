@@ -8,11 +8,11 @@ import entity.structure.AbstractLivingEntity;
 import entity.structure.EntityProperties;
 import entity.structure.LivingEntity;
 import entity.util.MoveResult;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import map.level.table.GameTable;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Optional;
@@ -95,7 +95,7 @@ public class Monster extends AbstractLivingEntity implements LivingEntity {
     @Override
     public void die() {
         Level.getLevel().getPlayer().changeExperience(monsterAttr.experience());
-        MessageBar.addMessage("You kill the " + name());
+        Game.stateModel().message("You kill the " + name());
 
         // todo: loot tables for monsters
 //        if (Item.getItemAt(getXPos(), getYPos()) != null && Level.getLevel().getRoom(this) != null) {
@@ -107,10 +107,10 @@ public class Monster extends AbstractLivingEntity implements LivingEntity {
 //            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null); // TODO: not right amount of gold??
 //        } else if (Helper.random.nextInt(2) == 1){
 //            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.FOOD, null);
-//            MessageBar.addMessage("The " + name + " drops some food");
+//            Game.stateModel().message("The " + name + " drops some food");
 //        } else {
 //            Item.spawnItem(getXPos(), getYPos(), Item.itemTypes.GOLD, null);
-//            MessageBar.addMessage("The " + name + " drops some gold");
+//            Game.stateModel().message("The " + name + " drops some gold");
 //        }
     }
 

@@ -8,12 +8,13 @@ import entity.monster.MonsterLoader;
 import entity.player.Player;
 import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
-import map.Map;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
+import state.StateManager;
+import state.StateUpdate;
 import util.Helper;
 import util.animation.Animation;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -79,6 +80,7 @@ public class Wand extends AbstractItem implements Item {
                 Comparator.comparingDouble(m -> Helper.distance(m, player))
         );
 
+        // todo: make collect nearest monster a function and call it if necessary, skipping if no monster
         Monster m = opt.get();
 
         switch (power) {
@@ -86,13 +88,13 @@ public class Wand extends AbstractItem implements Item {
                 m.attributes().setInvisible(true);
                 break;
             case LIGHTNING:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(), Color.YELLOW));
                 break;
             case FIRE:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(), Color.RED));
                 break;
             case COLD:
-                Map.getMap().getAnimationManager().addAnimation(new Animation(player.location(),
+                Game.stateModel().getAnimationManager().addAnimation(new Animation(player.location(),
                         new Color(0, 188, 255)));
                 break;
             case POLYMORPH:
@@ -100,7 +102,7 @@ public class Wand extends AbstractItem implements Item {
                 break;
             case MAGIC_MISSILES:
                 m.changeHealth(-(Helper.random.nextInt(3) + 1));
-                MessageBar.addMessage("Missiles fly from your wand, hitting " + m.name());
+                Game.stateModel().message("Missiles fly from your wand, hitting " + m.name());
                 break;
             case HASTE_MONSTER:
                 if (m.attributes().speed() > 0) {
@@ -117,15 +119,15 @@ public class Wand extends AbstractItem implements Item {
                 }
             case DRAIN_LIFE:
                 player.changeHealth(-player.health() / 2);
-                Map.getMap().getStatusBar().updateStatusBar();
+                Game.stateModel().update(new StateUpdate(StateManager.Update.PLAYER_GUI));
                 for (Monster monster : Level.getLevel().getLoadedMonsters()) {
                     monster.changeHealth(-5);
                 }
-                MessageBar.addMessage("All visible monsters take damage");
+                Game.stateModel().message("All visible monsters take damage");
                 break;
             case NOTHING:
                 // Yup, this is legitimately a wand type.
-                MessageBar.addMessage("Nothing happens");
+                Game.stateModel().message("Nothing happens");
                 break;
             case TELEPORT_AWAY:
                 m.moveTo(Helper.getRandom(Room.rooms).getRandomPointInBounds());
@@ -135,15 +137,15 @@ public class Wand extends AbstractItem implements Item {
                 break;
             case CANCELLATION:
                 m.getStatus().add(new Effect(Effect.Type.SUPPRESS_POWER));
-                MessageBar.addMessage(m.name() + " loses its special abilities");
+                Game.stateModel().message(m.name() + " loses its special abilities");
                 break;
         }
 
-        MessageBar.addMessage("You used the " + name());
+        Game.stateModel().message("You used the " + name());
         uses--;
 
         if (uses <= 0) {
-            MessageBar.addMessage("Your " + name() + " breaks");
+            Game.stateModel().message("Your " + name() + " breaks");
             return true;
         }
 

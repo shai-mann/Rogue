@@ -11,19 +11,19 @@ import entity.structure.EntityProperties;
 import entity.structure.LivingEntity;
 import entity.util.MoveResult;
 import main.GameManager;
-import map.Map;
+import map.Game;
 import map.level.Door;
 import map.level.Level;
 import map.level.Room;
+import state.StateManager;
+import state.StateUpdate;
 import util.Helper;
-import util.gamepanes.MessageBar;
 import util.inventory.InventoryPane;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 import static settings.Settings.*;
 
@@ -60,13 +60,20 @@ public class Player extends AbstractLivingEntity {
         initKeyMap();
     }
 
+    public void addUpdateHooks(StateManager stateManager) {
+        stateManager.addHook(StateManager.Update.PLAYER, this::update);
+        stateManager.addHook(StateManager.Update.PLAYER_STATUS, status::update);
+        stateManager.addHook(StateManager.Update.PLAYER_REGEN, manager::tickRegenerate);
+        stateManager.addHook(StateManager.Update.PLAYER_HUNGER, manager::tickHunger);
+    }
+
     public void update() {
         if (shouldDie()) {
             die();
             return;
         }
 
-        status.update();
+        manager.tick();
     }
 
     /* SYSTEM METHODS */
@@ -75,7 +82,7 @@ public class Player extends AbstractLivingEntity {
         changeMaxHealth((int) (maxHealth() * 0.1));
         // todo: increase maxDamage
 
-        MessageBar.addMessage("Welcome to level " + level);
+        Game.stateModel().message("Welcome to level " + level);
     }
 
     /* PLAYER ACTIONS */
@@ -91,14 +98,12 @@ public class Player extends AbstractLivingEntity {
 
         attemptMove(displacement);
 
-        // todo: update game
-        manager.tick(true);
-        Level.getLevel().update();
+        Game.stateModel().update(StateUpdate.GAME_TICK);
     }
 
     private void rest() {
-        manager.tickRegenerate();
-        manager.tick(false);
+        manager.tickRegenerate(); // ticks regeneration system twice
+        Game.stateModel().update(StateUpdate.GAME_TICK);
     }
 
     private void search() {
@@ -108,14 +113,13 @@ public class Player extends AbstractLivingEntity {
         for (Door d : room.doors().stream().filter(Door::isSecret).toList()) {
             if (Helper.isNextTo(location(), d.getLocation())) {
                 d.reveal();
-                MessageBar.addMessage("You discover a secret door");
+                Game.stateModel().message("You discover a secret door");
             }
         }
 
         // todo: trap searching
 
-        manager.tick(true);
-        Map.getMap().update();
+        Game.stateModel().update(StateUpdate.GAME_TICK);
     }
 
     public void inventory() {
@@ -134,9 +138,15 @@ public class Player extends AbstractLivingEntity {
 
         level.newLevel(direction == Staircase.Direction.DOWN);
         moveTo(Level.getLevel().getStartingRoom().getRandomPointInBounds());
-        Map.getMap().getStatusBar().updateStatusBar(); // todo: switch to general rendering update?
 
-        manager.tick(true);
+        Game.stateModel().update(new StateUpdate(Arrays.asList(
+                StateManager.Update.CHAT,
+                StateManager.Update.PLAYER,
+                StateManager.Update.PLAYER_GUI,
+                StateManager.Update.PLAYER_HUNGER,
+                StateManager.Update.PLAYER_REGEN,
+                StateManager.Update.ITEMS
+        )));
     }
 
     /* KEY INPUT HELPERS */
@@ -148,7 +158,7 @@ public class Player extends AbstractLivingEntity {
 //            monsterStatus.lowerHealth(getDamage());
 //            Map.getMap().update();
 //            if (monster.getStatus().getHealth() > 0) {
-//                MessageBar.addMessage("You hit the " + monster.getName());
+//                Game.stateModel().message("You hit the " + monster.getName());
 //            }
 //            if (monster.getStatus().isSleeping()) {
 //                monster.getStatus().setSleeping(false); // TODO: move to part of monster class
@@ -275,6 +285,6 @@ public class Player extends AbstractLivingEntity {
 
     public void eat() {
         manager.resetHunger();
-        Map.getMap().getStatusBar().updateStatusBar();
+        Game.stateModel().update(StateUpdate.GAME_TICK);
     }
 }

@@ -45,10 +45,8 @@ public class PlayerStatsManager {
         this.player = player;
     }
 
-    public void tick(boolean tickHunger) {
+    public void tick() {
         if (shouldLevelUp()) levelUp();
-        if (tickHunger) tickHunger();
-        tickRegenerate();
     }
 
     /* EXPERIENCE SYSTEM */
@@ -103,7 +101,7 @@ public class PlayerStatsManager {
         if (player.health() >= player.maxHealth()) return;
 
         regenStepsCounter++;
-        if (player.getStatus().hasEffect(Effect.Type.REGENERATION))
+        if (player.getStatus().hasEffect(Effect.Type.REGENERATION)) regenStepsCounter++;
 
         if (shouldRegenerate()) {
             player.changeHealth(1);

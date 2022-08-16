@@ -8,12 +8,12 @@ import entity.monster.Monster;
 import entity.player.Player;
 import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
+import map.Game;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
-import java.util.*;
+import java.util.Arrays;
 
 public class Potion extends AbstractItem implements Item {
 
@@ -73,15 +73,15 @@ public class Potion extends AbstractItem implements Item {
                 break;
             case POISON:
                 p.getStatus().add(Status.Stat.POISONED, Helper.random.nextInt(80) + 20);
-                MessageBar.addMessage("Poison flows through your bloodstream");
+                Game.stateModel().message("Poison flows through your bloodstream");
                 break;
             case GAIN_STRENGTH:
                 p.getStatus().add(Status.Stat.STRENGTHENED, Helper.random.nextInt(20));
-                MessageBar.addMessage("You feel stronger");
+                Game.stateModel().message("You feel stronger");
                 break;
             case SEE_INVISIBLE:
                 p.getStatus().add(new Effect(Effect.Type.SEE_INVISIBLE));
-                MessageBar.addMessage("Your eyesight becomes better");
+                Game.stateModel().message("Your eyesight becomes better");
                 break;
             case HEALING:
                 p.changeHealth(p.getLevel());
@@ -106,14 +106,14 @@ public class Potion extends AbstractItem implements Item {
                 break;
             case EXTRA_HEALING:
                 p.changeHealth(8 * p.getLevel());
-                MessageBar.addMessage("You feel much better");
+                Game.stateModel().message("You feel much better");
                 break;
             case RESTORE_STRENGTH:
                 p.getStatus().reset(Status.Stat.WEAKENED);
                 break;
             case BLINDNESS:
                 p.getStatus().add(Status.Stat.BLINDED, Helper.random.nextInt(1) + 10);
-                MessageBar.addMessage("You feel your eyesight magically deteriorate");
+                Game.stateModel().message("You feel your eyesight magically deteriorate");
                 break;
         }
 

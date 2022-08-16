@@ -3,8 +3,8 @@ package entity.monster.ai.attack;
 import entity.component.Status;
 import entity.monster.Monster;
 import entity.monster.ai.AbstractAttackAI;
+import map.Game;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 public class HitAttack extends AbstractAttackAI {
 
@@ -39,7 +39,7 @@ public class HitAttack extends AbstractAttackAI {
 
         if (isCrit(outcome) && Helper.calculateChance(0.2)) {
             player.getStatus().add(Status.Stat.PARALYZED, 3);
-            MessageBar.addMessage("You are paralyzed for 3 turns"); // TODO: move to Status Listener object?
+            Game.stateModel().message("You are paralyzed for 3 turns"); // TODO: move to Status Listener object?
         }
 
         player.changeHealth(damage);

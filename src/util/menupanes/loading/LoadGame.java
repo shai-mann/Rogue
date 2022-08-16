@@ -2,7 +2,7 @@ package util.menupanes.loading;
 
 import entity.lifeless.Staircase;
 import main.GameManager;
-import map.Map;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import map.level.table.CustomRoomTable;
@@ -110,7 +110,7 @@ public class LoadGame {
                     filePath + "/messages"
             )).readObject()};
         }
-        new Map(animations, messages);
+        new Game(animations, messages);
     }
 
     private void loadLevel() throws IOException, ClassNotFoundException {

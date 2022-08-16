@@ -13,6 +13,7 @@ import map.level.table.GameTable;
 import map.level.table.RoomTableModel;
 import rendering.Renderable;
 import rendering.Renderer;
+import state.StateManager;
 import util.Helper;
 
 import javax.swing.*;
@@ -58,7 +59,7 @@ public class Level extends JComponent {
     private final List<Item> items = new ArrayList<>();
     private final List<Monster> monsters = new ArrayList<>();
 
-    private static Level level;
+    private static Level level; // todo: remove
 
     public Level() {
         setDefaults();
@@ -109,6 +110,12 @@ public class Level extends JComponent {
 
         generateRooms(Helper.getRandom(5, 8)); // TODO: convert from hardcoded literals
         startingRoom = generatePassageways();
+    }
+
+    public void addUpdateHooks(StateManager stateManager) {
+        player.addUpdateHooks(stateManager);
+        stateManager.addHook(StateManager.Update.MONSTERS, () -> monsters.forEach(Monster::update));
+//        stateManager.addHook(StateManager.Update.ITEMS, () -> items.forEach(Item::update));
     }
 
     public void update() {

@@ -4,9 +4,9 @@ import entity.lifeless.item.structure.AbstractItem;
 import entity.lifeless.item.structure.Item;
 import entity.player.Player;
 import entity.structure.EntityProperties;
+import map.Game;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 
@@ -43,12 +43,12 @@ public class Weapon extends AbstractItem implements Item {
 
         if (p.getHeldItem().equals(this)) {
             p.setHeldItem(null);
-            MessageBar.addMessage("You put away the " + name());
+            Game.stateModel().message("You put away the " + name());
             return false;
         }
 
         p.setHeldItem(this);
-        MessageBar.addMessage("You hold the " + name());
+        Game.stateModel().message("You hold the " + name());
 
         return false;
     }

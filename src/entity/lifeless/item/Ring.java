@@ -6,9 +6,9 @@ import entity.lifeless.item.structure.Item;
 import entity.player.Player;
 import entity.structure.EntityProperties;
 import entity.util.Obfuscator;
+import map.Game;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class Ring extends AbstractItem implements Item {
         if (p.isWorn(this)) {
             p.remove(this);
             p.getStatus().remove(power.effect);
-            MessageBar.addMessage("You take off the " + name());
+            Game.stateModel().message("You take off the " + name());
             return false;
         }
 
@@ -80,9 +80,9 @@ public class Ring extends AbstractItem implements Item {
             if (power.effect != null) {
                 p.getStatus().add(power.effect);
             }
-            MessageBar.addMessage("You put on the " + name());
+            Game.stateModel().message("You put on the " + name());
         } else {
-            MessageBar.addMessage("You cannot wear more than 2 rings");
+            Game.stateModel().message("You cannot wear more than 2 rings");
         }
 
         return false;

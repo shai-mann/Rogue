@@ -1,7 +1,7 @@
 package util.gamepanes.saving;
 
 import main.GameManager;
-import map.Map;
+import map.Game;
 import map.level.Level;
 import map.level.Room;
 import util.Helper;
@@ -164,8 +164,8 @@ public class SavePane {
         new Save(dirPath + "/items", Level.getLevel().getItems());
         new Save(dirPath + "/table", Level.getLevel().getTable());
         new Save(dirPath + "/player", Level.getLevel().getPlayer());
-        new Save(dirPath + "/messages", (Object[]) Map.getMap().getMessageBar().getMessages());
-        new Save(dirPath + "/animations", Map.getMap().getAnimationManager().getAnimations());
+        new Save(dirPath + "/messages", (Object[]) Game.getMap().getMessageBar().getMessages());
+        new Save(dirPath + "/animations", Game.getMap().getAnimationManager().getAnimations());
         new Save(dirPath + "/rooms", Room.rooms);
         // all of the extra bits and pieces of the level
         // consider adding hidden and shown tables to this list
@@ -176,7 +176,7 @@ public class SavePane {
                 Level.getLevel().getStartingRoom()
         );
 
-        Map.getMap().setSaved(true);
+        Game.getMap().setSaved(true);
         f.dispose();
     }
 

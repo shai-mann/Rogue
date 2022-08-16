@@ -1,5 +1,6 @@
 package entity.structure;
 
+import map.Game;
 import util.Helper;
 
 import java.awt.*;
@@ -23,7 +24,7 @@ public abstract class AbstractLivingEntity extends AbstractEntity implements Liv
     public void move(Point displacement) {
         this.location = Helper.translate(location(), displacement);
 
-        System.out.println("[DEBUG] " + name() + " moved to location (" + location().x + ", " + location().y + ")");
+        Game.stateModel().debug(name() + " moved to location (" + location().x + ", " + location().y + ")");
     }
 
     @Override

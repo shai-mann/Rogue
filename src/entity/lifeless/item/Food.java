@@ -3,9 +3,8 @@ package entity.lifeless.item;
 import entity.lifeless.item.structure.AbstractItem;
 import entity.lifeless.item.structure.Item;
 import entity.structure.EntityProperties;
-import map.level.Level;
+import map.Game;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -33,9 +32,9 @@ public class Food extends AbstractItem implements Item {
 
     @Override
     public boolean use() {
-        Level.getLevel().getPlayer().eat();
-        Level.getLevel().getPlayer().getInventory().remove(this);
-        MessageBar.addMessage("You eat the " + name());
+        Game.stateModel().getPlayer().eat();
+        Game.stateModel().getPlayer().getInventory().remove(this);
+        Game.stateModel().message("You eat the " + name());
 
         return true;
     }

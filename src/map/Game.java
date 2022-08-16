@@ -2,6 +2,8 @@ package map;
 
 import main.GameManager;
 import map.level.Level;
+import state.StateManager;
+import state.StateModel;
 import util.Helper;
 import util.animation.Animation;
 import util.animation.AnimationManager;
@@ -17,25 +19,37 @@ import java.awt.event.WindowEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map implements Serializable {
+public class Game implements Serializable {
+
     private StatusBar statusBar;
     private Level level;
     private JPanel panel;
     private MessageBar messageBar;
     private AnimationManager animationManager;
 
+    private final StateModel stateModel;
+    private final StateManager stateManager;
+
     public boolean saved = false;
 
-    private static Map map;
+    private static Game game;
 
-    public Map() {
+    public Game() {
         setDefaults();
 
+        stateModel = new StateModel(
+                level::getPlayer,
+                () -> animationManager
+        );
+        stateManager = stateModel.getStateManager();
+
+        addStateHooks();
+
         GameManager.replaceContentPane(panel);
-        map = this;
+        game = this;
     }
 
-    public Map(ArrayList<Animation> animations, String[] messages) {
+    public Game(ArrayList<Animation> animations, String[] messages) {
         this();
         for (Animation a : animations) {
             animationManager.addAnimation(a);
@@ -43,20 +57,7 @@ public class Map implements Serializable {
         messageBar.setMessages(messages);
     }
 
-    public void update() {
-        saved = false;
-        MessageBar.nextTurn(); // must go first
-        level.update();
-        statusBar.updateStatusBar(); // must go after player update
-        animationManager.update();
-        level.render();
-    }
-
-    // GETTER/HELPER METHODS
-
-    public static Map getMap() {
-        return map;
-    }
+    /* INITIALIZING HELPER METHODS */
 
     private void createUIComponents() {
         if (Level.getLevel() == null) {
@@ -98,12 +99,30 @@ public class Map implements Serializable {
         animationManager = new AnimationManager();
     }
 
-    public MessageBar getMessageBar() {
-        return messageBar;
+    private void addStateHooks() {
+        level.addUpdateHooks(stateManager);
+
+        stateManager.addHook(StateManager.Update.PLAYER_GUI, statusBar::updateStatusBar);
+        stateManager.addHook(StateManager.Update.CHAT, MessageBar::nextTurn);
+        stateManager.addHook(StateManager.Update.ANIMATIONS, animationManager::update);
+
+        stateManager.addListener(level::render);
+        stateManager.addListener(() -> saved = false);
     }
 
-    public StatusBar getStatusBar() {
-        return statusBar;
+    /* GETTER AND SETTER METHODS */
+
+    // todo: remove
+    public static Game getMap() {
+        return game;
+    }
+
+    public static StateModel stateModel() {
+        return game.stateModel;
+    }
+
+    public MessageBar getMessageBar() {
+        return messageBar;
     }
 
     public AnimationManager getAnimationManager() {

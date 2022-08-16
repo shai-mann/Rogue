@@ -2,9 +2,9 @@ package entity.monster.ai;
 
 import entity.monster.Monster;
 import entity.player.Player;
+import map.Game;
 import map.level.Level;
 import util.Helper;
-import util.gamepanes.MessageBar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,13 +71,13 @@ public abstract class AbstractAttackAI implements AttackAI {
         }
 
         if (!isSuccessfulAttack()) {
-            MessageBar.addMessage(messageMap.get(Outcome.FAIL).get());
+            Game.stateModel().message(messageMap.get(Outcome.FAIL).get());
             return Outcome.FAIL;
         }
 
         Outcome outcome = isCrit() ? Outcome.CRIT : Outcome.SUCCESS;
         outcome = performAttack(outcome);
-        if (outcome != Outcome.UNPERFORMED) MessageBar.addMessage(messageMap.get(outcome).get());
+        if (outcome != Outcome.UNPERFORMED) Game.stateModel().message(messageMap.get(outcome).get());
 
         return outcome;
     }
