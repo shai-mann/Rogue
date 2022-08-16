@@ -285,6 +285,6 @@ public class Player extends AbstractLivingEntity {
 
     public void eat() {
         manager.resetHunger();
-        Game.stateModel().update(new StateUpdate(StateManager.Update.PLAYER_GUI));
+        Game.stateModel().update(StateUpdate.GAME_TICK);
     }
 }
