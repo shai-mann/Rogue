@@ -101,7 +101,7 @@ public class PlayerStatsManager {
         if (player.health() >= player.maxHealth()) return;
 
         regenStepsCounter++;
-        if (player.getStatus().hasEffect(Effect.Type.REGENERATION))
+        if (player.getStatus().hasEffect(Effect.Type.REGENERATION)) regenStepsCounter++;
 
         if (shouldRegenerate()) {
             player.changeHealth(1);
