@@ -1,8 +1,8 @@
 package state;
 
 import entity.player.Player;
+import rendering.panels.gamepanes.MessageBar;
 import util.animation.AnimationManager;
-import util.gamepanes.MessageBar;
 
 import java.util.function.Supplier;
 
